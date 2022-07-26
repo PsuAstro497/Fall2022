@@ -1,5 +1,5 @@
 +++
-title = "Julia Tutorials Template"
+title = "Astro 497: Data Science Applications for Exoplanets"
 tags = ["code", "tutorials"]
 +++
 

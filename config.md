@@ -1,5 +1,5 @@
 +++
-author = "Rik Huijzer"
+author = "Eric Ford"
 mintoclevel = 2
 
 # Add here files or directories that should be ignored by Franklin, otherwise
@@ -8,12 +8,12 @@ mintoclevel = 2
 # Base files such as LICENSE.md and README.md are ignored by default.
 ignore = ["node_modules/"]
 
-prepath = "JuliaTutorialsTemplate"
+prepath = "Astro497"
 
 # RSS (the website_{title, descr, url} must be defined to get RSS)
 generate_rss = false
-website_title = "JuliaTutorialsTemplate"
+website_title = "Astro 497"
 website_descr = "Example website containing Julia tutorials"
-website_url   = "https://rikhuijzer.github.io/JuliaTutorialsTemplate/"
+website_url   = "https://eford.github.io/Astro497/"
 +++
 
