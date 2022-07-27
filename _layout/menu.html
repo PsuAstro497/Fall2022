@@ -8,19 +8,38 @@
 <div id="sidebar" class="docs-sidebar off-canvas-sidebar">
 
 <div class="docs-brand">
-    <h5><a href="/">Julia Tutorials Template</a></h5>
+    <h5><a href="/">{{fill class_number}}</a></h5>
 </div>
 
 <div class="docs-nav">
 <div class="accordion-container">
   <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/syllabus/">Syllabus</a></div>
+    {{ispage syllabus/*}}{{menuitem "syllabus/basics"  "Basic Info"}}{{end}}
+    {{ispage syllabus/*}}{{menuitem "syllabus/reading" "Reading"   }}{{end}}
+    {{ispage syllabus/*}}{{menuitem "syllabus/goals"   "Goals"     }}{{end}}
+    {{ispage syllabus/*}}{{menuitem "syllabus/topics"  "Topics"    }}{{end}}
+    <div class="menu-header"><a href="/lessons/">Lessons</a></div>
+    {{ispage lessons/*}}{{menuitem "lessons/week1"  "Week 1"    }}{{end}}
+    {{ispage lessons/*}}{{menuitem "lessons/week2"  "Week 2"    }}{{end}}
+    {{ispage lessons/*}}{{menuitem "lessons/week3"  "Week 3"    }}{{end}}
+    <div class="menu-header"><a href="/labs/">Labs</a></div>
+    {{ispage labs/*}}{{menuitem "labs/lab1"  "Lab 1"    }}{{end}}
+    {{ispage labs/*}}{{menuitem "labs/lab2"  "Lab 2"    }}{{end}}
+    <div class="menu-header"><a href="/project/">Class Project</a></div>
+    <div class="menu-header"><a href="/resources/">Resources</a></div>
+    <br/>
+    Old example code
+    <li class="menu-list-item {{ispage pages/1_why_Julia/*}}active{{end}}"><a href="/pages/1_why_Julia/" class="menu-list-link {{ispage pages/1_why_Julia}}active{{end}}">1. Why Julia?</a>
+
     <div class="menu-header">Using this template</div>
     {{menuitem "getting-started" "Getting started"}}
-    <br/>
     <div class="menu-header">Example Pluto tutorials</div>
+    {{ispage tutorials/*}}
     {{menuitem "tutorials/linear-model" "Linear model"}}
     {{menuitem "tutorials/ode" "Harmonic oscillator"}}
     {{menuitem "tutorials/benchmarking" "Benchmarking"}}
+    {{end}}
   </ul>
 </div>
 </div>
