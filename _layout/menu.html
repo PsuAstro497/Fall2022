@@ -15,31 +15,58 @@
 <div class="accordion-container">
   <ul class="menu menu-nav">
     <div class="menu-header"><a href="/syllabus/">Syllabus</a></div>
-    {{ispage syllabus/*}}{{menuitem "syllabus/basics"  "Basic Info"}}{{end}}
-    {{ispage syllabus/*}}{{menuitem "syllabus/reading" "Reading"   }}{{end}}
-    {{ispage syllabus/*}}{{menuitem "syllabus/goals"   "Goals"     }}{{end}}
-    {{ispage syllabus/*}}{{menuitem "syllabus/topics"  "Topics"    }}{{end}}
-    <div class="menu-header"><a href="/lessons/">Lessons</a></div>
-    {{ispage lessons/*}}{{menuitem "lessons/week1"  "Week 1"    }}{{end}}
-    {{ispage lessons/*}}{{menuitem "lessons/week2"  "Week 2"    }}{{end}}
-    {{ispage lessons/*}}{{menuitem "lessons/week3"  "Week 3"    }}{{end}}
-    <div class="menu-header"><a href="/labs/">Labs</a></div>
-    {{ispage labs/*}}{{menuitem "labs/lab1"  "Lab 1"    }}{{end}}
-    {{ispage labs/*}}{{menuitem "labs/lab2"  "Lab 2"    }}{{end}}
-    <div class="menu-header"><a href="/project/">Class Project</a></div>
-    <div class="menu-header"><a href="/resources/">Resources</a></div>
-    <br/>
-    Old example code
-    <li class="menu-list-item {{ispage pages/1_why_Julia/*}}active{{end}}"><a href="/pages/1_why_Julia/" class="menu-list-link {{ispage pages/1_why_Julia}}active{{end}}">1. Why Julia?</a>
-
-    <div class="menu-header">Using this template</div>
-    {{menuitem "getting-started" "Getting started"}}
-    <div class="menu-header">Example Pluto tutorials</div>
-    {{ispage tutorials/*}}
-    {{menuitem "tutorials/linear-model" "Linear model"}}
-    {{menuitem "tutorials/ode" "Harmonic oscillator"}}
-    {{menuitem "tutorials/benchmarking" "Benchmarking"}}
+    {{ispage syllabus/*}}
+    {{menuitem "syllabus/basics"  "Basic Info"}}
+    {{menuitem "syllabus/goals"   "Goals"     }}
+    {{menuitem "syllabus/schedule"  "Schedule"    }}
+    {{menuitem "syllabus/preparation"  "Preparation"    }}
+    {{menuitem "syllabus/relation_to_other_courses"  "Relation to Other Courses"    }}
+    {{menuitem "syllabus/reading" "Reading"   }}
+    {{menuitem "syllabus/assessment"  "Assessment"    }}
+    {{menuitem "syllabus/safety"  "Safety"    }}
+    {{menuitem "syllabus/academic_integrity"  "Academic Integrity"    }}
+    {{menuitem "syllabus/additional_statements"  "Additional Statements"    }}
     {{end}}
+    <div class="menu-header"><a href="/lessons/">Lessons</a></div>
+    {{ispage lessons/*}}
+    {{menuitem "lessons/week1"  "Week 1"   }}
+    {{menuitem "lessons/week2"  "Week 2"    }}
+    {{menuitem "lessons/week3"  "Week 3"    }}
+    {{menuitem "lessons/week4"  "Week 4"    }}
+    {{menuitem "lessons/week5"  "Week 5"    }}
+    {{menuitem "lessons/week6"  "Week 6"    }}
+    {{menuitem "lessons/week7"  "Week 7"    }}
+    {{menuitem "lessons/week8"  "Week 8"    }}
+    {{menuitem "lessons/week9"  "Week 9"    }}
+    {{menuitem "lessons/week10"  "Week 10"    }}
+    {{menuitem "lessons/week11"  "Week 11"    }}
+    {{menuitem "lessons/week12"  "Week 12"    }}
+    {{menuitem "lessons/week13"  "Week 13"    }}
+    {{menuitem "lessons/week14"  "Week 14"    }}
+    {{menuitem "lessons/week15"  "Week 15"    }}
+    {{end}}
+    <div class="menu-header"><a href="/labs/">Labs</a></div>
+    {{ispage labs/*}}
+    {{menuitem "labs/lab1"  "Lab 1"    }}
+    {{menuitem "labs/lab2"  "Lab 2"    }}
+    {{menuitem "labs/lab3"  "Lab 3"    }}
+    {{menuitem "labs/lab4"  "Lab 4"    }}
+    {{menuitem "labs/lab5"  "Lab 5"    }}
+    {{menuitem "labs/lab6"  "Lab 6"    }}
+    {{menuitem "labs/lab7"  "Lab 7"    }}
+    {{menuitem "labs/lab8"  "Lab 8"    }}
+    {{menuitem "labs/lab9"  "Lab 9"    }}
+    {{end}}
+    <div class="menu-header"><a href="/project/">Class Project</a></div>
+    {{ispage project/*}}
+    {{menuitem "project/plan"  "Plan"    }}
+    {{menuitem "project/checkpoint"  "Checkpoints"    }}
+    {{menuitem "project/dashboard"  "Final Dashboard"    }}
+    {{menuitem "project/presentation"  "Group Presentation"    }}
+    {{menuitem "project/report"  "Individual Report"    }}
+    {{end}}
+    <div class="menu-header"><a href="/resources/">Resources</a></div>
+
   </ul>
 </div>
 </div>

@@ -1,14 +1,14 @@
 ## Basic Information
 
-- Course: Astro 528: High-Performance Scientific Computing for Astrophysics {{fill semester}}
-- Class Meetings: {{fill class_times}}
-- Location: {{fill class_location_long }}
+- Course: {{class_number}}: {{class_name}} ({{fill semester}})
+- Class Meetings: {{class_times}}
+- Location: {{class_location_long }}
 
   (Zoom link/meeting ID are available within Canvas)
-- Instructor: {{fill instructor_name}}
-- Email: {{fill instructor_email}}
-- Phone: {{fill instructor_phone}}
+- Instructor: {{instructor_name}}
+- Email: {{instructor_email}}
+- Phone: {{instructor_phone}}
 - Graduate Teaching Assistant: {{fill ta_name}}
-- Email: {{fill ta_email}}
-- Office Hours: {{fill office_hours}}
-- Website: [{{fill website_url}}]({{fill website_url}})
+- Email: {{ta_email}}
+- Office Hours: {{office_hours}}
+- Website: [{{website_url}}]({{website_url}})

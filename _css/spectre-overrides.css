@@ -5,6 +5,7 @@
   --output-background: hsl(0, 0%, 98%);
 }
 
+
 body {
     font-size: 1rem;
 }
@@ -26,6 +27,7 @@ ul {
 }
 
 .off-canvas-content {
+    margin-top: 3rem;
 }
 
 .docs-sidebar .docs-nav {

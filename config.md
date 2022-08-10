@@ -34,19 +34,12 @@ ta_name = "TBD"
 ta_email = "at psu.edu"
 office_hours = "TBD"
 
-config_topics = ["Overview of Exoplanets",
-	 "Detection Techniques: Transits",
-         "Detection Techniques: Transit Timing Variations",
-	 "Detection Techniques: Radial Velocities",
-	 "Characterization: Masses & Orbits",
-	 "Characterization: Inclinations",
-	 ]
-
+# Assignment deadlines
 lab1_title = "Getting Started with Labs"
 lab1_due = "Aug 29"
 lab2_title = "Data Visualization"
 lab2_due = "Sept 6" # Tuesday due to Labor Day
-lab3_title = "Model Fitting I"
+lab3_title = "Model Fitting I: Linear models"
 lab3_due = "Sept 12"
 lab4_title = "Model Assessment: Linear models"
 lab4_due = "Sept 19"
@@ -54,5 +47,25 @@ lab5_title = "Model Fitting II: Non-linear models"
 lab5_due = "Sept 26"
 lab6_title = "Explanatory Data Analysis"
 lab6_due = "Oct 3" # Same as exam?
-exam1_date = "Oct 3"
+exam1_date = "Oct 5"
+lab7_title = "Data Wrangling"
+lab7_due = "Oct 10"
+project_checkpoint1_title = "Project Plan"
+project_checkpoint1_due = "Oct 17"
+lab8_title = "Data Storage"
+lab8_due = "Oct 24"
+project_checkpoint2_title = "Project Step 1"
+project_checkpoint2_due = "Oct 31"
+lab9_title = "Data Visualization/Reproducible Research"
+lab9_due = "Nov 7"
+project_checkpoint3_title = "Project Step 2"
+project_checkpoint3_due = "Nov 14"
+project_final_title = "Project Dashboard"
+project_final_due = "Nov 28"
+project_presentation_title = "Project Presentations"
+project_presentation_due = "Dec 2 - 9"
+project_report_title = "Individual Report"
+project_report_due = "Dec 5"
+
+hasplotly = false
 +++

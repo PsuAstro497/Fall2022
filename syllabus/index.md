@@ -12,6 +12,18 @@ lessons =  ["lessons/week1.md", "lessons/week2.md"]
 
 \textinput{syllabus/goals}
 
-\textinput{syllabus/goals}
+\textinput{syllabus/schedule}
+
+\textinput{syllabus/preparation}
+
+\textinput{syllabus/relation_to_other_courses}
 
 \textinput{syllabus/reading}
+
+\textinput{syllabus/assessment}
+
+\textinput{syllabus/safety}
+
+\textinput{syllabus/academic_integrity}
+
+\textinput{syllabus/additional_statements}

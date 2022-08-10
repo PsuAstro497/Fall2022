@@ -1,0 +1,1 @@
+../_assets/syllabus/goals.md

@@ -1,5 +1,17 @@
 +++
-lessons =  ["lessons/week1.md", "lessons/week2.md"]
+lessons =  ["lessons/week1.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            "lessons/week2.md",
+            ]
 +++
 
 ## Course Topics
