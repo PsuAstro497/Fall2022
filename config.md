@@ -16,7 +16,7 @@ prepath = "Astro497"
 generate_rss = false
 website_title = "Astro 497"
 website_descr = "Example website containing Julia tutorials"
-website_url   = "https://eford.github.io/Astro497/"
+website_url   = "https://PsuAstro497.github.io/Fall2022/
 version = "v0.1"
 
 # Class specific variables
