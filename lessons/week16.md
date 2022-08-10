@@ -3,8 +3,8 @@ title = "Week 16"
 week_num = 16
 tags = ["lessons"]
 topic = "Student Presentations"
-ds_topic = ""
-exo_topic =  ""
+ds_topic = "NA"
+exo_topic =  "NA"
 +++
 
 Week {{week_num}}
