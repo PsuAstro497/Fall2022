@@ -26,7 +26,7 @@ There will be a short reading to be completed prior to class on most Mondays and
 | 12 | Reports & Dashboards | Disks  |
 | 13 | Data Visualization | Future of Exoplanet Detection |
 | 14 | (Thanksgiving Holiday) | - |
-| 15 | TBD | Future of Exoplanet Characterization |
+| 15 | TBD | - |
 | 16 | Student Presentations | Student Presentations |
 <!-- | 17 | (Exam Week) | - | -->
 

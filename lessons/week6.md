@@ -11,7 +11,6 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
-- Read TBD
 
 ## [Lab {{fill lab_num labs/lab6.md}}: {{fill title labs/lab6.md}}](../../labs/lab6/)
 

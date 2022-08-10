@@ -11,7 +11,6 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
-- Before Wednesday's class, Read TBD
 
 ## [Lab {{fill lab_num labs/lab3.md}}: {{fill title labs/lab3.md}}](../../labs/lab3/)
 

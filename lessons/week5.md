@@ -11,7 +11,12 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
-- Read TBD
+- Suggested readings for Monday's class:
+   - [What is Bayesian Statistics?](https://storopoli.github.io/Bayesian-Julia/pages/2_bayes_stats/) (if it's helpful for you)
+
+- Read before Wednesday's class:
+   - [How to Use Turing](https://storopoli.github.io/Bayesian-Julia/pages/4_Turing/)
+   - [Bayesian Linear Regression](https://storopoli.github.io/Bayesian-Julia/pages/6_linear_reg/) (if it's helpful for you; stop before example, as we'll an astronomical example instead)
 
 ## [Lab {{fill lab_num labs/lab5.md}}: {{fill title labs/lab5.md}}](../../labs/lab5/)
 
