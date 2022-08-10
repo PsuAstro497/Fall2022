@@ -53,7 +53,7 @@ lab5_due = "Sept 26"
 lab6_title = "Explanatory Data Analysis"
 lab6_start = "Sept 28"
 lab6_due = "Oct 3" # Same as exam?
-exam1_date = "Oct 3 or 5"
+exam1_date = "Oct 5"
 lab7_title = "Data Wrangling"
 lab7_start = "Oct 12"
 lab7_due = "Oct 17"
@@ -73,8 +73,8 @@ project_final_title = "Project Dashboard"
 project_final_due = "Nov 28"
 project_presentation_title = "Project Presentations"
 project_presentation_due = "Dec 2 - 9"
-project_report_title = "Individual Report"
-project_report_due = "Dec 5"
+project_report_title = "Individual Report & Reflection"
+project_report_due = "Dec 9"
 
 hasplotly = false
 +++

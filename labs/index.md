@@ -18,3 +18,4 @@ lab_list = [("labs/lab1.md","lab1"),
 {{for (page,lab) in lab_list }}
 - Lab {{fill lab_num page}}: [{{lab}}]({{fill title page}})
 {{end}}
+
