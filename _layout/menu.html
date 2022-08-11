@@ -70,6 +70,19 @@
     {{menuitem "project/presentation"  "Group Presentation"    }}
     {{menuitem "project/report"  "Individual Report"    }}
     {{end}}
+    <div class="menu-header"><a href="/tips/">Tips</a></div>
+    {{ispage tips/*}}
+    {{menuitem "tips/roar"  "Using Roar"    }}
+    {{menuitem "tips/roar/pluto"  "Starting Pluto"    }}
+    {{menuitem "tips/labs"  "Using Labs"    }}
+    {{ispage tips/labs/*}}
+      {{menuitem "tips/labs/starting"  "Starting"    }}
+      {{menuitem "tips/labs/commit"  "Commiting"    }}
+      {{menuitem "tips/labs/submitting"  "Submitting"    }}
+      {{menuitem "tips/labs/feedback"  "Feedback"    }}
+    {{end}}
+    {{end}}
+
     <div class="menu-header"><a href="/resources/">Resources</a></div>
 
   </ul>
