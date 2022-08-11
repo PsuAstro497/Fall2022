@@ -19,3 +19,6 @@ lab_list = [("labs/lab1.md","lab1"),
 - Lab {{fill lab_num page}}: [{{lab}}]({{fill title page}})
 {{end}}
 
+\\
+
+See also [lessons](/lessons/).

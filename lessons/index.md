@@ -24,3 +24,6 @@ lessons =  [("lessons/week1.md","week1"),
 - Week {{fill week_num page}}: [{{lesson}}]({{fill topic page}})
 {{end}}
 
+\\
+
+See also [labs](/labs/).
