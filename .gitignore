@@ -12,6 +12,9 @@ _assets/og-image/
 **/*.log
 **/*.txt
 tutorials/*.md
-tutorials/**/*.html
+tutorials/*/*.html
+notebooks/*.md
+notebooks/*/*.html
+
 **/_tmp_*.jl
 **/*backup*.jl

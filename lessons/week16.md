@@ -11,4 +11,4 @@ Week {{week_num}}
 # {{topic}}
 
 - Present your class project to the class.
-- Enjoy seeing what your fellow students did and learning from their experiences, too.
+- No readings.  Enjoy seeing what your fellow students did and learning from their experiences, too.

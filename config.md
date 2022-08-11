@@ -15,7 +15,7 @@ prepath = "Fall2022"
 # RSS (the website_{title, descr, url} must be defined to get RSS)
 generate_rss = false
 website_title = "Astro 497"
-website_descr = "Example website containing Julia tutorials"
+website_descr = "Astro 497 (Fall 2022)"
 website_url   = "https://PsuAstro497.github.io/Fall2022/"
 version = "v0.1"
 

@@ -6,7 +6,7 @@ const PKGDIR = pkgdir(Tutorials)
 
 export build_tutorials
 
-const TUTORIALS_DIR = joinpath(PKGDIR, "tutorials")
+const TUTORIALS_DIR = joinpath(PKGDIR, "notebooks")
 
 "Get files from a previous run. Assumes that the files are inside a `gh-pages` branch."
 function prev_dir()::Union{Nothing,AbstractString}
@@ -23,7 +23,8 @@ function prev_dir()::Union{Nothing,AbstractString}
     try
         # This can fail if there is no gh-pages branch yet.
         run(`git clone --depth=1 --branch=gh-pages $url $dir`)
-        prev_dir = joinpath(dir, "tutorials")
+        #prev_dir = joinpath(dir, "tutorials")
+        prev_dir = joinpath(dir, "notebooks")
         return prev_dir
     catch
         return nothing
@@ -49,7 +50,8 @@ function append_notebook_links()
         md_file = basename(md_path)
         without_extension, _ = splitext(md_file)
         jl_file = "$(without_extension).jl"
-        url = "/tutorials/$jl_file"
+        #url = "/tutorials/$jl_file"
+        url = "/notebooks/$jl_file"
         open(md_path, "a") do io
             text = """\n
                 _To run this tutorial locally, download [this file]($url) and open it with
