@@ -45,7 +45,7 @@ julia --project -e 'using Pkg; Pkg.instantiate(); '
 - If you do not see the a tile for Pluto, then go to File.New_Launcher.
 - Most labs will contain one or more Pluto notebooks (their file names will end in .jl).  To open one in Pluto,
    + Click the Pluto tile.  A new tab will open in your browser for the Pluto session.
-   + In the "Open from file" box, type the path to the directory containing the repo, a forward slash and the name of the first notebook (e.g., 'lab1-yourgithubid/ex1.jl').  Tab completion is often helpful.
+   + In the box labeled "Open from file" or "Open a notebook" (depending on Pluto version), type the path to the directory containing the repo, a forward slash and the name of the first notebook (e.g., 'lab1-yourgithubid/ex1.jl').  Tab completion is often helpful.
 - Do your work in the notebook.
 - When you're done with a notebook, make sure it is saved (Ctrl+S) and close the tab.
 

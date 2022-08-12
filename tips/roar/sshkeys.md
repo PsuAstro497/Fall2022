@@ -8,7 +8,7 @@ For students using Roar for the first time,
 - Select Clusters._ACI Shell Access (You'll likely have to complete 2 factor authentication again.)
 - Run the following script
 ```shell
-/gpfs/group/RISE/classroom/astro_528/scripts/updateKeys.sh
+/gpfs/group/RISE/classroom/astro_497/scripts/updateKeys.sh
 ```
 once at the beginning of the semester.  
 

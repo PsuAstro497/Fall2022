@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.18.1
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -25,32 +25,190 @@ md"""
 # Data Science Applications to Exoplanets
 """
 
-# ╔═╡ ef43bba9-2ed9-412e-9608-9f65602b3421
+# ╔═╡ 502d38bd-8b97-484d-9618-bed479bf648a
 md"""
-## Course Logistics
-- Safety
-- [Website](https://psuastro497.github.io/Fall2022/)
-- Accounts:
-   - Roar
-   - TopHat
-- Labs
-- Readings
+# Safety
+
+- Please err on the side of caution.
+- If not feeling well, **please** stay home.
+- If have reason to believe may have been exposed, **please** stay home.
+- **Please** wear a high-quality & well-fitting mask while in the classroom.  
+
 """
+
+# ╔═╡ 4f15b6fc-5876-46c5-b682-bfa71e77ee16
+md"""
+
+### Masks
+- Offer students masks
+- Studies indicate that:
+   - N95/KN95/KF94 masks are significantly more effective than surgical masks
+   - Surgical masks are more effective than cotton masks
+   - Good fit and being worn properly is key to either's effectiveness
+
+"""
+
+# ╔═╡ e25a3d93-b981-48e2-9189-1398e137960e
+md""" 
+### Distancing
+- While some students may be comfortable working closely with a partner, others may prefer to maintain physical distance.
+- Students are expected to respect others' requests for physical distancing.
+- If you work together with a classmate in-person, please get in the habit of communicating with them.
+- It's ok to change one's mind mid-semester, as we learn more about the situation.
+"""
+
+# ╔═╡ d6e5cea3-1d40-4266-bf1a-478139d3b211
+md"""
+### Why?
+- Being sick, isolating and/or quarantining make it harder to stay on top of classes.
+- Being extra cautious during class will help peers and instructor to focus on learning, rather than worrying about their safety.
+- If engage in less safe activities outside of class, please take precautions.  
+"""
+
+# ╔═╡ 19575253-08f8-48f8-b1ec-89b4074b8108
+
+md"""
+# Course Logistics
+## Website 
+#### [https://psuastro497.github.io/Fall2022/](https://psuastro497.github.io/Fall2022/) contains:
+- Syllabus
+- Info for each week's lessons (e.g., reading & bonus links)
+- Info for to labs/homework exercises.
+- Key due dates for project (more info to come)
+- Practical Tips 
+
+## Canvas
+- Announcements
+- Uploading some assignments 
+- Links for Zoom & TopHat
+- Other info via embedded version of website
+
+## Zoom 
+- For Wednesday lab classes
+"""
+
+# ╔═╡ db79a1cc-0cec-4cae-a24b-d2f4e256eb2c
+md"""
+# Creating Accounts:
+## Roar: 
+- Penn State's supercomputer
+- Will use for running labs/homework exercises & class project
+- I'll walk people through setup steps this Wednesday.
+- Please [request account](http://localhost:8000/tips/roar/create_account/) by end of today.
+"""
+
+# ╔═╡ 6c9684cd-3952-4e01-b3bc-d111d47b48ff
+md"""
+## TopHat:
+- For submitting reading questions
+- Submit question by 9am on day of relevant class.
+- Aim for at least 1 question a week.  (I'll drop some from grade automatically.)
+- Create account in time to submit reading question on Friday
+   - No need to give phone number or credit card info.
+"""
+
+# ╔═╡ dba2b51e-0dc7-48f2-a975-ead2280dca54
+md"""
+# Textbook & Readings
+- [Exoplanets](https://www.amazon.com/Exoplanets-Space-Science-Sara-Seager/dp/0816529450) (Seager, ed; ISBN: 978-0816529452)
+Several readings from online sources, e.g.: 
+- [Think Julia](https://www.amazon.com/Think-Julia-Like-Computer-Scientist/dp/1492045039) (Lauwens; ISBN: 1492045039) or [online](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html)
+- [Julia Data Science](https://www.amazon.com/dp/B09KMRKQ96/) (Storopoli & Huljzer; ISBN-13: 979-8489859165) or [online](https://juliadatascience.io/)
+- [Bayesian Statistics using Julia and Turing](https://storopoli.github.io/Bayesian-Julia/)
+"""
+
+# ╔═╡ 88003290-02ca-487b-b94d-4ce553caeb6e
+Resource("https://images-na.ssl-images-amazon.com/images/I/31txP-5Z+8L._SX385_BO1,204,203,200_.jpg")
+
+# ╔═╡ 4ead033d-0001-4479-86ac-f420ecbf15d3
+Resource("https://images-na.ssl-images-amazon.com/images/I/51IsffDG4jL._SX379_BO1,204,203,200_.jpg")
+
+# ╔═╡ b8bc9184-059c-45b3-8a7a-9bb3d4b8c6b4
+Resource("https://images-na.ssl-images-amazon.com/images/I/41IR7AhnnpL._SX348_BO1,204,203,200_.jpg")
 
 # ╔═╡ d2f1789a-3d21-40e9-8d98-bdd52e54554e
 md"""
-## What is Data Science?
+# What is Data Science?
 
+### What do you think?
+
+## One oversimplified take...
+"""
+
+# ╔═╡ b2376e4d-4d13-42d6-a484-217f1dbcabb7
+Resource("https://images.squarespace-cdn.com/content/v1/5150aec6e4b0e340ec52710a/1364352051365-HZAS3CLBF7ABLE3F5OBY/Data_Science_VD.png?format=750w")
+
+# ╔═╡ a12f0d4d-12d9-4c13-81c1-69889e7aabf4
+md"The Data Science Venn Diagram is from Drew Conway and is licensed as [Creative Commons Attribution-NonCommercial](http://creativecommons.org/licenses/by-nc/3.0/legalcode)"
+
+# ╔═╡ 07851600-44d6-4b44-9839-8bf19c647884
+md"""
+## This class is *not* meant to teach:
+- Programming (e.g., CMPSC 121, 122)
+- Numerical Methods (see ASTRO 410)
+- Linear Algebra (see MATH 220)
+- Statistics (e.g., ASTRO 415)
+- Machine Learning (e.g., DS 310)
+- Astronomical Techniques (see ASTOR 451)
+- How to conduct Astronomy Research (e.g., a summer project or thesis)
+"""
+
+# ╔═╡ 75eecba2-fb5f-4dfc-b2af-b3041c9357b0
+md"""
+## So what does this class do?
+### Exoplanets:
+- Overview of field of the field
+- Interpret exoplanet observations
+
+### Data Science:
+- Develop *Data Acumen*[^1]
+  - Model building
+  - Data visualization
+  - Reproducible research
+- Practice "soft skills"
+  - Technical collaboration
+  - Scientific communications
+- Provide taste of Data Science
+"""
+
+# ╔═╡ 44755795-c2f7-44dc-86a2-ba6e848f3a67
+md"""
+### Data Acumen
+[^1]: "We define data acumen as the ability to make good judgements about the use of data to support problem solutions." ([Keller et al. 2020](https://doi.org/10.1162/99608f92.2d83f7f5))
+"""
+
+# ╔═╡ d8015168-9c59-45b5-81c3-7b37fbf26319
+md"""
+# Course Overview
+Students will learn about techniques for detecting and characterizing extrasolar planetary systems, including the capabilities and challenges for the future of each method. Students will analyze astronomical data to detect and characterize exoplanets and their host stars. Along the way, students will build practical data science skills (e.g., querying astronomical databases, data storage and manipulation, data visualization, exploratory and explanatory data analysis, Bayesian modeling workflows, and reproducible research practices).
+
+## Goals
+- Understand how astronomers detect and characterize extrasolar planetary systems,
+- Learn about the current state and future of exoplanet science,
+- Increase their data acumen, and
+- Appreciate how building data science skills can benefit astronomy & astrophysics research.
+
+## Objectives
+- Ingest and manipulate data from astronomical surveys.
+- Quantitatively describe the effects of exoplanets on astronomical observations.
+- Build, apply, assess and update astrophysically motivated models for astronomical observations.
+- Create visualizations for exploratory and explanatory data analyses of observations from exoplanet surveys.
+- Synthesize the above into a dashboard to support the efficient analysis of exoplanet observations while following principles of reproducible research.
+"""
+
+# ╔═╡ 5370fe50-add3-4886-9ef5-a6e1aecd1cc4
+md"""
+## Remebmer to request Roar account so can log in on Wednesday!
 """
 
 # ╔═╡ 51ff8e7c-cf0e-41f8-bbe7-b46d64d39ca2
 
 
 # ╔═╡ 02a0991e-8ebe-4307-b277-59d39d612c78
-md"## Helper Code"
+md"# Helper Code"
 
 # ╔═╡ 9a4a6761-8c60-4a7d-92d3-cdfbc85c76d9
-ChooseDisplayMode(wide=true, present=false)
+ChooseDisplayMode(present=false)
 
 # ╔═╡ e8794ba6-7344-4c16-b2b7-570008848a4a
 md"ToC on side $(@bind toc_aside CheckBox(;default=true))"
@@ -73,7 +231,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.3"
+julia_version = "1.7.0"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -106,11 +264,8 @@ deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-
-[[deps.FileWatching]]
-uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
@@ -297,13 +452,30 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 # ╔═╡ Cell order:
 # ╟─39aca95d-6e93-4e18-8789-0928e881d3d9
-# ╟─ef43bba9-2ed9-412e-9608-9f65602b3421
-# ╠═d2f1789a-3d21-40e9-8d98-bdd52e54554e
+# ╟─502d38bd-8b97-484d-9618-bed479bf648a
+# ╟─4f15b6fc-5876-46c5-b682-bfa71e77ee16
+# ╟─e25a3d93-b981-48e2-9189-1398e137960e
+# ╟─d6e5cea3-1d40-4266-bf1a-478139d3b211
+# ╟─19575253-08f8-48f8-b1ec-89b4074b8108
+# ╟─db79a1cc-0cec-4cae-a24b-d2f4e256eb2c
+# ╟─6c9684cd-3952-4e01-b3bc-d111d47b48ff
+# ╟─dba2b51e-0dc7-48f2-a975-ead2280dca54
+# ╟─88003290-02ca-487b-b94d-4ce553caeb6e
+# ╟─4ead033d-0001-4479-86ac-f420ecbf15d3
+# ╟─b8bc9184-059c-45b3-8a7a-9bb3d4b8c6b4
+# ╟─d2f1789a-3d21-40e9-8d98-bdd52e54554e
+# ╟─b2376e4d-4d13-42d6-a484-217f1dbcabb7
+# ╟─a12f0d4d-12d9-4c13-81c1-69889e7aabf4
+# ╟─07851600-44d6-4b44-9839-8bf19c647884
+# ╟─75eecba2-fb5f-4dfc-b2af-b3041c9357b0
+# ╟─44755795-c2f7-44dc-86a2-ba6e848f3a67
+# ╟─d8015168-9c59-45b5-81c3-7b37fbf26319
+# ╟─5370fe50-add3-4886-9ef5-a6e1aecd1cc4
 # ╠═51ff8e7c-cf0e-41f8-bbe7-b46d64d39ca2
 # ╟─02a0991e-8ebe-4307-b277-59d39d612c78
 # ╟─9a4a6761-8c60-4a7d-92d3-cdfbc85c76d9
 # ╟─e8794ba6-7344-4c16-b2b7-570008848a4a
-# ╠═ffd38b51-b872-432b-a9bf-7568681d3aa1
-# ╟─66eaf0bf-79e3-43b4-80a8-cb75971feceb
+# ╟─ffd38b51-b872-432b-a9bf-7568681d3aa1
+# ╠═66eaf0bf-79e3-43b4-80a8-cb75971feceb
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
