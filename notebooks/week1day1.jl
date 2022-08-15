@@ -66,7 +66,6 @@ md"""
 """
 
 # ╔═╡ 19575253-08f8-48f8-b1ec-89b4074b8108
-
 md"""
 # Course Logistics
 ## Website 
@@ -200,9 +199,6 @@ Students will learn about techniques for detecting and characterizing extrasolar
 md"""
 ## Remebmer to request Roar account so can log in on Wednesday!
 """
-
-# ╔═╡ 51ff8e7c-cf0e-41f8-bbe7-b46d64d39ca2
-
 
 # ╔═╡ 02a0991e-8ebe-4307-b277-59d39d612c78
 md"# Helper Code"
@@ -471,7 +467,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─44755795-c2f7-44dc-86a2-ba6e848f3a67
 # ╟─d8015168-9c59-45b5-81c3-7b37fbf26319
 # ╟─5370fe50-add3-4886-9ef5-a6e1aecd1cc4
-# ╠═51ff8e7c-cf0e-41f8-bbe7-b46d64d39ca2
 # ╟─02a0991e-8ebe-4307-b277-59d39d612c78
 # ╟─9a4a6761-8c60-4a7d-92d3-cdfbc85c76d9
 # ╟─e8794ba6-7344-4c16-b2b7-570008848a4a
