@@ -1,7 +1,7 @@
 +++
 title = "Linear Models"
 lab_num = 3
-tags = ["labs", "logistics"]
+tags = ["labs"]
 +++
 
 ## Lab {{lab_num}}: {{title}}

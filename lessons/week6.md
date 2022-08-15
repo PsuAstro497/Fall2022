@@ -12,7 +12,7 @@ Week {{week_num}}
 
 ## {{ds_topic}}
 
-## [Lab {{fill lab_num labs/lab6.md}}: {{fill title labs/lab6.md}}](../../labs/lab6/)
+## [Lab 6](../../labs/lab6/): {{fill title labs/lab6.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Exoplanet Transits & Occultations:   Sec. 3.5

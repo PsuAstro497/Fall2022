@@ -1,7 +1,7 @@
 +++
 title = "Data Wrangling"
 lab_num = 7
-tags = ["labs", "logistics"]
+tags = ["labs"]
 +++
 
 ## Lab {{lab_num}}: {{title}}

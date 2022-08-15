@@ -13,7 +13,7 @@ Week {{week_num}}
 ## {{ds_topic}}
 
 
-## [Lab {{fill lab_num labs/lab9.md}}: {{fill title labs/lab9.md}}](../../labs/lab9/)
+## [Lab 9](../../labs/lab9/): {{fill title labs/lab9.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Microlensing by Exoplanets:   Sec. 1-3.1, 4-4.5

@@ -1,6 +1,6 @@
 +++
 title = "Class Project"
-tags = ["project", "logistics"]
+tags = ["project", "logistics", "overview"]
 +++
 
 ## Class Project

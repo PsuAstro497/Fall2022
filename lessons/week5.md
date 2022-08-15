@@ -18,7 +18,7 @@ Week {{week_num}}
    - [How to Use Turing](https://storopoli.github.io/Bayesian-Julia/pages/4_Turing/)
    - [Bayesian Linear Regression](https://storopoli.github.io/Bayesian-Julia/pages/6_linear_reg/) (if it's helpful for you; stop before example, as we'll an astronomical example instead)
 
-## [Lab {{fill lab_num labs/lab5.md}}: {{fill title labs/lab5.md}}](../../labs/lab5/)
+## [Lab 5](../../labs/lab5/): {{fill title labs/lab5.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read ["Statistical methods for exoplanet detection with radial velocities"](ADDLINK):  Sec.1-2.3, 3.1, 4.1, 5.1

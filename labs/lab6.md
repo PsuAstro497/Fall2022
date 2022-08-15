@@ -1,7 +1,7 @@
 +++
 title = "Explanatory Data Analysis"
 lab_num = 6
-tags = ["labs", "logistics"]
+tags = ["labs"]
 +++
 
 ## Lab {{lab_num}}: {{title}}

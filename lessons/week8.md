@@ -12,7 +12,7 @@ Week {{week_num}}
 
 ## {{ds_topic}}
 
-## [Lab {{fill lab_num labs/lab7.md}}: {{fill title labs/lab7.md}}](../../labs/lab7/)
+## [Lab 7](../../labs/lab7/): {{fill title labs/lab7.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Statistical Distribution of Exoplanets:   Sec. 1-2.7

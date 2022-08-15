@@ -1,7 +1,7 @@
 +++
 title = "Data Storage & Memory Access"
 lab_num = 8
-tags = ["labs", "logistics"]
+tags = ["labs"]
 +++
 
 ## Lab {{lab_num}}: {{title}}
