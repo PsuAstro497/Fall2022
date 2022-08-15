@@ -2,7 +2,7 @@
 title = "Week 2"
 week_num = 2
 tags = ["lessons"]
-topic = "Exploratory Data Analysis – Transits"
+topic = "Exploratory Data Analysis & Transits"
 ds_topic = "Exploratory Data Analysis"
 exo_topic =  "Exoplanet Detection: Transits"
 +++

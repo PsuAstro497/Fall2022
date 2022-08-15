@@ -2,7 +2,7 @@
 title = "Week 1"
 week_num = 1
 tags = ["lessons"]
-topic = "What is Data Science?  — Overview of Exoplanets"
+topic = "What is Data Science? & Overview of Exoplanets"
 ds_topic = "What is Data Science?"
 exo_topic = "Overview of Exoplanets"
 +++

@@ -2,7 +2,7 @@
 title = "Week 4"
 week_num = 4
 tags = ["lessons"]
-topic = "Model Assessment – Radial Velocity Technique"
+topic = "Model Assessment & Radial Velocity Technique"
 ds_topic = "Model Building II: Assessment"
 exo_topic =  "Exoplanet Detection: Radial Velocity Technique"
 +++

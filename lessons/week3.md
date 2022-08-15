@@ -2,7 +2,7 @@
 title = "Week 3"
 week_num = 3
 tags = ["lessons"]
-topic = "Model Building – Transit Timing Variations"
+topic = "Model Building & Transit Timing Variations"
 ds_topic = "Model Building I: Linear Models"
 exo_topic =  "Exoplanet Detection: Transit Timing Variations"
 +++

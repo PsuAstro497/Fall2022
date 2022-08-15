@@ -16,7 +16,6 @@ lab_list = [("labs/lab1.md","lab1"),
 ## Lab/Homework Exercises
 
 - [Lab 1](labs/lab1/): {{fill title labs/lab1.md}} ([github](https://github.com/PsuAstro497/lab1-start))
-- [Lab 1](labs/lab1/): {{fill title labs/lab1.md}}
 - [Lab 2](labs/lab2/): {{fill title labs/lab2.md}}
 - [Lab 3](labs/lab3/): {{fill title labs/lab3.md}}
 - [Lab 4](labs/lab4/): {{fill title labs/lab4.md}}

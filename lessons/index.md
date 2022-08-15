@@ -21,13 +21,15 @@ tags = ["lessons","overview"]
 +++
 
 ## Lessons
+### Unit 1:  
 - [Week 1](week1/): {{fill topic lessons/week1.md}}
 - [Week 2](week2/): {{fill topic lessons/week2.md}}
-- [Week 3](week3/): {{fill topic lessons/week3.md}}
+- [Week 3](week3/): Model Building & Transit Timing Variations <!-- {{fill topic lessons/week3.md}} -->  <!-- Why broken? -->
 - [Week 4](week4/): {{fill topic lessons/week4.md}}
 - [Week 5](week5/): {{fill topic lessons/week5.md}}
 - [Week 6](week6/): {{fill topic lessons/week6.md}}
 - [Week 7](week7/): {{fill topic lessons/week7.md}}
+\\
 - [Week 8](week8/): {{fill topic lessons/week8.md}}
 - [Week 9](week9/): {{fill topic lessons/week9.md}}
 - [Week 10](week10/): {{fill topic lessons/week10.md}}
