@@ -32,4 +32,4 @@ lab_list = [("labs/lab1.md","lab1"),
 -->
 \\
 
-See also [lessons](/lessons/).
+See also [GitHub organization](https://github.com/PsuAstro497) and [lessons page](/lessons/).
