@@ -8,6 +8,8 @@ tags = ["labs", "logistics"]
 
 Start {{lab1_start}} ---
 Due {{lab1_due}}
+- ex1.jl
+- goals.md
 
 \\ 
 
