@@ -4,103 +4,80 @@
 using Markdown
 using InteractiveUtils
 
-# ╔═╡ d52a0e02-1a73-11ed-1864-45f999e72173
+# ╔═╡ 2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 begin
 	using PlutoUI, PlutoTeachingTools
 end
 
-# ╔═╡ 2632d9c3-1db4-4d43-9c81-7495f2665c3d
+# ╔═╡ 5e85efae-1d94-11ed-2aee-2d32c2b43695
 md"""
-# Astro 497: Week 1, Friday
-# Overview of Exoplanets
-- NASA's [Exoplanet Science Institute (NExScI)](https://nexsci.caltech.edu/) maintains the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/index.html)
-- They provide several [up-to-date plots](https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/), such as those below.
+# Astro 497: Week 2, Monday
+# Exploratory Data Analysis
+
+## Overview
+1.  Ingest data
+1.  Validate data
+1.  Clean data
+1.  Describe/Visualize data
+1.  Identifying potential relationships in data
 """
 
-# ╔═╡ 220e2f65-6c0e-4f89-a01e-a7e53c6eb2a5
+# ╔═╡ 57d33d1f-b15a-435d-a7ec-433d0f8370c6
 md"""
-## Discoveries vs Time
-$(Resource("https://exoplanetarchive.ipac.caltech.edu/videos/exo_discovery_histogram.mp4", :width=>"75%"))
+## Ingest Data
+- Identify a data source
+- Construct a query
+- Download the results of that query
+- Store the data locally
+- Read the data into memory.
 """
-# $(Resource("https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/exo_dischist_cb.png", :width=>"75%"))
 
-# ╔═╡ b8c097e8-3072-44e4-9cbf-5b683ece4446
+# ╔═╡ 657ab8e9-779f-4b19-bae4-079832dbc5ca
 md"""
-- We'll spend the first ~half of the course focusing on Radial Velocity & Transit methods.
-  - These are the natural choices for class projects (because there's lots of data.)
-- During the second ~half of the course, we'll touch on most of the other methods briefly.
-  - But we won't get as much hands-on experience using them, since you'll be working on your projects then.
+## Validate Data
+- What is the size and shape of the data?
+- What are the types of data?
+- What are the ranges of values?
+- Is there missing data?
+- Check if a representative subset of the data is consistent with expectations.
+- Are some entries suspiciously discrepant from expectations/other data?
+- What is the approximate empirical distribution of value?
+- Are values self-consistent?
+
 """
 
-# ╔═╡ f4e8da0a-7367-4357-836f-df6af36bcf7a
+# ╔═╡ ad2b753b-a09f-4a07-9843-6f84a3460004
 md"""
-## Mass vs Period vs Time
-$(Resource("https://exoplanetarchive.ipac.caltech.edu/videos/mass_period_movie_nexsci.mp4",:width=>"75%"))
+## Clean Data
+- Are some values clearly erroneous?
+- Are some values susipicously discrepant?
 """
 
-# ╔═╡ b7152a93-83bc-47e5-829a-a35378c9f20a
-if false
-	md"""
-## Mass-Period Distribution
-$(Resource("https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/exo_massperiod_cb.png", :width=>"75%")) 
-	"""
-end
-
-# ╔═╡ 53840d48-d7c6-4c5f-9044-e368ea97eca0
+# ╔═╡ d060d6c3-baf4-48c4-98e7-188b80bed1fe
 md"""
-# From individual objects to populations
-- Which features on above plot reflect intrinsic distribtion of exoplanets?
-- Which features reflect strengths/weaknesses of detection methods?
+## Describe/Visualize Data
+- Scale 
+- Transformations (e.g., log, sqrt)
 
-### Correlation vs causation
-
-## Interpretting Data Responsibly
-- Which features are *expected* based on well-established astrophysics?
-- Which features are scientifically *interesting*?
-- What *scientifically interesting* questions could be addressed by...
-   - existing data?
-   - new observations/analysis in next $N$ years?
 """
 
-# ╔═╡ 891d967c-7cc9-419b-bc1b-124ca26a47b2
+# ╔═╡ 5e8da102-4647-4284-b381-8ff9a1ed7505
 md"""
-# Period vs Eccentricity 
-$(Resource("https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/exo_eccperiod_cb.png",:width=>"75%"))
+## Identify potential relationships in Data
 
-## What features do you notice?
-- How do you interpret those?
+- Relationships between values for each object
+- Relationships between values across objects
+- Relationships in time
+
 """
 
-# ╔═╡ f368dff0-fce6-4bdd-932f-0174d87b82ec
-md"""# What about "Small" Planets?"""
-
-# ╔═╡ 0d91f18b-1c03-474f-8803-ffcf69ec3e51
-md"""
-## Radius vs Period vs Time
-### (Zoom in on Planets from Kepler mission)
-$(Resource("https://exoplanetarchive.ipac.caltech.edu/videos/koi-radiusvperiod-nexsci.mp4",:width=>"75%"))
-"""
-
-# ╔═╡ aba60bb6-3c89-4377-92c7-b235ccabf05b
-md"""## Mass-Radius Distribution
-$(Resource("https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/exo_massradius_cb.png", :width=>"75%"))
-"""
-
-# ╔═╡ ee66c685-c55b-45e3-a28a-85de1dedc412
-md"""
-# What's missing from these plots?
-"""
-
-# ╔═╡ f5926cdd-806f-4096-ba08-1d01ce8e647f
-
-
-# ╔═╡ e53d7ed0-fd38-4575-be51-eaf5e8ad8e9b
+# ╔═╡ d031150e-28ce-489f-8d9a-d397a1473f05
 md"# Helper Code"
 
-# ╔═╡ 362a7280-c035-4db0-8cfc-fe5c1f6b1094
+# ╔═╡ 504e22c9-d7ba-4cc6-bb68-f05f101db340
 ChooseDisplayMode()
 
-# ╔═╡ a61f206b-d858-4151-aa46-6bd2416bf812
+# ╔═╡ a3bb5429-4336-43bf-9838-c35748617a17
 TableOfContents(aside=true)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -338,21 +315,15 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╟─2632d9c3-1db4-4d43-9c81-7495f2665c3d
-# ╟─220e2f65-6c0e-4f89-a01e-a7e53c6eb2a5
-# ╟─b8c097e8-3072-44e4-9cbf-5b683ece4446
-# ╟─f4e8da0a-7367-4357-836f-df6af36bcf7a
-# ╟─b7152a93-83bc-47e5-829a-a35378c9f20a
-# ╟─53840d48-d7c6-4c5f-9044-e368ea97eca0
-# ╟─891d967c-7cc9-419b-bc1b-124ca26a47b2
-# ╟─f368dff0-fce6-4bdd-932f-0174d87b82ec
-# ╟─0d91f18b-1c03-474f-8803-ffcf69ec3e51
-# ╟─aba60bb6-3c89-4377-92c7-b235ccabf05b
-# ╟─ee66c685-c55b-45e3-a28a-85de1dedc412
-# ╠═f5926cdd-806f-4096-ba08-1d01ce8e647f
-# ╟─e53d7ed0-fd38-4575-be51-eaf5e8ad8e9b
-# ╠═362a7280-c035-4db0-8cfc-fe5c1f6b1094
-# ╠═a61f206b-d858-4151-aa46-6bd2416bf812
-# ╠═d52a0e02-1a73-11ed-1864-45f999e72173
+# ╠═5e85efae-1d94-11ed-2aee-2d32c2b43695
+# ╟─57d33d1f-b15a-435d-a7ec-433d0f8370c6
+# ╟─657ab8e9-779f-4b19-bae4-079832dbc5ca
+# ╠═ad2b753b-a09f-4a07-9843-6f84a3460004
+# ╠═d060d6c3-baf4-48c4-98e7-188b80bed1fe
+# ╠═5e8da102-4647-4284-b381-8ff9a1ed7505
+# ╟─d031150e-28ce-489f-8d9a-d397a1473f05
+# ╠═504e22c9-d7ba-4cc6-bb68-f05f101db340
+# ╠═a3bb5429-4336-43bf-9838-c35748617a17
+# ╠═2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
