@@ -1,0 +1,7 @@
+## Recordings of classes
+
+Some classes may be recorded. Ay students who prefer to not ask questions while being recorded are encouraged to submit questions in advance of class.
+
+Video and audio recordings of classes are part of the class activities. Any video and audio recordings are used for educational use/purposes and only may be made available to all students presently enrolled in the class. For purposes where the recordings will be used in future class sessions/lectures beyond this class, any type of identifying information will be adequately removed.
+
+According to [University Policy](https://policy.psu.edu/policies/ad40), students must get express permission from their instructor to record class sessions. Screenshots showing instructors and students are considered recordings. Even if permission is granted, student-initiated recordings must be used only for educational purposes for the students enrolled in the initiating student’s class. Recordings may be used only during the period in which the student is enrolled in the class. Authorized student-initiated recordings may not be posted or shared in any fashion outside of the class, including online or through other media, without the express written consent of the course instructor or appropriate University administrator. Students who engage in the unauthorized distribution of class recordings may be held in violation of the University’s Code of Conduct, and/or liable under Federal and State laws.
