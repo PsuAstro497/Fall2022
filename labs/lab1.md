@@ -8,8 +8,8 @@ tags = ["labs", "logistics"]
 
 Start {{lab1_start}} ---
 Due {{lab1_due}}
-- ex1.jl
-- goals.md
+- [Ex 1: Getting Started w/ Julia & Pluto](https://psuastro497.github.io/lab1-start/goals.html)
+- [Goals](https://psuastro497.github.io/lab1-start/goals.html)
 
 \\ 
 

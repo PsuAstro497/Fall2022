@@ -9,8 +9,8 @@ tags = ["labs"]
 Start {{lab2_start}} ---
 Due {{lab2_due}}
 
-- [Ex 1: Exploratory Data Analysis](https://psuastro497.github.io/lab2-start/ex1.html)
-- [Ex 2: Disaggregate Data](https://psuastro497.github.io/lab2-start/ex2.html)
+- [Ex 1: Exploratory Data Analysis I: Introduction](https://psuastro497.github.io/lab2-start/ex1.html)
+- [Ex 2: Exploratory Data Analysis II: Disaggregated Data](https://psuastro497.github.io/lab2-start/ex2.html)
 
 ### Goals:
 In this lab, students will learn to:
