@@ -11,7 +11,9 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
-
+- Dashboards w/ Pluto: [PlutoUI examples](https://juliapluto.github.io/sample-notebook-previews/PlutoUI.jl.html), [video from JuliaCon 2022](https://www.youtube.com/watch?v=dP9UuEL00iM)
+- Genie.jl: [docs](https://genieframework.com/docs/genie/v5/tutorials/1--Overview.html) [video overview](https://www.youtube.com/watch?v=YEQLTCWxDuM)
+- Dash.jl: [docs](https://dash.plotly.com/julia/introduction)
 
 ## [Lab 9](../../labs/lab9/): {{fill title labs/lab9.md}}
 

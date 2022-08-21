@@ -9,7 +9,7 @@ tags = ["labs", "logistics"]
 Start {{lab1_start}} ---
 Due {{lab1_due}}
 - [Ex 1: Getting Started w/ Julia & Pluto](https://psuastro497.github.io/lab1-start/goals.html)
-- [Goals](https://psuastro497.github.io/lab1-start/goals.html)
+- [Goals for the Semester](https://psuastro497.github.io/lab1-start/goals.html)
 
 \\ 
 
@@ -33,4 +33,8 @@ and reflect on their goals for the course.
 - [Commit](/tips/labs/commit) and [submit](/tips/labs/submitting/) your work.
 - Once the instrctor and/or TA has provided feedback, [review the feedback](/tips/labs/feedback/)
 
+### Resources 
+- Read [Think Julia](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html#chap01): Ch 1 "The Way of the Program" (after you've started on the lab is ok)
+- Optionally read [Julia Data Science](https://juliadatascience.io/): Ch 2.2-2.3, 3-3.2, 3.3-3.5, 4-4.2 (if/when it would be helpful for you)
+- [Basic commands in Pluto](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%94%8E-Basic-Commands-in-Pluto)
 

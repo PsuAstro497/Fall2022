@@ -19,7 +19,8 @@ tags = ["resources"]
 - [Julia manual](https://docs.julialang.org/en/v1/)
 
 ### Pluto
-- [Pluto wiki](https://github.com/fonsp/Pluto.jl/wiki)
+- [Basic Commands in Pluto](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%94%8E-Basic-Commands-in-Pluto)
+- More from the [Pluto wiki](https://github.com/fonsp/Pluto.jl/wiki)
 - [PlutoUI.jl docstrings](https://docs.juliahub.com/PlutoUI/)
 
 ### Website tools

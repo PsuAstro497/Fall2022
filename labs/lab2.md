@@ -33,3 +33,14 @@ Follow the link provided via Canvas to create your own private copy of this lab'
 See the
 [help on the course website](https://psuastro497.github.io/fall2022/resources/labs/) for instructions on getting setup to use ACI, cloning, commiting, pushing and submiting your work.
 
+### Resources
+- [DataFrames.jl](https://dataframes.juliadata.org/stable/)
+   - [Data Wranglingwith DataFrames.jl Cheat Sheet](https://www.ahsmart.com/assets/pages/data-wrangling-with-data-frames-jl-cheat-sheet/DataFramesCheatSheet_v1.x_rev1.pdf)
+   - Julia Data Science: [Ch 4](https://juliadatascience.io/dataframes)
+   - [DataFrames tutorials](https://github.com/bkamins/Julia-DataFrames-Tutorial/#toc)
+- [CSV.jl](https://csv.juliadata.org/stable/)
+- [Plots.jl](https://docs.juliaplots.org/stable/)
+- [StatsPlots.jl](https://docs.juliaplots.org/stable/)
+- [KernelDensity.jl](https://github.com/JuliaStats/KernelDensity.jl)
+
+
