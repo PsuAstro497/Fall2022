@@ -32,8 +32,8 @@ instructor_email = "ebf11 _at_ psu.edu"
 instructor_phone = "x3-5558"
 ta_name = "Zhenyuan Wang"
 ta_link = "[Zhenyuan Wang](https://science.psu.edu/astro/people/zzw173)"
-ta_email = "zzw173 at psu.edu"
-office_hours = "TBD"
+ta_email = "zzw173 _at_ psu.edu"
+office_hours = "Fridays 3-4 (online)"
 
 # Assignment deadlines
 lab1_title = "Getting Started with Labs"
