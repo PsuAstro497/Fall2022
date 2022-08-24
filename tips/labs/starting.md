@@ -22,7 +22,7 @@ tags = ["tips","labs","git","pluto"]
 - Return to your browser tab with "My Interactive Sessions".
 - Hopefully, there's now a _Connect to Jupyter Server_ button. Click it.
 - Go to the newly opened tab, you'll have a Jupyter Lab Server.
-- If you don't see tiles for Python, Julia and Pluto Notebooks, then click _File.New_Launcher_.
+- If you don't see tiles for Python, Julia and Pluto Notebooks, then click _File.NewLauncher_.
 - Find the _Terminal_ tile or in the menu system, _File.New.Terminal_.
 - In the new terminal tab, clone your github repo by running
 
@@ -42,7 +42,7 @@ julia --project -e 'using Pkg; Pkg.instantiate(); '
 ## Open Pluto notebook
 
 - Go back to the browser tab with your Jupyter Lab server running.
-- If you do not see the a tile for Pluto, then go to File.New_Launcher.
+- If you do not see the a tile for Pluto, then go to _File.NewLauncher_.
 - Most labs will contain one or more Pluto notebooks (their file names will end in .jl).  To open one in Pluto,
    + Click the Pluto tile.  A new tab will open in your browser for the Pluto session.
    + In the box labeled "Open from file" or "Open a notebook" (depending on Pluto version), type the path to the directory containing the repo, a forward slash and the name of the first notebook (e.g., 'lab1-yourgithubid/ex1.jl').  Tab completion is often helpful.

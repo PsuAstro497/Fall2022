@@ -19,7 +19,7 @@ This will:
 3) Modify ssh config file, and
 4) Set proper permissions on all ssh files/directories.
 
-I recommend that you do NOT enter a password for your ssh key.  (If you do use a password, then you’ll have extra work to do before Lab 7.)
+I recommend that you do NOT enter a password for your ssh key. 
 
 
 Once you run the `updateKeys.sh` script, then you'll need to [add the new ssh key to the list of authorized keys for your github account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-linux) in order to push code from ACI to github.
