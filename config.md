@@ -17,7 +17,7 @@ generate_rss = false
 website_title = "Astro 497"
 website_descr = "Astro 497 (Fall 2022)"
 website_url   = "https://PsuAstro497.github.io/Fall2022/"
-version = "v0.1"
+version = "v0.2"
 
 # Class specific variables
 class_name = "Data Science Applications for Exoplanets"
@@ -33,7 +33,7 @@ instructor_phone = "x3-5558"
 ta_name = "Zhenyuan Wang"
 ta_link = "[Zhenyuan Wang](https://science.psu.edu/astro/people/zzw173)"
 ta_email = "zzw173 _at_ psu.edu"
-office_hours = "Fridays 3-4 (online)"
+office_hours = "Thursdays 3-4 (Davey Lab 532C) & Fridays 3-4 (online)"
 
 # Assignment deadlines
 lab1_title = "Getting Started with Labs"
@@ -53,7 +53,7 @@ lab5_start = "Sept 21"
 lab5_due = "Sept 26"
 lab6_title = "Explanatory Data Analysis"
 lab6_start = "Sept 28"
-lab6_due = "Oct 3" 
+lab6_due = "Oct 3"
 exam1_date = "Oct 5"
 lab7_title = "Data Wrangling"
 lab7_start = "Oct 12"
