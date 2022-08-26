@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.9
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -86,13 +86,13 @@ md"""## Mass-Radius Distribution
 $(Resource("https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/exo_massradius_cb.png", :width=>"75%"))
 """
 
+# ╔═╡ 5a3e163d-fa1c-40cc-80bd-448a7a51c6d6
+md"# More Reading Questions"
+
 # ╔═╡ ee66c685-c55b-45e3-a28a-85de1dedc412
 md"""
-# What's missing from these plots?
+## What's missing from plots above?
 """
-
-# ╔═╡ f5926cdd-806f-4096-ba08-1d01ce8e647f
-
 
 # ╔═╡ e53d7ed0-fd38-4575-be51-eaf5e8ad8e9b
 md"# Helper Code"
@@ -102,6 +102,25 @@ ChooseDisplayMode()
 
 # ╔═╡ a61f206b-d858-4151-aa46-6bd2416bf812
 TableOfContents(aside=true)
+
+# ╔═╡ da2e6a40-9cf4-4baa-89f2-c79b6750d87c
+ question(text; v_offset::Integer=0) = Markdown.MD(Markdown.Admonition("tip", "Question", [text]));
+
+# ╔═╡ a8ed565e-9686-4e81-985f-dbaa767e00fa
+question(md"""I was wondering why the astronomy community settled on using Jupiter as the "base comparision" for studying exoplanets?""")
+
+# ╔═╡ 49f6afc1-af78-4246-9702-f10500816264
+question(md"Are there any new observational techniques for detecting exoplanets now that telescopes and technology have improved?")
+
+# ╔═╡ b1f7ea58-a0c9-4fb5-bbb1-929b65ea49f5
+question(md"""Timing Variations:   What exactly does "time perturbations of stars with stable oscillation periods" mean?""")
+
+# ╔═╡ 2821fa72-7d20-47a7-ad73-806d74317502
+question(md"Will there ever be a cap to exponential growth of data availability?  
+Could there be a maximum on the amount of data that we can physically store and handle?")
+
+# ╔═╡ dcf0a137-35a0-4421-882a-9db99a89f18d
+question(md"Is Pluto not considered a planet because it is a free-floating object and if so is it not in orbit with the Sun?")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -397,16 +416,22 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─b8c097e8-3072-44e4-9cbf-5b683ece4446
 # ╟─f4e8da0a-7367-4357-836f-df6af36bcf7a
 # ╟─b7152a93-83bc-47e5-829a-a35378c9f20a
+# ╟─a8ed565e-9686-4e81-985f-dbaa767e00fa
 # ╟─53840d48-d7c6-4c5f-9044-e368ea97eca0
 # ╟─891d967c-7cc9-419b-bc1b-124ca26a47b2
 # ╟─f368dff0-fce6-4bdd-932f-0174d87b82ec
 # ╟─0d91f18b-1c03-474f-8803-ffcf69ec3e51
 # ╟─aba60bb6-3c89-4377-92c7-b235ccabf05b
+# ╟─5a3e163d-fa1c-40cc-80bd-448a7a51c6d6
+# ╟─49f6afc1-af78-4246-9702-f10500816264
+# ╟─b1f7ea58-a0c9-4fb5-bbb1-929b65ea49f5
+# ╟─2821fa72-7d20-47a7-ad73-806d74317502
 # ╟─ee66c685-c55b-45e3-a28a-85de1dedc412
-# ╠═f5926cdd-806f-4096-ba08-1d01ce8e647f
+# ╟─dcf0a137-35a0-4421-882a-9db99a89f18d
 # ╟─e53d7ed0-fd38-4575-be51-eaf5e8ad8e9b
 # ╠═362a7280-c035-4db0-8cfc-fe5c1f6b1094
 # ╠═a61f206b-d858-4151-aa46-6bd2416bf812
 # ╠═d52a0e02-1a73-11ed-1864-45f999e72173
+# ╠═da2e6a40-9cf4-4baa-89f2-c79b6750d87c
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
