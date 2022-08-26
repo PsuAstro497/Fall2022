@@ -9,9 +9,22 @@ begin
 	using PlutoUI, PlutoTeachingTools
 end
 
-# ╔═╡ 2632d9c3-1db4-4d43-9c81-7495f2665c3d
+# ╔═╡ accc6c39-e8ed-4429-b2d2-273a3cafbed0
 md"""
 # Astro 497: Week 1, Friday
+## Administrative details
+- Computing Setup:  Thanks!
+- Office Hours:
+   - Thursdays 3-4pm (Zhenjuan Wang; Davey Lab 532C)
+   - Fridays 3-4pm (Eric Ford; Zoom)
+- Reading Questions
+   - Sign up for TopHat if you haven't already
+   - Aim for asking a question each week
+   - No more readings for coming Monday
+"""
+
+# ╔═╡ 0f55bed8-df99-4e34-8bef-b70eb675395c
+md"""
 # Overview of Exoplanets
 - NASA's [Exoplanet Science Institute (NExScI)](https://nexsci.caltech.edu/) maintains the [Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/index.html)
 - They provide several [up-to-date plots](https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/), such as those below.
@@ -31,6 +44,9 @@ md"""
 - During the second ~half of the course, we'll touch on most of the other methods briefly.
   - But we won't get as much hands-on experience using them, since you'll be working on your projects then.
 """
+
+# ╔═╡ 44ceb5d3-7d53-4553-8bdb-63b38b852f71
+md"### Questions about Astronometry & Timing Variations"
 
 # ╔═╡ f4e8da0a-7367-4357-836f-df6af36bcf7a
 md"""
@@ -69,6 +85,8 @@ $(Resource("https://exoplanetarchive.ipac.caltech.edu/exoplanetplots/exo_eccperi
 
 ## What features do you notice?
 - How do you interpret those?
+
+## What hidden variables might affect your interpretation?
 """
 
 # ╔═╡ f368dff0-fce6-4bdd-932f-0174d87b82ec
@@ -94,6 +112,9 @@ md"""
 ## What's missing from plots above?
 """
 
+# ╔═╡ f124d3ab-e221-4d49-b9be-54b236f251ca
+md"## Just for Fun Questions"
+
 # ╔═╡ e53d7ed0-fd38-4575-be51-eaf5e8ad8e9b
 md"# Helper Code"
 
@@ -106,18 +127,36 @@ TableOfContents(aside=true)
 # ╔═╡ da2e6a40-9cf4-4baa-89f2-c79b6750d87c
  question(text; v_offset::Integer=0) = Markdown.MD(Markdown.Admonition("tip", "Question", [text]));
 
+# ╔═╡ 7ba19512-a48d-4aed-b8c3-9d9debed092c
+question(md"Which observational techniques will we focus on in this course?")
+
+# ╔═╡ acee36e8-9eac-497f-b9c5-46a4ec501bbf
+question(md"In the context of Astrometric planet searches, what are two components of motion in the plane of the sky?")
+
+# ╔═╡ b1f7ea58-a0c9-4fb5-bbb1-929b65ea49f5
+question(md"""In the context of the Timing Variations method, what does "time perturbations of stars with stable oscillation periods" mean?""")
+
+# ╔═╡ 0ee39a05-b3be-4d80-a1a4-89702e19ed3a
+question(md"Why do we still using timing method to detect exoplanets even though we know life could not survive on these pulsar orbiting planets?")
+
+# ╔═╡ 95cdaddc-96e5-4ef5-82ad-648bb688768c
+question(md"What kind of special information do we get only from the timing method of detecting exoplanets?")
+
 # ╔═╡ a8ed565e-9686-4e81-985f-dbaa767e00fa
 question(md"""I was wondering why the astronomy community settled on using Jupiter as the "base comparision" for studying exoplanets?""")
 
 # ╔═╡ 49f6afc1-af78-4246-9702-f10500816264
 question(md"Are there any new observational techniques for detecting exoplanets now that telescopes and technology have improved?")
 
-# ╔═╡ b1f7ea58-a0c9-4fb5-bbb1-929b65ea49f5
-question(md"""Timing Variations:   What exactly does "time perturbations of stars with stable oscillation periods" mean?""")
-
 # ╔═╡ 2821fa72-7d20-47a7-ad73-806d74317502
 question(md"Will there ever be a cap to exponential growth of data availability?  
 Could there be a maximum on the amount of data that we can physically store and handle?")
+
+# ╔═╡ cb2180f1-f14d-440b-9206-ccd1702dfbbe
+question(md"Is there anyway we would be able to detect habitable planerts that are unlike Earth?")
+
+# ╔═╡ 287e5928-17d1-4419-9939-c5b6d2981f18
+question(md"Do you think there is any intelligent life on exoplanets?")
 
 # ╔═╡ dcf0a137-35a0-4421-882a-9db99a89f18d
 question(md"Is Pluto not considered a planet because it is a free-floating object and if so is it not in orbit with the Sun?")
@@ -137,7 +176,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -411,9 +450,16 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╟─2632d9c3-1db4-4d43-9c81-7495f2665c3d
+# ╟─accc6c39-e8ed-4429-b2d2-273a3cafbed0
+# ╟─0f55bed8-df99-4e34-8bef-b70eb675395c
 # ╟─220e2f65-6c0e-4f89-a01e-a7e53c6eb2a5
+# ╟─7ba19512-a48d-4aed-b8c3-9d9debed092c
 # ╟─b8c097e8-3072-44e4-9cbf-5b683ece4446
+# ╟─44ceb5d3-7d53-4553-8bdb-63b38b852f71
+# ╟─acee36e8-9eac-497f-b9c5-46a4ec501bbf
+# ╟─b1f7ea58-a0c9-4fb5-bbb1-929b65ea49f5
+# ╟─0ee39a05-b3be-4d80-a1a4-89702e19ed3a
+# ╟─95cdaddc-96e5-4ef5-82ad-648bb688768c
 # ╟─f4e8da0a-7367-4357-836f-df6af36bcf7a
 # ╟─b7152a93-83bc-47e5-829a-a35378c9f20a
 # ╟─a8ed565e-9686-4e81-985f-dbaa767e00fa
@@ -424,9 +470,11 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─aba60bb6-3c89-4377-92c7-b235ccabf05b
 # ╟─5a3e163d-fa1c-40cc-80bd-448a7a51c6d6
 # ╟─49f6afc1-af78-4246-9702-f10500816264
-# ╟─b1f7ea58-a0c9-4fb5-bbb1-929b65ea49f5
 # ╟─2821fa72-7d20-47a7-ad73-806d74317502
+# ╟─cb2180f1-f14d-440b-9206-ccd1702dfbbe
 # ╟─ee66c685-c55b-45e3-a28a-85de1dedc412
+# ╟─f124d3ab-e221-4d49-b9be-54b236f251ca
+# ╟─287e5928-17d1-4419-9939-c5b6d2981f18
 # ╟─dcf0a137-35a0-4421-882a-9db99a89f18d
 # ╟─e53d7ed0-fd38-4575-be51-eaf5e8ad8e9b
 # ╠═362a7280-c035-4db0-8cfc-fe5c1f6b1094
