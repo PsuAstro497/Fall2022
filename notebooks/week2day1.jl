@@ -11,8 +11,8 @@ end
 
 # ╔═╡ 95538698-17ec-4034-978e-b737247c74b8
 md"""
-# Astro 497: Week 2, Monday
 # Exploratory Data Analysis
+**Astro 497: Week 2, Monday**
 
 ## Logistics
 - Added due dates for reading questions (through mid-term exam) onto Canvas
@@ -22,7 +22,8 @@ md"""
   - Let me know by end-of-business Tuesday if have any breakout room requests
 - First COVID close contacts reported
   - Thanks for being cautious
-  - Recording today's class
+  - Recording today's class for student(s) who miss
+  - Will start posting
 """
 
 # ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
@@ -85,11 +86,10 @@ md"""
 
 # ╔═╡ e2bba1b0-a5ee-4fc3-a943-3727c42236d3
 tip(md"""
-#### Options for storing/organizing your data
-- Vectors
-- Matrices (or $\ge$2-dimensional arrays)
-- DataFrames & Tables
-- Databases
+**Options for storing/organizing your data**
+- Vectors, Matrices and higher-dimensional arrays:   
+- DataFrames & Tables: reduces risk of bookkeeping errors
+- Databases (e.g., multiple talbes of different lengths)
 """)
 
 # ╔═╡ 657ab8e9-779f-4b19-bae4-079832dbc5ca
@@ -118,12 +118,12 @@ Are some data values:
 
 # ╔═╡ be85c7bb-baab-463d-b69f-898eaf4316a4
 tip(md"""
-#### Any large dataset is likely to have some suspicious data!
+**Any large dataset is likely to have some suspicious data!**
 - Could these issues affect my analysis?
 - Could these values interfere even exploratory data analysis?
 - Should I try to understand my data source better before I proceed?
 - Should I fix the issues now or proceed with caution?
-   - 80%/20% "rule"
+   - 80%/20% rule
 - If proceeding, how will I make sure that I (and my team) don't forget these concerns?
 """)
 
@@ -176,9 +176,6 @@ md"""## Make a Plan
 - What apparent relationships should be evaluted quantiatively?
 - What potential concerns should be kept in mind? 
 """
-
-# ╔═╡ a15a2161-68e1-47d4-b914-7f56185cccd3
-md"## More questions from Friday"
 
 # ╔═╡ d031150e-28ce-489f-8d9a-d397a1473f05
 md"# Helper Code"
@@ -478,7 +475,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╠═95538698-17ec-4034-978e-b737247c74b8
+# ╟─95538698-17ec-4034-978e-b737247c74b8
 # ╟─e251d327-aaff-4b19-86a1-7e5230e22910
 # ╟─5d1f6a25-5669-492f-b1c6-657f87bbf578
 # ╟─57d33d1f-b15a-435d-a7ec-433d0f8370c6
@@ -489,10 +486,9 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─d060d6c3-baf4-48c4-98e7-188b80bed1fe
 # ╟─5e8da102-4647-4284-b381-8ff9a1ed7505
 # ╟─d8681ba2-e553-43f7-87ef-639aae580bc9
-# ╟─a15a2161-68e1-47d4-b914-7f56185cccd3
 # ╟─d031150e-28ce-489f-8d9a-d397a1473f05
 # ╠═504e22c9-d7ba-4cc6-bb68-f05f101db340
 # ╠═a3bb5429-4336-43bf-9838-c35748617a17
-# ╠═2824ff96-5186-4d22-bea1-7c4df5f5e4bc
+# ╟─2824ff96-5186-4d22-bea1-7c4df5f5e4bc
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
