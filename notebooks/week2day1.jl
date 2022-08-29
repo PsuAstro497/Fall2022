@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.9
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -9,28 +9,88 @@ begin
 	using PlutoUI, PlutoTeachingTools
 end
 
-# ╔═╡ 5e85efae-1d94-11ed-2aee-2d32c2b43695
+# ╔═╡ 95538698-17ec-4034-978e-b737247c74b8
 md"""
 # Astro 497: Week 2, Monday
 # Exploratory Data Analysis
 
+## Logistics
+- Added due dates for reading questions (through mid-term exam) onto Canvas
+- Lab 2
+  - Added link to create Lab 2 starter repository
+  - Will be time to start working on during class
+  - Let me know by end-of-business Tuesday if have any breakout room requests
+- First COVID close contacts reported
+  - Thanks for being cautious
+  - Recording today's class
+"""
+
+# ╔═╡ e251d327-aaff-4b19-86a1-7e5230e22910
+md"""
 ## Overview
+1.  Choose data to explore 
 1.  Ingest data
 1.  Validate data
 1.  Clean data
 1.  Describe/Visualize data
-1.  Identifying potential relationships in data
+1.  Identify potential relationships in data
+1.  Make a plan
+"""
+
+# ╔═╡ 5d1f6a25-5669-492f-b1c6-657f87bbf578
+md"""
+## Choose data to Explore
+### Classical Astronomy approach:
+1.  Choose scientific problem
+1.  Decide what data is needed
+1.  Request telescope time
+1.  Conduct observations
+1.  Ingest data you collect
+
+### Classical archival science approach:
+1.  Choose scientific problem
+1.  Decide what data is needed
+1.  Learn about/query multiple surveys/datasets that might have data to address your question. 
+1.  Prioritize which to consider first
+1.  Query archive(s) to ingest data others collected.
+
+### Survey-science key-project approach:
+1.  Choose scientific problem
+1.  Decide what data is needed
+1.  Obtain funding
+1.  Build observatory, telescope, detector, software pipeline, archive, etc. to meet your specifications
+1.  Conduct survey (observations, calibration, data reduction, archiving, etc.)
+1.  Query database(s) to ingest data from survey
+1.  Release data to public
+
+### Survey-science ancillary science approach:
+1.  Identify exciting dataset(s)
+1.  Learn about how they were collected, limitations, uncertainties, biases, etc.
+1.  Decide if they has the potential to addres your science question
+1.  Query database(s) to ingest data others have collected
+
+### Many variations
+-  Spectrum of approaches for how to identify questions/datasets
+-  Combine survey, archival and targeted approaches to address a common question.
 """
 
 # ╔═╡ 57d33d1f-b15a-435d-a7ec-433d0f8370c6
 md"""
 ## Ingest Data
-- Identify a data source
 - Construct a query
 - Download the results of that query
 - Store the data locally
 - Read the data into memory.
 """
+
+# ╔═╡ e2bba1b0-a5ee-4fc3-a943-3727c42236d3
+tip(md"""
+#### Options for storing/organizing your data
+- Vectors
+- Matrices (or $\ge$2-dimensional arrays)
+- DataFrames & Tables
+- Databases
+""")
 
 # ╔═╡ 657ab8e9-779f-4b19-bae4-079832dbc5ca
 md"""
@@ -49,27 +109,76 @@ md"""
 # ╔═╡ ad2b753b-a09f-4a07-9843-6f84a3460004
 md"""
 ## Clean Data
-- Are some values clearly erroneous?
-- Are some values susipicously discrepant?
+Are some data values:
+- missing?
+- clearly erroneous? 
+- susipicously discrepant from expectations?
+- susipicously discrepant from other data?
 """
+
+# ╔═╡ be85c7bb-baab-463d-b69f-898eaf4316a4
+tip(md"""
+#### Any large dataset is likely to have some suspicious data!
+- Could these issues affect my analysis?
+- Could these values interfere even exploratory data analysis?
+- Should I try to understand my data source better before I proceed?
+- Should I fix the issues now or proceed with caution?
+   - 80%/20% "rule"
+- If proceeding, how will I make sure that I (and my team) don't forget these concerns?
+""")
 
 # ╔═╡ d060d6c3-baf4-48c4-98e7-188b80bed1fe
 md"""
 ## Describe/Visualize Data
-- Scale 
-- Transformations (e.g., log, sqrt)
+- Location: mean, median, mode
+- Scale: standard deviation, quantiles, bounds
+- Higher-order moments:  skewness, kurtosis, behavior of tails
 
+- Transformations 
+  - Linear transformations (shift, scale, rotate)
+  - Non-linear transformations for visualization (e.g., log, sqrt)
+  - Power transforms to standardize distributions (e.g., Box-Cox transform)  
+
+- Ohter strategies
+  - Clamping data to limit effects of outliers
+  - Imputing missing data to allow for fast exploratory analysis
+
+- Statistical tests
+  - Test for normality
 """
 
 # ╔═╡ 5e8da102-4647-4284-b381-8ff9a1ed7505
 md"""
 ## Identify potential relationships in Data
 
-- Relationships between values for each object
-- Relationships between values across objects
-- Relationships in time
+Look for relationships between values:
+- For each object
+- Across objects
+- In space
+- In time
 
+### Statistics
+- Correlation coefficients
+- Rank correlation coefficient
+- Dangers of statistics
+
+### Visualizations
+- Scatter plot 
+- 2-d histograms or density estimates
+- Limitations of visualizations
 """
+
+# ╔═╡ d8681ba2-e553-43f7-87ef-639aae580bc9
+md"""## Make a Plan
+- Is this question/dataset combination worthy of more of my time?
+- Should I consider combining with other dataset(s) to fill gaps?
+- What needs to done before begining quantiative analysis?
+- What apparent relationships should be evaluted quantiatively?
+- What potential concerns should be kept in mind? 
+"""
+
+# ╔═╡ a15a2161-68e1-47d4-b914-7f56185cccd3
+md"## More questions from Friday"
 
 # ╔═╡ d031150e-28ce-489f-8d9a-d397a1473f05
 md"# Helper Code"
@@ -95,7 +204,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -369,12 +478,18 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╠═5e85efae-1d94-11ed-2aee-2d32c2b43695
+# ╟─95538698-17ec-4034-978e-b737247c74b8
+# ╟─e251d327-aaff-4b19-86a1-7e5230e22910
+# ╟─5d1f6a25-5669-492f-b1c6-657f87bbf578
 # ╟─57d33d1f-b15a-435d-a7ec-433d0f8370c6
+# ╟─e2bba1b0-a5ee-4fc3-a943-3727c42236d3
 # ╟─657ab8e9-779f-4b19-bae4-079832dbc5ca
-# ╠═ad2b753b-a09f-4a07-9843-6f84a3460004
-# ╠═d060d6c3-baf4-48c4-98e7-188b80bed1fe
-# ╠═5e8da102-4647-4284-b381-8ff9a1ed7505
+# ╟─ad2b753b-a09f-4a07-9843-6f84a3460004
+# ╟─be85c7bb-baab-463d-b69f-898eaf4316a4
+# ╟─d060d6c3-baf4-48c4-98e7-188b80bed1fe
+# ╟─5e8da102-4647-4284-b381-8ff9a1ed7505
+# ╟─d8681ba2-e553-43f7-87ef-639aae580bc9
+# ╟─a15a2161-68e1-47d4-b914-7f56185cccd3
 # ╟─d031150e-28ce-489f-8d9a-d397a1473f05
 # ╠═504e22c9-d7ba-4cc6-bb68-f05f101db340
 # ╠═a3bb5429-4336-43bf-9838-c35748617a17
