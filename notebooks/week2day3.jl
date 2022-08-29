@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.9
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -7,13 +7,24 @@ using InteractiveUtils
 # ╔═╡ 3d94c83d-0238-4ba5-820f-022bd6aac230
 using PlutoUI, PlutoTeachingTools
 
-# ╔═╡ 01f5afeb-2a44-48d4-8e7c-b9f932602b08
+# ╔═╡ 1aa502dc-7525-4432-aeac-ef98474f6568
 md"""
 **Astro 497: Week 2, Friday**
-
 # Exoplanet Detection:  Transits
+"""
 
-## Overview
+# ╔═╡ 087cd2b5-2821-466d-b869-504ad97931a0
+TableOfContents()
+
+# ╔═╡ 478ae32d-7b46-43a8-b3ad-12b280a96612
+md"""
+## Logistics
+- How was length of lab 2?
+"""
+
+# ╔═╡ 8e63323f-bf73-4674-84b0-96e6e8b92484
+md"""
+## Overview of Today
 - Transit Method
 - Observables
 - Transit Probability
@@ -36,7 +47,7 @@ Credit:  NASA
 
 # ╔═╡ f873d738-f2f8-4e9c-8d62-2e3f617e9e48
 md"""
-$(LocalResource("../_assets/week2/circular_diagram.png"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week2/circular_diagram.png","../_assets/week2/circular_diagram.png"))
 Credit:  [Joshua Winn (2010)](https://arxiv.org/abs/1001.2010)
 """
 
@@ -97,7 +108,7 @@ $f_{{\rm occ}} = -\frac{\pi}{2} - \omega$
 # ╔═╡ 4dc63f3a-e4c5-4a2a-98ad-6cb00e4e71a0
 md"""
 # Transit Observables
-$(LocalResource("../_assets/week2/transit_diagram.png"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week2/transit_diagram.png","../_assets/week2/transit_diagram.png"))
 Credit:  [Joshua Winn (2010)](https://arxiv.org/abs/1001.2010)
 """
 
@@ -141,7 +152,7 @@ md"""
 # ╔═╡ 1a1d349c-ba18-4d17-9123-28652469824d
 md"""
 # Transit Probability
-$(LocalResource("../_assets/week2/probcalc.png"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week2/probcalc.png","../_assets/week2/probcalc.png"))
 Credit:  [Joshua Winn (2010)](https://arxiv.org/abs/1001.2010)
 """
 
@@ -168,7 +179,7 @@ md"""
 # ╔═╡ 970cdb06-6953-428c-9fdc-cdbd346dd8c6
 md"""
 ### Early Surveys
-$(LocalResource("../_assets/week2/horne_table.png", :width=>"100%"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week2/horne_table.png","../_assets/week2/horne_table.png", :width=>"80%"))
 Credit: [Horne 2002](http://star-www.st-and.ac.uk/~kdh1/transits/table.html)
 """
 
@@ -178,7 +189,7 @@ md"""
 Dozens of large planets:
 - [SuperWASP](https://wasp-planets.net/wasp-planets/)
 - [HATNet](https://hatnet.org/planets/)
-Small planets around nearby stars:
+Small number of small planets around nearby stars:
 - [MEarth](https://lweb.cfa.harvard.edu/MEarth/Welcome.html)
 - [TRAPPIST](https://www.eso.org/public/usa/teles-instr/lasilla/trappist/)
 """
@@ -206,21 +217,41 @@ md"""
 Credit: [NASA](https://www.nasa.gov/image-feature/this-is-tess-our-newest-planet-hunter)
 """
 
+# ╔═╡ b65d5bd5-34e5-48bc-b333-2a8107f8d2ac
+md"""
+### Plato
+![Artist impression of PLATO Spacecraft](https://cdn.sci.esa.int/documents/33240/35301/PLATO_artist_impression_20191105_2_625.jpg)
+Copyright: [Copyright: ESA/ATG medialab](https://sci.esa.int/web/services/terms-and-conditions)
+"""
+
 # ╔═╡ 0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 md"""
 # Stregnths & Weaknesses
 ## Strengths
--
--
+- Small telescope can do high-quality science
+- CCDs make relative photometry (relatively) easy 
+- Can observe many stars at once
+- Not restricted to specific spectral types.
+- Transit signal-to-noise $\sim R_p/R_\star$
+- Transit probability high for short-period planets.
 
 ## Weaknesses
--
--
-
+- Transits only provide information about a planet during a very small fraction of it's orbit.  
+   - Scheduling observations of a full transit can be difficult .
+   - If observing from the ground, then day light or weather can lead to missing a transit.
+- Transit probability decreases with increasing orbital separation
+  - Most planets won't transit (as seen from Earth)
+  - Unlikely that transits can be used to study any particular planet 
+- Other astrophysical/atmospheric objects/effects cause similar photometric effects.
+   - Follow-up observations are often needed to validate or confirm transiting planet candidates.
+- Need to observe for multiple orbital periods to measure period robustly.
 """
 
 # ╔═╡ 9e5421f0-25f8-476b-a2fe-7e6acddfb3d9
 Resource("https://exoplanets.nasa.gov/5_ways_content/vid/transit_method_double_planet.mp4") #, :width=>"100%")
+
+# ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
+md"""# Reading Questions"""
 
 # ╔═╡ 14afc732-48cb-43a3-956b-a2f42b49dceb
 md"""
@@ -243,8 +274,8 @@ Credit: [NASA](https://exoplanets.nasa.gov/faq/31/whats-a-transit/)
 # ╔═╡ c651ae5b-cea8-4c61-a50c-819697d24a06
 md"# Helper Code"
 
-# ╔═╡ 087cd2b5-2821-466d-b869-504ad97931a0
-TableOfContents()
+# ╔═╡ 58501926-8be8-47b5-b097-79bbb9a182bc
+ChooseDisplayMode()
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -261,7 +292,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -316,6 +347,12 @@ git-tree-sha1 = "335bfdceacc84c5cdf16aadc768aa5ddfc5383cc"
 uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
 version = "0.8.4"
 
+[[deps.Formatting]]
+deps = ["Printf"]
+git-tree-sha1 = "8339d61043228fdd3eb658d86c926cb282ae72a8"
+uuid = "59287772-0a20-5a39-b81b-1366585eb4c0"
+version = "0.4.2"
+
 [[deps.Hyperscript]]
 deps = ["Test"]
 git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
@@ -355,6 +392,12 @@ git-tree-sha1 = "f2355693d6778a178ade15952b7ac47a4ff97996"
 uuid = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 version = "1.3.0"
 
+[[deps.Latexify]]
+deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "Printf", "Requires"]
+git-tree-sha1 = "1a43be956d433b5d0321197150c2f94e16c0aaa0"
+uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
+version = "0.15.16"
+
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
@@ -387,6 +430,12 @@ git-tree-sha1 = "dedbebe234e06e1ddad435f5c6f4b85cd8ce55f7"
 uuid = "6f1432cf-f94c-5a45-995e-cdbf5db27b0b"
 version = "2.2.2"
 
+[[deps.MacroTools]]
+deps = ["Markdown", "Random"]
+git-tree-sha1 = "3d3e902b31198a27340d0bf00d6ac452866021cf"
+uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
+version = "0.5.9"
+
 [[deps.Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -415,9 +464,9 @@ version = "1.4.1"
 
 [[deps.Parsers]]
 deps = ["Dates"]
-git-tree-sha1 = "0044b23da09b5608b4ecacb4e5e6c6332f833a7e"
+git-tree-sha1 = "3d5bf43e3e8b412656404ed9466f1dcbf7c50269"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.3.2"
+version = "2.4.0"
 
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
@@ -436,10 +485,10 @@ uuid = "0ff47ea0-7a50-410d-8455-4348d5de0420"
 version = "0.1.5"
 
 [[deps.PlutoTeachingTools]]
-deps = ["HypertextLiteral", "LaTeXStrings", "Markdown", "PlutoLinks", "PlutoUI", "Random"]
-git-tree-sha1 = "7aa8eef291dbb46aba4aab7fc3895d540a4725d8"
+deps = ["Downloads", "HypertextLiteral", "LaTeXStrings", "Latexify", "Markdown", "PlutoLinks", "PlutoUI", "Random"]
+git-tree-sha1 = "67c917d383c783aeadd25babad6625b834294b30"
 uuid = "661c6b06-c737-4d37-b85c-46df65de6f69"
-version = "0.1.5"
+version = "0.1.7"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
@@ -535,7 +584,10 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 """
 
 # ╔═╡ Cell order:
-# ╟─01f5afeb-2a44-48d4-8e7c-b9f932602b08
+# ╟─1aa502dc-7525-4432-aeac-ef98474f6568
+# ╟─087cd2b5-2821-466d-b869-504ad97931a0
+# ╟─478ae32d-7b46-43a8-b3ad-12b280a96612
+# ╟─8e63323f-bf73-4674-84b0-96e6e8b92484
 # ╟─28d92f9a-ec46-4fa9-b6a8-fb234610b974
 # ╟─10606b2e-f494-4368-b85b-fd02132b45b2
 # ╟─f873d738-f2f8-4e9c-8d62-2e3f617e9e48
@@ -556,13 +608,15 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─f8f1b2e2-e72d-4c6e-9d51-b7ebf812897c
 # ╟─c8432773-77dd-4a78-ba90-50042f70ccad
 # ╟─fd9c5332-f1e8-43e1-a77a-4e77bb58f105
+# ╟─b65d5bd5-34e5-48bc-b333-2a8107f8d2ac
 # ╟─0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 # ╟─9e5421f0-25f8-476b-a2fe-7e6acddfb3d9
+# ╟─8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
+# ╠═a5c32806-1e5b-11ed-0f01-7f4009ba4972
 # ╟─14afc732-48cb-43a3-956b-a2f42b49dceb
 # ╟─4809e920-04e0-4ebe-8daa-c14a21db653c
-# ╠═a5c32806-1e5b-11ed-0f01-7f4009ba4972
 # ╟─c651ae5b-cea8-4c61-a50c-819697d24a06
+# ╠═58501926-8be8-47b5-b097-79bbb9a182bc
 # ╠═3d94c83d-0238-4ba5-820f-022bd6aac230
-# ╠═087cd2b5-2821-466d-b869-504ad97931a0
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
