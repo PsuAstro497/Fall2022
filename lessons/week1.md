@@ -17,6 +17,7 @@ Week {{week_num}}
 
 ## {{ds_topic}}
 - Read [Julia Data Science](https://juliadatascience.io/): Ch 1-1.2 <!-- 2.2-2.3, 3-3.2 -->  (anytime during the week is ok)
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week1day1/)
 
 ## [Lab 1](../../labs/lab1/): {{fill title labs/lab1.md}}
 - Read [Think Julia](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html#chap01): Ch 1 "The Way of the Program" (after you've started on the lab is ok)
@@ -25,3 +26,4 @@ Week {{week_num}}
 ## {{exo_topic}}
 - Read *Exoplanets*: Introduction to Exoplanets:   Sec. 1-6.2
 - Submit reading question before Friday's class.
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week1day3/)

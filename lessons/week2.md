@@ -11,6 +11,7 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week2day1/)
 
 ## [Lab 2](../../labs/lab2/): {{fill title labs/lab2.md}}
 
