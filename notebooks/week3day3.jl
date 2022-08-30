@@ -68,7 +68,7 @@ $p_{\rm tra} = \frac{R_\star}{a}~\approx 0.005~\left( \frac{R_\star}{R_{\odot}} 
 
 # ╔═╡ 107c2f8d-24fb-49c0-bed3-5fcd7c0e86bd
 md"""
-$(LocalResource("../_assets/week3/transplanetsphere.svg"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week3/transplanetsphere.svg","../_assets/week3/transplanetsphere.svg"))
 Credit: [Ragozzine & Holman (2010)](https://arxiv.org/abs/1006.3727) $br
 Paper [(Brakensiek & Ragozzine 2016)](https://iopscience.iop.org/article/10.3847/0004-637X/821/1/47) & [code](https://github.com/eford/CORBITS.jl)  for calculating intersection area efficiently
 """
@@ -85,19 +85,35 @@ md"""
 """
 
 # ╔═╡ b769c22b-fa22-471d-9742-0c2d2ee77a48
-md"# TTV Observations"
+md"# Example TTV Observations"
 
 # ╔═╡ 5d2b1262-4287-4d32-80ee-cc65939ea4dd
 md"""
-## Kepler-9
-$(LocalResource("../_assets/week3/FigTTV.ps"))
+## Kepler-9 TTVs
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week3/FigTTV.pn","../_assets/week3/FigTTV.png", :width=>"80%"))
+Credit: [Dreizler & Ofir (2014)](https://arxiv.org/abs/1403.1372)
+"""
+
+# ╔═╡ b5d79d39-6752-4a70-8bcc-9391350b8161
+md"""
+#### Kepler-9 TTV Residuals
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week3/FigTTVres.png","../_assets/week3/FigTTVres.png", :width=>"80%"))
+Credit: [Dreizler & Ofir (2014)](https://arxiv.org/abs/1403.1372)
+
+"""
+
+# ╔═╡ 0c7dfa89-c640-4223-ae4b-f64b18191462
+md"""
+#### Posterior distributions for masses of Kepler-9 b & c
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week3/FigMassP2.png","../_assets/week3/FigMassP1.png", :width=>"49%"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week3/FigMassP2.png","../_assets/week3/FigMassP2.png", :width=>"49%"))
 Credit: [Dreizler & Ofir (2014)](https://arxiv.org/abs/1403.1372)
 """
 
 # ╔═╡ 3014430c-610f-4468-8e2f-5dc7ce9af16b
 md"""
 ## Kepler TTV Gallery
-$(LocalResource("../_assets/week3/apjsaa25b0f6_lr.jpg"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week3/apjsaa25b0f6_lr.jpg","../_assets/week3/apjsaa25b0f6_lr.jpg", :width=>"80%"))
 Credit: Fig 5 from [Holczer et al. (2016)](https://iopscience.iop.org/article/10.3847/0067-0049/225/1/9)
 """
 
@@ -267,7 +283,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.7.0"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -439,9 +455,9 @@ version = "1.4.1"
 
 [[deps.Parsers]]
 deps = ["Dates"]
-git-tree-sha1 = "3d5bf43e3e8b412656404ed9466f1dcbf7c50269"
+git-tree-sha1 = "0044b23da09b5608b4ecacb4e5e6c6332f833a7e"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.4.0"
+version = "2.3.2"
 
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
@@ -567,11 +583,13 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─10606b2e-f494-4368-b85b-fd02132b45b2
 # ╟─1a1d349c-ba18-4d17-9123-28652469824d
 # ╟─3ab2e03b-724b-452f-b4b7-3cb855dae849
-# ╠═107c2f8d-24fb-49c0-bed3-5fcd7c0e86bd
+# ╟─107c2f8d-24fb-49c0-bed3-5fcd7c0e86bd
 # ╟─54caf8ec-22e7-46eb-960d-e318e846bcb9
-# ╠═b769c22b-fa22-471d-9742-0c2d2ee77a48
-# ╠═5d2b1262-4287-4d32-80ee-cc65939ea4dd
-# ╠═3014430c-610f-4468-8e2f-5dc7ce9af16b
+# ╟─b769c22b-fa22-471d-9742-0c2d2ee77a48
+# ╟─5d2b1262-4287-4d32-80ee-cc65939ea4dd
+# ╟─b5d79d39-6752-4a70-8bcc-9391350b8161
+# ╟─0c7dfa89-c640-4223-ae4b-f64b18191462
+# ╟─3014430c-610f-4468-8e2f-5dc7ce9af16b
 # ╠═8c8110c5-2565-4c61-95d9-8c2cf2a60784
 # ╟─eee3898c-b7b3-4348-a68a-82fe770be86f
 # ╠═4dc63f3a-e4c5-4a2a-98ad-6cb00e4e71a0
