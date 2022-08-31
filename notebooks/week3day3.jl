@@ -288,7 +288,7 @@ ChooseDisplayMode()
 nbsp = htl"&nbsp;"
 
 # ╔═╡ 47f460d2-6593-46ce-82bc-3d4e17c6c362
-mearth=3.3e-6
+mearth=3e-6
 
 # ╔═╡ d4be1de7-c5e9-4d83-9ef7-4ad96695b499
 md"""## TTVFaster"""
@@ -741,7 +741,7 @@ function test_ttv(jmax::Integer,n1::Integer,n2::Integer,data::Vector)
 end
 
 # ╔═╡ d80ef0ae-6bee-47c2-82a9-f1d1e4d8a786
-ttvs_in, ttvs_out, tt_in, tt_out = test_ttv(6,ceil(Int64,timespan/Pin),ceil(Int64,timespan/Pout),[min*mearth,Pin,t0in,ein,ωin, mout*mearth,Pout,t0out,eout,ωout])
+ttvs_in, ttvs_out, tt_in, tt_out = test_ttv(6,ceil(Int64,(timespan-t0in)/Pin),ceil(Int64,(timespan-t0out)/Pout),[min*mearth,Pin,t0in,ein,ωin, mout*mearth,Pout,t0out,eout,ωout])
 
 # ╔═╡ 08fdcdd1-06a9-44c1-ab83-ffa069273848
 let
@@ -1841,7 +1841,7 @@ version = "1.4.1+0"
 # ╟─47f460d2-6593-46ce-82bc-3d4e17c6c362
 # ╟─d4be1de7-c5e9-4d83-9ef7-4ad96695b499
 # ╟─d80ef0ae-6bee-47c2-82a9-f1d1e4d8a786
-# ╠═c5ed4ffb-bd77-4d4c-9599-1f085717c762
-# ╠═eb4610ba-84c9-4959-97c8-186e689ea641
+# ╟─c5ed4ffb-bd77-4d4c-9599-1f085717c762
+# ╟─eb4610ba-84c9-4959-97c8-186e689ea641
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
