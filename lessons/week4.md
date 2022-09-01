@@ -11,8 +11,11 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week4day1/)
 
 ## [Lab 4](../../labs/lab4/): {{fill title labs/lab4.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*:  Radial Velocity Techniques for Exoplanets, Sec. 1-3.3
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week4day3/)
+

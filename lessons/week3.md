@@ -11,8 +11,12 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
+- Holiday, no class
+- See Lab for info about {{ds_topic}}
 
 ## [Lab 3](../../labs/lab3/): {{fill title labs/lab3.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*:  Non-Keplerian Dynamics of Exoplanets:   Sec. 1-3.2
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week3day3/)
+
