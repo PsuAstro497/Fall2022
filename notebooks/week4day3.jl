@@ -20,6 +20,7 @@ begin
 	using Optim
 	using Plots, LaTeXStrings, Plots.Measures
 	using PlutoUI, PlutoTeachingTools
+	using Downloads
 end
 
 # ╔═╡ 82d5eb4f-5724-4c72-b6e0-f6d5fc7f4313
@@ -435,9 +436,21 @@ end
 # ╔═╡ ad74edd0-5056-48f6-9f5c-19a46c0b7277
 begin
 	fn = joinpath("../_assets/week4/","apjsabe23ct6_mrt.txt");
-	df_all = read_apj_mrt(fn)
-	star_names = unique(df_all.Name)
-end;
+	#=
+	if !isfile(fn) || !(filesize(fn)>0)
+		fn = Downloads.download("https://psuastro497.github.io/Fall2022/assets/week4/apjsabe23ct6_mrt.txt")
+	end
+	=#
+	if filesize(fn)>0
+		df_all = read_apj_mrt(fn)
+		star_names = unique(df_all.Name)
+		md"Read machine readable version of Table 6 from [Rosenthal et al. (2021)](https://doi.org/10.3847/1538-4365/abe23c) into `df_all`."
+	else 
+		df_all = DataFrame()
+		star_names = String[""]
+		danger(md"Error reading data file with RVs.  Expect empty plots below.")
+	end
+end
 
 # ╔═╡ bead2981-e94f-4743-866b-7ecf7a2bae84
 md"""
@@ -452,10 +465,16 @@ begin
 end;
 
 # ╔═╡ bce3f35c-07a1-48ef-8a29-243b2215fcb5
-df_star_by_inst = df_star |> @groupby( _.Inst ) |> @map( {bjd = _.d, rv = _.RVel, σrv = _.e_RVel, inst= key(_), nobs_inst=length(_) }) |> DataFrame;
+begin 
+	df_star_by_inst = DataFrame()
+	try
+	df_star_by_inst = df_star |> @groupby( _.Inst ) |> @map( {bjd = _.d, rv = _.RVel, σrv = _.e_RVel, inst= key(_), nobs_inst=length(_) }) |> DataFrame;
+	catch
+	end
+end;
 
 # ╔═╡ fcf19e04-3e35-4a01-8036-fd5b283fdd37
-begin  # Warning: Assume exactly 2 instruments providing RV data
+if size(df_star_by_inst,1)>0  # Warning: Assume exactly 2 instruments providing RV data
 	data1 = (t=collect(df_star_by_inst[1,:bjd]).-t_offset, rv=collect(df_star_by_inst[1,:rv]), σrv=collect(df_star_by_inst[1,:σrv]))
 	data2 = (t=collect(df_star_by_inst[2,:bjd]).-t_offset, rv=collect(df_star_by_inst[2,:rv]), σrv=collect(df_star_by_inst[2,:σrv]))
 	
@@ -478,16 +497,21 @@ function loss_1pl(θ)
 end
 
 # ╔═╡ 41b2eea0-3049-4fa5-803e-83a54b74ef27
-result1 = Optim.optimize(loss_1pl, θinit1, BFGS(), autodiff=:forward);
+if @isdefined data1
+	result1 = Optim.optimize(loss_1pl, θinit1, BFGS(), autodiff=:forward);
+end
 
 # ╔═╡ fa3fe244-75cf-434b-8de1-5fca5db06c8b
-pred_1pl = map(t->model_1pl(t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,0.0,slope=result1.minimizer[8], t_mean=t_mean),t_plt);
+if @isdefined data1
+	pred_1pl = map(t->model_1pl(t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,0.0,slope=result1.minimizer[8], t_mean=t_mean),t_plt);
+end
 
 # ╔═╡ 278d1fbd-7c64-4544-b37a-8258f493b3db
-resid1 = vcat(
+if @isdefined data1
+	resid1 = vcat(
 	 data1.rv .- model_1pl.(data1.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,result1.minimizer[6],slope=result1.minimizer[8], t_mean=t_mean),
 	data2.rv .- model_1pl.(data2.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,result1.minimizer[7],slope=result1.minimizer[8], t_mean=t_mean) )
-
+end
 
 # ╔═╡ ba141b21-ab58-400a-a41a-9cdd4dd5987d
 function loss_1pl_resid(θ) 
@@ -504,13 +528,14 @@ function loss_1pl_resid(θ)
 end
 
 # ╔═╡ a847e31d-9007-478b-b1e3-ffb8e55a6f3c
+if @isdefined data1
 result_resid = Optim.optimize(loss_1pl_resid, θinit_resid, BFGS(), autodiff=:forward );
+end
 
 # ╔═╡ abc38d23-8665-4377-9a25-9e9c5a10a7bf
-model_resid = map(t->calc_rv_keplerian(t.-t_mean,PKhkωpM_to_PKeωM(result_resid.minimizer[1:5])...),t_plt);
-
-# ╔═╡ 250c4487-0963-4f35-9b75-fa5901f8aaa5
-θinit2 = [result1.minimizer[1:5]..., result_resid.minimizer[1:5]..., result1.minimizer[6]+result_resid.minimizer[6],result1.minimizer[7]+result_resid.minimizer[7], result1.minimizer[8]+result_resid.minimizer[8], result_resid.minimizer[9]];
+if @isdefined result_resid
+	model_resid = map(t->calc_rv_keplerian(t.-t_mean,PKhkωpM_to_PKeωM(result_resid.minimizer[1:5])...),t_plt);
+end;
 
 # ╔═╡ 393c7568-a234-4ef5-97a6-4af630e355e5
 function loss_2pl(θ) 
@@ -528,22 +553,22 @@ function loss_2pl(θ)
 	return loss
 end
 
-# ╔═╡ 2f328d44-1b5d-4257-a6a1-9cebb5bb5e8a
-result2 = Optim.optimize(loss_2pl, θinit2, BFGS(), autodiff=:forward);
+# ╔═╡ dbc0e11e-d3e0-46a4-92c5-3afc31463c03
+if @isdefined result1
+	θinit2 = [result1.minimizer[1:5]..., result_resid.minimizer[1:5]..., result1.minimizer[6]+result_resid.minimizer[6],result1.minimizer[7]+result_resid.minimizer[7], result1.minimizer[8]+result_resid.minimizer[8], result_resid.minimizer[9]];
+	result2 = Optim.optimize(loss_2pl, θinit2, BFGS(), autodiff=:forward)
+end
 
-# ╔═╡ 7fdf5c7e-e360-472a-abf4-9f2404a4f883
-result2.minimizer
-
-# ╔═╡ 78fa1f36-5a09-4d9d-a562-3476cebdbfff
-pred_2pl = map(t->model_2pl(t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,0.0,slope=result2.minimizer[13], t_mean=t_mean),t_plt);
-
-# ╔═╡ 62dd3278-6f02-416c-9bbb-f0de8b786d52
-resid2 = vcat(
+# ╔═╡ f0febfcd-f0f9-4ce8-a3ab-673ad2f19e5a
+if @isdefined result1
+	pred_2pl = map(t->model_2pl(t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,0.0,slope=result2.minimizer[13], t_mean=t_mean),t_plt)
+	resid2 = vcat(
 	 data1.rv .- model_2pl.(data1.t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,result2.minimizer[11],slope=result2.minimizer[13], t_mean=t_mean),
-	data2.rv .- model_2pl.(data2.t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,result2.minimizer[12],slope=result2.minimizer[13], t_mean=t_mean) );
+	data2.rv .- model_2pl.(data2.t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,result2.minimizer[12],slope=result2.minimizer[13], t_mean=t_mean) )
+end;
 
 # ╔═╡ 849d5f32-f7c4-45cf-bc9d-85eae6c13d4f
-begin
+if @isdefined resid2
 	plt_resid = plot(legend=:none)
 	
 	scatter!(data1.t, resid2[1:length(data1.t)], yerr=data1.σrv)
@@ -554,7 +579,7 @@ begin
 end;
 
 # ╔═╡ 1b260d22-e035-4991-bd42-4abd6f6b0333
-begin
+if @isdefined result2
 	#upscale
 	plt_fit = plot(widen=true, xticks=false)
 	num_inst = size(df_star_by_inst,1)
@@ -587,7 +612,7 @@ begin
 end;
 
 # ╔═╡ 449a4faf-0ba8-4325-a902-427951c60036
-let
+if @isdefined plt_fit 
 	l = @layout [a{0.7h} ; b ]
 	plt_combo = 
 	plot(plt_fit, plt_resid, layout = l)
@@ -628,6 +653,7 @@ let
 end
 
 # ╔═╡ 43ae8d15-6381-4c86-b08d-2d12cd4bc653
+if @isdefined result1
 let
 	#upscale
 	plt = plot() #legend=:none, widen=true)
@@ -659,8 +685,10 @@ let
 	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
 	plt
 end
+end
 
 # ╔═╡ 844ede38-9596-47a6-b30b-9eff622a2330
+if @isdefined result_resid
 let
 	#upscale
 	plt = plot(legend=:none, widen=true)
@@ -685,11 +713,13 @@ let
 	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
 	plt
 end
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 Optim = "429524aa-4258-5aef-a3af-852621145aeb"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
@@ -1858,7 +1888,7 @@ version = "0.9.1+5"
 # ╟─689c0cf1-ab41-460d-914b-b1f7d64f0894
 # ╟─3d1821a6-f134-49d6-a4b0-39d6d28ab420
 # ╟─d5febe7d-bf9b-4793-96f3-9c31b641b3ae
-# ╠═ad74edd0-5056-48f6-9f5c-19a46c0b7277
+# ╟─ad74edd0-5056-48f6-9f5c-19a46c0b7277
 # ╠═5e92054a-ca9e-4949-9727-5a9ed14003c0
 # ╠═bce3f35c-07a1-48ef-8a29-243b2215fcb5
 # ╠═8b1f8b91-12b5-4e61-a8ff-63538189cf34
@@ -1876,13 +1906,10 @@ version = "0.9.1+5"
 # ╟─55034abb-34e3-4fab-9b80-c82019a67756
 # ╠═26c601fb-d62f-47f2-a7ff-e7ca63ad9dcd
 # ╠═a847e31d-9007-478b-b1e3-ffb8e55a6f3c
-# ╠═abc38d23-8665-4377-9a25-9e9c5a10a7bf
+# ╟─abc38d23-8665-4377-9a25-9e9c5a10a7bf
 # ╟─de533ac4-6870-40f8-8bad-f8c62694e719
-# ╠═250c4487-0963-4f35-9b75-fa5901f8aaa5
-# ╠═2f328d44-1b5d-4257-a6a1-9cebb5bb5e8a
-# ╠═7fdf5c7e-e360-472a-abf4-9f2404a4f883
-# ╠═78fa1f36-5a09-4d9d-a562-3476cebdbfff
-# ╟─62dd3278-6f02-416c-9bbb-f0de8b786d52
+# ╠═dbc0e11e-d3e0-46a4-92c5-3afc31463c03
+# ╟─f0febfcd-f0f9-4ce8-a3ab-673ad2f19e5a
 # ╟─1b260d22-e035-4991-bd42-4abd6f6b0333
 # ╟─849d5f32-f7c4-45cf-bc9d-85eae6c13d4f
 # ╟─449a4faf-0ba8-4325-a902-427951c60036
