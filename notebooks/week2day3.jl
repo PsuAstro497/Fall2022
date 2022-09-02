@@ -162,11 +162,27 @@ md"""
 $p_{\rm tra} = \left(\frac{R_\star \pm R_p}{a}\right)
                    \left(\frac{1 + e\sin\omega}{1 - e^2} \right)$
 
-For a small planet on acircular orbit:
+If marginalize over $\omega$:
+
+$p_{\rm tra} = \left(\frac{R_\star \pm R_p}{a}\right)
+                   \left(\frac{1}{1 - e^2} \right)$
+
+
+For a small planet on a circular orbit:
 
 $p_{\rm tra} = \frac{R_\star}{a}~\approx 0.005~\left( \frac{R_\star}{R_{\odot}} \right)
                         \left( \frac{a}{{\rm AU}} \right)^{-1}$
 
+"""
+
+# ╔═╡ 9a6a4868-2973-465c-acd9-381b6340ebc8
+md"""
+**Q:** Could you please explain how to derive the transit and occupation probability equations, i.e. (9) and (10), from equations (7), (8)? Do we need the assumption that a >> R, where a is the orbital semi-major axis and R is star/planet radii?
+"""
+
+# ╔═╡ 9140aba3-8839-4406-8af5-2750bd929947
+md"""
+**Q:** Is there a limit to how far out a planet can be from its star and we still detect it by transit?
 """
 
 # ╔═╡ 1903ed4c-a09a-4dac-ad6f-6204cbc60237
@@ -253,6 +269,19 @@ Resource("https://exoplanets.nasa.gov/5_ways_content/vid/transit_method_double_p
 # ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
 md"""# Reading Questions"""
 
+# ╔═╡ 61af78ad-b36b-4ec9-bf33-aa44567df123
+md"""
+**Q:** Can we use the same methods to discover exoplanets to discover moons of those exoplanets? 
+"""
+
+# ╔═╡ a5c32806-1e5b-11ed-0f01-7f4009ba4972
+md"""
+**Q:** There are a lot of planets found with short periods from transiting (<10days) and a lot of these planets are Jupiter sized or larger. Is our solar system the odd one out and if we were at the closest star, is it possible that we could never find our planets using transiting considering Mercury has the shortest period of around 60 days?
+"""
+
+# ╔═╡ c5fa81c3-7c8e-41c5-bbe5-c44d75551b7d
+
+
 # ╔═╡ 14afc732-48cb-43a3-956b-a2f42b49dceb
 md"""
 # Multiple Transiting Planets
@@ -267,9 +296,6 @@ md"""
 ![TRAPPIST-1 Light Curve Animation](https://exoplanets.nasa.gov/internal_resources/822)
 Credit: [NASA](https://exoplanets.nasa.gov/faq/31/whats-a-transit/)
 """
-
-# ╔═╡ a5c32806-1e5b-11ed-0f01-7f4009ba4972
-
 
 # ╔═╡ c651ae5b-cea8-4c61-a50c-819697d24a06
 md"# Helper Code"
@@ -292,7 +318,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.7.0"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -602,6 +628,8 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─54caf8ec-22e7-46eb-960d-e318e846bcb9
 # ╟─1a1d349c-ba18-4d17-9123-28652469824d
 # ╟─3ab2e03b-724b-452f-b4b7-3cb855dae849
+# ╟─9a6a4868-2973-465c-acd9-381b6340ebc8
+# ╟─9140aba3-8839-4406-8af5-2750bd929947
 # ╟─1903ed4c-a09a-4dac-ad6f-6204cbc60237
 # ╟─970cdb06-6953-428c-9fdc-cdbd346dd8c6
 # ╟─5ec759dd-551c-4da6-8aa7-b442958720e8
@@ -612,7 +640,9 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 # ╟─9e5421f0-25f8-476b-a2fe-7e6acddfb3d9
 # ╟─8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
-# ╠═a5c32806-1e5b-11ed-0f01-7f4009ba4972
+# ╟─61af78ad-b36b-4ec9-bf33-aa44567df123
+# ╟─a5c32806-1e5b-11ed-0f01-7f4009ba4972
+# ╠═c5fa81c3-7c8e-41c5-bbe5-c44d75551b7d
 # ╟─14afc732-48cb-43a3-956b-a2f42b49dceb
 # ╟─4809e920-04e0-4ebe-8daa-c14a21db653c
 # ╟─c651ae5b-cea8-4c61-a50c-819697d24a06
