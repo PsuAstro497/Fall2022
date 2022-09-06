@@ -25,6 +25,9 @@ Students will strengthen their understanding of:
 - Loss function surface for linear models
 - Model fitting via optimization of loss function
 
+### Logistics
+Follow [this link](https://classroom.github.com/a/knIogN6y) to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
+
 ### Resources
 - [Optim.jl](https://julianlsolvers.github.io/Optim.jl/stable/)
 - [Plots.jl](https://docs.juliaplots.org/stable/)
