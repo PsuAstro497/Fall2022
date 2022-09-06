@@ -138,6 +138,19 @@ md"""
 $\delta \approx \left(\frac{R_p}{R_\star}\right)^2~\left[1 - \frac{I_p(t_{\rm tra})}{I_\star}\right]$
 """
 
+# ╔═╡ d9a1230c-1df2-463a-be46-3320dec80305
+md"""
+### Limb Darkening
+$(LocalResource("../_assets/week2/hd209458_hst_limbdarkening.png",:width=>"50%"))
+Credit: Figure 3 of [Knutson et al. (2007)](http://adsabs.harvard.edu/abs/2007ApJ...655..564K)
+"""
+
+# ╔═╡ 19d93648-8f1f-427c-bea7-28ae19c32090
+md"""
+See [Mandell & Agol (2002)](https://ui.adsabs.harvard.edu/abs/2002ApJ...580L.171M/abstract) and numerous implementations (e.g., from [Eric Agol](https://faculty.washington.edu/agol/transit.html) and [Transits.jl](https://github.com/JuliaAstro/Transits.jl))
+
+"""
+
 # ╔═╡ 54caf8ec-22e7-46eb-960d-e318e846bcb9
 md"""
 ## Multiple Transits
@@ -195,7 +208,7 @@ md"""
 # ╔═╡ 970cdb06-6953-428c-9fdc-cdbd346dd8c6
 md"""
 ### Early Surveys
-$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week2/horne_table.png","../_assets/week2/horne_table.png", :width=>"80%"))
+$(RobustLocalResource("https://psuastro497.github.io/Fall2022/assets/week2/horne_table.png","../_assets/week2/horne_table.png", :width=>"70%"))
 Credit: [Horne 2002](http://star-www.st-and.ac.uk/~kdh1/transits/table.html)
 """
 
@@ -208,6 +221,12 @@ Dozens of large planets:
 Small number of small planets around nearby stars:
 - [MEarth](https://lweb.cfa.harvard.edu/MEarth/Welcome.html)
 - [TRAPPIST](https://www.eso.org/public/usa/teles-instr/lasilla/trappist/)
+"""
+
+# ╔═╡ e76cbdec-97f2-45fe-b9a3-26ec8b1b80fb
+md"""
+$(Resource("https://upload.wikimedia.org/wikipedia/commons/f/f7/Sw8cams.jpg", :width=>"40%"))
+Credit:  David Anderson ([CC-BY-SA-3.0 license](https://creativecommons.org/licenses/by-sa/3.0/deed.en))
 """
 
 # ╔═╡ f8f1b2e2-e72d-4c6e-9d51-b7ebf812897c
@@ -240,6 +259,29 @@ md"""
 Copyright: [Copyright: ESA/ATG medialab](https://sci.esa.int/web/services/terms-and-conditions)
 """
 
+# ╔═╡ 6c433a78-a96d-41eb-906c-45ec7880016b
+md"""
+| Subset       | Count |
+| :-----------: | ----------- |
+| All Exoplanets | 	5084 |
+| Confirmed Planets Discovered by Kepler | 	2708 |
+| Kepler Project Candidates Yet To Be Confirmed | 	2056 |
+| Confirmed Planets Discovered by K2 | 	537 |
+| K2 Candidates Yet To Be Confirmed | 	969 |
+| Confirmed Planets Discovered by TESS | 	249 |
+| TESS Project Candidates Integrated into Archive | 	5845 |
+| Current date TESS Project Candidates at ExoFOP | 	5845 |
+| TESS Project Candidates Yet To Be Confirmed | 	3899 |
+
+Source: [Exoplanet Archive 9/2/2022](https://exoplanetarchive.ipac.caltech.edu/docs/counts_detail.html)
+"""
+
+# ╔═╡ 87004d85-56b7-4c0e-91ec-5582011a0e39
+md"""
+$(LocalResource("../_assets/week2/RpvsPerwrstar.png", :width=>"80%"))
+Credit:  Lissauer et al. 2022, submitted to AAS Journals
+"""
+
 # ╔═╡ 0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 md"""
 # Stregnths & Weaknesses
@@ -269,19 +311,6 @@ Resource("https://exoplanets.nasa.gov/5_ways_content/vid/transit_method_double_p
 # ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
 md"""# Reading Questions"""
 
-# ╔═╡ 61af78ad-b36b-4ec9-bf33-aa44567df123
-md"""
-**Q:** Can we use the same methods to discover exoplanets to discover moons of those exoplanets? 
-"""
-
-# ╔═╡ a5c32806-1e5b-11ed-0f01-7f4009ba4972
-md"""
-**Q:** There are a lot of planets found with short periods from transiting (<10days) and a lot of these planets are Jupiter sized or larger. Is our solar system the odd one out and if we were at the closest star, is it possible that we could never find our planets using transiting considering Mercury has the shortest period of around 60 days?
-"""
-
-# ╔═╡ c5fa81c3-7c8e-41c5-bbe5-c44d75551b7d
-
-
 # ╔═╡ 14afc732-48cb-43a3-956b-a2f42b49dceb
 md"""
 # Multiple Transiting Planets
@@ -303,6 +332,37 @@ md"# Helper Code"
 # ╔═╡ 58501926-8be8-47b5-b097-79bbb9a182bc
 ChooseDisplayMode()
 
+# ╔═╡ 92b48005-b1de-4e21-a87c-003b7cf5117c
+question(text) = Markdown.MD(Markdown.Admonition("tip", "Reading Question", [text]));
+
+
+# ╔═╡ 71072d1b-fdea-4798-9251-2e5c1e62980b
+question(md"Does the light curve of a grazing transit also reveal the planet to star radius ratio, or are full transits needed)?")
+
+# ╔═╡ 598edcef-88d7-4c83-aafa-d4dfc4d91d4b
+question(md"Is there a way to correct for stellar limb darkening in light curve data?
+")
+
+# ╔═╡ 15c6eaf2-a352-4dd7-93bc-44f9911ae3d7
+question(md"What is the concept behind combining the comparison stars then dividing it from the target star, will result with a flux measurement of the eclipse with as little noise as possible?")
+
+# ╔═╡ 1601cb25-110c-47a4-964d-70cf8fec21de
+question(md"Is the photometric surveys(space-based) the most economical and efficient way now?")
+
+# ╔═╡ e49aa2db-2b97-4a0f-8325-995f9cdc9e30
+question(md"What have space-based transit survey detected so far?")
+
+# ╔═╡ c5fa81c3-7c8e-41c5-bbe5-c44d75551b7d
+question(md"What is the most important thing to take away from exoplanet transits and occultations?")
+
+# ╔═╡ 61af78ad-b36b-4ec9-bf33-aa44567df123
+question(md"""Can we use the same methods to discover exoplanets to discover moons of those exoplanets? 
+""")
+
+# ╔═╡ a5c32806-1e5b-11ed-0f01-7f4009ba4972
+question(md"""There are a lot of planets found with short periods from transiting (<10days) and a lot of these planets are Jupiter sized or larger. Is our solar system the odd one out and if we were at the closest star, is it possible that we could never find our planets using transiting considering Mercury has the shortest period of around 60 days?
+""")
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -318,7 +378,7 @@ PlutoUI = "~0.7.39"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -625,6 +685,10 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─b9089f24-6836-49b4-a9b5-48bbf138afd5
 # ╟─886279f9-e77f-4ffc-aadf-35d6fd5e64c2
 # ╟─0a1c2f71-de04-4e42-b140-cafaf663ac31
+# ╟─71072d1b-fdea-4798-9251-2e5c1e62980b
+# ╟─d9a1230c-1df2-463a-be46-3320dec80305
+# ╟─598edcef-88d7-4c83-aafa-d4dfc4d91d4b
+# ╟─19d93648-8f1f-427c-bea7-28ae19c32090
 # ╟─54caf8ec-22e7-46eb-960d-e318e846bcb9
 # ╟─1a1d349c-ba18-4d17-9123-28652469824d
 # ╟─3ab2e03b-724b-452f-b4b7-3cb855dae849
@@ -633,20 +697,27 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─1903ed4c-a09a-4dac-ad6f-6204cbc60237
 # ╟─970cdb06-6953-428c-9fdc-cdbd346dd8c6
 # ╟─5ec759dd-551c-4da6-8aa7-b442958720e8
+# ╟─e76cbdec-97f2-45fe-b9a3-26ec8b1b80fb
+# ╟─15c6eaf2-a352-4dd7-93bc-44f9911ae3d7
 # ╟─f8f1b2e2-e72d-4c6e-9d51-b7ebf812897c
 # ╟─c8432773-77dd-4a78-ba90-50042f70ccad
 # ╟─fd9c5332-f1e8-43e1-a77a-4e77bb58f105
 # ╟─b65d5bd5-34e5-48bc-b333-2a8107f8d2ac
+# ╟─1601cb25-110c-47a4-964d-70cf8fec21de
+# ╟─6c433a78-a96d-41eb-906c-45ec7880016b
+# ╟─e49aa2db-2b97-4a0f-8325-995f9cdc9e30
+# ╟─87004d85-56b7-4c0e-91ec-5582011a0e39
+# ╟─c5fa81c3-7c8e-41c5-bbe5-c44d75551b7d
 # ╟─0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 # ╟─9e5421f0-25f8-476b-a2fe-7e6acddfb3d9
 # ╟─8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
 # ╟─61af78ad-b36b-4ec9-bf33-aa44567df123
 # ╟─a5c32806-1e5b-11ed-0f01-7f4009ba4972
-# ╠═c5fa81c3-7c8e-41c5-bbe5-c44d75551b7d
 # ╟─14afc732-48cb-43a3-956b-a2f42b49dceb
 # ╟─4809e920-04e0-4ebe-8daa-c14a21db653c
 # ╟─c651ae5b-cea8-4c61-a50c-819697d24a06
 # ╠═58501926-8be8-47b5-b097-79bbb9a182bc
 # ╠═3d94c83d-0238-4ba5-820f-022bd6aac230
+# ╠═92b48005-b1de-4e21-a87c-003b7cf5117c
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
