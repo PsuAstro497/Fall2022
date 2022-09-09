@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.9
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -57,6 +57,27 @@ $(Resource("https://upload.wikimedia.org/wikipedia/commons/9/96/201008-2a_Planet
 Credit:  NASA Ames/Kepler mission
 """
 
+# ╔═╡ 8c293f5f-910a-4c1d-8b7c-7c76348e8505
+md"""
+**Q:** Is it possible to use *deviations from a Keplerian orbit* to detect hidden exoplanets? If so, is there any exoplanet detected in this way?
+"""
+
+# ╔═╡ 89aa00c2-6d6b-4516-8041-af35050d3c8e
+md"""
+#### Kepler-19c 
+$(RobustLocalResource("https://cfn-live-content-bucket-iop-org.s3.amazonaws.com/journals/1538-3881/153/5/224/revision1/ajaa6897f1_hr.jpg","../_assets/week3/ajaa6897f1_hr.jpg",:width=>"80%"))
+Credit: [Malavolta et al. (2017) Fig. 1](https://doi.org/10.3847/1538-3881/aa6897)
+
+$(RobustLocalResource("https://cfn-live-content-bucket-iop-org.s3.amazonaws.com/journals/0004-637X/743/2/200/revision1/apj408732f14_hr.jpg","../_assets/week3/apj408732f14_hr.jpg",:width=>"80%"))
+Credit: [Balllard et al. (2011) Fig. 14](
+https://doi.org/10.3847/1538-3881/aa6897)
+
+
+$(RobustLocalResource("https://cfn-live-content-bucket-iop-org.s3.amazonaws.com/journals/1538-3881/153/5/224/revision1/ajaa6897t5_lr.gif","../_assets/week3/ajaa6897t5_lr.gif",:width=>"80%"))
+
+Credit: [Malavolta et al. (2017) Table 6](https://doi.org/10.3847/1538-3881/aa6897)
+"""
+
 # ╔═╡ 1a1d349c-ba18-4d17-9123-28652469824d
 md"""
 # Probability of Multiple Transiting Planets
@@ -99,7 +120,7 @@ md"""
 """
 
 # ╔═╡ b769c22b-fa22-471d-9742-0c2d2ee77a48
-md"# Example TTV Observations"
+md"# Example TTV observations of system with multiple transiting planets"
 
 # ╔═╡ 5d2b1262-4287-4d32-80ee-cc65939ea4dd
 md"""
@@ -150,6 +171,9 @@ md"""
 Timespan to plot: $(@bind timespan NumberField(0:10_000,default=365*3.5)) days
 """
 
+# ╔═╡ 781e2bd4-e979-49c5-a38f-4000cae53521
+
+
 # ╔═╡ f8f1b2e2-e72d-4c6e-9d51-b7ebf812897c
 md"""
 # TTV Surveys
@@ -185,7 +209,7 @@ md"""
 # Transit Duration Variations (TDVs) & $br Transit Depth Variations (TdVs)
 
 !!! question
-    **What is mechanism for TTVs, TDVs & TdVs?**
+    **What are the mechanisms for TTVs, TDVs & TdVs?**
 
 """
 
@@ -251,13 +275,16 @@ Z & = & r \sin(\omega+f)\sin i
 
 # ╔═╡ 46e7c55b-8239-4399-a7c9-240d9f3e5709
 md"""
-**Q:** Is it typically easy to distinguish between the effects of different non-Keplerian factors?  
-
-**Q:** What about the effects unknown bodies like small moons or planets, or even asteroid belts?
+**Q:** Is it  easy to distinguish between the effects of different non-Keplerian factors?  
 """
 
 # ╔═╡ 107288da-6aa8-4ca1-9095-661c93ecb2de
 md"## Exomoons?"
+
+# ╔═╡ 40297599-858a-4f43-9eca-05757f3acca9
+md"""
+**Q:** Is it easy to disnguish between the effects unknown bodies like small moons or planets, or even asteroid belts?
+"""
 
 # ╔═╡ a5c32806-1e5b-11ed-0f01-7f4009ba4972
 md"""
@@ -308,37 +335,43 @@ md"""
 # ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
 md"""# Reading Questions"""
 
+# ╔═╡ 0aa6e9a3-5232-4139-8ce2-8241ef886870
+md"""
+### Coordinate Systems for Modeling Planetary Systems
+**Q:** Can you go over astrocentric and barycentric coordinate systems?
+
+**Q:**  Does the Jacobian coordinate system fit the Keplerian model best? 
+
+**A:** For strictly Keplerian motion, don't need a Jacobian coorinate system.
+
+$br
+
+**Q:**  Which coordinate system do we use when we measure the non-Keplerian situation?
+
+#### Hierarchical Jacobi coordinates
+$(RobustLocalResource("https://iopscience.iop.org/article/10.1086/340752/fulltext/fg1.h.gif?doi=10.1086/340752","../_assets/week3/hierarchical_jacobian_coordinates.gif", :width=>"70%"))
+Credit: [Mardling & Lin (2001)](http://dx.doi.org/10.1086/340752) Figure 1
+
+$br
+
+**Q:**  What coordinate system should be used to fit different types of datasets?
+
+**A:** It depends.   for planetary systems around a single star Hierarchical Jacobian coordinates are usually a good choice.  If that's not good enough, may need full n-body model.
+
+Multiple star systems get complicated.  
+
+"""
+
 # ╔═╡ 8834e7b6-fd28-4df4-9c7b-ce8fdc86e42a
 md"""**Q:** What are symplectic and nonsymplectic integration algorithms?
 
 **A:** See [lab notebook with comparison of symplectiv & non-symplectic integrations](https://psuastro528.github.io/lab2-start/ex2.html)
 """
 
-# ╔═╡ a5b40f27-dc3b-482f-a651-46c9a7b88093
-md"""
-**Q:**  Does the Jacobian Coordinate fit the keplerian model best? Which coordinate do we use when we measure the non-keplerian situation?
-"""
-
-# ╔═╡ 2fb5c0a7-d426-42c0-8614-1bd39b624616
-md"""
-**Q:**  What is the common coordinate system can be used to fit different types of datasets?
-"""
-
 # ╔═╡ 83c83947-8247-4471-a03d-9690e9965cc4
 md"""
 **Q:** In actual practice, do the time-dependent versions of Kepler's Laws always get used instead of the non-time-dependent or does it depend on the situation?
 """
-
-# ╔═╡ 8c293f5f-910a-4c1d-8b7c-7c76348e8505
-md"""
-**Q:** Is it possible to use non-newtonian orbits to detect hidden exoplanets? If so, is there any exoplanet detected in this way?
-"""
-
-# ╔═╡ ed9608b6-95ac-4642-be36-79a19c9f1a36
-
-
-# ╔═╡ 6b227d67-8984-42ae-8686-da528c3fcd96
-
 
 # ╔═╡ c651ae5b-cea8-4c61-a50c-819697d24a06
 md"# Helper Code"
@@ -840,7 +873,7 @@ PlutoUI = "~0.7.40"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -1874,6 +1907,8 @@ version = "1.4.1+0"
 # ╟─8e63323f-bf73-4674-84b0-96e6e8b92484
 # ╟─28d92f9a-ec46-4fa9-b6a8-fb234610b974
 # ╟─10606b2e-f494-4368-b85b-fd02132b45b2
+# ╟─8c293f5f-910a-4c1d-8b7c-7c76348e8505
+# ╟─89aa00c2-6d6b-4516-8041-af35050d3c8e
 # ╟─1a1d349c-ba18-4d17-9123-28652469824d
 # ╟─3ab2e03b-724b-452f-b4b7-3cb855dae849
 # ╟─107c2f8d-24fb-49c0-bed3-5fcd7c0e86bd
@@ -1887,6 +1922,7 @@ version = "1.4.1+0"
 # ╟─0e9a5324-e7a7-463d-aea7-6223867d6ea4
 # ╟─08fdcdd1-06a9-44c1-ab83-ffa069273848
 # ╟─b32c1bdb-c404-4125-914a-8b6638d1c0bc
+# ╠═781e2bd4-e979-49c5-a38f-4000cae53521
 # ╟─f8f1b2e2-e72d-4c6e-9d51-b7ebf812897c
 # ╟─c8432773-77dd-4a78-ba90-50042f70ccad
 # ╟─fd9c5332-f1e8-43e1-a77a-4e77bb58f105
@@ -1898,21 +1934,18 @@ version = "1.4.1+0"
 # ╟─0a1c2f71-de04-4e42-b140-cafaf663ac31
 # ╟─a72ea48b-c4c7-4b13-8751-e5494da2b9e8
 # ╟─03b9598f-3de1-4519-ac6a-184305ff4168
-# ╠═46e7c55b-8239-4399-a7c9-240d9f3e5709
+# ╟─46e7c55b-8239-4399-a7c9-240d9f3e5709
 # ╟─107288da-6aa8-4ca1-9095-661c93ecb2de
+# ╟─40297599-858a-4f43-9eca-05757f3acca9
 # ╟─a5c32806-1e5b-11ed-0f01-7f4009ba4972
 # ╟─28b274a4-f666-4b44-91dd-bf2188ad073b
 # ╟─2e888e9e-093d-473a-b45d-1ae3c9275591
 # ╟─4369b76d-0eb9-4712-aa5d-9f27d15ca1f6
 # ╟─0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 # ╟─8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
+# ╟─0aa6e9a3-5232-4139-8ce2-8241ef886870
 # ╟─8834e7b6-fd28-4df4-9c7b-ce8fdc86e42a
-# ╠═a5b40f27-dc3b-482f-a651-46c9a7b88093
-# ╠═2fb5c0a7-d426-42c0-8614-1bd39b624616
-# ╠═83c83947-8247-4471-a03d-9690e9965cc4
-# ╠═8c293f5f-910a-4c1d-8b7c-7c76348e8505
-# ╠═ed9608b6-95ac-4642-be36-79a19c9f1a36
-# ╠═6b227d67-8984-42ae-8686-da528c3fcd96
+# ╟─83c83947-8247-4471-a03d-9690e9965cc4
 # ╟─c651ae5b-cea8-4c61-a50c-819697d24a06
 # ╠═58501926-8be8-47b5-b097-79bbb9a182bc
 # ╠═3d94c83d-0238-4ba5-820f-022bd6aac230
@@ -1921,6 +1954,6 @@ version = "1.4.1+0"
 # ╟─d4be1de7-c5e9-4d83-9ef7-4ad96695b499
 # ╟─d80ef0ae-6bee-47c2-82a9-f1d1e4d8a786
 # ╟─c5ed4ffb-bd77-4d4c-9599-1f085717c762
-# ╠═eb4610ba-84c9-4959-97c8-186e689ea641
+# ╟─eb4610ba-84c9-4959-97c8-186e689ea641
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
