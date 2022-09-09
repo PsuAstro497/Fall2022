@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.11
+# v0.19.9
 
 using Markdown
 using InteractiveUtils
@@ -249,31 +249,12 @@ Z & = & r \sin(\omega+f)\sin i
 - Longitude of ascending node: $\Omega$ (arbitrarily set to $180\degree$)
 """
 
-# ╔═╡ 0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
+# ╔═╡ 46e7c55b-8239-4399-a7c9-240d9f3e5709
 md"""
-# Stregnths & Weaknesses
-## Strengths
-- Small telescope can do high-quality science
-- CCDs make relative photometry (relatively) easy 
-- Can observe many stars at once
-- Not restricted to specific spectral types.
-- Transit signal-to-noise $\sim R_p/R_\star$
-- Transit probability high for short-period planets.
+**Q:** Is it typically easy to distinguish between the effects of different non-Keplerian factors?  
 
-## Weaknesses
-- Transits only provide information about a planet during a very small fraction of it's orbit.  
-   - Scheduling observations of a full transit can be difficult .
-   - If observing from the ground, then day light or weather can lead to missing a transit.
-- Transit probability decreases with increasing orbital separation
-  - Most planets won't transit (as seen from Earth)
-  - Unlikely that transits can be used to study any particular planet 
-- Other astrophysical/atmospheric objects/effects cause similar photometric effects.
-   - Follow-up observations are often needed to validate or confirm transiting planet candidates.
-- Need to observe for multiple orbital periods to measure period robustly.
+**Q:** What about the effects unknown bodies like small moons or planets, or even asteroid belts?
 """
-
-# ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
-md"""# Reading Questions"""
 
 # ╔═╡ 107288da-6aa8-4ca1-9095-661c93ecb2de
 md"## Exomoons?"
@@ -301,13 +282,62 @@ $(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa330
 Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
 """
 
+# ╔═╡ 0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
+md"""
+# Stregnths & Weaknesses
+## Strengths
+- Small telescope can do high-quality science
+- CCDs make relative photometry (relatively) easy 
+- Can observe many stars at once
+- Not restricted to specific spectral types.
+- Transit signal-to-noise $\sim R_p/R_\star$
+- Transit probability high for short-period planets.
+
+## Weaknesses
+- Transits only provide information about a planet during a very small fraction of it's orbit.  
+   - Scheduling observations of a full transit can be difficult .
+   - If observing from the ground, then day light or weather can lead to missing a transit.
+- Transit probability decreases with increasing orbital separation
+  - Most planets won't transit (as seen from Earth)
+  - Unlikely that transits can be used to study any particular planet 
+- Other astrophysical/atmospheric objects/effects cause similar photometric effects.
+   - Follow-up observations are often needed to validate or confirm transiting planet candidates.
+- Need to observe for multiple orbital periods to measure period robustly.
+"""
+
+# ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
+md"""# Reading Questions"""
+
 # ╔═╡ 8834e7b6-fd28-4df4-9c7b-ce8fdc86e42a
 md"""**Q:** What are symplectic and nonsymplectic integration algorithms?
 
 **A:** See [lab notebook with comparison of symplectiv & non-symplectic integrations](https://psuastro528.github.io/lab2-start/ex2.html)
 """
 
-# ╔═╡ 40f5af0b-0ea7-4a0d-a956-75a88fcf9859
+# ╔═╡ a5b40f27-dc3b-482f-a651-46c9a7b88093
+md"""
+**Q:**  Does the Jacobian Coordinate fit the keplerian model best? Which coordinate do we use when we measure the non-keplerian situation?
+"""
+
+# ╔═╡ 2fb5c0a7-d426-42c0-8614-1bd39b624616
+md"""
+**Q:**  What is the common coordinate system can be used to fit different types of datasets?
+"""
+
+# ╔═╡ 83c83947-8247-4471-a03d-9690e9965cc4
+md"""
+**Q:** In actual practice, do the time-dependent versions of Kepler's Laws always get used instead of the non-time-dependent or does it depend on the situation?
+"""
+
+# ╔═╡ 8c293f5f-910a-4c1d-8b7c-7c76348e8505
+md"""
+**Q:** Is it possible to use non-newtonian orbits to detect hidden exoplanets? If so, is there any exoplanet detected in this way?
+"""
+
+# ╔═╡ ed9608b6-95ac-4642-be36-79a19c9f1a36
+
+
+# ╔═╡ 6b227d67-8984-42ae-8686-da528c3fcd96
 
 
 # ╔═╡ c651ae5b-cea8-4c61-a50c-819697d24a06
@@ -810,7 +840,7 @@ PlutoUI = "~0.7.40"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.7.0"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -1868,6 +1898,7 @@ version = "1.4.1+0"
 # ╟─0a1c2f71-de04-4e42-b140-cafaf663ac31
 # ╟─a72ea48b-c4c7-4b13-8751-e5494da2b9e8
 # ╟─03b9598f-3de1-4519-ac6a-184305ff4168
+# ╠═46e7c55b-8239-4399-a7c9-240d9f3e5709
 # ╟─107288da-6aa8-4ca1-9095-661c93ecb2de
 # ╟─a5c32806-1e5b-11ed-0f01-7f4009ba4972
 # ╟─28b274a4-f666-4b44-91dd-bf2188ad073b
@@ -1876,7 +1907,12 @@ version = "1.4.1+0"
 # ╟─0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 # ╟─8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
 # ╟─8834e7b6-fd28-4df4-9c7b-ce8fdc86e42a
-# ╠═40f5af0b-0ea7-4a0d-a956-75a88fcf9859
+# ╠═a5b40f27-dc3b-482f-a651-46c9a7b88093
+# ╠═2fb5c0a7-d426-42c0-8614-1bd39b624616
+# ╠═83c83947-8247-4471-a03d-9690e9965cc4
+# ╠═8c293f5f-910a-4c1d-8b7c-7c76348e8505
+# ╠═ed9608b6-95ac-4642-be36-79a19c9f1a36
+# ╠═6b227d67-8984-42ae-8686-da528c3fcd96
 # ╟─c651ae5b-cea8-4c61-a50c-819697d24a06
 # ╠═58501926-8be8-47b5-b097-79bbb9a182bc
 # ╠═3d94c83d-0238-4ba5-820f-022bd6aac230
