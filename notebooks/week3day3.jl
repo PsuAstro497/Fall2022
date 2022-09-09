@@ -275,7 +275,39 @@ md"""
 # ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
 md"""# Reading Questions"""
 
+# ╔═╡ 107288da-6aa8-4ca1-9095-661c93ecb2de
+md"## Exomoons?"
+
 # ╔═╡ a5c32806-1e5b-11ed-0f01-7f4009ba4972
+md"""
+**Q:** How reliable are TTV's in determining exomoon candidates? I know these are often used to try to identify exomoon's, but how do we even begin to try to predict exomoon transits?
+"""
+
+# ╔═╡ 28b274a4-f666-4b44-91dd-bf2188ad073b
+md"""
+$(Resource("https://www.aanda.org/articles/aa/olm/2018/09/aa33085-18/aa33085-18-1-olm.webm", :width=>"95%"))
+Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
+"""
+
+# ╔═╡ 2e888e9e-093d-473a-b45d-1ae3c9275591
+md"""
+$(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa33085-18-fig1.jpg", :width=>"80%"))
+Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
+"""
+
+# ╔═╡ 4369b76d-0eb9-4712-aa5d-9f27d15ca1f6
+md"""
+$(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa33085-18-fig2.jpg", :width=>"80%"))
+Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
+"""
+
+# ╔═╡ 8834e7b6-fd28-4df4-9c7b-ce8fdc86e42a
+md"""**Q:** What are symplectic and nonsymplectic integration algorithms?
+
+**A:** See [lab notebook with comparison of symplectiv & non-symplectic integrations](https://psuastro528.github.io/lab2-start/ex2.html)
+"""
+
+# ╔═╡ 40f5af0b-0ea7-4a0d-a956-75a88fcf9859
 
 
 # ╔═╡ c651ae5b-cea8-4c61-a50c-819697d24a06
@@ -294,10 +326,10 @@ mearth=3e-6
 md"""## TTVFaster"""
 
 # ╔═╡ eb4610ba-84c9-4959-97c8-186e689ea641
-# WARNING:  This code is very old and should not be used as an example for writing your own code
-# Computes transit timing variations to linear order
-# in eccentricity.  Please cite Agol & Deck (2015) if
-# you make use of this in published research.
+# WARNING:  This code is very old (written for Julia v0.3) and should not be used as an example for writing your own code
+# Computes transit timing variations to linear order in eccentricity.  
+# Please cite Agol & Deck (2015) if you make use of this in published research.
+# https://github.com/ericagol/TTVFaster
 module TTVFaster
 
 export Planet_plane_hk, compute_ttv!
@@ -769,16 +801,16 @@ PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 [compat]
 HypertextLiteral = "~0.9.4"
 LaTeXStrings = "~1.3.0"
-Plots = "~1.31.7"
-PlutoTeachingTools = "~0.1.7"
-PlutoUI = "~0.7.39"
+Plots = "~1.32.0"
+PlutoTeachingTools = "~0.2.3"
+PlutoUI = "~0.7.40"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -816,9 +848,9 @@ version = "1.16.1+1"
 
 [[deps.ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra", "SparseArrays"]
-git-tree-sha1 = "80ca332f6dcb2508adba68f22f551adb2d00a624"
+git-tree-sha1 = "8a494fe0c4ae21047f28eb48ac968f0b8a6fcaa7"
 uuid = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
-version = "1.15.3"
+version = "1.15.4"
 
 [[deps.ChangesOfVariables]]
 deps = ["ChainRulesCore", "LinearAlgebra", "Test"]
@@ -1247,9 +1279,9 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[deps.MbedTLS]]
 deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "Random", "Sockets"]
-git-tree-sha1 = "2f0be365951a88dfb084f754005177e6dfb00ed0"
+git-tree-sha1 = "ae6676d5f576ccd21b6789c2cbe2ba24fcc8075d"
 uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
-version = "1.1.4"
+version = "1.1.5"
 
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
@@ -1347,16 +1379,16 @@ uuid = "ccf2f8ad-2431-5c83-bf29-c5338b663b6a"
 version = "3.0.0"
 
 [[deps.PlotUtils]]
-deps = ["ColorSchemes", "Colors", "Dates", "Printf", "Random", "Reexport", "Statistics"]
-git-tree-sha1 = "9888e59493658e476d3073f1ce24348bdc086660"
+deps = ["ColorSchemes", "Colors", "Dates", "Printf", "Random", "Reexport", "SnoopPrecompile", "Statistics"]
+git-tree-sha1 = "21303256d239f6b484977314674aef4bb1fe4420"
 uuid = "995b91a9-d308-5afd-9ec6-746e21dbc043"
-version = "1.3.0"
+version = "1.3.1"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "GeometryBasics", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "Requires", "Scratch", "Showoff", "SparseArrays", "Statistics", "StatsBase", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "a19652399f43938413340b2068e11e55caa46b65"
+git-tree-sha1 = "3f9b0706d6051d8edf9959e2422666703080722a"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.31.7"
+version = "1.32.0"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -1372,15 +1404,15 @@ version = "0.1.5"
 
 [[deps.PlutoTeachingTools]]
 deps = ["Downloads", "HypertextLiteral", "LaTeXStrings", "Latexify", "Markdown", "PlutoLinks", "PlutoUI", "Random"]
-git-tree-sha1 = "67c917d383c783aeadd25babad6625b834294b30"
+git-tree-sha1 = "d8be3432505c2febcea02f44e5f4396fae017503"
 uuid = "661c6b06-c737-4d37-b85c-46df65de6f69"
-version = "0.1.7"
+version = "0.2.3"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
-git-tree-sha1 = "8d1f54886b9037091edf146b517989fc4a09efec"
+git-tree-sha1 = "a602d7b0babfca89005da04d89223b867b55319f"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.39"
+version = "0.7.40"
 
 [[deps.Preferences]]
 deps = ["TOML"]
@@ -1462,6 +1494,11 @@ version = "1.0.3"
 git-tree-sha1 = "874e8867b33a00e784c8a7e4b60afe9e037b74e1"
 uuid = "777ac1f9-54b0-4bf8-805c-2214025038e7"
 version = "1.1.0"
+
+[[deps.SnoopPrecompile]]
+git-tree-sha1 = "f604441450a3c0569830946e5b33b78c928e1a85"
+uuid = "66db9d55-30c0-4569-8b51-7e840670fc0c"
+version = "1.0.1"
 
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
@@ -1575,9 +1612,9 @@ uuid = "1cfade01-22cf-5700-b092-accc4b62d6e1"
 version = "0.4.1"
 
 [[deps.Unzip]]
-git-tree-sha1 = "34db80951901073501137bdbc3d5a8e7bbd06670"
+git-tree-sha1 = "ca0969166a028236229f63514992fc073799bb78"
 uuid = "41fe7b60-77ed-43a1-b4f0-825fd5a5650d"
-version = "0.1.2"
+version = "0.2.0"
 
 [[deps.Wayland_jll]]
 deps = ["Artifacts", "Expat_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg", "XML2_jll"]
@@ -1831,9 +1868,15 @@ version = "1.4.1+0"
 # ╟─0a1c2f71-de04-4e42-b140-cafaf663ac31
 # ╟─a72ea48b-c4c7-4b13-8751-e5494da2b9e8
 # ╟─03b9598f-3de1-4519-ac6a-184305ff4168
+# ╟─107288da-6aa8-4ca1-9095-661c93ecb2de
+# ╟─a5c32806-1e5b-11ed-0f01-7f4009ba4972
+# ╟─28b274a4-f666-4b44-91dd-bf2188ad073b
+# ╟─2e888e9e-093d-473a-b45d-1ae3c9275591
+# ╟─4369b76d-0eb9-4712-aa5d-9f27d15ca1f6
 # ╟─0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 # ╟─8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
-# ╠═a5c32806-1e5b-11ed-0f01-7f4009ba4972
+# ╟─8834e7b6-fd28-4df4-9c7b-ce8fdc86e42a
+# ╠═40f5af0b-0ea7-4a0d-a956-75a88fcf9859
 # ╟─c651ae5b-cea8-4c61-a50c-819697d24a06
 # ╠═58501926-8be8-47b5-b097-79bbb9a182bc
 # ╠═3d94c83d-0238-4ba5-820f-022bd6aac230
@@ -1842,6 +1885,6 @@ version = "1.4.1+0"
 # ╟─d4be1de7-c5e9-4d83-9ef7-4ad96695b499
 # ╟─d80ef0ae-6bee-47c2-82a9-f1d1e4d8a786
 # ╟─c5ed4ffb-bd77-4d4c-9599-1f085717c762
-# ╟─eb4610ba-84c9-4959-97c8-186e689ea641
+# ╠═eb4610ba-84c9-4959-97c8-186e689ea641
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
