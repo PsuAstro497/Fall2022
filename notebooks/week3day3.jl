@@ -33,7 +33,6 @@ TableOfContents()
 # ╔═╡ 478ae32d-7b46-43a8-b3ad-12b280a96612
 md"""
 ## Logistics
-- How was lab 3?
 """
 
 # ╔═╡ 8e63323f-bf73-4674-84b0-96e6e8b92484
@@ -41,9 +40,13 @@ md"""
 ## Overview of Today
 - Transit Timing Variations Method
 - TTV Observables
-- TTV Regimes 
+- Examples
+- TTV Regimes
 - TTV Modeling
+- Relevant Datasets
+- Exomoons
 - Strengths & Weaknesses
+- Reading Questions
 """
 
 # ╔═╡ 28d92f9a-ec46-4fa9-b6a8-fb234610b974
@@ -63,19 +66,23 @@ md"""
 """
 
 # ╔═╡ 89aa00c2-6d6b-4516-8041-af35050d3c8e
-md"""
-#### Kepler-19c 
+#=
 $(RobustLocalResource("https://cfn-live-content-bucket-iop-org.s3.amazonaws.com/journals/1538-3881/153/5/224/revision1/ajaa6897f1_hr.jpg","../_assets/week3/ajaa6897f1_hr.jpg",:width=>"80%"))
-Credit: [Malavolta et al. (2017) Fig. 1](https://doi.org/10.3847/1538-3881/aa6897)
+Credit: 
 
 $(RobustLocalResource("https://cfn-live-content-bucket-iop-org.s3.amazonaws.com/journals/0004-637X/743/2/200/revision1/apj408732f14_hr.jpg","../_assets/week3/apj408732f14_hr.jpg",:width=>"80%"))
-Credit: [Balllard et al. (2011) Fig. 14](
-https://doi.org/10.3847/1538-3881/aa6897)
-
+Credit: 
 
 $(RobustLocalResource("https://cfn-live-content-bucket-iop-org.s3.amazonaws.com/journals/1538-3881/153/5/224/revision1/ajaa6897t5_lr.gif","../_assets/week3/ajaa6897t5_lr.gif",:width=>"80%"))
 
-Credit: [Malavolta et al. (2017) Table 6](https://doi.org/10.3847/1538-3881/aa6897)
+=#
+md"""
+**A:** Yes, e.g., Kepler-19c 
+See Fig. 1 of [Malavolta et al. (2017)](https://doi.org/10.3847/1538-3881/aa6897)
+
+See Fig 14. of [Balllard et al. (2011)](https://doi.org/10.3847/1538-3881/aa6897)
+
+See Table 6 of [Malavolta et al. (2017)](https://doi.org/10.3847/1538-3881/aa6897)
 """
 
 # ╔═╡ 1a1d349c-ba18-4d17-9123-28652469824d
@@ -298,38 +305,34 @@ Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
 """
 
 # ╔═╡ 2e888e9e-093d-473a-b45d-1ae3c9275591
+# $(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa33085-18-fig1.jpg", :width=>"80%"))
+#Credit: 
 md"""
-$(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa33085-18-fig1.jpg", :width=>"80%"))
-Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
+See Fig 1. of [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
 """
 
 # ╔═╡ 4369b76d-0eb9-4712-aa5d-9f27d15ca1f6
+#$(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa33085-18-fig2.jpg", :width=>"80%"))
+#Credit:
 md"""
-$(Resource("https://www.aanda.org/articles/aa/full_html/2018/09/aa33085-18/aa33085-18-fig2.jpg", :width=>"80%"))
-Credit: [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
+See Fig. 2 of [Rodenbeck et al. (2018)](https://doi.org/10.1051/0004-6361/201833085)
 """
 
 # ╔═╡ 0d7d2c3e-f3fe-4a9e-986c-463d24a30fa6
 md"""
 # Stregnths & Weaknesses
 ## Strengths
-- Small telescope can do high-quality science
-- CCDs make relative photometry (relatively) easy 
-- Can observe many stars at once
-- Not restricted to specific spectral types.
-- Transit signal-to-noise $\sim R_p/R_\star$
-- Transit probability high for short-period planets.
+- Can detect low-mass planets
+- TTVs are particulalry sensitive to closely-spaced planets and planets near mean-motion resonances.
+- Can characterize masses and eccentricities of multiple-planet systems, even when host star is far away and faint
+- Can measure masses and eccentricities with minimal degeneracies for closely-spaced planetary systems if each planet transits and the TTVs are large compared to measurement uncertainties.
 
 ## Weaknesses
-- Transits only provide information about a planet during a very small fraction of it's orbit.  
-   - Scheduling observations of a full transit can be difficult .
-   - If observing from the ground, then day light or weather can lead to missing a transit.
-- Transit probability decreases with increasing orbital separation
-  - Most planets won't transit (as seen from Earth)
-  - Unlikely that transits can be used to study any particular planet 
-- Other astrophysical/atmospheric objects/effects cause similar photometric effects.
-   - Follow-up observations are often needed to validate or confirm transiting planet candidates.
-- Need to observe for multiple orbital periods to measure period robustly.
+- TTVs are not applicable for studying systems where no planet transits.
+- If only one planet transits, then typically can reliably detect the presence of one or more perturbing bodies, but it is very difficult to characterize the planets in such systems via TTVs alone.
+- TTVs of near-resonant systems typically constrain planet-planet mass ratio better than planet masses or planet-star mass ratios.
+- There is often a degeneracy between planet masses and eccentricities, particularly for systems where TTVs are primarily due to a near mean-motion resonance. 
+- One has to be cautious of other potential causes for small TTV signals (e.g., starspots, detrending algorithms, exomoons, binary stars).
 """
 
 # ╔═╡ 8e9040ab-dfa8-4b9c-962a-4a07d2a064a4
