@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.11
+# v0.19.9
 
 using Markdown
 using InteractiveUtils
@@ -16,11 +16,12 @@ end
 
 # ╔═╡ 8be9bf52-a0a3-11ec-045f-3962ad227049
 begin
-	using DataFrames, Query
+	using CSV, DataFrames, Query
 	using Optim
 	using Plots, LaTeXStrings, Plots.Measures
 	using PlutoUI, PlutoTeachingTools
 	using Downloads
+	using ParameterHandling
 end
 
 # ╔═╡ 82d5eb4f-5724-4c72-b6e0-f6d5fc7f4313
@@ -155,33 +156,141 @@ md"""
 ### Ingest data
 """
 
+# ╔═╡ 2e51744b-b040-4f21-94b8-ffe9cd1e149e
+begin
+	fn = joinpath("../_assets/week4/legacy_data.csv");
+	if !isfile(fn) || !(filesize(fn)>0)
+		fn = Downloads.download("https://github.com/leerosenthalj/CLSI/raw/master/legacy_tables/legacy_data.csv", fn)
+	end
+	if filesize(fn) > 0
+		df_all = CSV.read(fn, DataFrame)
+		select!(df_all,["name","jd","mnvel","errvel", "cts","sval","tel"])
+		# Rename columns to match labels from table in original paper
+		rename!(df_all, "name"=>"Name","jd"=>"d","mnvel"=>"RVel","errvel"=>"e_RVel","tel"=>"Inst", "sval"=>"SVal")	
+		star_names = unique(df_all.Name)
+		md"Read RVs for $(length(star_names)) stars from California Legacy Survey from https://github.com/leerosenthalj/CLSI & from [Rosenthal et al. (2021)](https://doi.org/10.3847/1538-4365/abe23c) into `df_all`."
+	else
+		df_all = DataFrame()
+		star_names = String[""]
+
+		danger(md"Error reading data file with RVs.  Expect empty plots below.")
+	end
+	
+end
+
 # ╔═╡ 8b1f8b91-12b5-4e61-a8ff-63538189cf34
 t_offset = 2450000;  # So labels on x-axis are more digestable
+
+# ╔═╡ 873c94d4-29f1-4664-87b1-d70615c0f8ed
+# Examples to show: 114783, 119850, 13931, 187123
+
+# ╔═╡ 5a73b1fc-99bc-4530-ae4a-49ce25df99dc
+md"""
+Star ID to plot: HD $(@bind star_name_to_plt Select(star_names; default="114783"))
+"""
+
+# ╔═╡ 253decc1-35c7-4454-b500-4f28e1087d36
+starid = searchsortedfirst(star_names,star_name_to_plt);
+
+# ╔═╡ 5e92054a-ca9e-4949-9727-5a9ed14003c0
+begin
+	star_name = star_names[starid]
+	df_star = df_all |> @filter( _.Name == star_name ) |> DataFrame
+end;
+
+# ╔═╡ bce3f35c-07a1-48ef-8a29-243b2215fcb5
+begin 
+	df_star_by_inst = DataFrame()
+	try
+	df_star_by_inst = df_star |> @groupby( _.Inst ) |> @map( {bjd = _.d, rv = _.RVel, σrv = _.e_RVel, inst= key(_), nobs_inst=length(_) }) |> DataFrame;
+	catch
+	end
+end;
+
+# ╔═╡ 5edc2a2d-6f63-4ac6-8c33-2c5d670bc466
+let
+	#upscale
+	plt = plot() #legend=:none, widen=true)
+	num_inst = size(df_star_by_inst,1)
+	rvoffset = zeros(4) # [result2.minimizer[11], result2.minimizer[12], 0, 0]
+	#rvoffset[1:2] .= result1.minimizer[6:7]
+	#slope = result1.minimizer[8]
+	#rvoffset[1:2] .= result2.minimizer[11:12]
+	for inst in 1:num_inst
+		lab = df_star_by_inst[inst,:inst]
+		if lab == "lick" continue end
+		if lab == "k" lab = "Keck (pre)" end
+		if lab == "j" lab = "Keck (post)" end
+		if lab == "apf" lab = "APF" end
+		scatter!(df_star_by_inst[inst,:bjd].-t_offset,
+				df_star_by_inst[inst,:rv].-rvoffset[inst],
+				yerr=collect(df_star_by_inst[inst,:σrv]),
+				label=lab)
+				#markersize=4*upscale, legendfontsize=upscale*12
+		#plot!(t_plt,model_1pl)
+		#plot!(t_plt.-2450000,model_2pl)
+		#scatter!(df_star_by_inst[2,:bjd].-2450000,df_star_by_inst[2,:rv], yerr=collect(df_star_by_inst[2,:σrv]),label=:none)
+		#scatter!(df_star_by_inst[3,:bjd].-2450000,df_star_by_inst[3,:rv], yerr=collect(df_star_by_inst[3,:σrv]),label=:none)
+		#scatter!(df_star_by_inst[4,:bjd].-2450000,df_star_by_inst[4,:rv], yerr=collect(df_star_by_inst[4,:σrv]),label=:none)
+	end
+	xlabel!("Time (d)")
+	ylabel!("RV (m/s)")
+	title!("HD " * star_name )
+	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
+	plt
+end
 
 # ╔═╡ 21834080-14de-4926-9766-5a3ad994e2a1
 md"""
 # Fitting RV Model to data
 """
 
+# ╔═╡ fcf19e04-3e35-4a01-8036-fd5b283fdd37
+if size(df_star_by_inst,1)>0  # Warning: Assume exactly 2 instruments providing RV data
+	data1 = (t=collect(df_star_by_inst[1,:bjd]).-t_offset, rv=collect(df_star_by_inst[1,:rv]), σrv=collect(df_star_by_inst[1,:σrv]))
+	if size(df_star_by_inst,1) > 1
+		data2 = (t=collect(df_star_by_inst[2,:bjd]).-t_offset, rv=collect(df_star_by_inst[2,:rv]), σrv=collect(df_star_by_inst[2,:σrv]))
+	else
+		data2 = (t=Float64[], rv=Float64[], σrv=Float64[])
+	end
+	t_mean = (sum(data1.t)+sum(data2.t))/(length(data1.t).+length(data2.t))
+	t_plt = range(minimum(vcat(data1.t,data2.t)), stop=maximum(vcat(data1.t,data2.t)), step=1.0)
+end;
+
 # ╔═╡ d2d1cf44-255a-47bf-ba3d-42169c6af060
 md"""
 ## Fit one planet
 """
 
+# ╔═╡ 49fdca20-46fd-4f31-94f1-ed58f3b32305
+md"""
+Fit 1-planet model: $(@bind try_fit_1pl CheckBox())
+"""
+
 # ╔═╡ a318c478-f71c-457b-9c54-fe69e964849a
-θinit1 = [496.9, 10, 0.1, 0.1, 0.1, 1, 2, 1e-4, 2.0]
+θinit1 = [496.9, 10, 0.1, 0.1, 0.1, 1, 2, 1e-4, 2.0] # for 114783
 
 # ╔═╡ 55034abb-34e3-4fab-9b80-c82019a67756
 md"""
 ## Fit 2nd planet to residuals
 """
 
+# ╔═╡ fac9b01f-3a92-49da-9ec9-2e6502d595d9
+md"""
+Fit 2nd planet to residuals: $(@bind try_fit_2nd_pl_to_resid CheckBox())
+"""
+
 # ╔═╡ 26c601fb-d62f-47f2-a7ff-e7ca63ad9dcd
-θinit_resid = [4319.0, 5.0, 0.1, 0.1, π/4, 1.0, -1.0 , 0.0001, 1.0];
+θinit_resid = [4319.0, 5.0, 0.1, 0.1, π/4, 1.0, -1.0 , 0.0001, 1.0];  # for 114783
 
 # ╔═╡ de533ac4-6870-40f8-8bad-f8c62694e719
 md"""
 ## Fit 2-planet model
+"""
+
+# ╔═╡ bc0d6fd6-de10-4c58-b55c-7bca8fbc123a
+md"""
+Fit 2nd planet model: $(@bind try_fit_2pl CheckBox())
 """
 
 # ╔═╡ b60aadbc-4e70-414e-9fdc-c3b042cb17bf
@@ -394,94 +503,6 @@ The functions below:
 - make use of the global variables `data1`, `data2` and `t_mean`.
 """
 
-# ╔═╡ 93d115f3-ab51-4425-8bc8-33dc9b37bd87
-md"""
-## Code for parsing machine readable tables from AAS Journals
-"""
-
-# ╔═╡ bc7e067b-a170-40e0-b9f1-11b097e72a09
-function extract_entry(line::AbstractString, fmt_info)
-	substr = line[parse(Int,fmt_info[1]):parse(Int,fmt_info[2])]
-	if occursin("--",substr)
-		return missing
-	end
-	if  fmt_info[3] == "A" 
-		return strip(substr)
-	end
-	if !occursin(r"\d",substr) 
-		return missing
-	end
-	if fmt_info[3] == "I" 
-		return parse(Int,substr)
-	elseif  fmt_info[3] == "F" 
-		return parse(Float64,substr)
-	else
-		@warn "Need to add instructions for parsing type " fmt_info[1][3]
-		return nothing
-	end
-end
-
-# ╔═╡ d5036d21-76b3-41f9-8c34-59c8afe9ffe2
-function read_apj_mrt(fn::AbstractString)
-	lines = readlines(fn)
-	line_start_fmt_specs = findfirst(l->occursin("Bytes",l),lines)+2
-	line_stop_fmt_specs = findfirst(l->occursin(r"^\-+$",l),lines[line_start_fmt_specs:end]) + (line_start_fmt_specs-1) -1
-	line_data_start = findlast(l->occursin(r"^\-+$",l),lines) +1
-	fmt_info = map(l->match(r"^\s*(\d+)-\s+(\d+)\s+(\w)(\d\.?\d*)\s*(\S+)\s+(\S+)\s+(.*)$",l).captures,lines[line_start_fmt_specs:line_stop_fmt_specs]) 
-	colnames = map(f->f[6],fmt_info)
-	data = map(fmt->Base.Fix2(extract_entry,fmt).(lines[line_data_start:length(lines)]),fmt_info)
-	df = DataFrame(data,colnames )
-end
-
-# ╔═╡ ad74edd0-5056-48f6-9f5c-19a46c0b7277
-begin
-	fn = joinpath("../_assets/week4/","apjsabe23ct6_mrt.txt");
-	#=
-	if !isfile(fn) || !(filesize(fn)>0)
-		fn = Downloads.download("https://psuastro497.github.io/Fall2022/assets/week4/apjsabe23ct6_mrt.txt")
-	end
-	=#
-	if filesize(fn)>0
-		df_all = read_apj_mrt(fn)
-		star_names = unique(df_all.Name)
-		md"Read machine readable version of Table 6 from [Rosenthal et al. (2021)](https://doi.org/10.3847/1538-4365/abe23c) into `df_all`."
-	else 
-		df_all = DataFrame()
-		star_names = String[""]
-		danger(md"Error reading data file with RVs.  Expect empty plots below.")
-	end
-end
-
-# ╔═╡ bead2981-e94f-4743-866b-7ecf7a2bae84
-md"""
-Star ID: $(@bind starid NumberField(1:length(star_names), default=40))
-"""  # try 40, 52, 92, 198
-
-
-# ╔═╡ 5e92054a-ca9e-4949-9727-5a9ed14003c0
-begin
-	star_name = star_names[starid]
-	df_star = df_all |> @filter( _.Name == star_name ) |> DataFrame
-end;
-
-# ╔═╡ bce3f35c-07a1-48ef-8a29-243b2215fcb5
-begin 
-	df_star_by_inst = DataFrame()
-	try
-	df_star_by_inst = df_star |> @groupby( _.Inst ) |> @map( {bjd = _.d, rv = _.RVel, σrv = _.e_RVel, inst= key(_), nobs_inst=length(_) }) |> DataFrame;
-	catch
-	end
-end;
-
-# ╔═╡ fcf19e04-3e35-4a01-8036-fd5b283fdd37
-if size(df_star_by_inst,1)>0  # Warning: Assume exactly 2 instruments providing RV data
-	data1 = (t=collect(df_star_by_inst[1,:bjd]).-t_offset, rv=collect(df_star_by_inst[1,:rv]), σrv=collect(df_star_by_inst[1,:σrv]))
-	data2 = (t=collect(df_star_by_inst[2,:bjd]).-t_offset, rv=collect(df_star_by_inst[2,:rv]), σrv=collect(df_star_by_inst[2,:σrv]))
-	
-	t_mean = (sum(data1.t)+sum(data2.t))/(length(data1.t).+length(data2.t))
-	t_plt = range(minimum(vcat(data1.t,data2.t)), stop=maximum(vcat(data1.t,data2.t)), step=1.0)
-end
-
 # ╔═╡ 9da83c61-cbcb-4c13-83d1-21a26b1c59d1
 function loss_1pl(θ) 
 	(P1, K1, h1, k1, Mpω1, C1, C2, slope, σj ) = θ
@@ -497,21 +518,61 @@ function loss_1pl(θ)
 end
 
 # ╔═╡ 41b2eea0-3049-4fa5-803e-83a54b74ef27
-if @isdefined data1
+if try_fit_1pl && @isdefined data1 
 	result1 = Optim.optimize(loss_1pl, θinit1, BFGS(), autodiff=:forward);
 end
 
+# ╔═╡ 84c68b29-6707-4761-bde1-2dcabe5a0ac9
+if @isdefined result1 
+	result1.minimizer[1:5]
+end
+
 # ╔═╡ fa3fe244-75cf-434b-8de1-5fca5db06c8b
-if @isdefined data1
-	pred_1pl = map(t->model_1pl(t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,0.0,slope=result1.minimizer[8], t_mean=t_mean),t_plt);
+if try_fit_1pl && @isdefined data1
+	pred_1pl = map(t->model_1pl(t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,0.0,slope=0.0, t_mean=t_mean),t_plt);
+end
+
+# ╔═╡ 43ae8d15-6381-4c86-b08d-2d12cd4bc653
+if @isdefined result1
+let
+	#upscale
+	plt = plot() #legend=:none, widen=true)
+	num_inst = size(df_star_by_inst,1)
+	rvoffset = zeros(4) # [result2.minimizer[11], result2.minimizer[12], 0, 0]
+	rvoffset[1:2] .= result1.minimizer[6:7]
+	slope = result1.minimizer[8]
+	#rvoffset[1:2] .= result2.minimizer[11:12]
+	for inst in 1:num_inst
+		lab = df_star_by_inst[inst,:inst]
+		if lab == "lick" continue end
+		if lab == "k" lab = "Keck (pre)" end
+		if lab == "j" lab = "Keck (post)" end
+		if lab == "apf" lab = "APF" end
+		scatter!(df_star_by_inst[inst,:bjd].-t_offset,
+				df_star_by_inst[inst,:rv].-rvoffset[inst],
+				yerr=collect(df_star_by_inst[inst,:σrv]),
+				label=lab)
+		#plot!(t_plt,model_1pl)
+		#plot!(t_plt.-2450000,model_2pl)
+		#scatter!(df_star_by_inst[2,:bjd].-2450000,df_star_by_inst[2,:rv], yerr=collect(df_star_by_inst[2,:σrv]),label=:none)
+		#scatter!(df_star_by_inst[3,:bjd].-2450000,df_star_by_inst[3,:rv], yerr=collect(df_star_by_inst[3,:σrv]),label=:none)
+		#scatter!(df_star_by_inst[4,:bjd].-2450000,df_star_by_inst[4,:rv], yerr=collect(df_star_by_inst[4,:σrv]),label=:none)
+	end
+	plot!(t_plt,pred_1pl, label=:none)
+	xlabel!("Time (d)")
+	ylabel!("RV (m/s)")
+	title!("HD " * star_name )
+	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
+	plt
+end
 end
 
 # ╔═╡ 278d1fbd-7c64-4544-b37a-8258f493b3db
-if @isdefined data1
+if @isdefined result1
 	resid1 = vcat(
 	 data1.rv .- model_1pl.(data1.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,result1.minimizer[6],slope=result1.minimizer[8], t_mean=t_mean),
 	data2.rv .- model_1pl.(data2.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,result1.minimizer[7],slope=result1.minimizer[8], t_mean=t_mean) )
-end
+end;
 
 # ╔═╡ ba141b21-ab58-400a-a41a-9cdd4dd5987d
 function loss_1pl_resid(θ) 
@@ -528,14 +589,42 @@ function loss_1pl_resid(θ)
 end
 
 # ╔═╡ a847e31d-9007-478b-b1e3-ffb8e55a6f3c
-if @isdefined data1
-result_resid = Optim.optimize(loss_1pl_resid, θinit_resid, BFGS(), autodiff=:forward );
+if try_fit_2nd_pl_to_resid && (@isdefined data1) && (@isdefined resid1)
+result_resid = Optim.optimize(loss_1pl_resid, θinit_resid, BFGS(),autodiff=:forward ) ;
 end
 
 # ╔═╡ abc38d23-8665-4377-9a25-9e9c5a10a7bf
 if @isdefined result_resid
 	model_resid = map(t->calc_rv_keplerian(t.-t_mean,PKhkωpM_to_PKeωM(result_resid.minimizer[1:5])...),t_plt);
 end;
+
+# ╔═╡ 844ede38-9596-47a6-b30b-9eff622a2330
+if @isdefined result_resid
+let
+	#upscale
+	plt = plot(legend=:none, widen=true)
+	num_inst = size(df_star_by_inst,1)
+	rvoffset = result1.minimizer[6:7]
+	slope = result1.minimizer[8]
+
+	scatter!(data1.t,
+				data1.rv.-
+				model_1pl.(data1.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,rvoffset[1],slope=result1.minimizer[8], t_mean=t_mean),
+				yerr=data1.σrv) #,
+				#markersize=4*upscale, legendfontsize=upscale*12)
+	scatter!(data2.t,
+				data2.rv.-
+				model_1pl.(data2.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,rvoffset[2],slope=result1.minimizer[8], t_mean=t_mean),
+				yerr=data2.σrv),
+				#markersize=4*upscale, legendfontsize=upscale*12)
+	plot!(t_plt, model_resid)
+	xlabel!("Time (d)")
+	ylabel!("RV (m/s)")
+	title!("HD " * star_name * " (residuals to 1 planet model)")
+	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
+	plt
+end
+end
 
 # ╔═╡ 393c7568-a234-4ef5-97a6-4af630e355e5
 function loss_2pl(θ) 
@@ -554,13 +643,13 @@ function loss_2pl(θ)
 end
 
 # ╔═╡ dbc0e11e-d3e0-46a4-92c5-3afc31463c03
-if @isdefined result1
+if try_fit_2pl && (@isdefined result1) && (@isdefined result_resid)
 	θinit2 = [result1.minimizer[1:5]..., result_resid.minimizer[1:5]..., result1.minimizer[6]+result_resid.minimizer[6],result1.minimizer[7]+result_resid.minimizer[7], result1.minimizer[8]+result_resid.minimizer[8], result_resid.minimizer[9]];
 	result2 = Optim.optimize(loss_2pl, θinit2, BFGS(), autodiff=:forward)
 end
 
 # ╔═╡ f0febfcd-f0f9-4ce8-a3ab-673ad2f19e5a
-if @isdefined result1
+if (@isdefined result1) && (@isdefined result2)
 	pred_2pl = map(t->model_2pl(t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,0.0,slope=result2.minimizer[13], t_mean=t_mean),t_plt)
 	resid2 = vcat(
 	 data1.rv .- model_2pl.(data1.t,PKhkωpM_to_PKeωM(result2.minimizer[1:5])...,PKhkωpM_to_PKeωM(result2.minimizer[6:10])...,result2.minimizer[11],slope=result2.minimizer[13], t_mean=t_mean),
@@ -619,118 +708,86 @@ if @isdefined plt_fit
 	plt_combo
 end
 
-# ╔═╡ 5edc2a2d-6f63-4ac6-8c33-2c5d670bc466
-let
-	#upscale
-	plt = plot() #legend=:none, widen=true)
-	num_inst = size(df_star_by_inst,1)
-	rvoffset = zeros(4) # [result2.minimizer[11], result2.minimizer[12], 0, 0]
-	#rvoffset[1:2] .= result1.minimizer[6:7]
-	#slope = result1.minimizer[8]
-	#rvoffset[1:2] .= result2.minimizer[11:12]
-	for inst in 1:num_inst
-		lab = df_star_by_inst[inst,:inst]
-		if lab == "lick" continue end
-		if lab == "k" lab = "Keck (pre)" end
-		if lab == "j" lab = "Keck (post)" end
-		if lab == "apf" lab = "APF" end
-		scatter!(df_star_by_inst[inst,:bjd].-t_offset,
-				df_star_by_inst[inst,:rv].-rvoffset[inst],
-				yerr=collect(df_star_by_inst[inst,:σrv]),
-				label=lab)
-				#markersize=4*upscale, legendfontsize=upscale*12
-		#plot!(t_plt,model_1pl)
-		#plot!(t_plt.-2450000,model_2pl)
-		#scatter!(df_star_by_inst[2,:bjd].-2450000,df_star_by_inst[2,:rv], yerr=collect(df_star_by_inst[2,:σrv]),label=:none)
-		#scatter!(df_star_by_inst[3,:bjd].-2450000,df_star_by_inst[3,:rv], yerr=collect(df_star_by_inst[3,:σrv]),label=:none)
-		#scatter!(df_star_by_inst[4,:bjd].-2450000,df_star_by_inst[4,:rv], yerr=collect(df_star_by_inst[4,:σrv]),label=:none)
+# ╔═╡ 93d115f3-ab51-4425-8bc8-33dc9b37bd87
+md"""
+## Code for parsing machine readable tables from AAS Journals
+(Not actually used here, since found CSV version of files at https://github.com/leerosenthalj/CLSI.  But potentially useful for student projects.)
+"""
+
+# ╔═╡ ad74edd0-5056-48f6-9f5c-19a46c0b7277
+#=begin
+	fn = joinpath("../_assets/week4/","apjsabe23ct6_mrt.txt");
+	#=
+	if !isfile(fn) || !(filesize(fn)>0)
+		fn = Downloads.download("https://psuastro497.github.io/Fall2022/assets/week4/apjsabe23ct6_mrt.txt", fn)
 	end
-	xlabel!("Time (d)")
-	ylabel!("RV (m/s)")
-	title!("HD " * star_name )
-	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
-	plt
-end
-
-# ╔═╡ 43ae8d15-6381-4c86-b08d-2d12cd4bc653
-if @isdefined result1
-let
-	#upscale
-	plt = plot() #legend=:none, widen=true)
-	num_inst = size(df_star_by_inst,1)
-	rvoffset = zeros(4) # [result2.minimizer[11], result2.minimizer[12], 0, 0]
-	rvoffset[1:2] .= result1.minimizer[6:7]
-	slope = result1.minimizer[8]
-	#rvoffset[1:2] .= result2.minimizer[11:12]
-	for inst in 1:num_inst
-		lab = df_star_by_inst[inst,:inst]
-		if lab == "lick" continue end
-		if lab == "k" lab = "Keck (pre)" end
-		if lab == "j" lab = "Keck (post)" end
-		if lab == "apf" lab = "APF" end
-		scatter!(df_star_by_inst[inst,:bjd].-t_offset,
-				df_star_by_inst[inst,:rv].-rvoffset[inst],
-				yerr=collect(df_star_by_inst[inst,:σrv]),
-				label=lab)
-		#plot!(t_plt,model_1pl)
-		#plot!(t_plt.-2450000,model_2pl)
-		#scatter!(df_star_by_inst[2,:bjd].-2450000,df_star_by_inst[2,:rv], yerr=collect(df_star_by_inst[2,:σrv]),label=:none)
-		#scatter!(df_star_by_inst[3,:bjd].-2450000,df_star_by_inst[3,:rv], yerr=collect(df_star_by_inst[3,:σrv]),label=:none)
-		#scatter!(df_star_by_inst[4,:bjd].-2450000,df_star_by_inst[4,:rv], yerr=collect(df_star_by_inst[4,:σrv]),label=:none)
+	=#
+	if filesize(fn)>0
+		df_all = read_apj_mrt(fn)
+		star_names = unique(df_all.Name)
+		md"Read machine readable version of Table 6 from [Rosenthal et al. (2021)](https://doi.org/10.3847/1538-4365/abe23c) into `df_all`."
+	else 
+		df_all = DataFrame()
+		star_names = String[""]
+		danger(md"Error reading data file with RVs.  Expect empty plots below.")
 	end
-	plot!(t_plt,pred_1pl, label=:none)
-	xlabel!("Time (d)")
-	ylabel!("RV (m/s)")
-	title!("HD " * star_name )
-	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
-	plt
 end
+=#
+
+# ╔═╡ bc7e067b-a170-40e0-b9f1-11b097e72a09
+function extract_entry(line::AbstractString, fmt_info)
+	substr = line[parse(Int,fmt_info[1]):parse(Int,fmt_info[2])]
+	if occursin("--",substr)
+		return missing
+	end
+	if  fmt_info[3] == "A" 
+		return strip(substr)
+	end
+	if !occursin(r"\d",substr) 
+		return missing
+	end
+	if fmt_info[3] == "I" 
+		return parse(Int,substr)
+	elseif  fmt_info[3] == "F" 
+		return parse(Float64,substr)
+	else
+		@warn "Need to add instructions for parsing type " fmt_info[1][3]
+		return nothing
+	end
 end
 
-# ╔═╡ 844ede38-9596-47a6-b30b-9eff622a2330
-if @isdefined result_resid
-let
-	#upscale
-	plt = plot(legend=:none, widen=true)
-	num_inst = size(df_star_by_inst,1)
-	rvoffset = result1.minimizer[6:7]
-	slope = result1.minimizer[8]
-
-	scatter!(data1.t,
-				data1.rv.-
-				model_1pl.(data1.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,rvoffset[1],slope=result1.minimizer[8], t_mean=t_mean),
-				yerr=data1.σrv) #,
-				#markersize=4*upscale, legendfontsize=upscale*12)
-	scatter!(data2.t,
-				data2.rv.-
-				model_1pl.(data2.t,PKhkωpM_to_PKeωM(result1.minimizer[1:5])...,rvoffset[2],slope=result1.minimizer[8], t_mean=t_mean),
-				yerr=data2.σrv),
-				#markersize=4*upscale, legendfontsize=upscale*12)
-	plot!(t_plt, model_resid)
-	xlabel!("Time (d)")
-	ylabel!("RV (m/s)")
-	title!("HD " * star_name * " (residuals to 1 planet model)")
-	#savefig(plt,joinpath(homedir(),"Downloads","RvEx.pdf"))
-	plt
-end
+# ╔═╡ d5036d21-76b3-41f9-8c34-59c8afe9ffe2
+function read_apj_mrt(fn::AbstractString)
+	lines = readlines(fn)
+	line_start_fmt_specs = findfirst(l->occursin("Bytes",l),lines)+2
+	line_stop_fmt_specs = findfirst(l->occursin(r"^\-+$",l),lines[line_start_fmt_specs:end]) + (line_start_fmt_specs-1) -1
+	line_data_start = findlast(l->occursin(r"^\-+$",l),lines) +1
+	fmt_info = map(l->match(r"^\s*(\d+)-\s+(\d+)\s+(\w)(\d\.?\d*)\s*(\S+)\s+(\S+)\s+(.*)$",l).captures,lines[line_start_fmt_specs:line_stop_fmt_specs]) 
+	colnames = map(f->f[6],fmt_info)
+	data = map(fmt->Base.Fix2(extract_entry,fmt).(lines[line_data_start:length(lines)]),fmt_info)
+	df = DataFrame(data,colnames )
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+ParameterHandling = "2412ca09-6db7-441c-8e3a-88d5709968c5"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
 
 [compat]
+CSV = "~0.10.3"
 DataFrames = "~1.3.2"
 LaTeXStrings = "~1.3.0"
 Optim = "~1.7.2"
+ParameterHandling = "~0.4.5"
 Plots = "~1.26.0"
 PlutoTeachingTools = "~0.1.7"
 PlutoUI = "~0.7.37"
@@ -777,6 +834,12 @@ git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
 version = "1.0.8+0"
 
+[[deps.CSV]]
+deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings"]
+git-tree-sha1 = "9310d9495c1eb2e4fa1955dd478660e2ecab1fbb"
+uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+version = "0.10.3"
+
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
 git-tree-sha1 = "4b859a208b2397a7a623a03449e4636bdb17bcf2"
@@ -800,6 +863,12 @@ deps = ["InteractiveUtils", "UUIDs"]
 git-tree-sha1 = "1833bda4a027f4b2a1c984baddcf755d77266818"
 uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
 version = "1.1.0"
+
+[[deps.CodecZlib]]
+deps = ["TranscodingStreams", "Zlib_jll"]
+git-tree-sha1 = "ded953804d019afa9a3f98981d99b33e3db7b6da"
+uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
+version = "0.7.0"
 
 [[deps.ColorSchemes]]
 deps = ["ColorTypes", "Colors", "FixedPointNumbers", "Random"]
@@ -938,6 +1007,12 @@ git-tree-sha1 = "d8a578692e3077ac998b50c0217dfd67f21d1e5f"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.0+0"
 
+[[deps.FilePathsBase]]
+deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
+git-tree-sha1 = "316daa94fad0b7a008ebd573e002efd6609d85ac"
+uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
+version = "0.9.19"
+
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
@@ -1073,6 +1148,12 @@ version = "0.2.2"
 git-tree-sha1 = "f550e6e32074c939295eb5ea6de31849ac2c9625"
 uuid = "83e8ac13-25f8-5344-8a64-a9f2b223428f"
 version = "0.5.1"
+
+[[deps.InlineStrings]]
+deps = ["Parsers"]
+git-tree-sha1 = "d19f9edd8c34760dca2de2b503f969d8700ed288"
+uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
+version = "1.1.4"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
@@ -1355,6 +1436,12 @@ git-tree-sha1 = "b2a7af664e098055a7529ad1a900ded962bca488"
 uuid = "2f80f16e-611a-54ab-bc61-aa92de5b98fc"
 version = "8.44.0+0"
 
+[[deps.ParameterHandling]]
+deps = ["ChainRulesCore", "Compat", "InverseFunctions", "IterTools", "LinearAlgebra", "LogExpFunctions", "SparseArrays", "Test"]
+git-tree-sha1 = "ba866c5a7947a98920d87767668e52940cda4080"
+uuid = "2412ca09-6db7-441c-8e3a-88d5709968c5"
+version = "0.4.5"
+
 [[deps.Parameters]]
 deps = ["OrderedCollections", "UnPack"]
 git-tree-sha1 = "34c0e9ad262e5f7fc75b10a9952ca7692cfc5fbe"
@@ -1516,6 +1603,12 @@ git-tree-sha1 = "0b4b7f1393cff97c33891da2a0bf69c6ed241fda"
 uuid = "6c6a2e73-6563-6170-7368-637461726353"
 version = "1.1.0"
 
+[[deps.SentinelArrays]]
+deps = ["Dates", "Random"]
+git-tree-sha1 = "db8481cf5d6278a121184809e9eb1628943c7704"
+uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
+version = "1.3.13"
+
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
@@ -1627,6 +1720,12 @@ uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
+[[deps.TranscodingStreams]]
+deps = ["Random", "Test"]
+git-tree-sha1 = "8a75929dcd3c38611db2f8d08546decb514fcadf"
+uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
+version = "0.9.9"
+
 [[deps.URIs]]
 git-tree-sha1 = "97bbe755a53fe859669cd907f2d96aee8d2c1355"
 uuid = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
@@ -1666,6 +1765,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "4528479aa01ee1b3b4cd0e6faef0e04cf16466da"
 uuid = "2381bf8a-dfd0-557d-9999-79630e7b1b91"
 version = "1.25.0+0"
+
+[[deps.WeakRefStrings]]
+deps = ["DataAPI", "InlineStrings", "Parsers"]
+git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
+uuid = "ea10d353-3f73-51f8-a26c-33c1cb351aa5"
+version = "1.4.2"
 
 [[deps.XML2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "Zlib_jll"]
@@ -1888,27 +1993,33 @@ version = "0.9.1+5"
 # ╟─689c0cf1-ab41-460d-914b-b1f7d64f0894
 # ╟─3d1821a6-f134-49d6-a4b0-39d6d28ab420
 # ╟─d5febe7d-bf9b-4793-96f3-9c31b641b3ae
-# ╟─ad74edd0-5056-48f6-9f5c-19a46c0b7277
-# ╠═5e92054a-ca9e-4949-9727-5a9ed14003c0
-# ╠═bce3f35c-07a1-48ef-8a29-243b2215fcb5
-# ╠═8b1f8b91-12b5-4e61-a8ff-63538189cf34
-# ╟─bead2981-e94f-4743-866b-7ecf7a2bae84
+# ╟─2e51744b-b040-4f21-94b8-ffe9cd1e149e
+# ╟─5e92054a-ca9e-4949-9727-5a9ed14003c0
+# ╟─bce3f35c-07a1-48ef-8a29-243b2215fcb5
+# ╟─8b1f8b91-12b5-4e61-a8ff-63538189cf34
+# ╠═873c94d4-29f1-4664-87b1-d70615c0f8ed
+# ╟─5a73b1fc-99bc-4530-ae4a-49ce25df99dc
+# ╟─253decc1-35c7-4454-b500-4f28e1087d36
 # ╟─5edc2a2d-6f63-4ac6-8c33-2c5d670bc466
 # ╟─21834080-14de-4926-9766-5a3ad994e2a1
-# ╠═fcf19e04-3e35-4a01-8036-fd5b283fdd37
+# ╟─fcf19e04-3e35-4a01-8036-fd5b283fdd37
 # ╟─d2d1cf44-255a-47bf-ba3d-42169c6af060
+# ╟─49fdca20-46fd-4f31-94f1-ed58f3b32305
 # ╠═a318c478-f71c-457b-9c54-fe69e964849a
-# ╠═41b2eea0-3049-4fa5-803e-83a54b74ef27
-# ╠═fa3fe244-75cf-434b-8de1-5fca5db06c8b
+# ╟─41b2eea0-3049-4fa5-803e-83a54b74ef27
+# ╟─84c68b29-6707-4761-bde1-2dcabe5a0ac9
+# ╟─fa3fe244-75cf-434b-8de1-5fca5db06c8b
 # ╟─43ae8d15-6381-4c86-b08d-2d12cd4bc653
-# ╠═278d1fbd-7c64-4544-b37a-8258f493b3db
-# ╟─844ede38-9596-47a6-b30b-9eff622a2330
+# ╟─278d1fbd-7c64-4544-b37a-8258f493b3db
 # ╟─55034abb-34e3-4fab-9b80-c82019a67756
+# ╟─fac9b01f-3a92-49da-9ec9-2e6502d595d9
 # ╠═26c601fb-d62f-47f2-a7ff-e7ca63ad9dcd
-# ╠═a847e31d-9007-478b-b1e3-ffb8e55a6f3c
+# ╟─a847e31d-9007-478b-b1e3-ffb8e55a6f3c
 # ╟─abc38d23-8665-4377-9a25-9e9c5a10a7bf
+# ╟─844ede38-9596-47a6-b30b-9eff622a2330
 # ╟─de533ac4-6870-40f8-8bad-f8c62694e719
-# ╠═dbc0e11e-d3e0-46a4-92c5-3afc31463c03
+# ╟─bc0d6fd6-de10-4c58-b55c-7bca8fbc123a
+# ╟─dbc0e11e-d3e0-46a4-92c5-3afc31463c03
 # ╟─f0febfcd-f0f9-4ce8-a3ab-673ad2f19e5a
 # ╟─1b260d22-e035-4991-bd42-4abd6f6b0333
 # ╟─849d5f32-f7c4-45cf-bc9d-85eae6c13d4f
@@ -1929,10 +2040,11 @@ version = "0.9.1+5"
 # ╟─19a96558-4c9f-4bad-8fc2-735c813bd756
 # ╟─3932fb9d-2897-4d64-8dba-a51799d1aa7a
 # ╟─d4e5cd92-21c0-4073-ab3e-8cd5804976c8
-# ╟─9da83c61-cbcb-4c13-83d1-21a26b1c59d1
+# ╠═9da83c61-cbcb-4c13-83d1-21a26b1c59d1
 # ╟─ba141b21-ab58-400a-a41a-9cdd4dd5987d
 # ╟─393c7568-a234-4ef5-97a6-4af630e355e5
 # ╟─93d115f3-ab51-4425-8bc8-33dc9b37bd87
+# ╟─ad74edd0-5056-48f6-9f5c-19a46c0b7277
 # ╟─d5036d21-76b3-41f9-8c34-59c8afe9ffe2
 # ╟─bc7e067b-a170-40e0-b9f1-11b097e72a09
 # ╟─00000000-0000-0000-0000-000000000001
