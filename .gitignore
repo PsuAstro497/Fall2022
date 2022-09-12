@@ -15,6 +15,7 @@ tutorials/*.md
 tutorials/*/*.html
 notebooks/*.md
 notebooks/*/*.html
+notebooks/data/*
 
 **/_tmp_*.jl
 **/*backup*.jl

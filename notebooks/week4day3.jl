@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.9
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -158,8 +158,11 @@ md"""
 
 # ╔═╡ 2e51744b-b040-4f21-94b8-ffe9cd1e149e
 begin
-	fn = joinpath("../_assets/week4/legacy_data.csv");
+	fn = joinpath("../_assets/week4/legacy_data.csv")
 	if !isfile(fn) || !(filesize(fn)>0)
+		path = joinpath(pwd(),"data")
+		mkpath(path)
+		fn = joinpath(path,"legacy_data.csv")
 		fn = Downloads.download("https://github.com/leerosenthalj/CLSI/raw/master/legacy_tables/legacy_data.csv", fn)
 	end
 	if filesize(fn) > 0
@@ -798,7 +801,7 @@ Query = "~1.0.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
