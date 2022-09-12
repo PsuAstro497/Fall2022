@@ -48,9 +48,11 @@ md"""
 - Generate simulated data sets that satisfy all model assumptions.  
 - Apply model and computational methods to simulated data
 - Compare results to true parameter values.
-- Check:
+
+## Checks to perform based on simulated data:
   - Are estimated model parameters close to true values?
   - Do estimated parameter uncertainties accurately characterize the dispersion from the true values?
+  - Is the distribution of parameter estimates centered on their true values?
   - How many iterations are required for algorithms to converge?  
   - What can we learn reliably?    
   - Are there regions of parameter space that result in low quality inference?
@@ -59,7 +61,7 @@ md"""
 # ╔═╡ 6f96e5c6-79df-472c-ab9f-32126d2967d8
 md"""
 #### Validating methods on simulated data is a key step $br (too often overlooked)
-This approach is useful for diagnosing common problems:
+This approach is very useful for diagnosing many of the most common problems:
   - Not enough data
   - Measurement uncertainties too large
   - Spatial or temporal sampling leads to degeneracies
@@ -67,9 +69,9 @@ This approach is useful for diagnosing common problems:
   - Iterative algorithms don't converge reliably
   - Iterative algorithms take longer than expected to converge
 
-Real data is (almost always) more complicated than our idealizd model, but..  
+Real data is (almost always) more complicated than our idealizd model, but...  
   - If our method doesn't work reliabily for idealized data, then we shouldn't trust them applied to real data.
-  - If our method requires 10^6 iterations to converge for idealized data, then we know we'll need to run it for at least that long for real data.
+  - If our method requires $10^6$ iterations to converge for idealized data, then we know we'll need to run it for at least that long for real data (and potentially longer).
 
 """
 
@@ -135,7 +137,7 @@ md"""
   - So small they are scientifically unininteresting,
   - So large that more detailed analysis isn't a good use of your time,
   - Somewhere in the middle.  
-- We need to know where this analysis falls along that spectrum.
+- We need to know where this analysis falls along that spectrum *before* we start drawing scientific conclusions.
 """
 
 # ╔═╡ 46c12e8c-5a00-49fe-b922-30457993931c
@@ -158,15 +160,15 @@ md"""
 Order of polynominal to generate data: $(@bind order_true NumberField(1:3, default=1)) $br
 a₀: $(@bind a_0 NumberField(-2:0.1:1, default=1))
 a₁: $(@bind a_1 NumberField(-2:0.1:2, default=1))
-a₂: $(@bind a_2 NumberField(-2:0.1:2, default=1))
-a₃: $(@bind a_3 NumberField(-2:0.1:2, default=1)) $br
+a₂: $(@bind a_2 NumberField(-2:0.1:2, default=0))
+a₃: $(@bind a_3 NumberField(-2:0.1:2, default=0)) $br
 Number of observations: $(@bind n_obs NumberField(10:10:200, default=40)) 
 Number of outliers: $(@bind n_outliers NumberField(0:10, default=0)) $br
 Measurement uncertainty: $(@bind σ_obs NumberField(0:0.01:1, default=0.1))   
 """
 
 # ╔═╡ ed1508b6-3456-4947-9f04-b3cee90aa191
-θ_true = [a_0, a_1, a_2, a_3];	
+θ_true = [a_0, order_true >= 1 ? a_1 : 0.0 , order_true >= 2 ? a_2 : 0.0 , order_true >=3 ? a_3 : 0.0];	
 
 # ╔═╡ d3c0e27b-da6c-460d-84a3-3150b75f4071
  latexstring("y_{true} = \\sum_{i=0}^{$(order_true)} a_i x^i")
@@ -175,6 +177,9 @@ Measurement uncertainty: $(@bind σ_obs NumberField(0:0.01:1, default=0.1))
 md"""
 Now let's repeat that analysis many times and compare the MLE estimates for each parameter with the true values.
 """
+
+# ╔═╡ 4336bb9c-66a2-4635-b9ed-85e095eadffa
+#plot_parameter_histograms(results_full_model, θ_true, title="Results using full model")
 
 # ╔═╡ 777dd589-eb50-438e-a127-a486bfc3f378
 md"""
@@ -187,6 +192,9 @@ $(@bind redraw Button("Perform new simulations"))
 md"""
 What would have happend if we included only the intercept and slope terms (and not $x^2$ or $x^3$ terms)?
 """
+
+# ╔═╡ 386ef6f1-969e-4283-84fa-138ff8d05796
+#plot_parameter_histograms(results_linear_model, θ_true, title="Results using linear model")
 
 # ╔═╡ 881cd551-f535-494d-87d5-f2cb4a59066b
 md"""
@@ -340,11 +348,9 @@ function plot_parameter_histograms(results::AbstractMatrix, θ_true; title::Stri
   plot(plts..., layout=(n_param,1))
 end
 
-# ╔═╡ 4336bb9c-66a2-4635-b9ed-85e095eadffa
-plot_parameter_histograms(results_full_model, θ_true, title="Results using full model")
-
-# ╔═╡ 386ef6f1-969e-4283-84fa-138ff8d05796
-plot_parameter_histograms(results_linear_model, θ_true, title="Results using linear model")
+# ╔═╡ 30ff4e19-b106-449c-adac-e47c3104cab8
+PlutoTeachingTools.TwoColumn(plot_parameter_histograms(results_full_model, θ_true, title="Results using full model"), 
+	plot_parameter_histograms(results_linear_model, θ_true, title="Results using linear model"))
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -1407,6 +1413,7 @@ version = "1.4.1+0"
 # ╟─031643af-e327-444c-b01d-87d06f8fbaf5
 # ╟─88010ce4-b007-4dfe-af8c-20360da2559c
 # ╟─16268ece-5b3b-460e-be5e-a87199b3e0d3
+# ╟─30ff4e19-b106-449c-adac-e47c3104cab8
 # ╟─4336bb9c-66a2-4635-b9ed-85e095eadffa
 # ╟─777dd589-eb50-438e-a127-a486bfc3f378
 # ╟─59f91ee5-94cc-4029-8882-15f17775782b
