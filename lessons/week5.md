@@ -21,4 +21,5 @@ Week {{week_num}}
 ## [Lab 5](../../labs/lab5/): {{fill title labs/lab5.md}}
 
 ## {{exo_topic}}
-- Before Friday's class, read ["Statistical methods for exoplanet detection with radial velocities"](ADDLINK):  Sec.1-2.3, 3.1, 4.1, 5.1
+- Before Friday's class, read ["Statistical methods for exoplanet detection with radial velocities"](https://psu.instructure.com/files/139190533/download?download_frd=1):  Sec.1-3.1, 4-4.2, 7.1
+- Very optional [supplement]((https://psu.instructure.com/files/139190533/download?download_frd=1)) in case anyone is interested
