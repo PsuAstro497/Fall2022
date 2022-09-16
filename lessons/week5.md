@@ -12,7 +12,7 @@ Week {{week_num}}
 
 ## {{ds_topic}}
 - Suggested readings for Monday's class:
-   - [What is Bayesian Statistics?](https://storopoli.github.io/Bayesian-Julia/pages/2_bayes_stats/) (if it's helpful for you)
+   - [What is Bayesian Statistics?](https://storopoli.github.io/Bayesian-Julia/pages/02_bayes_stats/)
 
 - Read before Wednesday's class:
    - [How to Use Turing](https://storopoli.github.io/Bayesian-Julia/pages/4_Turing/)
