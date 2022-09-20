@@ -3,7 +3,7 @@ title = "Week 5"
 week_num = 5
 tags = ["lessons"]
 topic = "Non-linear Models & Exoplanet Masses & Orbits I"
-ds_topic = "Model Building III: Non-linear Models"
+ds_topic = "Model Building III: Bayesian Inference & Non-linear Models"
 exo_topic =  "Exoplanet Characterization: Masses & Orbits I"
 +++
 
@@ -13,6 +13,7 @@ Week {{week_num}}
 ## {{ds_topic}}
 - Suggested readings for Monday's class:
    - [What is Bayesian Statistics?](https://storopoli.github.io/Bayesian-Julia/pages/02_bayes_stats/)
+- [Slides from class](https://psu.instructure.com/courses/2198465/files?preview=139368519)
 
 - Read before Wednesday's class:
    - [How to Use Turing](https://storopoli.github.io/Bayesian-Julia/pages/4_Turing/)

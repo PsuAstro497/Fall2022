@@ -11,10 +11,7 @@ Start {{lab4_start}} ---
 Due {{lab4_due}}
 
 
-### Goals:
-In this lab, students will learn to:
-
-## Goals
+### Goals
 In this lab, students will learn to:
 - Assess evidence for planets based on Transit Timing Variations (TTVs)
 - Assess the quality of a model that has been fit to data
