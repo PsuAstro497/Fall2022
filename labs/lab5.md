@@ -15,8 +15,10 @@ In this lab, students will learn to:
 - Characterize the mass and orbit of an exoplanet using radial velocity observations
 - Build a Bayesian model for astronomical observations
 - Specify a prior and likelihood using a probabilistic programming language
-- Perform posterior sampling 
+- Perform posterior sampling
 - Qualitatively evaluate the convergence of Markov chains
+- Use an approximate model to assist with global search over a multi-modal parameter space
+- Assess the sensitivity of inferential results to the choice of prior & likelihood
 
 Students will strengthen their understanding of:
 - Assessing models
@@ -31,4 +33,3 @@ Follow [this link](https://classroom.github.com/a/6ESo_yI5) to create your own p
 - [Turing.jl](https://turing.ml/)
 - [StatsPlots.jl](https://docs.juliaplots.org/latest/generated/statsplots/)
 - [MCMCChains.jl](https://beta.turing.ml/MCMCChains.jl/dev/statsplots/#StatsPlots.jl)
-
