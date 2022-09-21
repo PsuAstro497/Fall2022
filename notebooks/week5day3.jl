@@ -19,7 +19,7 @@ begin
 	using PlutoUI, PlutoTeachingTools
 	using CSV, DataFrames, Query
 	using Distributions, Statistics
-	using Plots, LaTeXStrings, StatsPlots
+	using Plots, LaTeXStrings, ColorSchemes, StatsPlots
 end
 
 # ╔═╡ 4dade109-dd8b-450c-8a79-b0e5f8b9304d
@@ -59,22 +59,24 @@ end
 
 # ╔═╡ bbcbc35a-1103-49a2-8d4f-79e1ff79f9a9
 md"""
-## Masses
+## Radial Velocity Planet Population
 """
 
-# ╔═╡ 6a472370-e30a-4b92-a4e0-924938593f63
+# ╔═╡ f969c89a-9877-4f6b-b1a1-02639b9b2ff9
 md"""
-Show m sin i error bars: $(@bind show_msini_err CheckBox(default=false))
-"""
+Min $R_p$: $(@bind rp_min_rsol NumberField(0.5:0.5:20, default=3))  $nbsp $nbsp $nbsp
+Show e error bars: $(@bind show_e_err CheckBox(default=false)) $nbsp $nbsp
+m sin i error bars: $(@bind show_msini_err CheckBox(default=false))
+""" 
 
 # ╔═╡ 0205cf62-dfeb-4d5e-964d-91f294b4a30f
 begin
 	plt_P_m_base = plot(xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)")
 	if show_msini_err
-		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, yerr=(abs.(df.pl_msinieerr2),df.pl_msinieerr1), markersize=2, markerstrokewidth=0.5, label=:none)
+		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, yerr=(abs.(df.pl_msinieerr2),df.pl_msinieerr1), marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=3, markerstrokewidth=0.5, label=:none)
 
 	else
-		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, markersize=2, markerstrokewidth=0, label=:none)
+		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=2, markerstrokewidth=0, label=:none)
 	end
 	
 	P_rng = range(0.5,stop=10_000,length=30_000)
@@ -82,14 +84,51 @@ begin
 	plot!(plt_P_m_base,P_rng, m_K_1mps, label = "1m/s for Solar analog", legend=:bottomright)
 end
 
+# ╔═╡ e482d032-dd20-4c85-8fce-a8391267bdc1
+begin
+	if show_e_err
+		plt_P_e_base = scatter(df.pl_orbper, df.pl_orbeccen, yerr=(abs.(df.pl_orbeccenerr2),df.pl_orbeccenerr1), marker_z=log10.(df.pl_msinie), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (m sin i/M⊕)", 
+		label=:none, xscale=:log10, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=3, markerstrokewidth=0.5)
+	else
+		plt_P_e_base = scatter(df.pl_orbper, df.pl_orbeccen, marker_z=log10.(df.pl_msinie), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (m sin i/M⊕)", label=:none, xscale=:log10, ylims=(0,1), xlabel="Period (d)", ylabel="Eccentricity", markersize=2, markerstrokewidth=0)
+	end
+	local P_rng = range(0.5,stop=10_000,length=30_000)
+	rp_min = 0.005 * rp_min_rsol
+	e_rsol = 1 .- (rp_min./(P_rng./365).^(2/3))
+	plot!(plt_P_e_base,P_rng,e_rsol, label=string(rp_min_rsol) * "R⊙")
+end
+
+# ╔═╡ 5f48a640-0216-4ab3-8f1e-4c67944caca5
+scatter(df.pl_msinie, df.pl_orbeccen, marker_z=log10.(df.pl_orbper), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (P/d)", 
+	xscale=:log10, legend=:none, xlabel="m sin i (M⊕)", ylims=(0,1), ylabel="Eccentricity", markersize=3, markerstrokewidth=0.5)
+
+# ╔═╡ 8d377bdf-ce71-4b07-ab27-168543774602
+md"""
+## Impact of Detection Biases
+"""
+
+# ╔═╡ e2cde2c4-a994-4bdf-9e9b-adc513e62dd6
+md"""
+### RV Detection Criteria
+"""
+
+# ╔═╡ 479d69b3-b6cc-4116-ac5b-a675b6464fdb
+hint(md"""
+- Formally have precise $m \sin i$ measurement: $N_{obs} \ge  60 \, ( σᵣᵥ₁ / K)^2$
+- Resolve potential period aliases (particularly for short-period, non-transiting planets): $N_{obs} \ge \mathrm{dozens}$
+- RV amplitude greater than stellar variability: $K \ge 1-3 \mathrm{m/s}$
+""")
+
 # ╔═╡ bf784fd6-f88c-4348-84c3-0eb874299cfb
 md"""
 ### What if the orbital period and $m \sin i$'s were drawn independently?
 """
 
 # ╔═╡ 309c4a47-1319-4318-b0e4-6e031c86a7c8
-scatter(df.pl_orbper, sample(df.pl_msinie,size(df,1)), 
+#TwoColumn(plt_P_m_base,
+	scatter(df.pl_orbper, sample(df.pl_msinie,size(df,1)), 
 	label=:none, xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)", markersize=2)
+#)
 
 # ╔═╡ 581386a1-ee17-4cb3-adad-2ef3af74b42e
 md"""
@@ -112,104 +151,156 @@ Detection threshold (m/s): $(@bind K_threshold Slider(0:0.25:30, default=3.0))
 let
 	mask_altK = alt_K .>= K_threshold
 	plt = scatter(alt_P, alt_msinie, 
-	xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)", markersize=1, markerstrokewidth=0, label="K <" * string(K_threshold) * "m/s")
+	xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)", markersize=1, markerstrokewidth=0, label="K <" * string(K_threshold) * "m/s", title="Simulated")
 	scatter!(plt, alt_P[mask_altK], alt_msinie[mask_altK], markersize=2, markercolor=:red, markerstrokewidth=0, label="K > " * string(K_threshold) * "m/s")
-	TwoColumn(plt_P_m_base,plt)
+	TwoColumn(title!(plt_P_m_base, "Observed"),plt)
 end
 
 # ╔═╡ b4669729-9bb8-4f1d-8c94-390dee84f39e
 md"""
-## Eccentricities
+## Eccentricity Distribution
 """
 
-# ╔═╡ e482d032-dd20-4c85-8fce-a8391267bdc1
-plt_P_e_base = scatter(df.pl_orbper, df.pl_orbeccen, label=:none, xscale=:log10, ylims=(0,1), xlabel="Period (d)", ylabel="Eccentricity", markersize=2);
-
-# ╔═╡ 2d40edef-86aa-42b3-8a2b-5608d6b7d7df
-let
-	plt = plt_P_e_base
-	P_rng = range(0.5,stop=10_000,length=30_000)
-	rp_min = 0.015
-	e_rsol = 1 .- (rp_min./(P_rng./365).^(2/3))
-	plot!(plt,P_rng,e_rsol, label="3 R⊙")
-	rp_min = 0.03
-	e_rsol = 1 .- (rp_min./(P_rng./365).^(2/3))
-	plot!(plt,P_rng,e_rsol, label="6 R⊙")
-end
-
-# ╔═╡ ed9f2579-f9ee-4b69-862a-caf2e383ce24
+# ╔═╡ 5d8c2999-7988-43ef-84fa-bb3458a09a39
 md"""
-### Measurement Uncertainties
+Rayleigh parameter: $(@bind σ_rayleigh NumberField(0.05:0.05:0.9, default=0.1)) $nbsp $nbsp
+Include Measurement Uncertainties: $(@bind incl_ecc_errs CheckBox(default=false))
+$nbsp
+$(@bind redraw_e Button("Redraw e's"))
 """
 
-# ╔═╡ 5f48a640-0216-4ab3-8f1e-4c67944caca5
-scatter(df.pl_orbper, df.pl_orbeccen, 
-	xscale=:log10, legend=:none, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=2)
+# ╔═╡ 2d753f5f-1f25-4cce-bebc-259d51d31454
+md"""
+# Transiting Plants
+"""
 
-# ╔═╡ 65344e31-a66b-40ef-a44d-60f8221ee1a6
-scatter(df.pl_orbper, df.pl_orbeccen, yerr=(abs.(df.pl_orbeccenerr2),df.pl_orbeccenerr1), 
-	xscale=:log10, legend=:none, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=2)
-
-# ╔═╡ a093bbf3-4681-4824-adb1-6887dff41ec1
-cump
-
-# ╔═╡ 9dfbe955-dae1-43aa-9a87-515fc6a29f90
-typeof(df.pl_orbeccenerr2) <: AbstractVector
-
-# ╔═╡ 9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
-function draw_randn_asym_01(μ::Real,σₗ::Real,σₕ::Real)
-	rn = randn()
-	local z = -one(typeof(μ))
-	while !(0<=z<1)
-		z = (rn>0) ? μ+σₕ*rn : μ-σₗ*rn
-	end
-	z
-end
-
-# ╔═╡ 18c78f9a-c3db-4abb-8cad-517c0259c363
+# ╔═╡ 39cb8b9b-eed9-4cee-a6c7-77587de67f20
 begin 
-	df_syn1 = DataFrame(pl_orbper = df.pl_orbper)
-	df_syn1.pl_orbeccen = map(i->draw_randn_asym_01(0.0,abs(df.pl_orbeccenerr2[i]),df.pl_orbeccenerr1[i]),1:size(df,1))
+	df_tr = df_all |> 
+		@filter(_.discoverymethod == "Transit") |> 
+		@filter( _.pl_controv_flag == 0 ) |> DataFrame
+	# Pick columns we will insist on having values for
+	select!(df_tr,[:pl_orbper, :pl_rade, :pl_radeerr1, :pl_radeerr2, :pl_trandur, :pl_trandurerr1, :pl_trandurerr2, :st_dens, :st_denserr1, :st_denserr2 ])
+	# Require no missing values
+	filter!(x -> !any(ismissing, x), df_tr)  
+	# Require uncertainties bars on mass aren't > 50%
+	#df = df_rv |> @filter( (abs(_.pl_msinieerr1) < 0.5 * _.pl_msinie) && (abs(_.pl_msinieerr2) < 0.5 * _.pl_msinie) ) |> DataFrame
+	df_tr
 end
 
-# ╔═╡ cbfdbf17-aea9-4def-8237-7ef53a8426d9
-scatter(df_syn1.pl_orbper,df_syn1.pl_orbeccen, yerr=(abs.(df.pl_orbeccenerr2),df.pl_orbeccenerr1), 
-	xscale=:log10, legend=:none, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=2)
+# ╔═╡ cbed063b-5929-417d-8693-ec3b839ad57e
+df_tr.pl_trandur_norm = (df_tr.pl_trandur./12.97).*(365.25 ./df_tr.pl_orbper).^(1/3).*(df_tr.st_dens./1.41).^(1/3);
 
-# ╔═╡ 5981a7e3-ea96-4262-9e48-b26485da7347
-let
-	plt = histogram( df.pl_orbeccen, label="Observed")
-	histogram!(plt,df_syn1.pl_orbeccen, label="Simulated")
-end
+# ╔═╡ 2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
+begin
+	plt_P_r_base = plot(xscale=:log10, yscale=:log10, xlims=(0.3,365), ylims=(0.5, 20), xlabel="Period (d)", ylabel="Radius (R⊕)")
+	if show_msini_err
+		scatter!(plt_P_r_base,df_tr.pl_orbper, df_tr.pl_rade, yerr=(abs.(df_tr.pl_radeerr2),df_tr.pl_radeerr1), marker_z=df_tr.pl_trandur_norm, seriescolor=cgrad(:thermal), colorbar_title="Normalized Transit Duration", markersize=3, markerstrokewidth=0.5, label=:none)
 
-# ╔═╡ 7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
-function generate_ecc_sample(dist::Distributions.ContinuousUnivariateDistribution, σₗ::AbstractVector, σₕ::AbstractVector)
-	@assert size(σₗ) == size(σₕ)
-	
-	e_true = rand(dist, size(σₕ) )
-	e_obs = draw_randn_asym_01.(e_true, σₗ, σₕ)
-	
-	(;e_true, e_obs)
-end
-
-# ╔═╡ a3d656db-a813-4572-b6c1-f010a58a243a
-let
-	(e_true, e_obs) = generate_ecc_sample(Rayleigh(0.12), abs.(df.pl_orbeccenerr2), df.pl_orbeccenerr1)
-	
-	plt = histogram( df.pl_orbeccen, alpha=0.5, label="Observed")
-	histogram!(plt,e_obs, alpha=0.5, label="Simulated, w/ Measurement Noise")
-	histogram!(plt,e_true, alpha=0.5, label="Simulated, w/o Measurement Noise")
-end
-
-# ╔═╡ 89cb4354-d719-4dc1-bf85-a9c296d3c24e
-function draw_randn_asym_pos(μ::Real,σₗ::Real,σₕ::Real)
-	rn = randn()
-	local z = -one(typeof(μ))
-	while !(0<z)
-		z = (rn>0) ? μ+σₕ*rn : μ-σₗ*rn
+	else
+		scatter!(plt_P_r_base,df_tr.pl_orbper, df_tr.pl_rade, marker_z=df_tr.pl_trandur_norm, seriescolor=cgrad(:thermal), colorbar_title="Normalized Transit Duration", markersize=2, markerstrokewidth=0, label=:none)
 	end
-	z
+	plt_P_r_base
+	#P_rng = range(0.5,stop=10_000,length=30_000)
+	#m_K_1mps =  1.0 ./(0.09 .* (365.25./P_rng).^(1/3))
+	#plot!(plt_P_m_base,P_rng, m_K_1mps, label = "1m/s for Solar analog", legend=:bottomright)
 end
+
+# ╔═╡ ed138ea4-b94a-470b-ab08-aec146da61e6
+md"""
+## Impact of Detection Biases
+"""
+
+# ╔═╡ b62f00ae-402f-411f-a65f-7d50129522f8
+hint(md"""
+- Transit signal to noise
+   - Planet size
+   - Host star size
+   - Photometric precission for host star
+   - When star was observed 
+- Number of transits
+- Transit Duration
+   - Impact parameter
+   - Host star density
+   - Eccentricity & ω
+- Transits of other planets
+""")
+
+# ╔═╡ 51578155-c392-4bf5-bfd4-56402a1f8058
+scatter(log10.(df_tr.pl_orbper),df_tr.pl_trandur_norm, xlabel="log₁₀(P/d)", ylabel="Normalized Transit Duration",  marker_z=log2.(df_tr.pl_rade), seriescolor=cgrad(:matter,rev=true), colorbar_title="log₂(Rp/R⊕)", markersize=2, markerstrokewidth=0, label=:none)
+
+# ╔═╡ 6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
+let
+	plt = histogram(df_tr.pl_trandur_norm, xlabel="Normalized Transit Duration", ylabel="Count", label=:none)
+end
+
+# ╔═╡ 1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
+md"""
+# Kepler's Multiple Planet Systems
+
+Figures from [He, Ford & Ragozzine (2019) MNRAS, 490, 4575](https://ui.adsabs.harvard.edu/abs/2019MNRAS.490.4575H/abstract)
+and
+[He, Ford, Ragozzine & Carrera (2020) AJ, 160, 276](https://ui.adsabs.harvard.edu/abs/2020AJ....160..276H/abstract).
+"""
+
+# ╔═╡ ab9008f3-de65-4fef-a393-2a5dda409318
+md"""
+## Number of Detections versus multiplicity
+$(LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_multiplicities_compare.png"))
+"""
+
+# ╔═╡ 0d1199fc-0888-4943-8dee-7e29ea04d20a
+md"""
+### Marginal Distribution of Ratios of Transit Observables for Pairs of Planets in Same System
+
+$(TwoColumn(LocalResource("../_assets/week5/Non_Clustered_Model_periodratios_compare.png"),LocalResource("../_assets/week5/Non_Clustered_Model_depthratios_compare.png")))
+"""
+# LocalResource("../_assets/week5/Non_Clustered_Model_logxi_compare.png")
+
+# ╔═╡ 4480d4e1-324c-4414-b278-6a798bab77f0
+md"""
+## Forward model for generating simulated planetary systems
+### Drawing Periods & Radii
+$(LocalResource("../_assets/week5/Models_cartoon.png"))
+### Drawing Eccentricities & Inclinations
+$(LocalResource("../_assets/week5/AMD_model_cartoon.png"))
+"""
+
+# ╔═╡ cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
+md"""
+## Best-fit Model for Planetary Systems
+### Marginal Distribution of Transit Observables
+$(ThreeColumn(
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_periods_compare.png"),
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_radii_compare.png"),
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_durations_compare.png")))
+
+### Marginal Distribution of Ratios of Transit Observables for Pairs of Planets in Same System
+
+$(ThreeColumn(
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_periodratios_compare.png"),
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_depthratios_compare.png"), 
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_all_compare.png")))
+"""
+
+# ╔═╡ 745e7b26-8db6-48b1-b20d-9d1093981fa1
+LocalResource("../_assets/week5/Compare_models/Models_Compare_underlying_multiplicities.png", :width=>"75%")
+
+# ╔═╡ 6bbd37e2-98dc-4c44-95ef-e236f143b942
+LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_pratio_min_vs_amd_ecc_incl.png")
+
+# ╔═╡ 9566be82-268b-44e6-b5c7-839d0ff49cbf
+LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_mult_vs_amd_ecc_incl_dists_long.png")
+
+# ╔═╡ 44db6c55-4235-4ff5-b391-847ac9d369e5
+LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_per_mult.png")
+
+# ╔═╡ 51f670ae-da32-475d-b59e-272edf5c8596
+#=
+TwoColumn(
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_mmr_compare.png"),
+	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_nonmmr_compare.png") )
+=#
 
 # ╔═╡ c879333a-5aa4-4528-9110-00f491a9ed4a
 md"""
@@ -218,6 +309,71 @@ md"""
 
 # ╔═╡ fbf647a7-b2ba-445d-8622-35c6cb2e27d0
 ChooseDisplayMode()
+
+# ╔═╡ 9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
+function draw_randn_asym_01(μ::Real,σₗ::Real,σₕ::Real)
+	rn = randn()
+	local z = -one(typeof(μ))
+	#while !(0<=z<1)
+		z = (rn>0) ? μ+σₕ*rn : μ+σₗ*rn
+	#end
+	z
+end
+
+# ╔═╡ 7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
+function generate_ecc_sample(dist::Distributions.ContinuousUnivariateDistribution, σₗ::AbstractVector, σₕ::AbstractVector)
+	@assert size(σₗ) == size(σₕ)
+	
+	e_true = rand(truncated(dist, upper=1), size(σₕ) )
+	e_obs = draw_randn_asym_01.(e_true, σₗ, σₕ)
+	
+	(;e_true, e_obs)
+end
+
+# ╔═╡ e22d8b23-f017-4589-8c9c-e54820954155
+begin
+	redraw_e
+	(e_true, e_obs) = generate_ecc_sample(Rayleigh(σ_rayleigh), abs.(df.pl_orbeccenerr2), df.pl_orbeccenerr1)
+end;
+
+# ╔═╡ a3d656db-a813-4572-b6c1-f010a58a243a
+let
+	plt = plot(xlims=(0,1))
+	histogram!(plt, df.pl_orbeccen, alpha=0.4, label="Observed")
+	histogram!(plt,e_true, alpha=0.4, label="Simulated, w/o Measurement Noise")
+	if incl_ecc_errs
+		histogram!(plt,e_obs, alpha=0.6, label="Simulated, w/ Measurement Noise")
+	end
+	plt
+end
+
+# ╔═╡ 18c78f9a-c3db-4abb-8cad-517c0259c363
+begin 
+	df_syn1 = DataFrame(pl_orbper = df.pl_orbper, pl_msinie = df.pl_msinie)
+	df_syn1.pl_orbeccen = e_obs #map(i->draw_randn_asym_01(0.0,abs(df.pl_orbeccenerr2[i]),df.pl_orbeccenerr1[i]),1:size(df,1))
+end;
+
+# ╔═╡ cbfdbf17-aea9-4def-8237-7ef53a8426d9
+let
+	plt = scatter(df_syn1.pl_orbper, df_syn1.pl_orbeccen, marker_z=log10.(df_syn1.pl_msinie), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (m sin i/M⊕)", label=:none, xscale=:log10, ylims=(0,1), xlabel="Period (d)", ylabel="Eccentricity", markersize=2, markerstrokewidth=0)
+	
+	#plt = scatter(df_syn1.pl_orbper,df_syn1.pl_orbeccen, yerr=(abs.(df.pl_orbeccenerr2),df.pl_orbeccenerr1), xscale=:log10, legend=:none, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=2)
+	local P_rng = range(0.5,stop=10_000,length=30_000)
+	rp_min = 0.005 * rp_min_rsol
+	e_rsol = 1 .- (rp_min./(P_rng./365).^(2/3))
+	plot!(plt,P_rng,e_rsol, label=string(rp_min_rsol) * "R⊙", title="Simulated")
+	TwoColumn(title!(plt_P_e_base, "Observed"), plt)
+end
+
+# ╔═╡ 89cb4354-d719-4dc1-bf85-a9c296d3c24e
+function draw_randn_asym_pos(μ::Real,σₗ::Real,σₕ::Real)
+	rn = randn()
+	local z = -one(typeof(μ))
+	while !(0<z)
+		z = (rn>0) ? μ+σₕ*rn : μ+σₗ*rn
+	end
+	z
+end
 
 # ╔═╡ 59c0f88d-cc4f-4bff-b093-3259e190497b
 md"""
@@ -239,6 +395,7 @@ df_small2 = df_small |>
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
@@ -251,6 +408,7 @@ StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 
 [compat]
 CSV = "~0.10.4"
+ColorSchemes = "~3.19.0"
 DataFrames = "~1.3.5"
 Distributions = "~0.25.73"
 LaTeXStrings = "~1.3.0"
@@ -1568,7 +1726,12 @@ version = "1.4.1+0"
 # ╠═cf207789-48c9-440f-b83b-de2905fa709b
 # ╟─bbcbc35a-1103-49a2-8d4f-79e1ff79f9a9
 # ╟─0205cf62-dfeb-4d5e-964d-91f294b4a30f
-# ╟─6a472370-e30a-4b92-a4e0-924938593f63
+# ╟─e482d032-dd20-4c85-8fce-a8391267bdc1
+# ╟─f969c89a-9877-4f6b-b1a1-02639b9b2ff9
+# ╟─5f48a640-0216-4ab3-8f1e-4c67944caca5
+# ╟─8d377bdf-ce71-4b07-ab27-168543774602
+# ╟─e2cde2c4-a994-4bdf-9e9b-adc513e62dd6
+# ╟─479d69b3-b6cc-4116-ac5b-a675b6464fdb
 # ╟─bf784fd6-f88c-4348-84c3-0eb874299cfb
 # ╟─309c4a47-1319-4318-b0e4-6e031c86a7c8
 # ╟─581386a1-ee17-4cb3-adad-2ef3af74b42e
@@ -1576,23 +1739,35 @@ version = "1.4.1+0"
 # ╟─9287a107-cbf8-4dbf-852a-f163ebc49afd
 # ╟─57cb60f0-6e6c-4f8d-bfe3-39838a9b0db0
 # ╟─b4669729-9bb8-4f1d-8c94-390dee84f39e
-# ╠═e482d032-dd20-4c85-8fce-a8391267bdc1
-# ╠═2d40edef-86aa-42b3-8a2b-5608d6b7d7df
-# ╟─ed9f2579-f9ee-4b69-862a-caf2e383ce24
-# ╠═5f48a640-0216-4ab3-8f1e-4c67944caca5
-# ╠═65344e31-a66b-40ef-a44d-60f8221ee1a6
-# ╠═18c78f9a-c3db-4abb-8cad-517c0259c363
-# ╠═7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
-# ╠═a3d656db-a813-4572-b6c1-f010a58a243a
-# ╠═a093bbf3-4681-4824-adb1-6887dff41ec1
-# ╠═9dfbe955-dae1-43aa-9a87-515fc6a29f90
-# ╠═cbfdbf17-aea9-4def-8237-7ef53a8426d9
-# ╠═5981a7e3-ea96-4262-9e48-b26485da7347
-# ╠═9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
-# ╠═89cb4354-d719-4dc1-bf85-a9c296d3c24e
-# ╠═c879333a-5aa4-4528-9110-00f491a9ed4a
+# ╟─5d8c2999-7988-43ef-84fa-bb3458a09a39
+# ╟─e22d8b23-f017-4589-8c9c-e54820954155
+# ╟─a3d656db-a813-4572-b6c1-f010a58a243a
+# ╟─18c78f9a-c3db-4abb-8cad-517c0259c363
+# ╟─cbfdbf17-aea9-4def-8237-7ef53a8426d9
+# ╟─2d753f5f-1f25-4cce-bebc-259d51d31454
+# ╠═39cb8b9b-eed9-4cee-a6c7-77587de67f20
+# ╠═cbed063b-5929-417d-8693-ec3b839ad57e
+# ╟─2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
+# ╟─ed138ea4-b94a-470b-ab08-aec146da61e6
+# ╟─b62f00ae-402f-411f-a65f-7d50129522f8
+# ╟─51578155-c392-4bf5-bfd4-56402a1f8058
+# ╟─6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
+# ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
+# ╟─ab9008f3-de65-4fef-a393-2a5dda409318
+# ╟─0d1199fc-0888-4943-8dee-7e29ea04d20a
+# ╟─4480d4e1-324c-4414-b278-6a798bab77f0
+# ╟─cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
+# ╟─745e7b26-8db6-48b1-b20d-9d1093981fa1
+# ╠═6bbd37e2-98dc-4c44-95ef-e236f143b942
+# ╟─9566be82-268b-44e6-b5c7-839d0ff49cbf
+# ╟─44db6c55-4235-4ff5-b391-847ac9d369e5
+# ╟─51f670ae-da32-475d-b59e-272edf5c8596
+# ╟─c879333a-5aa4-4528-9110-00f491a9ed4a
 # ╠═fbf647a7-b2ba-445d-8622-35c6cb2e27d0
 # ╠═cda49574-3843-11ed-255d-f301e028a76e
+# ╠═7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
+# ╠═9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
+# ╠═89cb4354-d719-4dc1-bf85-a9c296d3c24e
 # ╠═59c0f88d-cc4f-4bff-b093-3259e190497b
 # ╠═8c722f99-87e3-47d2-b284-9abd1637a844
 # ╠═41f914ba-bc61-4b91-88eb-ebe9387c392a
