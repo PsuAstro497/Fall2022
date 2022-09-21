@@ -18,6 +18,7 @@ end
 begin 
 	using PlutoUI, PlutoTeachingTools
 	using CSV, DataFrames, Query
+	using Downloads
 	using Distributions, Statistics
 	using Plots, LaTeXStrings, ColorSchemes, StatsPlots
 end
@@ -36,8 +37,17 @@ md"""
 Read data from NExScI Exoplanet Archive table.
 """
 
+# ╔═╡ 5a65c558-7125-4d83-af1e-7de3c417c9c0
+begin
+	mkpath("data")
+	fn = "data/nexsci_ps.tsv"
+	if !isfile(fn) || !(filesize(fn)>0)
+		fn = Downloads.download("https://github.com/PsuAstro497/Datasets/raw/main/nexsci_ps.tsv", "data/nexsci_ps.tsv")
+	end
+end;
+
 # ╔═╡ a8805407-307a-45aa-886f-c6a56b24374f
-df_all = CSV.read(joinpath("../../labs/lab2-start/data/","nexsci_ps.tsv"), DataFrame);
+df_all = CSV.read(fn, DataFrame);
 
 # ╔═╡ 78632720-da32-4c12-8054-946e01836ced
 md"""
@@ -427,6 +437,7 @@ CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
@@ -1750,7 +1761,8 @@ version = "1.4.1+0"
 # ╟─4dade109-dd8b-450c-8a79-b0e5f8b9304d
 # ╟─c8f40951-6a14-4b0a-90f5-48206b77f123
 # ╟─18bc32d3-8138-4ef5-b702-90f4fd7865a3
-# ╠═a8805407-307a-45aa-886f-c6a56b24374f
+# ╟─5a65c558-7125-4d83-af1e-7de3c417c9c0
+# ╟─a8805407-307a-45aa-886f-c6a56b24374f
 # ╟─78632720-da32-4c12-8054-946e01836ced
 # ╠═cf207789-48c9-440f-b83b-de2905fa709b
 # ╟─bbcbc35a-1103-49a2-8d4f-79e1ff79f9a9
