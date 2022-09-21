@@ -226,6 +226,35 @@ hint(md"""
 - Transits of other planets
 """)
 
+# ╔═╡ 5d391627-f57a-4c2c-8e15-889d42f16fb6
+md"""
+## Planet Occurence Rates 
+Figures from [Hsu, Ford, Ragozzine & Ashby (2019) AJ, 158, 109](https://ui.adsabs.harvard.edu/abs/2019AJ....158..109H/abstract)
+
+$(LocalResource("../_assets/week5/f2.png"))
+
+###  Radius Valley
+$(LocalResource("../_assets/week5/f3.png"))
+"""
+
+# ╔═╡ 10aaddec-ed87-4426-9967-96499e45b5f8
+md"""
+### Occurence Rate of Earth-size Planets in Habitable Zone of Sun-like Stars ($\eta_{\oplus}$)
+
+For $P \in [237,500)$ days & $R_p \in [1, 1.75) R_\oplus$:
+$(TwoColumn( LocalResource("../_assets/week5/f5k.png"),
+			 LocalResource("../_assets/week5/f5l.png")))
+
+#### Comparing results from multiple studies
+$(LocalResource("../_assets/week5/f6.png"))
+
+"""
+
+# ╔═╡ eeb21e1a-70b8-4ca3-80bd-ee8d60fff4c2
+md"""
+## Eccentricity Distribution of Transiting Planets
+"""
+
 # ╔═╡ 51578155-c392-4bf5-bfd4-56402a1f8058
 scatter(log10.(df_tr.pl_orbper),df_tr.pl_trandur_norm, xlabel="log₁₀(P/d)", ylabel="Normalized Transit Duration",  marker_z=log2.(df_tr.pl_rade), seriescolor=cgrad(:matter,rev=true), colorbar_title="log₂(Rp/R⊕)", markersize=2, markerstrokewidth=0, label=:none)
 
@@ -1750,6 +1779,9 @@ version = "1.4.1+0"
 # ╟─2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
 # ╟─ed138ea4-b94a-470b-ab08-aec146da61e6
 # ╟─b62f00ae-402f-411f-a65f-7d50129522f8
+# ╟─5d391627-f57a-4c2c-8e15-889d42f16fb6
+# ╟─10aaddec-ed87-4426-9967-96499e45b5f8
+# ╟─eeb21e1a-70b8-4ca3-80bd-ee8d60fff4c2
 # ╟─51578155-c392-4bf5-bfd4-56402a1f8058
 # ╟─6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
 # ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
