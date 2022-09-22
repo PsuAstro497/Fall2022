@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.11
+# v0.19.9
 
 using Markdown
 using InteractiveUtils
@@ -443,12 +443,12 @@ let
 end
 
 # ╔═╡ ee7aaab9-5e4f-46ab-8100-75be142fba72
-let 
-	plt = make_rv_vs_phase_panel(e_plt, ω_plt, P=P_plt, K=K_plt, M0=M0_plt, t_max = 100, xticks=true, yticks=true)
-	xlabel!(plt, L"Time")
-	ylabel!(plt, L"\Delta RV(t)")
-	xlims!(0,100)
-	ylims!(-6,6)
+begin 
+	plt_1pl = make_rv_vs_phase_panel(e_plt, ω_plt, P=P_plt, K=K_plt, M0=M0_plt, t_max = 100, xticks=true, yticks=true)
+	xlabel!(plt_1pl, L"\mathrm{Time} \;\;\; (day)")
+	ylabel!(plt_1pl, L"\Delta RV\;\;\;\; (m/s)")
+	xlims!(plt_1pl,0,100)
+	ylims!(plt_1pl,-6,6)
 end
 
 # ╔═╡ 7047d464-efdd-4315-b930-5b2e8a3d93c5
@@ -801,7 +801,7 @@ Query = "~1.0.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.7.0"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -1991,7 +1991,7 @@ version = "0.9.1+5"
 # ╟─8d0a2a57-1bbe-4145-9e1b-de125c7635ef
 # ╟─bab9033c-b9ee-45c1-9466-838e40bdb920
 # ╟─4bdcca25-c37f-4079-b222-be773adc2b8f
-# ╟─ee7aaab9-5e4f-46ab-8100-75be142fba72
+# ╠═ee7aaab9-5e4f-46ab-8100-75be142fba72
 # ╟─2306a2d5-2924-45e0-adec-b90d536d2949
 # ╟─689c0cf1-ab41-460d-914b-b1f7d64f0894
 # ╟─3d1821a6-f134-49d6-a4b0-39d6d28ab420

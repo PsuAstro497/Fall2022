@@ -60,7 +60,7 @@ begin
 		@filter(_.discoverymethod == "Radial Velocity") |> 
 		@filter( _.pl_controv_flag == 0 ) |> DataFrame
 	# Pick columns we will insist on having values for
-	select!(df_rv,[:pl_orbper, :pl_msinie, :pl_msinieerr1, :pl_msinieerr2, :pl_rvamp, :pl_rvamperr1, :pl_rvamperr2, :pl_orbeccen, :pl_orbeccenerr1, :pl_orbeccenerr2 ])
+	select!(df_rv,[:pl_orbper, :pl_orbpererr1, :pl_orbpererr2,:pl_msinie, :pl_msinieerr1, :pl_msinieerr2, :pl_rvamp, :pl_rvamperr1, :pl_rvamperr2, :pl_orbeccen, :pl_orbeccenerr1, :pl_orbeccenerr2 ])
 	# Require no missing values
 	filter!(x -> !any(ismissing, x), df_rv)  
 	# Require uncertainties bars on mass aren't > 50%
@@ -83,7 +83,10 @@ m sin i error bars: $(@bind show_msini_err CheckBox(default=false))
 begin
 	plt_P_m_base = plot(xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)")
 	if show_msini_err
-		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, yerr=(abs.(df.pl_msinieerr2),df.pl_msinieerr1), marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=3, markerstrokewidth=0.5, label=:none)
+		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, 
+			xerr=(abs.(df.pl_orbpererr2),df.pl_orbpererr1),
+			yerr=(abs.(df.pl_msinieerr2),df.pl_msinieerr1), 
+			marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=3, markerstrokewidth=0.5, label=:none)
 
 	else
 		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=2, markerstrokewidth=0, label=:none)
@@ -173,11 +176,32 @@ md"""
 
 # ╔═╡ 5d8c2999-7988-43ef-84fa-bb3458a09a39
 md"""
-Rayleigh parameter: $(@bind σ_rayleigh NumberField(0.05:0.05:0.9, default=0.1)) $nbsp $nbsp
+Rayleigh parameter: $(@bind σ_rayleigh NumberField(0.04:0.02:0.9, default=0.1)) $nbsp $nbsp
 Include Measurement Uncertainties: $(@bind incl_ecc_errs CheckBox(default=false))
 $nbsp
 $(@bind redraw_e Button("Redraw e's"))
 """
+
+# ╔═╡ 6ebf215f-615e-4490-a5a0-6fed3a4f9fd7
+md"""
+#### Is there a significant detection bias affecting $e$ distribution?
+"""
+
+# ╔═╡ a9c88237-c0df-49e4-a7e0-e3348979aa5b
+md"""
+$RV(t) = \frac{K}{\sqrt{1-e^2}}\left[\cos(\omega+T(t)) + e \cos\omega \right]$
+"""
+
+# ╔═╡ 14a9ba6f-4f9b-4020-86e3-c2194e38b4f1
+begin
+	e_plt = 0:0.02:1
+	K_plt = 1 ./sqrt.(1 .- e_plt.^2 )
+	plt_RVamp_vs_e = plot(e_plt,K_plt, xlabel="e", ylabel="(RV Amplitude)/K", label=:none, xlims=(0,1) )
+end;
+
+# ╔═╡ 2837531d-9b54-4a58-98df-b704005a1b1f
+Foldable("RV amplitude versus e",plt_RVamp_vs_e)
+
 
 # ╔═╡ 2d753f5f-1f25-4cce-bebc-259d51d31454
 md"""
@@ -193,8 +217,11 @@ begin
 	select!(df_tr,[:pl_orbper, :pl_rade, :pl_radeerr1, :pl_radeerr2, :pl_trandur, :pl_trandurerr1, :pl_trandurerr2, :st_dens, :st_denserr1, :st_denserr2 ])
 	# Require no missing values
 	filter!(x -> !any(ismissing, x), df_tr)  
-	# Require uncertainties bars on mass aren't > 50%
-	#df = df_rv |> @filter( (abs(_.pl_msinieerr1) < 0.5 * _.pl_msinie) && (abs(_.pl_msinieerr2) < 0.5 * _.pl_msinie) ) |> DataFrame
+	# Require uncertainties bars on radius and stellar density aren't > 30%
+	df_tr = df_tr |> 
+		@filter( (abs(_.pl_radeerr1) < 0.5 * _.pl_rade) && (abs(_.pl_radeerr2) < 0.5 * _.pl_rade) ) |> 
+		@filter( (abs(_.st_denserr1) < 0.5 * _.st_dens) && (abs(_.st_denserr2) < 0.5 * _.st_dens) ) |>
+		DataFrame
 	df_tr
 end
 
@@ -203,7 +230,7 @@ df_tr.pl_trandur_norm = (df_tr.pl_trandur./12.97).*(365.25 ./df_tr.pl_orbper).^(
 
 # ╔═╡ 2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
 begin
-	plt_P_r_base = plot(xscale=:log10, yscale=:log10, xlims=(0.3,365), ylims=(0.5, 20), xlabel="Period (d)", ylabel="Radius (R⊕)")
+	plt_P_r_base = plot(xscale=:log10, yscale=:log10, xlims=(0.3,365), ylims=(0.5, 25), xlabel="Period (d)", ylabel="Radius (R⊕)")
 	if show_msini_err
 		scatter!(plt_P_r_base,df_tr.pl_orbper, df_tr.pl_rade, yerr=(abs.(df_tr.pl_radeerr2),df_tr.pl_radeerr1), marker_z=df_tr.pl_trandur_norm, seriescolor=cgrad(:thermal), colorbar_title="Normalized Transit Duration", markersize=3, markerstrokewidth=0.5, label=:none)
 
@@ -268,18 +295,46 @@ md"""
 # ╔═╡ 51578155-c392-4bf5-bfd4-56402a1f8058
 scatter(log10.(df_tr.pl_orbper),df_tr.pl_trandur_norm, xlabel="log₁₀(P/d)", ylabel="Normalized Transit Duration",  marker_z=log2.(df_tr.pl_rade), seriescolor=cgrad(:matter,rev=true), colorbar_title="log₂(Rp/R⊕)", markersize=2, markerstrokewidth=0, label=:none)
 
+# ╔═╡ 09bce3b2-6f0b-4c0a-a273-8a478b4c1f2a
+md"""
+σ(ρ⋆): $(@bind σ_ρstar_sim NumberField(0:0.01:0.5))
+"""
+
 # ╔═╡ 6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
 let
-	plt = histogram(df_tr.pl_trandur_norm, xlabel="Normalized Transit Duration", ylabel="Count", label=:none)
+	plt = plot(xlabel="Normalized Transit Duration", ylabel="Count", xlims=(0,1.6))
+	duration_sample = map(b->sqrt(1-b^2), rand(10_000))
+	histogram!(plt, duration_sample, normalize=true, alpha=0.5, label="Circular, 0% σ(ρ⋆)")
+	if σ_ρstar_sim > 0
+		duration_sample .+= σ_ρstar_sim .* randn(length(duration_sample))
+		histogram!(plt, duration_sample, normalize=true, alpha=0.5, label="Circular, 10% σ(ρ⋆)")
+	end
+	histogram!(plt, df_tr.pl_trandur_norm, normalize=true, alpha=0.7, label="Observed", color=3)
 end
 
 # ╔═╡ 1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
 md"""
 # Kepler's Multiple Planet Systems
+"""
 
-Figures from [He, Ford & Ragozzine (2019) MNRAS, 490, 4575](https://ui.adsabs.harvard.edu/abs/2019MNRAS.490.4575H/abstract)
+# ╔═╡ 32e6170f-0ab3-4681-9517-f9ef940e2b30
+md"""
+## Architectures of systems with $\ge$4 known transiting planets.
+$(LocalResource("../_assets/week5/cks_multis_architectures.png"))
+Credit: Fig 1 from [Weiss & Petigura (2020)](https://ui.adsabs.harvard.edu/abs/2020ApJ...893L...1W/abstract)
+"""
+
+# ╔═╡ 2849d543-08df-4abd-9da6-a5fe02bc9228
+md"""
+Upcoming figures from [He, Ford & Ragozzine (2019) MNRAS, 490, 4575](https://ui.adsabs.harvard.edu/abs/2019MNRAS.490.4575H/abstract)
 and
 [He, Ford, Ragozzine & Carrera (2020) AJ, 160, 276](https://ui.adsabs.harvard.edu/abs/2020AJ....160..276H/abstract).
+"""
+
+# ╔═╡ 08ee8e02-9648-416f-b0b2-755e3d355714
+md"""
+## Number of Detections versus multiplicity
+$(LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_multiplicities_compare.png"))
 """
 
 # ╔═╡ ab9008f3-de65-4fef-a393-2a5dda409318
@@ -378,10 +433,10 @@ end;
 # ╔═╡ a3d656db-a813-4572-b6c1-f010a58a243a
 let
 	plt = plot(xlims=(0,1))
-	histogram!(plt, df.pl_orbeccen, alpha=0.4, label="Observed")
-	histogram!(plt,e_true, alpha=0.4, label="Simulated, w/o Measurement Noise")
+	histogram!(plt, df.pl_orbeccen, noramlize=true, alpha=0.4, label="Observed")
+	histogram!(plt,e_true, noramlize=true, alpha=0.4, label="Simulated, w/o Measurement Noise")
 	if incl_ecc_errs
-		histogram!(plt,e_obs, alpha=0.6, label="Simulated, w/ Measurement Noise")
+		histogram!(plt,e_obs, noramlize=true, alpha=0.6, label="Simulated, w/ Measurement Noise")
 	end
 	plt
 end
@@ -1785,9 +1840,13 @@ version = "1.4.1+0"
 # ╟─a3d656db-a813-4572-b6c1-f010a58a243a
 # ╟─18c78f9a-c3db-4abb-8cad-517c0259c363
 # ╟─cbfdbf17-aea9-4def-8237-7ef53a8426d9
+# ╟─6ebf215f-615e-4490-a5a0-6fed3a4f9fd7
+# ╟─a9c88237-c0df-49e4-a7e0-e3348979aa5b
+# ╟─14a9ba6f-4f9b-4020-86e3-c2194e38b4f1
+# ╟─2837531d-9b54-4a58-98df-b704005a1b1f
 # ╟─2d753f5f-1f25-4cce-bebc-259d51d31454
 # ╠═39cb8b9b-eed9-4cee-a6c7-77587de67f20
-# ╠═cbed063b-5929-417d-8693-ec3b839ad57e
+# ╟─cbed063b-5929-417d-8693-ec3b839ad57e
 # ╟─2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
 # ╟─ed138ea4-b94a-470b-ab08-aec146da61e6
 # ╟─b62f00ae-402f-411f-a65f-7d50129522f8
@@ -1796,13 +1855,17 @@ version = "1.4.1+0"
 # ╟─eeb21e1a-70b8-4ca3-80bd-ee8d60fff4c2
 # ╟─51578155-c392-4bf5-bfd4-56402a1f8058
 # ╟─6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
+# ╟─09bce3b2-6f0b-4c0a-a273-8a478b4c1f2a
 # ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
+# ╟─32e6170f-0ab3-4681-9517-f9ef940e2b30
+# ╟─2849d543-08df-4abd-9da6-a5fe02bc9228
+# ╟─08ee8e02-9648-416f-b0b2-755e3d355714
 # ╟─ab9008f3-de65-4fef-a393-2a5dda409318
 # ╟─0d1199fc-0888-4943-8dee-7e29ea04d20a
 # ╟─4480d4e1-324c-4414-b278-6a798bab77f0
 # ╟─cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
 # ╟─745e7b26-8db6-48b1-b20d-9d1093981fa1
-# ╠═6bbd37e2-98dc-4c44-95ef-e236f143b942
+# ╟─6bbd37e2-98dc-4c44-95ef-e236f143b942
 # ╟─9566be82-268b-44e6-b5c7-839d0ff49cbf
 # ╟─44db6c55-4235-4ff5-b391-847ac9d369e5
 # ╟─51f670ae-da32-475d-b59e-272edf5c8596
