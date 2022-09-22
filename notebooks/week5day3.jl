@@ -387,7 +387,7 @@ LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_pratio
 LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_mult_vs_amd_ecc_incl_dists_long.png")
 
 # ╔═╡ 44db6c55-4235-4ff5-b391-847ac9d369e5
-LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_per_mult.png")
+#LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_per_mult.png")
 
 # ╔═╡ 51f670ae-da32-475d-b59e-272edf5c8596
 #=
@@ -505,7 +505,7 @@ StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 CSV = "~0.10.4"
 ColorSchemes = "~3.19.0"
 DataFrames = "~1.3.5"
-Distributions = "~0.25.73"
+Distributions = "~0.25.71"
 LaTeXStrings = "~1.3.0"
 Plots = "~1.33.0"
 PlutoTeachingTools = "~0.2.3"
@@ -518,7 +518,7 @@ StatsPlots = "~0.15.3"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractFFTs]]
@@ -718,9 +718,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Distributions]]
 deps = ["ChainRulesCore", "DensityInterface", "FillArrays", "LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SparseArrays", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns", "Test"]
-git-tree-sha1 = "34a557ce10eb2d9142f4ef60726b4f17c1c30941"
+git-tree-sha1 = "ee407ce31ab2f1bacadc3bd987e96de17e00aed3"
 uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
-version = "0.25.73"
+version = "0.25.71"
 
 [[deps.DocStringExtensions]]
 deps = ["LibGit2"]
@@ -1521,9 +1521,9 @@ version = "1.0.2"
 
 [[deps.Tables]]
 deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "LinearAlgebra", "OrderedCollections", "TableTraits", "Test"]
-git-tree-sha1 = "7149a60b01bf58787a1b83dad93f90d4b9afbe5d"
+git-tree-sha1 = "4d5536136ca85fe9931d6e8920c138bb9fcc6532"
 uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "1.8.1"
+version = "1.8.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
