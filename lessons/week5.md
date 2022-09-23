@@ -24,3 +24,6 @@ Week {{week_num}}
 ## {{exo_topic}}
 - Before Friday's class, read ["Statistical methods for exoplanet detection with radial velocities"](https://psu.instructure.com/files/139190533/download?download_frd=1):  Sec.1-3.1, 4-4.2, 7.1
 - Very optional [supplement]((https://psu.instructure.com/files/139190533/download?download_frd=1)) in case anyone is interested
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week5day3/)
+
+
