@@ -181,10 +181,10 @@ md"""
 ChooseDisplayMode()
 
 # ╔═╡ ef38c415-e2e0-47a7-97ea-18268a960fea
-LocalResource("../_assets/week5/WinnFig8a.png")
+#LocalResource("../_assets/week5/WinnFig8a.png")
 
 # ╔═╡ 45decf90-9e71-4c9a-a2c3-2123c5047066
-LocalResource("../_assets/week5/WinnFig8b.png")
+#LocalResource("../_assets/week5/WinnFig8b.png")
 
 # ╔═╡ 26722319-eeb5-406f-bd64-e43a7375a4db
 md"""
@@ -196,6 +196,9 @@ question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite
 
 # ╔═╡ 7323edea-b329-48c3-9dc0-89a4461a90e7
 question(md"""From my understanding of periodograms, you are able to detect half periods, double periods, and even triple or quad periods.  Explain.""")
+
+# ╔═╡ c84b73f2-252e-4266-96b1-9cb7323e5494
+question(md"""Is there a difference between a periodogram and a fourier transform, and if there is, what is the advantage of finding planets using a periodogram as opposed to a fourier transform?""")
 
 # ╔═╡ 88e908e6-933d-4192-9ad2-c7802d038287
 md"""
@@ -1639,12 +1642,13 @@ version = "1.4.1+0"
 # ╟─c3bf9feb-b047-469e-b043-18cfb69e66c7
 # ╟─faca0b2c-e19a-4246-93dc-a6baa7a9718a
 # ╟─76819951-3f3c-4adc-989f-04435b4ae060
-# ╟─7323edea-b329-48c3-9dc0-89a4461a90e7
+# ╠═7323edea-b329-48c3-9dc0-89a4461a90e7
 # ╟─57197cb0-1ff6-40f1-9225-aa5a259ab2aa
 # ╟─a75f7af6-83cf-4201-8663-d5906e33fa5c
 # ╟─df2079a4-f89e-4645-8917-d2a62ed4ff55
 # ╟─2a92b42b-21be-46e5-9172-88f61dd262ea
 # ╟─c1228db0-5dfd-46fd-b471-26cb563b6072
+# ╟─c84b73f2-252e-4266-96b1-9cb7323e5494
 # ╟─3c3fa58f-6500-4943-9934-3d04fdc5f4b4
 # ╟─3ab9ca68-b7c9-4f1f-af39-8374d1cf10ff
 # ╟─b359a1f4-2f8a-4c19-8d13-966efb09d71e
@@ -1680,7 +1684,7 @@ version = "1.4.1+0"
 # ╟─17bcf51c-311c-4bc3-a464-03253a8d89a9
 # ╟─41c71d22-163e-4ea2-b511-9f9c129253e6
 # ╠═d1caecb5-346a-47b5-9ccc-6c4df5be7e60
-# ╟─ef38c415-e2e0-47a7-97ea-18268a960fea
+# ╠═ef38c415-e2e0-47a7-97ea-18268a960fea
 # ╠═45decf90-9e71-4c9a-a2c3-2123c5047066
 # ╟─26722319-eeb5-406f-bd64-e43a7375a4db
 # ╟─b34fa8df-87da-49fc-b0ac-f038f4c8612e
