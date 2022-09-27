@@ -27,7 +27,7 @@ Students will strengthen their understanding of:
 
 
 ### Logistics
-Follow [this link](https://classroom.github.com/a/6ESo_yI5) to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
+Follow [this link](https://classroom.github.com/a/6GlUjTZ3) to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
 
 ### Resources
 - [Turing.jl](https://turing.ml/)
