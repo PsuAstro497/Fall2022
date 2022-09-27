@@ -4,124 +4,32 @@
 using Markdown
 using InteractiveUtils
 
-# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
-macro bind(def, element)
-    quote
-        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
-        local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
-        el
-    end
-end
-
-# ╔═╡ d1caecb5-346a-47b5-9ccc-6c4df5be7e60
+# ╔═╡ babc10d1-30a6-46ab-be4c-c711a9413cd1
 begin
-	using Transits
-	using Distributions #
-	using Plots, ColorSchemes
 	using PlutoUI, PlutoTeachingTools
+	using Plots, Distributions
 end
 
-# ╔═╡ c3bf9feb-b047-469e-b043-18cfb69e66c7
+# ╔═╡ 5fee857c-392d-11ed-1547-3d393fa0d3cc
 md"""
-# Orbital Inclinations
-**Astro 497, Week 6, Monday**
+# Explanatory Data Analysis
+**Astro 497, Week 6, Day 1**
 """
 
-# ╔═╡ faca0b2c-e19a-4246-93dc-a6baa7a9718a
+# ╔═╡ eb017f1e-8031-426d-b03d-35390121cb7c
 TableOfContents()
 
-# ╔═╡ 3c3fa58f-6500-4943-9934-3d04fdc5f4b4
+# ╔═╡ 289236e3-4cdf-47d7-9e75-db7f9dadce65
 md"""
-# Rossiter-McLaughlin Effect
+## Logistics
 """
 
-# ╔═╡ 3ab9ca68-b7c9-4f1f-af39-8374d1cf10ff
-md"""
-## Resolved Stellar Disk
-"""
-
-# ╔═╡ 61ddefa1-6e30-465f-8b7d-ed0a52880d0a
-md"""
-## Interactive Plot
-"""
-
-# ╔═╡ dfc344a0-cd15-42bb-b76c-4f7a07a8421f
-md"""
-Time $(@bind t_plt Slider(-0.06:0.001:0.06, default=0))
-b $(@bind b_plt Slider(0:0.05:1, default=0))
-Ω $(@bind Ω_plt Slider(0:π/100:π, default=0))
-Rₚ/R⋆ $(@bind r_ratio_plt NumberField(0.005:0.005:0.15,default=0.1))
-"""
-
-# ╔═╡ cff93461-b079-4894-afc9-4439f53a8deb
-md"""
-## Animations
-"""
-
-# ╔═╡ 7ae2f85e-52c4-4db3-9bf0-a509010b8e6a
-@bind i_frame Clock(0.25, false)
-
-# ╔═╡ 20019990-a424-445d-96ec-39cd6278cdc6
-md"""
-## Geometry of RM Measurements
-"""
-
-# ╔═╡ 6fc1ca2c-709f-4b1f-af98-5af84cd82784
-LocalResource("../_assets/week5/figures/geometry.png")
-
-# ╔═╡ 0eb53eea-289d-4f87-a3dc-747ff791e019
-md"""
-# Results of Rossiter-McLaughlin Observations
-"""
-
-# ╔═╡ d127279b-8f5c-47fd-83b2-601ed9a8a2d0
-LocalResource("../_assets/week5/figures/Albrecht+2021_fig4.png")
-
-# ╔═╡ 54a35812-22ad-49e2-bca2-8f80c6c47379
-md"""
-### Projected Obliquity vs Host Star Temperature
-$(LocalResource("../_assets/week5/figures/teff_projected_obliquity_vsini.png"))
-"""
-
-# ╔═╡ fc00489e-7355-4c38-852e-538511806d85
-md"""
-### Projected Obliquity vs Host Star Age
-$(LocalResource("../_assets/week5/figures/age_projected_obliquity.png"))
-"""
-
-# ╔═╡ 7ec579f4-dfbc-4320-af05-422391519aac
-md"""
-## Projected Obliquity vs Planet-Star Mass Ratio
-$(LocalResource("../_assets/week5/figures/mass_ratio_projected_obliquity.png"))
-"""
-
-# ╔═╡ b4ed9eff-96f4-4f9f-94d4-6e9e23c02ec4
-md"""
-## Projected Obliquity vs Orbital Separation
-$(LocalResource("../_assets/week5/figures/ar_projected_obliquity.png"))
-"""
-
-# ╔═╡ d52ded9c-4d01-4a48-94f7-d1002a2351ec
-md"""
-## Potential Formation Mechanisms
-"""
-
-# ╔═╡ 5f962986-00ad-4c8d-b440-885e34c2b471
-LocalResource("../_assets/week5/figures/misalign_cartoon_darker.png")
-
-# ╔═╡ d7b57c40-2cc7-4e7d-b21d-ff380218fcf4
-md"""
-Credit: [Albrecht, Dawson & Winn (2022)](https://ui.adsabs.harvard.edu/abs/2022PASP..134h2001A/abstract) 
-[![CC-BY ](https://arxiv.org/icons/licenses/by-4.0.png)](http://creativecommons.org/licenses/by/4.0/)
-"""
-
-# ╔═╡ 8d94be45-3bf6-4f2a-9f28-81518e76889b
+# ╔═╡ d8726ec0-b214-44f5-9fd9-54c4360e36b1
 md"""
 # Bias-Variance Tradeoff
 """
 
-# ╔═╡ 44ce7474-ecd9-4c67-a0f9-1ed983c9242b
+# ╔═╡ 85bf510c-b944-4afe-acec-655d2e881355
 md"""
 ```math
 \begin{eqnarray}
@@ -132,7 +40,7 @@ md"""
 ```
 """
 
-# ╔═╡ e73c9b9e-3b28-4ca7-989e-3905cce66b41
+# ╔═╡ 58afcc5d-266b-452f-85ad-f5162c7d7767
 let
 	x = 0:10:1_000
 	plt = plot()
@@ -145,334 +53,30 @@ let
 	title!("Tradeoff between exact & approximate algorithms")
 end
 
-# ╔═╡ cf4dfca4-bce1-4408-a992-ac7b56e647bc
-
-
-# ╔═╡ 6c5359d3-1b84-47a0-9cb9-5d0ee706823a
-
-
-# ╔═╡ a74dfc6b-409b-4bc6-b587-0e6929006d68
-
-
-# ╔═╡ 17bcf51c-311c-4bc3-a464-03253a8d89a9
+# ╔═╡ ba0fb116-7077-437d-8847-c82e6da04e9c
 md"""
-# Helper Code
+## Helper Code
 """
 
-# ╔═╡ 41c71d22-163e-4ea2-b511-9f9c129253e6
-ChooseDisplayMode()
+# ╔═╡ 4fa14ca4-2b5d-45fd-b335-1a915eded726
 
-# ╔═╡ ef38c415-e2e0-47a7-97ea-18268a960fea
-#LocalResource("../_assets/week5/WinnFig8a.png")
 
-# ╔═╡ 45decf90-9e71-4c9a-a2c3-2123c5047066
-#LocalResource("../_assets/week5/WinnFig8b.png")
+# ╔═╡ 2a3b41ae-687e-4a18-8db0-b5afe0cde0a5
 
-# ╔═╡ 26722319-eeb5-406f-bd64-e43a7375a4db
-md"""
-Credit: Fig 8 of [Winn & Fabrycky (2015) ARA&A 53, 409.](https://ui.adsabs.harvard.edu/abs/2015ARA%26A..53..409W/abstract)
-"""
-
-# ╔═╡ b34fa8df-87da-49fc-b0ac-f038f4c8612e
-question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
-
-# ╔═╡ 88e908e6-933d-4192-9ad2-c7802d038287
-md"""
-## Parameters
-"""
-
-# ╔═╡ 0589435c-25c8-44a8-8bb8-f159740ad59b
-begin
-	gridsize = min(100,round(Int64,8*(1/r_ratio_plt)))
-	figsize = 400
-	bigfigsize = 800
-end
-
-# ╔═╡ 39832015-1380-4a19-b35b-47a23a88b3bd
-begin
-	num_times_anim = 100
-	num_times_movie = 200
-	t_anim = range(-0.06, 0.06, length=num_times_anim) # days from t0
-	t_movie = range(-0.06, 0.06, length=num_times_movie) # days from t0
-end
-
-# ╔═╡ 6bc459bc-62ec-4faf-8294-348ac499df60
-begin
-	u = [0.4, 0.26] # quad limb dark
-	ld = PolynomialLimbDark(u)
-end
-
-# ╔═╡ cbbda00c-1d81-4e96-baea-368bd9d7d19b
-md"""
-## Precompute maps
-"""
-
-# ╔═╡ 3a9968c1-d259-4287-8147-0e35b8e9dffd
-md"""
-## Science Functions
-"""
-
-# ╔═╡ a045edac-c3b5-435c-bcf3-f13586af0734
-function I(x::Real, y::Real; radius_ratio=1)
-	r = sqrt(x^2+y^2)
-	if r>1 return 0 end #missing end
-	μ = cos(asin(r))
-	ld(μ, radius_ratio)	
-end
-
-# ╔═╡ 806f9a87-3572-4d92-acd6-73e954609731
-function rv_patch(x::Real, y::Real)
-	r = sqrt(x^2+y^2)
-	if r>1 return 0 end # missing end
-	Rsol = 696_340_000
-	sec_per_day = 24*60^2
-	A = 14.713 
-	B = -2.396
-	C = -1.787
-	vsini = (π/180) / sec_per_day * Rsol
-	#sinφ = y
-	#vsini *= (A + B * sinφ^2 + C * sinφ^4)
-	vsini *= A # + B * sinφ^2 + C * sinφ^4)
-	x*vsini
-end
-
-# ╔═╡ d16da790-8bbf-4f3c-8bf4-b6748418e813
-begin
-	x_plt = -1:(1//gridsize):1
-	y_plt = -1:(1//gridsize):1
-	grid_I = [ I(x,y) for x in x_plt, y in y_plt ]
-	grid_rv = [rv_patch(x,y) for x in x_plt, y in y_plt ]
-	sum_grid_I = sum(grid_I)
-	grid_Irv = grid_I .* grid_rv ./ sum_grid_I
-end;
-
-# ╔═╡ b359a1f4-2f8a-4c19-8d13-966efb09d71e
-heatmap(x_plt,y_plt,grid_I',clims=(0,1), size=(bigfigsize,bigfigsize), title="Intensity") 
-
-# ╔═╡ 484dcad2-d4dd-4786-ae93-9dedf70cb754
-heatmap(x_plt,y_plt,grid_rv',seriescolor=cgrad(ColorSchemes.balance), size=(bigfigsize,bigfigsize), title="RV") 
-
-# ╔═╡ 0ecea71d-8e92-4d6a-91b5-6c2fc31327a5
-heatmap(x_plt,y_plt,grid_Irv'.*gridsize^2,seriescolor=cgrad(ColorSchemes.balance), size=(bigfigsize,bigfigsize), title="Contribution to RV") 
-
-# ╔═╡ 347a56d2-5bff-485a-aa70-a4fbf8beb430
-begin
-	workspace_map = zeros(size(grid_Irv))
-	workspace_map_spectrum = zeros(size(grid_Irv))
-	workspace_spectra = zeros(length(x_plt))
-end;
-
-# ╔═╡ cd9cca6c-aa26-4669-8659-bf604ba71680
-v_grid = rv_patch.(x_plt,0.);
-
-# ╔═╡ 375994ff-08ed-4c39-8938-dd1c92b91ea2
-function get_iter_to_change(x,y,r, grid)
-	x_lo = searchsortedfirst(grid,x-r-0.5*grid.step)
-	x_hi = searchsortedlast(grid,x+r+0.5*grid.step)
-	y_lo = searchsortedfirst(grid,y-r-0.5*grid.step)
-	y_hi = searchsortedlast(grid,y+r+0.5*grid.step)
-	Iterators.product(x_lo:x_hi, y_lo:y_hi)
-end
-
-# ╔═╡ 5065bcff-0307-4c20-a95b-fec7c046f181
-begin
-function planet_mask(x::Real, y::Real, xx::Real,yy::Real,r::Real)
-	(xx-x)^2+(yy-y)^2<r^2 ? 0 : 1
-end
-function planet_mask(t, orbit::Transits.Orbits.AbstractOrbit, r; grid::AbstractVector = x_plt)
-	x,y,z = Orbits.relative_position(orbit,t)
-	[ planet_mask(x,y, xx,yy,r) for xx in grid, yy in grid ]
-end
-end
-
-# ╔═╡ 3d297ed9-19b1-40e7-aed3-a269192dcf5a
-function calc_map_inplace!(map, t, grid, orb, r_ratio)
-	#map .= grid.*planet_mask(t,orb,r_ratio)
-	x,y,z = Orbits.relative_position(orb,t)
-	iter = get_iter_to_change(x,y,r_ratio, x_plt)
-	map .= grid
-	for (i,j) in iter
-		map[i,j] = grid[i,j]*planet_mask(x,y,x_plt[i],y_plt[j], r_ratio)
-	end
-	map
-end
-
-# ╔═╡ 15bcb6e7-a9c1-41ee-a5b2-0d8468b5bcd1
-function calc_rv_inplace(t, grid_Irv, orb, r_ratio, map=workspace_map)
-	calc_map_inplace!(map, t, grid_Irv, orb, r_ratio)
-	sum(map)
-end
-
-# ╔═╡ 2957f299-5304-429d-90f5-04142ff497a9
-function calc_spectra_inplace!(spectrum, t, grid_I, orb, r_ratio, map=workspace_map_spectrum) 
-	calc_map_inplace!(map, t, grid_I, orb, r_ratio)
-	spectrum .= sum(map,dims=2)
-end
-
-# ╔═╡ ccbdce5a-ca45-4e61-bca4-af79addfbacf
-function calc_all(t, orbit)
-	rv = calc_rv_inplace(t, grid_Irv, orbit, r_ratio_plt)
-	calc_spectra_inplace!(workspace_spectra, t, grid_I, orbit, r_ratio_plt, workspace_map_spectrum) 
-	rv
-end
-
-# ╔═╡ 86dbb15c-22d4-483f-9955-5a4efb75535d
-md"""
-## Plotting functions
-"""
-
-# ╔═╡ 3c8d81fc-d2de-49cc-ac9d-b689723d5eeb
-function plot_star_weighted_rv(t)
-	plt = plot(xlims=(-1,1), ylims=(-1,1), size=(figsize,figsize), legend=:none);
-	plt = heatmap!(plt,x_plt,y_plt,workspace_map',seriescolor=cgrad(ColorSchemes.balance))
-end
-
-# ╔═╡ c6ba7854-73e7-4fd5-85a0-154579dd708a
-function plot_spectrum_frame(t)
-	plot(v_grid, 1 .-workspace_spectra./sum(workspace_spectra), xlabel="v (m/s)", ylabel="Flux", legend=:none, size=(figsize,figsize//2))
-end
-
-# ╔═╡ 3c95bd05-135b-4c92-9ed8-7ba4d0db155a
-function plot_rm_frame(t, rv, path_rv)
-	plt = plot(t_anim.*24,path_rv, size=(figsize,figsize//2), label=:none)
-	xlabel!(plt,"Time (hr)")
-	ylabel!(plt,"ΔRV (m/s)")
-	scatter!(plt,[t*24],[rv], mc=:blue, label=:none)
-end
-
-# ╔═╡ f594e0b5-bf25-44fb-93ca-14872b90841d
-begin
-	period_in_days = 3
-	orbit = KeplerianOrbit(period=period_in_days, t0=0, b=b_plt, Omega=Ω_plt )
-	rv_plt = calc_all(t_plt, orbit)
-	fluxes = @. ld(orbit, t_anim, r_ratio_plt)
-
-	plt_star = plot_star_weighted_rv(t_plt)
-	plot!(plt_star,map(tt->Orbits.relative_position(orbit,tt)[1],t_anim),map(tt->Orbits.relative_position(orbit,tt)[2],t_anim), size=(figsize,figsize), color=:black)
-	title!(plt_star,"Weighted RV w/ Planet")
-	
-	plt_spectrum = plot_spectrum_frame(t_plt)
-	
-	path_rv = map(tt->calc_rv_inplace(tt,grid_Irv,orbit,r_ratio_plt),t_anim);
-	plt_rm = plot_rm_frame(t_plt,rv_plt,path_rv)
-end;
-
-# ╔═╡ af076195-9083-4147-af74-081cd43eaa76
-plt_star
-
-# ╔═╡ b1cd4ae5-657e-4c05-9fe7-e63f5992fc56
-title!(plt_spectrum,"Absorption Line Profile")
-
-# ╔═╡ 47ac1992-51c9-4d80-b6a0-2d16c253ccac
-title!(plt_rm,"Rossiter-McLaughlin Effect\nOn Measured RV")
-
-# ╔═╡ 3a938f17-9890-4ebd-ab96-f16cee2b7bf5
-begin
-	plot(t_anim.*24, fluxes, label=:none, size=(figsize,figsize//2))
-	scatter!([t_plt.*24],[ld(orbit, t_plt, r_ratio_plt)], color=:blue, label=:none)
-	xlabel!("Time (hr)")
-	ylabel!("Flux")
-	title!("Transit light curve")
-end
-
-# ╔═╡ 43a40de1-c8af-41cf-a580-6b249e2e70d9
-begin
-	radius_in_rearth = (r_ratio_plt/0.00916794)
-	mass_in_mearth = min(radius_in_rearth^3,317.9)
-	rv_amp = 0.09*mass_in_mearth * (365.25/period_in_days)^(1/3)
-end;
-
-# ╔═╡ 85506d9a-92ad-485e-baf9-59694b95876c
-md"""
-Min-to-Max Deviation due to RM effeect: **$(string(round(maximum(path_rv)-minimum(path_rv), sigdigits=2))) m/s**
-
-Min-to-Max Deviation due to orbital motion: **$(string(round(rv_amp, sigdigits=2))) m/s** (assuming m = $(round(mass_in_mearth,sigdigits=2)) M_⊕)
-"""
-
-# ╔═╡ de0204a5-8b19-49a1-9715-ac9baeb3693e
-path_rv_movie = map(tt->calc_rv_inplace(tt,grid_Irv,orbit,r_ratio_plt),t_anim);
-
-# ╔═╡ 6055a655-8f99-40e9-8ddc-3e12406ca54d
-begin
-	t_frame = t_anim[mod(i_frame,length(t_anim))+1]
-	rv_frame = calc_all(t_frame, orbit)
-
-	plt_star_frame = plot_star_weighted_rv(t_plt)
-	plot!(plt_star_frame,map(tt->Orbits.relative_position(orbit,tt)[1],t_anim),map(tt->Orbits.relative_position(orbit,tt)[2],t_anim), size=(figsize,figsize), color=:black)
-	title!(plt_star_frame,"Weighted RV w/ Planet")
-	
-	plt_spectrum_frame = plot_spectrum_frame(t_plt)
-
-	plt_rm_frame = plot_rm_frame(t_frame,rv_frame,path_rv_movie)
-end;
-
-# ╔═╡ e29c7134-f341-4706-a559-2fe13c7844ef
-plt_star_frame
-
-# ╔═╡ 2a2719bc-1d63-4c14-aba8-340c66639556
-plt_spectrum_frame
-
-# ╔═╡ bd409eaa-5017-41a1-bfe7-57b5e0a4ca87
-plt_rm_frame
-
-# ╔═╡ daf8814f-d73c-4efd-97a9-99bfba640697
-md"""
-## Movie
-"""
-
-# ╔═╡ 9e3cc49b-0646-4602-b5b5-8bf5a469a639
-md"""
-Save Movies: $(@bind make_anim CheckBox(default=false))
-"""
-
-# ╔═╡ ea188aa1-59c5-4e62-87a5-16ce9f136f3f
-if make_anim
-	anim_rm_rv = @animate for tt ∈ t_movie
-	    #plot_rm_frame(tt)
-		rv_frame = calc_all(tt, orbit)
-		plt_rm_frame = plot_rm_frame(tt,rv_frame,path_rv_movie)
-	end
-	gif(anim_rm_rv, "anim_rm_rv_curve.gif", fps = 15)
-	LocalResource("anim_rm_rv_curve.gif")
-end
-
-# ╔═╡ 62ca8025-a377-4919-bb1c-2d7b416cbe20
-if make_anim
-	anim_rm_star = @animate for tt ∈ t_movie
-		rv_frame = calc_all(tt, orbit)
-	    plot_star_weighted_rv(tt)
-	end
-	gif(anim_rm_star, "anim_rm_disk.gif", fps = 15)
-	LocalResource("anim_rm_disk.gif")
-end
-
-# ╔═╡ 860458b6-5813-47f7-ba10-8b0199b6b8a9
-if make_anim
-	anim_rm_spectra = @animate for tt ∈ t_movie
-		rv_frame = calc_all(tt, orbit)
-	    plot_spectrum_frame(tt)
-	end
-	gif(anim_rm_spectra, "anim_rm_spectra.gif", fps = 15)
-	LocalResource("anim_rm_spectra.gif")
-end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-Transits = "2e59a628-7bac-4d38-8059-3a73ba0928ab"
 
 [compat]
-ColorSchemes = "~3.19.0"
 Distributions = "~0.25.73"
 Plots = "~1.33.0"
 PlutoTeachingTools = "~0.2.3"
 PlutoUI = "~0.7.40"
-Transits = "~0.3.9"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -488,31 +92,14 @@ git-tree-sha1 = "8eaf9f1b4921132a4cff3f36a1d9ba923b14a481"
 uuid = "6e696c72-6542-2067-7265-42206c756150"
 version = "1.1.4"
 
-[[deps.ArgCheck]]
-git-tree-sha1 = "a3a402a35a2f7e0b87828ccabbd5ebfbebe356b4"
-uuid = "dce04be8-c92d-5529-be00-80e4d2c0e197"
-version = "2.3.0"
-
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 
-[[deps.AstroLib]]
-deps = ["Dates", "DelimitedFiles", "LinearAlgebra", "Printf", "StaticArrays"]
-git-tree-sha1 = "283b723fa46dcfdaa758aa66e1b28fb25104ba1b"
-uuid = "c7932e45-9af1-51e7-9da9-f004cd3a462b"
-version = "0.4.1"
-
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
-
-[[deps.Bijectors]]
-deps = ["ArgCheck", "ChainRulesCore", "ChangesOfVariables", "Compat", "Distributions", "Functors", "InverseFunctions", "IrrationalConstants", "LinearAlgebra", "LogExpFunctions", "MappedArrays", "Random", "Reexport", "Requires", "Roots", "SparseArrays", "Statistics"]
-git-tree-sha1 = "a3704b8e5170f9339dff4e6cb286ad49464d3646"
-uuid = "76274a88-744f-5084-9051-94815aaf08c4"
-version = "0.10.6"
 
 [[deps.Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -580,11 +167,6 @@ git-tree-sha1 = "417b0ed7b8b838aa6ca0a87aadf1bb9eb111ce40"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
 version = "0.12.8"
 
-[[deps.CommonSolve]]
-git-tree-sha1 = "332a332c97c7071600984b3c31d9067e1a4e6e25"
-uuid = "38540f10-b2f7-11e9-35d8-d573e4eb0ff2"
-version = "0.2.1"
-
 [[deps.Compat]]
 deps = ["Dates", "LinearAlgebra", "UUIDs"]
 git-tree-sha1 = "5856d3031cdb1f3b2b6340dfdc66b6d9a149a374"
@@ -595,26 +177,15 @@ version = "4.2.0"
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 
-[[deps.ConcreteStructs]]
-git-tree-sha1 = "f749037478283d372048690eb3b5f92a79432b34"
-uuid = "2569d6c7-a4a2-43d3-a901-331e8e4be471"
-version = "0.2.3"
-
-[[deps.ConstructionBase]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "fb21ddd70a051d882a1686a5a550990bbe371a95"
-uuid = "187b0558-2788-49d3-abe0-74a17ed4e7c9"
-version = "1.4.1"
-
 [[deps.Contour]]
 git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.6.2"
 
 [[deps.DataAPI]]
-git-tree-sha1 = "fb5f5316dd3fd4c5e7c30a24d50643b73e37cd40"
+git-tree-sha1 = "1106fa7e1256b402a86a8e7b15c00c85036fef49"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
-version = "1.10.0"
+version = "1.11.0"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -680,12 +251,6 @@ git-tree-sha1 = "ccd479984c7838684b3ac204b716c89955c76623"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.2+0"
 
-[[deps.FastGaussQuadrature]]
-deps = ["LinearAlgebra", "SpecialFunctions", "StaticArrays"]
-git-tree-sha1 = "58d83dd5a78a36205bdfddb82b1bb67682e64487"
-uuid = "442a2c76-b920-505d-bb47-c5924d526838"
-version = "0.4.9"
-
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
@@ -725,16 +290,6 @@ git-tree-sha1 = "aa31987c2ba8704e23c6c8ba8a4f769d5d7e4f91"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
 version = "1.0.10+0"
 
-[[deps.Functors]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "a2657dd0f3e8a61dbe70fc7c122038bd33790af5"
-uuid = "d9f16b24-f501-4c13-a1f2-28368ffc5196"
-version = "0.3.0"
-
-[[deps.Future]]
-deps = ["Random"]
-uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
-
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
 git-tree-sha1 = "d972031d28c8c8d9d7b41a536ad7bb0c2579caca"
@@ -749,9 +304,9 @@ version = "0.66.2"
 
 [[deps.GR_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Cairo_jll", "FFMPEG_jll", "Fontconfig_jll", "GLFW_jll", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll", "Pixman_jll", "Pkg", "Qt5Base_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "3697c23d09d5ec6f2088faa68f0d926b6889b5be"
+git-tree-sha1 = "0eb5ef6f270fb70c2d83ee3593f56d02ed6fc7ff"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
-version = "0.67.0+0"
+version = "0.68.0+0"
 
 [[deps.Gettext_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "XML2_jll"]
@@ -787,6 +342,12 @@ deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "129acf094d168394e80ee1dc4bc06ec835e510a3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "2.8.1+1"
+
+[[deps.HypergeometricFunctions]]
+deps = ["DualNumbers", "LinearAlgebra", "OpenLibm_jll", "SpecialFunctions", "Test"]
+git-tree-sha1 = "709d864e3ed6e3545230601f94e11ebc65994641"
+uuid = "34004b35-14d8-5ef3-9330-4cdb6864b03a"
+version = "0.3.11"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
@@ -849,12 +410,6 @@ deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
 git-tree-sha1 = "0f960b1404abb0b244c1ece579a0ec78d056a5d1"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
 version = "0.9.15"
-
-[[deps.KeywordCalls]]
-deps = ["Compat", "Tricks"]
-git-tree-sha1 = "42feb5ec95dd43f99bb0437fcb5abccd14d9e67e"
-uuid = "4d827475-d3e4-43d6-abe3-9688362ede9f"
-version = "0.2.5"
 
 [[deps.LAME_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -982,11 +537,6 @@ deps = ["Markdown", "Random"]
 git-tree-sha1 = "3d3e902b31198a27340d0bf00d6ac452866021cf"
 uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
 version = "0.5.9"
-
-[[deps.MappedArrays]]
-git-tree-sha1 = "e8b359ef06ec72e8c030463fe02efe5527ee5142"
-uuid = "dbb5928d-eab1-5f90-85c2-b9b0edb7c900"
-version = "0.4.1"
 
 [[deps.Markdown]]
 deps = ["Base64"]
@@ -1157,12 +707,6 @@ git-tree-sha1 = "3c009334f45dfd546a16a57960a821a1a023d241"
 uuid = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
 version = "2.5.0"
 
-[[deps.Quaternions]]
-deps = ["DualNumbers", "LinearAlgebra", "Random"]
-git-tree-sha1 = "b327e4db3f2202a4efafe7569fcbe409106a1f75"
-uuid = "94ee1d12-ae83-5a48-8b1c-48b8ff168ae0"
-version = "0.5.6"
-
 [[deps.REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
@@ -1217,18 +761,6 @@ git-tree-sha1 = "68db32dff12bb6127bac73c209881191bf0efbb7"
 uuid = "f50d1b31-88e8-58de-be2c-1cc44531875f"
 version = "0.3.0+0"
 
-[[deps.Roots]]
-deps = ["CommonSolve", "Printf", "Setfield"]
-git-tree-sha1 = "50f945fb7d7fdece03bbc76ff1ab96170f64a892"
-uuid = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
-version = "2.0.2"
-
-[[deps.Rotations]]
-deps = ["LinearAlgebra", "Quaternions", "Random", "StaticArrays", "Statistics"]
-git-tree-sha1 = "3d52be96f2ff8a4591a9e2440036d4339ac9a2f7"
-uuid = "6038ab10-8711-5258-84ad-4b1120ba62dc"
-version = "1.3.2"
-
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 
@@ -1240,12 +772,6 @@ version = "1.1.1"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
-
-[[deps.Setfield]]
-deps = ["ConstructionBase", "Future", "MacroTools", "StaticArraysCore"]
-git-tree-sha1 = "e2cc6d8c88613c05e1defb55170bf5ff211fbeac"
-uuid = "efcf1570-3423-57d1-acb7-fd33fddbac46"
-version = "1.1.1"
 
 [[deps.Showoff]]
 deps = ["Dates", "Grisu"]
@@ -1282,17 +808,6 @@ git-tree-sha1 = "d75bda01f8c31ebb72df80a46c88b25d1c79c56d"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
 version = "2.1.7"
 
-[[deps.StaticArrays]]
-deps = ["LinearAlgebra", "Random", "StaticArraysCore", "Statistics"]
-git-tree-sha1 = "efa8acd030667776248eabb054b1836ac81d92f0"
-uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.5.7"
-
-[[deps.StaticArraysCore]]
-git-tree-sha1 = "ec2bd695e905a3c755b33026954b119ea17f2d22"
-uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
-version = "1.3.0"
-
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
@@ -1310,10 +825,10 @@ uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.33.21"
 
 [[deps.StatsFuns]]
-deps = ["ChainRulesCore", "InverseFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
-git-tree-sha1 = "5950925ff997ed6fb3e985dcce8eb1ba42a0bbe7"
+deps = ["ChainRulesCore", "HypergeometricFunctions", "InverseFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
+git-tree-sha1 = "5783b877201a82fc0014cbf381e7e6eb130473a4"
 uuid = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
-version = "0.9.18"
+version = "1.0.1"
 
 [[deps.SuiteSparse]]
 deps = ["Libdl", "LinearAlgebra", "Serialization", "SparseArrays"]
@@ -1343,12 +858,6 @@ git-tree-sha1 = "8a75929dcd3c38611db2f8d08546decb514fcadf"
 uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
 version = "0.9.9"
 
-[[deps.Transits]]
-deps = ["AstroLib", "Bijectors", "ChainRulesCore", "ConcreteStructs", "Distributions", "FastGaussQuadrature", "KeywordCalls", "LinearAlgebra", "Printf", "Random", "Reexport", "Rotations", "SpecialFunctions", "StaticArrays", "StatsFuns", "Unitful", "UnitfulAstro"]
-git-tree-sha1 = "c62117692ec2c20ce18a84ee6aec946fe8ee79ee"
-uuid = "2e59a628-7bac-4d38-8059-3a73ba0928ab"
-version = "0.3.9"
-
 [[deps.Tricks]]
 git-tree-sha1 = "6bac775f2d42a611cdfcd1fb217ee719630c4175"
 uuid = "410a4b4d-49e4-4fbc-ab6d-cb71b17b3775"
@@ -1371,24 +880,6 @@ deps = ["REPL"]
 git-tree-sha1 = "53915e50200959667e78a92a418594b428dffddf"
 uuid = "1cfade01-22cf-5700-b092-accc4b62d6e1"
 version = "0.4.1"
-
-[[deps.Unitful]]
-deps = ["ConstructionBase", "Dates", "LinearAlgebra", "Random"]
-git-tree-sha1 = "b649200e887a487468b71821e2644382699f1b0f"
-uuid = "1986cc42-f94f-5a68-af5c-568840ba703d"
-version = "1.11.0"
-
-[[deps.UnitfulAngles]]
-deps = ["Dates", "Unitful"]
-git-tree-sha1 = "d6cfdb6ddeb388af1aea38d2b9905fa014d92d98"
-uuid = "6fb2a4bd-7999-5318-a3b2-8ad61056cd98"
-version = "0.6.2"
-
-[[deps.UnitfulAstro]]
-deps = ["Unitful", "UnitfulAngles"]
-git-tree-sha1 = "05adf5e3a3bd1038dd50ff6760cddd42380a7260"
-uuid = "6112ee07-acf9-5e0f-b108-d242c714bf9f"
-version = "1.2.0"
 
 [[deps.Unzip]]
 git-tree-sha1 = "ca0969166a028236229f63514992fc073799bb78"
@@ -1617,78 +1108,15 @@ version = "1.4.1+0"
 """
 
 # ╔═╡ Cell order:
-# ╟─c3bf9feb-b047-469e-b043-18cfb69e66c7
-# ╟─faca0b2c-e19a-4246-93dc-a6baa7a9718a
-# ╟─3c3fa58f-6500-4943-9934-3d04fdc5f4b4
-# ╟─3ab9ca68-b7c9-4f1f-af39-8374d1cf10ff
-# ╟─b359a1f4-2f8a-4c19-8d13-966efb09d71e
-# ╟─484dcad2-d4dd-4786-ae93-9dedf70cb754
-# ╟─0ecea71d-8e92-4d6a-91b5-6c2fc31327a5
-# ╟─61ddefa1-6e30-465f-8b7d-ed0a52880d0a
-# ╟─f594e0b5-bf25-44fb-93ca-14872b90841d
-# ╟─af076195-9083-4147-af74-081cd43eaa76
-# ╟─dfc344a0-cd15-42bb-b76c-4f7a07a8421f
-# ╟─b1cd4ae5-657e-4c05-9fe7-e63f5992fc56
-# ╟─47ac1992-51c9-4d80-b6a0-2d16c253ccac
-# ╟─3a938f17-9890-4ebd-ab96-f16cee2b7bf5
-# ╟─85506d9a-92ad-485e-baf9-59694b95876c
-# ╟─43a40de1-c8af-41cf-a580-6b249e2e70d9
-# ╟─cff93461-b079-4894-afc9-4439f53a8deb
-# ╟─de0204a5-8b19-49a1-9715-ac9baeb3693e
-# ╟─6055a655-8f99-40e9-8ddc-3e12406ca54d
-# ╟─7ae2f85e-52c4-4db3-9bf0-a509010b8e6a
-# ╟─e29c7134-f341-4706-a559-2fe13c7844ef
-# ╟─2a2719bc-1d63-4c14-aba8-340c66639556
-# ╟─bd409eaa-5017-41a1-bfe7-57b5e0a4ca87
-# ╟─20019990-a424-445d-96ec-39cd6278cdc6
-# ╟─6fc1ca2c-709f-4b1f-af98-5af84cd82784
-# ╟─0eb53eea-289d-4f87-a3dc-747ff791e019
-# ╟─d127279b-8f5c-47fd-83b2-601ed9a8a2d0
-# ╟─54a35812-22ad-49e2-bca2-8f80c6c47379
-# ╟─fc00489e-7355-4c38-852e-538511806d85
-# ╟─7ec579f4-dfbc-4320-af05-422391519aac
-# ╟─b4ed9eff-96f4-4f9f-94d4-6e9e23c02ec4
-# ╟─d52ded9c-4d01-4a48-94f7-d1002a2351ec
-# ╟─5f962986-00ad-4c8d-b440-885e34c2b471
-# ╟─d7b57c40-2cc7-4e7d-b21d-ff380218fcf4
-# ╟─8d94be45-3bf6-4f2a-9f28-81518e76889b
-# ╟─44ce7474-ecd9-4c67-a0f9-1ed983c9242b
-# ╟─e73c9b9e-3b28-4ca7-989e-3905cce66b41
-# ╠═cf4dfca4-bce1-4408-a992-ac7b56e647bc
-# ╠═6c5359d3-1b84-47a0-9cb9-5d0ee706823a
-# ╠═a74dfc6b-409b-4bc6-b587-0e6929006d68
-# ╟─17bcf51c-311c-4bc3-a464-03253a8d89a9
-# ╟─41c71d22-163e-4ea2-b511-9f9c129253e6
-# ╠═d1caecb5-346a-47b5-9ccc-6c4df5be7e60
-# ╠═ef38c415-e2e0-47a7-97ea-18268a960fea
-# ╠═45decf90-9e71-4c9a-a2c3-2123c5047066
-# ╟─26722319-eeb5-406f-bd64-e43a7375a4db
-# ╟─b34fa8df-87da-49fc-b0ac-f038f4c8612e
-# ╟─88e908e6-933d-4192-9ad2-c7802d038287
-# ╠═0589435c-25c8-44a8-8bb8-f159740ad59b
-# ╠═39832015-1380-4a19-b35b-47a23a88b3bd
-# ╠═6bc459bc-62ec-4faf-8294-348ac499df60
-# ╟─cbbda00c-1d81-4e96-baea-368bd9d7d19b
-# ╠═d16da790-8bbf-4f3c-8bf4-b6748418e813
-# ╠═cd9cca6c-aa26-4669-8659-bf604ba71680
-# ╠═347a56d2-5bff-485a-aa70-a4fbf8beb430
-# ╟─3a9968c1-d259-4287-8147-0e35b8e9dffd
-# ╠═a045edac-c3b5-435c-bcf3-f13586af0734
-# ╠═806f9a87-3572-4d92-acd6-73e954609731
-# ╠═375994ff-08ed-4c39-8938-dd1c92b91ea2
-# ╠═5065bcff-0307-4c20-a95b-fec7c046f181
-# ╠═3d297ed9-19b1-40e7-aed3-a269192dcf5a
-# ╠═15bcb6e7-a9c1-41ee-a5b2-0d8468b5bcd1
-# ╠═2957f299-5304-429d-90f5-04142ff497a9
-# ╠═ccbdce5a-ca45-4e61-bca4-af79addfbacf
-# ╟─86dbb15c-22d4-483f-9955-5a4efb75535d
-# ╠═3c8d81fc-d2de-49cc-ac9d-b689723d5eeb
-# ╠═c6ba7854-73e7-4fd5-85a0-154579dd708a
-# ╠═3c95bd05-135b-4c92-9ed8-7ba4d0db155a
-# ╟─daf8814f-d73c-4efd-97a9-99bfba640697
-# ╟─ea188aa1-59c5-4e62-87a5-16ce9f136f3f
-# ╟─62ca8025-a377-4919-bb1c-2d7b416cbe20
-# ╟─860458b6-5813-47f7-ba10-8b0199b6b8a9
-# ╟─9e3cc49b-0646-4602-b5b5-8bf5a469a639
+# ╟─5fee857c-392d-11ed-1547-3d393fa0d3cc
+# ╟─eb017f1e-8031-426d-b03d-35390121cb7c
+# ╟─289236e3-4cdf-47d7-9e75-db7f9dadce65
+# ╟─d8726ec0-b214-44f5-9fd9-54c4360e36b1
+# ╟─85bf510c-b944-4afe-acec-655d2e881355
+# ╟─58afcc5d-266b-452f-85ad-f5162c7d7767
+# ╟─ba0fb116-7077-437d-8847-c82e6da04e9c
+# ╠═babc10d1-30a6-46ab-be4c-c711a9413cd1
+# ╠═4fa14ca4-2b5d-45fd-b335-1a915eded726
+# ╠═2a3b41ae-687e-4a18-8db0-b5afe0cde0a5
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
