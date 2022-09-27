@@ -15,6 +15,7 @@ For students working in a team, the team should generally submit a single progre
 If the team has questions (e.g., one team member thinks the prototype is adequately meeting expectations, but another team member is concerned that it might not), then they can include those in the progress report.
 Team members should only should submit separate progress reports, if they are unable to reach an agreement.
 
+
 #### Checkpoint 1 ({{project_checkpoint2_due}})
 By the first checkpoint, it's expected that you'll have a prototype dashboard that:
 - Ingests the data for analysis.  E.g.,
@@ -35,8 +36,8 @@ For example, you might say:
    "Some stars have RV observations from three observatories and should be modeled with three RV offsets.  If we have time, then we'll generalize the code to fit three RV offsets (instead of the current one or two).  If we do not have time, then we'll check the number of data sources for the selected target and ask the user to pick two for including in the analysis."
 This will allow your team to get feedback on your plans early in the project, while there's still plenty of time to make adjustments.  
 
-#### Checkpoint 2 ({{project_checkpoint3_due}})
 
+#### Checkpoint 2 ({{project_checkpoint3_due}})
 By the second checkpoint, it's expected that you'll have a prototype dashboard that:
 - Meets all expectations for Checkpoint 1
 - Visualizes the user-selected data with relatively little processing or analysis
