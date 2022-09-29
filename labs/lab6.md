@@ -25,10 +25,9 @@ Students will strengthen their understanding of:
 
 
 ### Logistics
-Follow [this link](TODO) to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
+Follow [this link](https://classroom.github.com/a/w6TOniLM) to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
 
 ### Resources
 - [Turing.jl](https://turing.ml/)
 - [StatsPlots.jl](https://docs.juliaplots.org/latest/generated/statsplots/)
 - [MCMCChains.jl](https://beta.turing.ml/MCMCChains.jl/dev/statsplots/#StatsPlots.jl)
-
