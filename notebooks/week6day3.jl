@@ -341,80 +341,6 @@ let
 	histogram!(plt, df_tr.pl_trandur_norm, normalize=true, alpha=0.7, label="Observed", color=3)
 end
 
-# ╔═╡ 1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
-md"""
-# Kepler's Multiple Planet Systems
-"""
-
-# ╔═╡ 32e6170f-0ab3-4681-9517-f9ef940e2b30
-md"""
-## Architectures of systems with $\ge$4 known transiting planets.
-$(LocalResource("../_assets/week5/cks_multis_architectures.png"))
-Credit: Fig 1 from [Weiss & Petigura (2020)](https://ui.adsabs.harvard.edu/abs/2020ApJ...893L...1W/abstract)
-"""
-
-# ╔═╡ 2849d543-08df-4abd-9da6-a5fe02bc9228
-md"""
-Upcoming figures from [He, Ford & Ragozzine (2019) MNRAS, 490, 4575](https://ui.adsabs.harvard.edu/abs/2019MNRAS.490.4575H/abstract)
-and
-[He, Ford, Ragozzine & Carrera (2020) AJ, 160, 276](https://ui.adsabs.harvard.edu/abs/2020AJ....160..276H/abstract).
-"""
-
-# ╔═╡ 08ee8e02-9648-416f-b0b2-755e3d355714
-md"""
-## Number of Detections versus multiplicity
-$(LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_multiplicities_compare.png"))
-"""
-
-# ╔═╡ ab9008f3-de65-4fef-a393-2a5dda409318
-md"""
-## Number of Detections versus multiplicity
-$(LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_multiplicities_compare.png"))
-"""
-
-# ╔═╡ 0d1199fc-0888-4943-8dee-7e29ea04d20a
-md"""
-### Marginal Distribution of Ratios of Transit Observables for Pairs of Planets in Same System
-
-$(TwoColumn(LocalResource("../_assets/week5/Non_Clustered_Model_periodratios_compare.png"),LocalResource("../_assets/week5/Non_Clustered_Model_depthratios_compare.png")))
-"""
-# LocalResource("../_assets/week5/Non_Clustered_Model_logxi_compare.png")
-
-# ╔═╡ 4480d4e1-324c-4414-b278-6a798bab77f0
-md"""
-## Forward model for generating simulated planetary systems
-### Drawing Periods & Radii
-$(LocalResource("../_assets/week5/Models_cartoon.png"))
-### Drawing Eccentricities & Inclinations
-$(LocalResource("../_assets/week5/AMD_model_cartoon.png"))
-"""
-
-# ╔═╡ cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
-md"""
-## Best-fit Model for Planetary Systems
-### Marginal Distribution of Transit Observables
-$(ThreeColumn(
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_periods_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_radii_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_durations_compare.png")))
-
-### Marginal Distribution of Ratios of Transit Observables for Pairs of Planets in Same System
-
-$(ThreeColumn(
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_periodratios_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_depthratios_compare.png"), 
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_all_compare.png")))
-"""
-
-# ╔═╡ 745e7b26-8db6-48b1-b20d-9d1093981fa1
-LocalResource("../_assets/week5/Compare_models/Models_Compare_underlying_multiplicities.png", :width=>"75%")
-
-# ╔═╡ 6bbd37e2-98dc-4c44-95ef-e236f143b942
-LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_pratio_min_vs_amd_ecc_incl.png")
-
-# ╔═╡ 9566be82-268b-44e6-b5c7-839d0ff49cbf
-LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_mult_vs_amd_ecc_incl_dists_long.png")
-
 # ╔═╡ 44db6c55-4235-4ff5-b391-847ac9d369e5
 #LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_per_mult.png")
 
@@ -424,11 +350,6 @@ TwoColumn(
 	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_mmr_compare.png"),
 	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_nonmmr_compare.png") )
 =#
-
-# ╔═╡ b264c46c-43de-49c2-8788-08e192f25ff3
-md"""
-# Questions (general)
-"""
 
 # ╔═╡ c879333a-5aa4-4528-9110-00f491a9ed4a
 md"""
@@ -457,12 +378,6 @@ question(md"Does the rotational oblateness of a star have a substantial effect o
 
 # ╔═╡ 37cc7923-e762-4964-83bb-ba85143f1122
 question(md"Is there a specific distribution of inclinations that determines how the Rossiter-McLaughlin Effect is observed?")
-
-# ╔═╡ 30bb5f69-d7ca-472e-9868-2ef5f8325c22
-question(md"What are some ways we can make sure a planet is transiting if the planet is only passing through one side of the star?")
-
-# ╔═╡ 976efdd7-992c-4559-90a3-82a3b4f7ef3e
-question(md"How often do we see multiple exoplanet eclipses at once? Say, two planets passing in front of the host star at the same time? I'd think this to be very rare, but what could such a phenomena reveal about the host star's planetary system?")
 
 # ╔═╡ 9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
 function draw_randn_asym_01(μ::Real,σₗ::Real,σₕ::Real)
@@ -1926,22 +1841,8 @@ version = "1.4.1+0"
 # ╟─51578155-c392-4bf5-bfd4-56402a1f8058
 # ╟─6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
 # ╟─09bce3b2-6f0b-4c0a-a273-8a478b4c1f2a
-# ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
-# ╟─32e6170f-0ab3-4681-9517-f9ef940e2b30
-# ╟─2849d543-08df-4abd-9da6-a5fe02bc9228
-# ╟─08ee8e02-9648-416f-b0b2-755e3d355714
-# ╟─ab9008f3-de65-4fef-a393-2a5dda409318
-# ╟─0d1199fc-0888-4943-8dee-7e29ea04d20a
-# ╟─4480d4e1-324c-4414-b278-6a798bab77f0
-# ╟─cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
-# ╟─745e7b26-8db6-48b1-b20d-9d1093981fa1
-# ╟─6bbd37e2-98dc-4c44-95ef-e236f143b942
-# ╟─9566be82-268b-44e6-b5c7-839d0ff49cbf
 # ╟─44db6c55-4235-4ff5-b391-847ac9d369e5
 # ╟─51f670ae-da32-475d-b59e-272edf5c8596
-# ╟─b264c46c-43de-49c2-8788-08e192f25ff3
-# ╟─30bb5f69-d7ca-472e-9868-2ef5f8325c22
-# ╟─976efdd7-992c-4559-90a3-82a3b4f7ef3e
 # ╟─c879333a-5aa4-4528-9110-00f491a9ed4a
 # ╠═fbf647a7-b2ba-445d-8622-35c6cb2e27d0
 # ╠═cda49574-3843-11ed-255d-f301e028a76e
