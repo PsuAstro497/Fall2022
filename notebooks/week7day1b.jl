@@ -4,472 +4,61 @@
 using Markdown
 using InteractiveUtils
 
-# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
-macro bind(def, element)
-    quote
-        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
-        local el = $(esc(element))
-        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
-        el
-    end
-end
-
-# ╔═╡ cda49574-3843-11ed-255d-f301e028a76e
-begin 
+# ╔═╡ babc10d1-30a6-46ab-be4c-c711a9413cd1
+begin
 	using PlutoUI, PlutoTeachingTools
-	using CSV, DataFrames, Query
-	using Downloads
-	using Distributions, Statistics
-	using Plots, LaTeXStrings, ColorSchemes, StatsPlots
+	using Plots #, Distributions
 end
 
-# ╔═╡ 4dade109-dd8b-450c-8a79-b0e5f8b9304d
+# ╔═╡ 5fee857c-392d-11ed-1547-3d393fa0d3cc
 md"""
-# Exoplanet Masses & Orbits
-**Astro 497, Week 6, Day 3**
+# Your Questions
+**Astro 497, Week 7, Day 1**
 """
 
-# ╔═╡ c8f40951-6a14-4b0a-90f5-48206b77f123
+# ╔═╡ eb017f1e-8031-426d-b03d-35390121cb7c
 TableOfContents()
 
-# ╔═╡ 5fd9efd1-a34c-4795-a6d4-087e5dd1d7c5
+# ╔═╡ 077b677e-d5be-4cd9-82b8-51ef05493c8c
 md"""
-# Questions (RM)
+## Logistics
+- Exam
 """
 
-# ╔═╡ 1d271df1-8a1d-4626-bdd2-41a4f41b9151
-md"""
-$\max \Delta RV_{\mathrm{RM}} \simeq \left(\frac{R_p}{R_\star}\right)^2 \sqrt{1-b^2} (v_\star \sin i_\star)$
-"""
-
-# ╔═╡ fb3eacf0-3546-4805-8c91-bbc32a957c63
-md"""
-$(LocalResource("../_assets/week6/rmlines-reduced.png",:height=>"100%"))
-Credit: [Winn (2014)](https://arxiv.org/abs/1001.2010) from textbook
-"""
-
-# ╔═╡ f9062eb0-35ac-4f12-ab4b-e4cd4681dbbf
-md"""
-| Star  | Oblateness    | v sin i |
-|-------|---------------|---------|
-| Sun   | $10^{-4}$     |  7 km/s |
-| α Eri (Achernar) |  1.41 | 250 km/s |  
-"""
-
-# ╔═╡ fa8e0a4f-76ef-40a6-bad5-ab016d3050c6
-md"""
-# Masses & Orbits of Known Exoplanets
-"""
-
-# ╔═╡ 18bc32d3-8138-4ef5-b702-90f4fd7865a3
-md"""
-Read data from NExScI Exoplanet Archive table.
-"""
-
-# ╔═╡ 5a65c558-7125-4d83-af1e-7de3c417c9c0
-begin
-	mkpath("data")
-	fn = "data/nexsci_ps.tsv"
-	if !isfile(fn) || !(filesize(fn)>0)
-		fn = Downloads.download("https://github.com/PsuAstro497/Datasets/raw/main/nexsci_ps.tsv", "data/nexsci_ps.tsv")
-	end
-end;
-
-# ╔═╡ a8805407-307a-45aa-886f-c6a56b24374f
-df_all = CSV.read(fn, DataFrame);
-
-# ╔═╡ 78632720-da32-4c12-8054-946e01836ced
-md"""
-Select planets discovered by radial velocity method (and without controversial flag).
-"""
-
-# ╔═╡ cf207789-48c9-440f-b83b-de2905fa709b
-begin 
-	df_rv = df_all |> 
-		@filter(_.discoverymethod == "Radial Velocity") |> 
-		@filter( _.pl_controv_flag == 0 ) |> DataFrame
-	# Pick columns we will insist on having values for
-	select!(df_rv,[:pl_orbper, :pl_orbpererr1, :pl_orbpererr2,:pl_msinie, :pl_msinieerr1, :pl_msinieerr2, :pl_rvamp, :pl_rvamperr1, :pl_rvamperr2, :pl_orbeccen, :pl_orbeccenerr1, :pl_orbeccenerr2 ])
-	# Require no missing values
-	filter!(x -> !any(ismissing, x), df_rv)  
-	# Require uncertainties bars on mass aren't > 50%
-	df = df_rv |> @filter( (abs(_.pl_msinieerr1) < 0.5 * _.pl_msinie) && (abs(_.pl_msinieerr2) < 0.5 * _.pl_msinie) ) |> DataFrame
-end
-
-# ╔═╡ bbcbc35a-1103-49a2-8d4f-79e1ff79f9a9
-md"""
-# Radial Velocity Planet Population
-"""
-
-# ╔═╡ f969c89a-9877-4f6b-b1a1-02639b9b2ff9
-md"""
-Min $R_p$: $(@bind rp_min_rsol NumberField(0.5:0.5:20, default=3))  $nbsp $nbsp $nbsp
-Show e error bars: $(@bind show_e_err CheckBox(default=false)) $nbsp $nbsp
-m sin i error bars: $(@bind show_msini_err CheckBox(default=false))
-""" 
-
-# ╔═╡ 0205cf62-dfeb-4d5e-964d-91f294b4a30f
-begin
-	plt_P_m_base = plot(xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)")
-	if show_msini_err
-		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, 
-			xerr=(abs.(df.pl_orbpererr2),df.pl_orbpererr1),
-			yerr=(abs.(df.pl_msinieerr2),df.pl_msinieerr1), 
-			marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=3, markerstrokewidth=0.5, label=:none)
-
-	else
-		scatter!(plt_P_m_base,df.pl_orbper, df.pl_msinie, marker_z=df.pl_orbeccen, seriescolor=cgrad(:matter), colorbar_title="Eccentricity", markersize=2, markerstrokewidth=0, label=:none)
-	end
-	
-	P_rng = range(0.5,stop=10_000,length=30_000)
-	m_K_1mps =  1.0 ./(0.09 .* (365.25./P_rng).^(1/3))
-	plot!(plt_P_m_base,P_rng, m_K_1mps, label = "1m/s for Solar analog", legend=:bottomright)
-end
-
-# ╔═╡ e482d032-dd20-4c85-8fce-a8391267bdc1
-begin
-	if show_e_err
-		plt_P_e_base = scatter(df.pl_orbper, df.pl_orbeccen, yerr=(abs.(df.pl_orbeccenerr2),df.pl_orbeccenerr1), marker_z=log10.(df.pl_msinie), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (m sin i/M⊕)", 
-		label=:none, xscale=:log10, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=3, markerstrokewidth=0.5)
-	else
-		plt_P_e_base = scatter(df.pl_orbper, df.pl_orbeccen, marker_z=log10.(df.pl_msinie), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (m sin i/M⊕)", label=:none, xscale=:log10, ylims=(0,1), xlabel="Period (d)", ylabel="Eccentricity", markersize=2, markerstrokewidth=0)
-	end
-	local P_rng = range(0.5,stop=10_000,length=30_000)
-	rp_min = 0.005 * rp_min_rsol
-	e_rsol = 1 .- (rp_min./(P_rng./365).^(2/3))
-	plot!(plt_P_e_base,P_rng,e_rsol, label=string(rp_min_rsol) * "R⊙")
-end
-
-# ╔═╡ 5f48a640-0216-4ab3-8f1e-4c67944caca5
-scatter(df.pl_msinie, df.pl_orbeccen, marker_z=log10.(df.pl_orbper), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (P/d)", 
-	xscale=:log10, legend=:none, xlabel="m sin i (M⊕)", ylims=(0,1), ylabel="Eccentricity", markersize=3, markerstrokewidth=0.5)
-
-# ╔═╡ 8d377bdf-ce71-4b07-ab27-168543774602
-md"""
-## Impact of Detection Biases
-"""
-
-# ╔═╡ e2cde2c4-a994-4bdf-9e9b-adc513e62dd6
-md"""
-### RV Detection Criteria
-"""
-
-# ╔═╡ 479d69b3-b6cc-4116-ac5b-a675b6464fdb
-hint(md"""
-- Formally have precise $m \sin i$ measurement: $N_{obs} \ge  60 \, ( σᵣᵥ₁ / K)^2$
-- Resolve potential period aliases (particularly for short-period, non-transiting planets): $N_{obs} \ge \mathrm{dozens}$
-- RV amplitude greater than stellar variability: $K \ge 1-3 \mathrm{m/s}$
-""")
-
-# ╔═╡ bf784fd6-f88c-4348-84c3-0eb874299cfb
-md"""
-### What if the orbital period and $m \sin i$'s were drawn independently?
-"""
-
-# ╔═╡ 309c4a47-1319-4318-b0e4-6e031c86a7c8
-#TwoColumn(plt_P_m_base,
-	scatter(df.pl_orbper, sample(df.pl_msinie,size(df,1)), 
-	label=:none, xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)", markersize=2)
-#)
-
-# ╔═╡ 581386a1-ee17-4cb3-adad-2ef3af74b42e
-md"""
-### Account for minimum $K$ to be discovered by RV survey
-"""
-
-# ╔═╡ fb549892-2ad8-4444-a018-56d2f508231d
-begin
-	alt_P =  sample(df.pl_orbper,size(df,1))
-	alt_msinie = sample(df.pl_msinie,size(df,1))
-	alt_K = df.pl_rvamp .* alt_msinie ./ df.pl_msinie .* (df.pl_orbper./alt_P).^(1/3)
-end;
-
-# ╔═╡ 57cb60f0-6e6c-4f8d-bfe3-39838a9b0db0
-md"""
-Detection threshold (m/s): $(@bind K_threshold Slider(0:0.25:30, default=3.0))
-"""
-
-# ╔═╡ 9287a107-cbf8-4dbf-852a-f163ebc49afd
+# ╔═╡ 58afcc5d-266b-452f-85ad-f5162c7d7767
 let
-	mask_altK = alt_K .>= K_threshold
-	plt = scatter(alt_P, alt_msinie, 
-	xscale=:log10, yscale=:log10, ylims=(0.5, 10_000), xlabel="Period (d)", ylabel="m sin i (M⊕)", markersize=1, markerstrokewidth=0, label="K <" * string(K_threshold) * "m/s", title="Simulated")
-	scatter!(plt, alt_P[mask_altK], alt_msinie[mask_altK], markersize=2, markercolor=:red, markerstrokewidth=0, label="K > " * string(K_threshold) * "m/s")
-	TwoColumn(title!(plt_P_m_base, "Observed"),plt)
+	x = 0:10:1_000
+	plt = plot()
+	y_exact = x.^(-1//2)
+	y_approx = 0.05 .+ x.^(-1)
+	plot(x,y_exact, label="Exact Alg")
+	plot!(x,y_approx, label="Approximate Alg")
+	xlabel!("Computational Cost")
+	ylabel!("Distaince between the true posterior\nand approximate posterior")
+	title!("Tradeoff between exact & approximate algorithms")
 end
 
-# ╔═╡ b4669729-9bb8-4f1d-8c94-390dee84f39e
+# ╔═╡ d255d76d-c941-4fa0-b277-deaec77ad6fd
 md"""
-## Eccentricity Distribution
+# Your questions
 """
 
-# ╔═╡ 5d8c2999-7988-43ef-84fa-bb3458a09a39
+# ╔═╡ ba0fb116-7077-437d-8847-c82e6da04e9c
 md"""
-Rayleigh parameter: $(@bind σ_rayleigh NumberField(0.04:0.02:0.9, default=0.1)) $nbsp $nbsp
-Include Measurement Uncertainties: $(@bind incl_ecc_errs CheckBox(default=false))
-$nbsp
-$(@bind redraw_e Button("Redraw e's"))
+## Helper Code
 """
-
-# ╔═╡ 6ebf215f-615e-4490-a5a0-6fed3a4f9fd7
-md"""
-#### Is there a significant detection bias affecting $e$ distribution?
-"""
-
-# ╔═╡ a9c88237-c0df-49e4-a7e0-e3348979aa5b
-md"""
-$RV(t) = \frac{K}{\sqrt{1-e^2}}\left[\cos(\omega+T(t)) + e \cos\omega \right]$
-"""
-
-# ╔═╡ 14a9ba6f-4f9b-4020-86e3-c2194e38b4f1
-begin
-	e_plt = 0:0.02:1
-	K_plt = 1 ./sqrt.(1 .- e_plt.^2 )
-	plt_RVamp_vs_e = plot(e_plt,K_plt, xlabel="e", ylabel="(RV Amplitude)/K", label=:none, xlims=(0,1) )
-end;
-
-# ╔═╡ 2837531d-9b54-4a58-98df-b704005a1b1f
-plt_RVamp_vs_e
-
-# ╔═╡ 2d753f5f-1f25-4cce-bebc-259d51d31454
-md"""
-# Transiting Planet Population
-"""
-
-# ╔═╡ 39cb8b9b-eed9-4cee-a6c7-77587de67f20
-begin 
-	df_tr = df_all |> 
-		@filter(_.discoverymethod == "Transit") |> 
-		@filter( _.pl_controv_flag == 0 ) |> DataFrame
-	# Pick columns we will insist on having values for
-	select!(df_tr,[:pl_orbper, :pl_rade, :pl_radeerr1, :pl_radeerr2, :pl_trandur, :pl_trandurerr1, :pl_trandurerr2, :st_dens, :st_denserr1, :st_denserr2 ])
-	# Require no missing values
-	filter!(x -> !any(ismissing, x), df_tr)  
-	# Require uncertainties bars on radius and stellar density aren't > 30%
-	df_tr = df_tr |> 
-		@filter( (abs(_.pl_radeerr1) < 0.5 * _.pl_rade) && (abs(_.pl_radeerr2) < 0.5 * _.pl_rade) ) |> 
-		@filter( (abs(_.st_denserr1) < 0.5 * _.st_dens) && (abs(_.st_denserr2) < 0.5 * _.st_dens) ) |>
-		DataFrame
-	df_tr
-end
-
-# ╔═╡ cbed063b-5929-417d-8693-ec3b839ad57e
-df_tr.pl_trandur_norm = (df_tr.pl_trandur./12.97).*(365.25 ./df_tr.pl_orbper).^(1/3).*(df_tr.st_dens./1.41).^(1/3);
-
-# ╔═╡ 2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
-begin
-	plt_P_r_base = plot(xscale=:log10, yscale=:log10, xlims=(0.3,365), ylims=(0.5, 25), xlabel="Period (d)", ylabel="Radius (R⊕)")
-	if show_msini_err
-		scatter!(plt_P_r_base,df_tr.pl_orbper, df_tr.pl_rade, yerr=(abs.(df_tr.pl_radeerr2),df_tr.pl_radeerr1), marker_z=df_tr.pl_trandur_norm, seriescolor=cgrad(:thermal), colorbar_title="Normalized Transit Duration", markersize=3, markerstrokewidth=0.5, label=:none)
-
-	else
-		scatter!(plt_P_r_base,df_tr.pl_orbper, df_tr.pl_rade, marker_z=df_tr.pl_trandur_norm, seriescolor=cgrad(:thermal), colorbar_title="Normalized Transit Duration", markersize=2, markerstrokewidth=0, label=:none)
-	end
-	plt_P_r_base
-	#P_rng = range(0.5,stop=10_000,length=30_000)
-	#m_K_1mps =  1.0 ./(0.09 .* (365.25./P_rng).^(1/3))
-	#plot!(plt_P_m_base,P_rng, m_K_1mps, label = "1m/s for Solar analog", legend=:bottomright)
-end
-
-# ╔═╡ ed138ea4-b94a-470b-ab08-aec146da61e6
-md"""
-## Impact of Detection Biases
-"""
-
-# ╔═╡ b62f00ae-402f-411f-a65f-7d50129522f8
-hint(md"""
-- Transit signal to noise
-   - Planet size
-   - Host star size
-   - Photometric precission for host star
-   - When star was observed 
-- Number of transits
-- Transit Duration
-   - Impact parameter
-   - Host star density
-   - Eccentricity & ω
-- Transits of other planets
-""")
-
-# ╔═╡ 5d391627-f57a-4c2c-8e15-889d42f16fb6
-md"""
-## Planet Occurence Rates 
-Figures from [Hsu, Ford, Ragozzine & Ashby (2019) AJ, 158, 109](https://ui.adsabs.harvard.edu/abs/2019AJ....158..109H/abstract)
-
-$(LocalResource("../_assets/week5/f2.png"))
-
-###  Radius Valley
-$(LocalResource("../_assets/week5/f3.png"))
-"""
-
-# ╔═╡ 10aaddec-ed87-4426-9967-96499e45b5f8
-md"""
-### Occurence Rate of Earth-size Planets in Habitable Zone of Sun-like Stars ($\eta_{\oplus}$)
-
-For $P \in [237,500)$ days & $R_p \in [1, 1.75) R_\oplus$:
-$(TwoColumn( LocalResource("../_assets/week5/f5k.png"),
-			 LocalResource("../_assets/week5/f5l.png")))
-
-#### Comparing results from multiple studies
-$(LocalResource("../_assets/week5/f6.png"))
-
-"""
-
-# ╔═╡ eeb21e1a-70b8-4ca3-80bd-ee8d60fff4c2
-md"""
-## Eccentricity Distribution of Transiting Planets
-"""
-
-# ╔═╡ 51578155-c392-4bf5-bfd4-56402a1f8058
-scatter(log10.(df_tr.pl_orbper),df_tr.pl_trandur_norm, xlabel="log₁₀(P/d)", ylabel="Normalized Transit Duration",  marker_z=log2.(df_tr.pl_rade), seriescolor=cgrad(:matter,rev=true), colorbar_title="log₂(Rp/R⊕)", markersize=2, markerstrokewidth=0, label=:none)
-
-# ╔═╡ 09bce3b2-6f0b-4c0a-a273-8a478b4c1f2a
-md"""
-σ(ρ⋆): $(@bind σ_ρstar_sim NumberField(0:0.01:0.5))
-"""
-
-# ╔═╡ 6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
-let
-	plt = plot(xlabel="Normalized Transit Duration", ylabel="Count", xlims=(0,1.6))
-	duration_sample = map(b->sqrt(1-b^2), rand(10_000))
-	histogram!(plt, duration_sample, normalize=true, alpha=0.5, label="Circular, 0% σ(ρ⋆)")
-	if σ_ρstar_sim > 0
-		duration_sample .+= σ_ρstar_sim .* randn(length(duration_sample))
-		histogram!(plt, duration_sample, normalize=true, alpha=0.5, label="Circular, 10% σ(ρ⋆)")
-	end
-	histogram!(plt, df_tr.pl_trandur_norm, normalize=true, alpha=0.7, label="Observed", color=3)
-end
-
-# ╔═╡ 44db6c55-4235-4ff5-b391-847ac9d369e5
-#LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_per_mult.png")
-
-# ╔═╡ 51f670ae-da32-475d-b59e-272edf5c8596
-#=
-TwoColumn(
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_mmr_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_nonmmr_compare.png") )
-=#
-
-# ╔═╡ c879333a-5aa4-4528-9110-00f491a9ed4a
-md"""
-# Helper Code
-"""
-
-# ╔═╡ fbf647a7-b2ba-445d-8622-35c6cb2e27d0
-ChooseDisplayMode()
-
-# ╔═╡ 1d254576-2985-4f2a-8ca3-3c9c0e3960db
-question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
-
-# ╔═╡ e29ba494-3a9a-40a3-9e3e-c6c62eb35ced
-question(md"When we see transit, is there any way to figure out if the planet is orbiting in the expected direction?")
-
-# ╔═╡ b32729ce-4c64-468a-8d72-5800aa04e965
-question(md"Are there other limitations to the RM effect besides a sensitivity to the angle between the sky projections of the spin and orbital angular momentum vectors?")
-
-# ╔═╡ badba3a2-2222-4747-a352-e5f810b20233
-question(md"""
-Figure 5 shows two different graphs (a and b). Are all graphs like graph a) until changed based on the prevalent mechanisms? 
-""")
-
-# ╔═╡ 99ebc374-b9db-4a10-991a-12cee556d829
-question(md"Does the rotational oblateness of a star have a substantial effect on RM data?")
-
-# ╔═╡ 37cc7923-e762-4964-83bb-ba85143f1122
-question(md"Is there a specific distribution of inclinations that determines how the Rossiter-McLaughlin Effect is observed?")
-
-# ╔═╡ 9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
-function draw_randn_asym_01(μ::Real,σₗ::Real,σₕ::Real)
-	rn = randn()
-	local z = -one(typeof(μ))
-	#while !(0<=z<1)
-		z = (rn>0) ? μ+σₕ*rn : μ+σₗ*rn
-	#end
-	z
-end
-
-# ╔═╡ 7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
-function generate_ecc_sample(dist::Distributions.ContinuousUnivariateDistribution, σₗ::AbstractVector, σₕ::AbstractVector)
-	@assert size(σₗ) == size(σₕ)
-	
-	e_true = rand(truncated(dist, upper=1), size(σₕ) )
-	e_obs = draw_randn_asym_01.(e_true, σₗ, σₕ)
-	
-	(;e_true, e_obs)
-end
-
-# ╔═╡ e22d8b23-f017-4589-8c9c-e54820954155
-begin
-	redraw_e
-	(e_true, e_obs) = generate_ecc_sample(Rayleigh(σ_rayleigh), abs.(df.pl_orbeccenerr2), df.pl_orbeccenerr1)
-end;
-
-# ╔═╡ a3d656db-a813-4572-b6c1-f010a58a243a
-let
-	plt = plot(xlims=(0,1))
-	histogram!(plt, df.pl_orbeccen, noramlize=true, alpha=0.4, label="Observed")
-	histogram!(plt,e_true, noramlize=true, alpha=0.4, label="Simulated, w/o Measurement Noise")
-	if incl_ecc_errs
-		histogram!(plt,e_obs, noramlize=true, alpha=0.6, label="Simulated, w/ Measurement Noise")
-	end
-	plt
-end
-
-# ╔═╡ 18c78f9a-c3db-4abb-8cad-517c0259c363
-begin 
-	df_syn1 = DataFrame(pl_orbper = df.pl_orbper, pl_msinie = df.pl_msinie)
-	df_syn1.pl_orbeccen = e_obs #map(i->draw_randn_asym_01(0.0,abs(df.pl_orbeccenerr2[i]),df.pl_orbeccenerr1[i]),1:size(df,1))
-end;
-
-# ╔═╡ cbfdbf17-aea9-4def-8237-7ef53a8426d9
-let
-	plt = scatter(df_syn1.pl_orbper, df_syn1.pl_orbeccen, marker_z=log10.(df_syn1.pl_msinie), seriescolor=cgrad(:thermal), colorbar_title="log₁₀ (m sin i/M⊕)", label=:none, xscale=:log10, ylims=(0,1), xlabel="Period (d)", ylabel="Eccentricity", markersize=2, markerstrokewidth=0)
-	
-	#plt = scatter(df_syn1.pl_orbper,df_syn1.pl_orbeccen, yerr=(abs.(df.pl_orbeccenerr2),df.pl_orbeccenerr1), xscale=:log10, legend=:none, xlabel="Period (d)", ylims=(0,1), ylabel="Eccentricity", markersize=2)
-	local P_rng = range(0.5,stop=10_000,length=30_000)
-	rp_min = 0.005 * rp_min_rsol
-	e_rsol = 1 .- (rp_min./(P_rng./365).^(2/3))
-	plot!(plt,P_rng,e_rsol, label=string(rp_min_rsol) * "R⊙", title="Simulated")
-	TwoColumn(title!(plt_P_e_base, "Observed"), plt)
-end
-
-# ╔═╡ 89cb4354-d719-4dc1-bf85-a9c296d3c24e
-function draw_randn_asym_pos(μ::Real,σₗ::Real,σₕ::Real)
-	rn = randn()
-	local z = -one(typeof(μ))
-	while !(0<z)
-		z = (rn>0) ? μ+σₕ*rn : μ+σₗ*rn
-	end
-	z
-end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
-DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
-Downloads = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
-Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
-StatsPlots = "f3b207a7-027a-5e70-b257-86293d7955fd"
 
 [compat]
-CSV = "~0.10.4"
-ColorSchemes = "~3.19.0"
-DataFrames = "~1.3.5"
-Distributions = "~0.25.71"
-LaTeXStrings = "~1.3.0"
 Plots = "~1.33.0"
 PlutoTeachingTools = "~0.2.3"
 PlutoUI = "~0.7.40"
-Query = "~1.0.0"
-StatsPlots = "~0.15.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -479,47 +68,17 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 julia_version = "1.7.1"
 manifest_format = "2.0"
 
-[[deps.AbstractFFTs]]
-deps = ["ChainRulesCore", "LinearAlgebra"]
-git-tree-sha1 = "69f7020bd72f069c219b5e8c236c1fa90d2cb409"
-uuid = "621f4979-c628-5d54-868e-fcf4e3e8185c"
-version = "1.2.1"
-
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
 git-tree-sha1 = "8eaf9f1b4921132a4cff3f36a1d9ba923b14a481"
 uuid = "6e696c72-6542-2067-7265-42206c756150"
 version = "1.1.4"
 
-[[deps.Adapt]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "195c5505521008abea5aee4f96930717958eac6f"
-uuid = "79e6a3ab-5dfb-504d-930d-738a2a938a0e"
-version = "3.4.0"
-
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
 
-[[deps.Arpack]]
-deps = ["Arpack_jll", "Libdl", "LinearAlgebra", "Logging"]
-git-tree-sha1 = "91ca22c4b8437da89b030f08d71db55a379ce958"
-uuid = "7d9fca2a-8960-54d3-9f78-7d1dccf2cb97"
-version = "0.5.3"
-
-[[deps.Arpack_jll]]
-deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "OpenBLAS_jll", "Pkg"]
-git-tree-sha1 = "5ba6c757e8feccf03a1554dfaf3e26b3cfc7fd5e"
-uuid = "68821587-b530-5797-8361-c406ea357684"
-version = "3.5.1+1"
-
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
-
-[[deps.AxisAlgorithms]]
-deps = ["LinearAlgebra", "Random", "SparseArrays", "WoodburyMatrices"]
-git-tree-sha1 = "66771c8d21c8ff5e3a93379480a2307ac36863f7"
-uuid = "13072b0f-2c55-5437-9ae7-d433b7a33950"
-version = "1.0.1"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
@@ -530,23 +89,11 @@ git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
 version = "1.0.8+0"
 
-[[deps.CSV]]
-deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings"]
-git-tree-sha1 = "873fb188a4b9d76549b81465b1f75c82aaf59238"
-uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-version = "0.10.4"
-
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
 git-tree-sha1 = "4b859a208b2397a7a623a03449e4636bdb17bcf2"
 uuid = "83423d85-b0ee-5818-9007-b63ccbeb887a"
 version = "1.16.1+1"
-
-[[deps.Calculus]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "f641eb0a4f00c343bbc32346e1217b86f3ce9dad"
-uuid = "49dc2e85-a5d0-5ad3-a950-438e2897f1b9"
-version = "0.5.1"
 
 [[deps.ChainRulesCore]]
 deps = ["Compat", "LinearAlgebra", "SparseArrays"]
@@ -559,12 +106,6 @@ deps = ["ChainRulesCore", "LinearAlgebra", "Test"]
 git-tree-sha1 = "38f7a08f19d8810338d4f5085211c7dfa5d5bdd8"
 uuid = "9e997f8a-9a97-42d5-a9f1-ce6bfc15e2c0"
 version = "0.1.4"
-
-[[deps.Clustering]]
-deps = ["Distances", "LinearAlgebra", "NearestNeighbors", "Printf", "SparseArrays", "Statistics", "StatsBase"]
-git-tree-sha1 = "75479b7df4167267d75294d14b58244695beb2ac"
-uuid = "aaaa29a8-35af-508c-8bc3-b662a17a0fe5"
-version = "0.14.2"
 
 [[deps.CodeTracking]]
 deps = ["InteractiveUtils", "UUIDs"]
@@ -617,38 +158,16 @@ git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.6.2"
 
-[[deps.Crayons]]
-git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
-uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
-version = "4.1.1"
-
 [[deps.DataAPI]]
 git-tree-sha1 = "fb5f5316dd3fd4c5e7c30a24d50643b73e37cd40"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.10.0"
-
-[[deps.DataFrames]]
-deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrettyTables", "Printf", "REPL", "Reexport", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
-git-tree-sha1 = "6bce52b2060598d8caaed807ec6d6da2a1de949e"
-uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "1.3.5"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
 git-tree-sha1 = "d1fff3a548102f48987a52a2e0d114fa97d730f0"
 uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
 version = "0.18.13"
-
-[[deps.DataValueInterfaces]]
-git-tree-sha1 = "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6"
-uuid = "e2d170a0-9d28-54be-80f0-106bbe20a464"
-version = "1.0.0"
-
-[[deps.DataValues]]
-deps = ["DataValueInterfaces", "Dates"]
-git-tree-sha1 = "d88a19299eba280a6d062e135a43f00323ae70bf"
-uuid = "e7dc6d0d-1eca-5fa6-8ad6-5aecde8b7ea5"
-version = "0.4.13"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -658,27 +177,9 @@ uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 deps = ["Mmap"]
 uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
 
-[[deps.DensityInterface]]
-deps = ["InverseFunctions", "Test"]
-git-tree-sha1 = "80c3e8639e3353e5d2912fb3a1916b8455e2494b"
-uuid = "b429d917-457f-4dbc-8f4c-0cc954292b1d"
-version = "0.4.0"
-
-[[deps.Distances]]
-deps = ["LinearAlgebra", "SparseArrays", "Statistics", "StatsAPI"]
-git-tree-sha1 = "3258d0659f812acde79e8a74b11f17ac06d0ca04"
-uuid = "b4f34e82-e78d-54a5-968a-f98e89d6e8f7"
-version = "0.10.7"
-
 [[deps.Distributed]]
 deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
-
-[[deps.Distributions]]
-deps = ["ChainRulesCore", "DensityInterface", "FillArrays", "LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SparseArrays", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns", "Test"]
-git-tree-sha1 = "ee407ce31ab2f1bacadc3bd987e96de17e00aed3"
-uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
-version = "0.25.71"
 
 [[deps.DocStringExtensions]]
 deps = ["LibGit2"]
@@ -689,12 +190,6 @@ version = "0.9.1"
 [[deps.Downloads]]
 deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-
-[[deps.DualNumbers]]
-deps = ["Calculus", "NaNMath", "SpecialFunctions"]
-git-tree-sha1 = "5837a837389fccf076445fce071c8ddaea35a566"
-uuid = "fa6b7ba4-c1ee-5f82-b5fc-ecf0adba8f74"
-version = "0.6.8"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -709,37 +204,13 @@ uuid = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
 version = "0.4.1"
 
 [[deps.FFMPEG_jll]]
-deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Pkg", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
-git-tree-sha1 = "74faea50c1d007c85837327f6775bea60b5492dd"
+deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "Pkg", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
+git-tree-sha1 = "ccd479984c7838684b3ac204b716c89955c76623"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
-version = "4.4.2+2"
-
-[[deps.FFTW]]
-deps = ["AbstractFFTs", "FFTW_jll", "LinearAlgebra", "MKL_jll", "Preferences", "Reexport"]
-git-tree-sha1 = "90630efff0894f8142308e334473eba54c433549"
-uuid = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
-version = "1.5.0"
-
-[[deps.FFTW_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "c6033cc3892d0ef5bb9cd29b7f2f0331ea5184ea"
-uuid = "f5851436-0d7a-5f13-b9de-f02708fd171a"
-version = "3.3.10+0"
-
-[[deps.FilePathsBase]]
-deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
-git-tree-sha1 = "e27c4ebe80e8699540f2d6c805cc12203b614f12"
-uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
-version = "0.9.20"
+version = "4.4.2+0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
-
-[[deps.FillArrays]]
-deps = ["LinearAlgebra", "Random", "SparseArrays", "Statistics"]
-git-tree-sha1 = "87519eb762f85534445f5cda35be12e32759ee14"
-uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
-version = "0.13.4"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
@@ -770,10 +241,6 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "aa31987c2ba8704e23c6c8ba8a4f769d5d7e4f91"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
 version = "1.0.10+0"
-
-[[deps.Future]]
-deps = ["Random"]
-uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
@@ -828,12 +295,6 @@ git-tree-sha1 = "129acf094d168394e80ee1dc4bc06ec835e510a3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "2.8.1+1"
 
-[[deps.HypergeometricFunctions]]
-deps = ["DualNumbers", "LinearAlgebra", "OpenLibm_jll", "SpecialFunctions", "Test"]
-git-tree-sha1 = "709d864e3ed6e3545230601f94e11ebc65994641"
-uuid = "34004b35-14d8-5ef3-9330-4cdb6864b03a"
-version = "0.3.11"
-
 [[deps.Hyperscript]]
 deps = ["Test"]
 git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
@@ -857,27 +318,9 @@ git-tree-sha1 = "f550e6e32074c939295eb5ea6de31849ac2c9625"
 uuid = "83e8ac13-25f8-5344-8a64-a9f2b223428f"
 version = "0.5.1"
 
-[[deps.InlineStrings]]
-deps = ["Parsers"]
-git-tree-sha1 = "d19f9edd8c34760dca2de2b503f969d8700ed288"
-uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
-version = "1.1.4"
-
-[[deps.IntelOpenMP_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "d979e54b71da82f3a65b62553da4fc3d18c9004c"
-uuid = "1d5cc7b8-4909-519e-a0f8-d0f5ad9712d0"
-version = "2018.0.3+2"
-
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
-
-[[deps.Interpolations]]
-deps = ["Adapt", "AxisAlgorithms", "ChainRulesCore", "LinearAlgebra", "OffsetArrays", "Random", "Ratios", "Requires", "SharedArrays", "SparseArrays", "StaticArrays", "WoodburyMatrices"]
-git-tree-sha1 = "f67b55b6447d36733596aea445a9f119e83498b6"
-uuid = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
-version = "0.14.5"
 
 [[deps.InverseFunctions]]
 deps = ["Test"]
@@ -885,26 +328,10 @@ git-tree-sha1 = "b3364212fb5d870f724876ffcd34dd8ec6d98918"
 uuid = "3587e190-3f89-42d0-90ee-14403ec27112"
 version = "0.1.7"
 
-[[deps.InvertedIndices]]
-git-tree-sha1 = "bee5f1ef5bf65df56bdd2e40447590b272a5471f"
-uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
-version = "1.1.0"
-
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "7fd44fd4ff43fc60815f8e764c0f352b83c49151"
 uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
 version = "0.1.1"
-
-[[deps.IterableTables]]
-deps = ["DataValues", "IteratorInterfaceExtensions", "Requires", "TableTraits", "TableTraitsUtils"]
-git-tree-sha1 = "70300b876b2cebde43ebc0df42bc8c94a144e1b4"
-uuid = "1c8ee90f-4401-5389-894e-7a04a3dc0f4d"
-version = "1.0.0"
-
-[[deps.IteratorInterfaceExtensions]]
-git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
-uuid = "82899510-4779-5014-852e-03e436cf321d"
-version = "1.0.0"
 
 [[deps.JLLWrappers]]
 deps = ["Preferences"]
@@ -929,12 +356,6 @@ deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
 git-tree-sha1 = "0f960b1404abb0b244c1ece579a0ec78d056a5d1"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
 version = "0.9.15"
-
-[[deps.KernelDensity]]
-deps = ["Distributions", "DocStringExtensions", "FFTW", "Interpolations", "StatsBase"]
-git-tree-sha1 = "9816b296736292a80b9a3200eb7fbb57aaa3917a"
-uuid = "5ab0869b-81aa-558d-bb23-cbf5423bbe9b"
-version = "0.6.5"
 
 [[deps.LAME_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -964,10 +385,6 @@ deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdow
 git-tree-sha1 = "ab9aa169d2160129beb241cb2750ca499b4e90e9"
 uuid = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 version = "0.15.17"
-
-[[deps.LazyArtifacts]]
-deps = ["Artifacts", "Pkg"]
-uuid = "4af54fe1-eca0-43a8-85a7-787d91b784e3"
 
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -1061,12 +478,6 @@ git-tree-sha1 = "dedbebe234e06e1ddad435f5c6f4b85cd8ce55f7"
 uuid = "6f1432cf-f94c-5a45-995e-cdbf5db27b0b"
 version = "2.2.2"
 
-[[deps.MKL_jll]]
-deps = ["Artifacts", "IntelOpenMP_jll", "JLLWrappers", "LazyArtifacts", "Libdl", "Pkg"]
-git-tree-sha1 = "41d162ae9c868218b1f3fe78cba878aa348c2d26"
-uuid = "856f044c-d86e-5d09-b602-aeab76dc8ba7"
-version = "2022.1.0+0"
-
 [[deps.MacroTools]]
 deps = ["Markdown", "Random"]
 git-tree-sha1 = "3d3e902b31198a27340d0bf00d6ac452866021cf"
@@ -1104,37 +515,14 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
 
-[[deps.MultivariateStats]]
-deps = ["Arpack", "LinearAlgebra", "SparseArrays", "Statistics", "StatsAPI", "StatsBase"]
-git-tree-sha1 = "efe9c8ecab7a6311d4b91568bd6c88897822fabe"
-uuid = "6f286f6a-111f-5878-ab1e-185364afe411"
-version = "0.10.0"
-
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
 git-tree-sha1 = "a7c3d1da1189a1c2fe843a3bfa04d18d20eb3211"
 uuid = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 version = "1.0.1"
 
-[[deps.NearestNeighbors]]
-deps = ["Distances", "StaticArrays"]
-git-tree-sha1 = "0e353ed734b1747fc20cd4cba0edd9ac027eff6a"
-uuid = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
-version = "0.4.11"
-
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-
-[[deps.Observables]]
-git-tree-sha1 = "dfd8d34871bc3ad08cd16026c1828e271d554db9"
-uuid = "510215fc-4207-5dde-b226-833fc4488ee2"
-version = "0.5.1"
-
-[[deps.OffsetArrays]]
-deps = ["Adapt"]
-git-tree-sha1 = "1ea784113a6aa054c5ebd95945fa5e52c2f378e7"
-uuid = "6fe1bfb0-de20-5000-8ca7-80f57d26f881"
-version = "1.12.7"
 
 [[deps.Ogg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1173,21 +561,11 @@ git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.4.1"
 
-[[deps.PCRE2_jll]]
-deps = ["Artifacts", "Libdl"]
-uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-
 [[deps.PCRE_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "b2a7af664e098055a7529ad1a900ded962bca488"
 uuid = "2f80f16e-611a-54ab-bc61-aa92de5b98fc"
 version = "8.44.0+0"
-
-[[deps.PDMats]]
-deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse"]
-git-tree-sha1 = "cf494dca75a69712a72b80bc48f59dcf3dea63ec"
-uuid = "90014a1f-27ba-587c-ab20-58faa44d9150"
-version = "0.11.16"
 
 [[deps.Parsers]]
 deps = ["Dates"]
@@ -1247,23 +625,11 @@ git-tree-sha1 = "a602d7b0babfca89005da04d89223b867b55319f"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.40"
 
-[[deps.PooledArrays]]
-deps = ["DataAPI", "Future"]
-git-tree-sha1 = "a6062fe4063cdafe78f4a0a81cfffb89721b30e7"
-uuid = "2dfb63ee-cc39-5dd5-95bd-886bf059d720"
-version = "1.4.2"
-
 [[deps.Preferences]]
 deps = ["TOML"]
 git-tree-sha1 = "47e5f437cc0e7ef2ce8406ce1e7e24d44915f88d"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.3.0"
-
-[[deps.PrettyTables]]
-deps = ["Crayons", "Formatting", "Markdown", "Reexport", "Tables"]
-git-tree-sha1 = "dfb54c4e414caa595a1f2ed759b160f5a3ddcba5"
-uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "1.3.1"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -1275,24 +641,6 @@ git-tree-sha1 = "c6c0f690d0cc7caddb74cef7aa847b824a16b256"
 uuid = "ea2cea3b-5b76-57ae-a6ef-0a8af62496e1"
 version = "5.15.3+1"
 
-[[deps.QuadGK]]
-deps = ["DataStructures", "LinearAlgebra"]
-git-tree-sha1 = "3c009334f45dfd546a16a57960a821a1a023d241"
-uuid = "1fd47b50-473d-5c70-9696-f719f8f3bcdc"
-version = "2.5.0"
-
-[[deps.Query]]
-deps = ["DataValues", "IterableTables", "MacroTools", "QueryOperators", "Statistics"]
-git-tree-sha1 = "a66aa7ca6f5c29f0e303ccef5c8bd55067df9bbe"
-uuid = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
-version = "1.0.0"
-
-[[deps.QueryOperators]]
-deps = ["DataStructures", "DataValues", "IteratorInterfaceExtensions", "TableShowUtils"]
-git-tree-sha1 = "911c64c204e7ecabfd1872eb93c49b4e7c701f02"
-uuid = "2aef5ad7-51ca-5a8f-8e88-e75cf067b44b"
-version = "0.9.3"
-
 [[deps.REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
 uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
@@ -1300,12 +648,6 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 [[deps.Random]]
 deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
-
-[[deps.Ratios]]
-deps = ["Requires"]
-git-tree-sha1 = "dc84268fe0e3335a62e315a3a7cf2afa7178a734"
-uuid = "c84ed2f1-dad5-54f0-aa8e-dbefe2724439"
-version = "0.4.3"
 
 [[deps.RecipesBase]]
 git-tree-sha1 = "6bf3f380ff52ce0832ddd3a2a7b9538ed1bcca7d"
@@ -1341,18 +683,6 @@ git-tree-sha1 = "dad726963ecea2d8a81e26286f625aee09a91b7c"
 uuid = "295af30f-e4ad-537b-8983-00126c2a3abe"
 version = "3.4.0"
 
-[[deps.Rmath]]
-deps = ["Random", "Rmath_jll"]
-git-tree-sha1 = "bf3188feca147ce108c76ad82c2792c57abe7b1f"
-uuid = "79098fc4-a85e-5d69-aa6a-4863f24498fa"
-version = "0.7.0"
-
-[[deps.Rmath_jll]]
-deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "68db32dff12bb6127bac73c209881191bf0efbb7"
-uuid = "f50d1b31-88e8-58de-be2c-1cc44531875f"
-version = "0.3.0+0"
-
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 
@@ -1362,18 +692,8 @@ git-tree-sha1 = "f94f779c94e58bf9ea243e77a37e16d9de9126bd"
 uuid = "6c6a2e73-6563-6170-7368-637461726353"
 version = "1.1.1"
 
-[[deps.SentinelArrays]]
-deps = ["Dates", "Random"]
-git-tree-sha1 = "db8481cf5d6278a121184809e9eb1628943c7704"
-uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
-version = "1.3.13"
-
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
-
-[[deps.SharedArrays]]
-deps = ["Distributed", "Mmap", "Random", "Serialization"]
-uuid = "1a1011a3-84de-559e-8e89-a11a2f7dc383"
 
 [[deps.Showoff]]
 deps = ["Dates", "Grisu"]
@@ -1410,17 +730,6 @@ git-tree-sha1 = "d75bda01f8c31ebb72df80a46c88b25d1c79c56d"
 uuid = "276daf66-3868-5448-9aa4-cd146d93841b"
 version = "2.1.7"
 
-[[deps.StaticArrays]]
-deps = ["LinearAlgebra", "Random", "StaticArraysCore", "Statistics"]
-git-tree-sha1 = "efa8acd030667776248eabb054b1836ac81d92f0"
-uuid = "90137ffa-7385-5640-81b9-e52037218182"
-version = "1.5.7"
-
-[[deps.StaticArraysCore]]
-git-tree-sha1 = "ec2bd695e905a3c755b33026954b119ea17f2d22"
-uuid = "1e83bf80-4336-4d27-bf5d-d5a4f845583c"
-version = "1.3.0"
-
 [[deps.Statistics]]
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
@@ -1437,55 +746,9 @@ git-tree-sha1 = "d1bf48bfcc554a3761a133fe3a9bb01488e06916"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.33.21"
 
-[[deps.StatsFuns]]
-deps = ["ChainRulesCore", "HypergeometricFunctions", "InverseFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
-git-tree-sha1 = "5783b877201a82fc0014cbf381e7e6eb130473a4"
-uuid = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
-version = "1.0.1"
-
-[[deps.StatsPlots]]
-deps = ["AbstractFFTs", "Clustering", "DataStructures", "DataValues", "Distributions", "Interpolations", "KernelDensity", "LinearAlgebra", "MultivariateStats", "NaNMath", "Observables", "Plots", "RecipesBase", "RecipesPipeline", "Reexport", "StatsBase", "TableOperations", "Tables", "Widgets"]
-git-tree-sha1 = "3e59e005c5caeb1a57a90b17f582cbfc2c8da8f7"
-uuid = "f3b207a7-027a-5e70-b257-86293d7955fd"
-version = "0.15.3"
-
-[[deps.SuiteSparse]]
-deps = ["Libdl", "LinearAlgebra", "Serialization", "SparseArrays"]
-uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
-
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-
-[[deps.TableOperations]]
-deps = ["SentinelArrays", "Tables", "Test"]
-git-tree-sha1 = "e383c87cf2a1dc41fa30c093b2a19877c83e1bc1"
-uuid = "ab02a1b2-a7df-11e8-156e-fb1833f50b87"
-version = "1.2.0"
-
-[[deps.TableShowUtils]]
-deps = ["DataValues", "Dates", "JSON", "Markdown", "Test"]
-git-tree-sha1 = "14c54e1e96431fb87f0d2f5983f090f1b9d06457"
-uuid = "5e66a065-1f0a-5976-b372-e0b8c017ca10"
-version = "0.2.5"
-
-[[deps.TableTraits]]
-deps = ["IteratorInterfaceExtensions"]
-git-tree-sha1 = "c06b2f539df1c6efa794486abfb6ed2022561a39"
-uuid = "3783bdb8-4a98-5b6b-af9a-565f29a5fe9c"
-version = "1.0.1"
-
-[[deps.TableTraitsUtils]]
-deps = ["DataValues", "IteratorInterfaceExtensions", "Missings", "TableTraits"]
-git-tree-sha1 = "78fecfe140d7abb480b53a44f3f85b6aa373c293"
-uuid = "382cd787-c1b6-5bf2-a167-d5b971a19bda"
-version = "1.0.2"
-
-[[deps.Tables]]
-deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "LinearAlgebra", "OrderedCollections", "TableTraits", "Test"]
-git-tree-sha1 = "4d5536136ca85fe9931d6e8920c138bb9fcc6532"
-uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
-version = "1.8.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -1546,24 +809,6 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "4528479aa01ee1b3b4cd0e6faef0e04cf16466da"
 uuid = "2381bf8a-dfd0-557d-9999-79630e7b1b91"
 version = "1.25.0+0"
-
-[[deps.WeakRefStrings]]
-deps = ["DataAPI", "InlineStrings", "Parsers"]
-git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
-uuid = "ea10d353-3f73-51f8-a26c-33c1cb351aa5"
-version = "1.4.2"
-
-[[deps.Widgets]]
-deps = ["Colors", "Dates", "Observables", "OrderedCollections"]
-git-tree-sha1 = "fcdae142c1cfc7d89de2d11e08721d0f2f86c98a"
-uuid = "cc8bc4a8-27d6-5769-a93b-9d913e69aa62"
-version = "0.6.6"
-
-[[deps.WoodburyMatrices]]
-deps = ["LinearAlgebra", "SparseArrays"]
-git-tree-sha1 = "de67fa59e33ad156a590055375a30b23c40299d3"
-uuid = "efce3f68-66dc-5838-9240-27a6d6f5f9b6"
-version = "0.5.5"
 
 [[deps.XML2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "Zlib_jll"]
@@ -1775,67 +1020,12 @@ version = "1.4.1+0"
 """
 
 # ╔═╡ Cell order:
-# ╟─4dade109-dd8b-450c-8a79-b0e5f8b9304d
-# ╟─c8f40951-6a14-4b0a-90f5-48206b77f123
-# ╟─5fd9efd1-a34c-4795-a6d4-087e5dd1d7c5
-# ╟─e29ba494-3a9a-40a3-9e3e-c6c62eb35ced
-# ╟─b32729ce-4c64-468a-8d72-5800aa04e965
-# ╟─1d271df1-8a1d-4626-bdd2-41a4f41b9151
-# ╟─badba3a2-2222-4747-a352-e5f810b20233
-# ╟─fb3eacf0-3546-4805-8c91-bbc32a957c63
-# ╟─99ebc374-b9db-4a10-991a-12cee556d829
-# ╟─f9062eb0-35ac-4f12-ab4b-e4cd4681dbbf
-# ╟─37cc7923-e762-4964-83bb-ba85143f1122
-# ╟─fa8e0a4f-76ef-40a6-bad5-ab016d3050c6
-# ╟─18bc32d3-8138-4ef5-b702-90f4fd7865a3
-# ╟─5a65c558-7125-4d83-af1e-7de3c417c9c0
-# ╟─a8805407-307a-45aa-886f-c6a56b24374f
-# ╟─78632720-da32-4c12-8054-946e01836ced
-# ╠═cf207789-48c9-440f-b83b-de2905fa709b
-# ╟─bbcbc35a-1103-49a2-8d4f-79e1ff79f9a9
-# ╟─0205cf62-dfeb-4d5e-964d-91f294b4a30f
-# ╟─e482d032-dd20-4c85-8fce-a8391267bdc1
-# ╟─f969c89a-9877-4f6b-b1a1-02639b9b2ff9
-# ╟─5f48a640-0216-4ab3-8f1e-4c67944caca5
-# ╟─8d377bdf-ce71-4b07-ab27-168543774602
-# ╟─e2cde2c4-a994-4bdf-9e9b-adc513e62dd6
-# ╟─479d69b3-b6cc-4116-ac5b-a675b6464fdb
-# ╟─bf784fd6-f88c-4348-84c3-0eb874299cfb
-# ╟─309c4a47-1319-4318-b0e4-6e031c86a7c8
-# ╟─581386a1-ee17-4cb3-adad-2ef3af74b42e
-# ╟─fb549892-2ad8-4444-a018-56d2f508231d
-# ╟─9287a107-cbf8-4dbf-852a-f163ebc49afd
-# ╟─57cb60f0-6e6c-4f8d-bfe3-39838a9b0db0
-# ╟─b4669729-9bb8-4f1d-8c94-390dee84f39e
-# ╟─5d8c2999-7988-43ef-84fa-bb3458a09a39
-# ╟─e22d8b23-f017-4589-8c9c-e54820954155
-# ╟─a3d656db-a813-4572-b6c1-f010a58a243a
-# ╟─18c78f9a-c3db-4abb-8cad-517c0259c363
-# ╟─cbfdbf17-aea9-4def-8237-7ef53a8426d9
-# ╟─6ebf215f-615e-4490-a5a0-6fed3a4f9fd7
-# ╟─a9c88237-c0df-49e4-a7e0-e3348979aa5b
-# ╟─14a9ba6f-4f9b-4020-86e3-c2194e38b4f1
-# ╟─2837531d-9b54-4a58-98df-b704005a1b1f
-# ╟─2d753f5f-1f25-4cce-bebc-259d51d31454
-# ╠═39cb8b9b-eed9-4cee-a6c7-77587de67f20
-# ╟─cbed063b-5929-417d-8693-ec3b839ad57e
-# ╟─2da9aaa1-c2e6-4a42-96a3-8f60cc7425a3
-# ╟─ed138ea4-b94a-470b-ab08-aec146da61e6
-# ╟─b62f00ae-402f-411f-a65f-7d50129522f8
-# ╟─5d391627-f57a-4c2c-8e15-889d42f16fb6
-# ╟─10aaddec-ed87-4426-9967-96499e45b5f8
-# ╟─eeb21e1a-70b8-4ca3-80bd-ee8d60fff4c2
-# ╟─51578155-c392-4bf5-bfd4-56402a1f8058
-# ╟─6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
-# ╟─09bce3b2-6f0b-4c0a-a273-8a478b4c1f2a
-# ╟─44db6c55-4235-4ff5-b391-847ac9d369e5
-# ╟─51f670ae-da32-475d-b59e-272edf5c8596
-# ╟─c879333a-5aa4-4528-9110-00f491a9ed4a
-# ╠═fbf647a7-b2ba-445d-8622-35c6cb2e27d0
-# ╠═cda49574-3843-11ed-255d-f301e028a76e
-# ╟─1d254576-2985-4f2a-8ca3-3c9c0e3960db
-# ╠═7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
-# ╠═9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
-# ╠═89cb4354-d719-4dc1-bf85-a9c296d3c24e
+# ╟─5fee857c-392d-11ed-1547-3d393fa0d3cc
+# ╟─eb017f1e-8031-426d-b03d-35390121cb7c
+# ╟─077b677e-d5be-4cd9-82b8-51ef05493c8c
+# ╟─58afcc5d-266b-452f-85ad-f5162c7d7767
+# ╟─d255d76d-c941-4fa0-b277-deaec77ad6fd
+# ╠═ba0fb116-7077-437d-8847-c82e6da04e9c
+# ╠═babc10d1-30a6-46ab-be4c-c711a9413cd1
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
