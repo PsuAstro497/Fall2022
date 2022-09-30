@@ -94,7 +94,7 @@ precompile(build_tutorials, ())
 
 function build_notebooks_wo_html(
         bopts::BuildOptions,
-        oopts::OutputOptions=OutputOptions()
+        oopts::OutputOptions=PlutoStaticHTML.OutputOptions()
     )::Dict{String,Vector{String}}
     dir = bopts.dir
     files = filter(readdir(dir)) do file
