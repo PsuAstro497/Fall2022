@@ -12,6 +12,7 @@ Week {{week_num}}
 
 ## Exam Preparation
 - Before Monday's class, submit questions via TopHat
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week7day1/)
 
 ## Exam
 - During class on Wednesday

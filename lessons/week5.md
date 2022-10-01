@@ -2,9 +2,9 @@
 title = "Week 5"
 week_num = 5
 tags = ["lessons"]
-topic = "Non-linear Models & Exoplanet Masses & Orbits I"
+topic = "Bayesian Inference & Exoplanet Masses & Orbits I"
 ds_topic = "Model Building III: Bayesian Inference & Non-linear Models"
-exo_topic =  "Exoplanet Characterization: Masses & Orbits I"
+exo_topic =  "Exoplanet Characterization: Rossiter McLaughlin Effect"
 +++
 
 Week {{week_num}}
@@ -25,5 +25,3 @@ Week {{week_num}}
 - Before Friday's class, read ["Statistical methods for exoplanet detection with radial velocities"](https://psu.instructure.com/files/139190533/download?download_frd=1):  Sec.1-3.1, 4-4.2, 7.1
 - Very optional [supplement]((https://psu.instructure.com/files/139190533/download?download_frd=1)) in case anyone is interested
 - [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week5day3/)
-
-

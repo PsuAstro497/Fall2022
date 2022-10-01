@@ -40,7 +40,7 @@ function build()
     output_format = franklin_output
     previous_dir = prev_dir()
     bopts = BuildOptions(dir; output_format, previous_dir)
-    hopts = HTMLOptions(; append_build_context=true)
+    hopts = OutputOptions(; append_build_context=true)
     #build_notebooks(bopts, hopts)
     build_notebooks_wo_html(bopts, hopts)
     return nothing
@@ -100,7 +100,7 @@ function build_notebooks_wo_html(
     files = filter(readdir(dir)) do file
         path = joinpath(dir, file)
         endswith(file, ".jl") &&
-        PlutoStaticHTML._is_pluto_file(path) && !startswith(file, TMP_COPY_PREFIX) &&
+        PlutoStaticHTML._is_pluto_file(path) && !startswith(file, PlutoStaticHTML.TMP_COPY_PREFIX) &&
         !(filesize(file * ".html")>0)
     end
     return build_notebooks(bopts, files, oopts)
