@@ -11,9 +11,11 @@ const TUTORIALS_DIR = joinpath(PKGDIR, "notebooks")
 "Get files from a previous run. Assumes that the files are inside a `gh-pages` branch."
 function prev_dir()::Union{Nothing,AbstractString}
     if "DISABLE_CACHE" in keys(ENV) && ENV["DISABLE_CACHE"] == "true"
+        @info "Cache disabled"
         return nothing
     end
     if !("REPO" in keys(ENV))
+        @info "ENV[REPO] not avaliable"
         return nothing
     end
     repo = ENV["REPO"]
@@ -27,6 +29,7 @@ function prev_dir()::Union{Nothing,AbstractString}
         prev_dir = joinpath(dir, "notebooks")
         return prev_dir
     catch
+        @info "Error cloning gh-pages branch"
         return nothing
     end
 end
@@ -38,7 +41,8 @@ function build()
     previous_dir = prev_dir()
     bopts = BuildOptions(dir; output_format, previous_dir)
     hopts = HTMLOptions(; append_build_context=true)
-    build_notebooks(bopts, hopts)
+    #build_notebooks(bopts, hopts)
+    build_notebooks_wo_html(bopts, hopts)
     return nothing
 end
 
@@ -86,4 +90,19 @@ function build_tutorials()
 end
 precompile(build_tutorials, ())
 
+
+
+function build_notebooks_wo_html(
+        bopts::BuildOptions,
+        oopts::PlutoStaticHTML.OutputOptions=PlutoStaticHTML.OutputOptions()
+    )::Dict{String,Vector{String}}
+    dir = bopts.dir
+    files = filter(readdir(dir)) do file
+        path = joinpath(dir, file)
+        endswith(file, ".jl") &&
+        PlutoStaticHTML._is_pluto_file(path) && !startswith(file, TMP_COPY_PREFIX) &&
+        !(filesize(file * ".html")>0)
+    end
+    return build_notebooks(bopts, files, oopts)
+end
 end # module

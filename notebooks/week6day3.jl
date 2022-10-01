@@ -25,12 +25,41 @@ end
 
 # ╔═╡ 4dade109-dd8b-450c-8a79-b0e5f8b9304d
 md"""
-# Exoplanet Masses & Orbits I
+# Exoplanet Masses & Orbits
 **Astro 497, Week 6, Day 3**
 """
 
 # ╔═╡ c8f40951-6a14-4b0a-90f5-48206b77f123
 TableOfContents()
+
+# ╔═╡ 5fd9efd1-a34c-4795-a6d4-087e5dd1d7c5
+md"""
+# Questions (RM)
+"""
+
+# ╔═╡ 1d271df1-8a1d-4626-bdd2-41a4f41b9151
+md"""
+$\max \Delta RV_{\mathrm{RM}} \simeq \left(\frac{R_p}{R_\star}\right)^2 \sqrt{1-b^2} (v_\star \sin i_\star)$
+"""
+
+# ╔═╡ fb3eacf0-3546-4805-8c91-bbc32a957c63
+md"""
+$(LocalResource("../_assets/week6/rmlines-reduced.png",:height=>"100%"))
+Credit: [Winn (2014)](https://arxiv.org/abs/1001.2010) from textbook
+"""
+
+# ╔═╡ f9062eb0-35ac-4f12-ab4b-e4cd4681dbbf
+md"""
+| Star  | Oblateness    | v sin i |
+|-------|---------------|---------|
+| Sun   | $10^{-4}$     |  7 km/s |
+| α Eri (Achernar) |  1.41 | 250 km/s |  
+"""
+
+# ╔═╡ fa8e0a4f-76ef-40a6-bad5-ab016d3050c6
+md"""
+# Masses & Orbits of Known Exoplanets
+"""
 
 # ╔═╡ 18bc32d3-8138-4ef5-b702-90f4fd7865a3
 md"""
@@ -69,7 +98,7 @@ end
 
 # ╔═╡ bbcbc35a-1103-49a2-8d4f-79e1ff79f9a9
 md"""
-## Radial Velocity Planet Population
+# Radial Velocity Planet Population
 """
 
 # ╔═╡ f969c89a-9877-4f6b-b1a1-02639b9b2ff9
@@ -200,12 +229,11 @@ begin
 end;
 
 # ╔═╡ 2837531d-9b54-4a58-98df-b704005a1b1f
-Foldable("RV amplitude versus e",plt_RVamp_vs_e)
-
+plt_RVamp_vs_e
 
 # ╔═╡ 2d753f5f-1f25-4cce-bebc-259d51d31454
 md"""
-# Transiting Plants
+# Transiting Planet Population
 """
 
 # ╔═╡ 39cb8b9b-eed9-4cee-a6c7-77587de67f20
@@ -312,80 +340,6 @@ let
 	histogram!(plt, df_tr.pl_trandur_norm, normalize=true, alpha=0.7, label="Observed", color=3)
 end
 
-# ╔═╡ 1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
-md"""
-# Kepler's Multiple Planet Systems
-"""
-
-# ╔═╡ 32e6170f-0ab3-4681-9517-f9ef940e2b30
-md"""
-## Architectures of systems with $\ge$4 known transiting planets.
-$(LocalResource("../_assets/week5/cks_multis_architectures.png"))
-Credit: Fig 1 from [Weiss & Petigura (2020)](https://ui.adsabs.harvard.edu/abs/2020ApJ...893L...1W/abstract)
-"""
-
-# ╔═╡ 2849d543-08df-4abd-9da6-a5fe02bc9228
-md"""
-Upcoming figures from [He, Ford & Ragozzine (2019) MNRAS, 490, 4575](https://ui.adsabs.harvard.edu/abs/2019MNRAS.490.4575H/abstract)
-and
-[He, Ford, Ragozzine & Carrera (2020) AJ, 160, 276](https://ui.adsabs.harvard.edu/abs/2020AJ....160..276H/abstract).
-"""
-
-# ╔═╡ 08ee8e02-9648-416f-b0b2-755e3d355714
-md"""
-## Number of Detections versus multiplicity
-$(LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_multiplicities_compare.png"))
-"""
-
-# ╔═╡ ab9008f3-de65-4fef-a393-2a5dda409318
-md"""
-## Number of Detections versus multiplicity
-$(LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_multiplicities_compare.png"))
-"""
-
-# ╔═╡ 0d1199fc-0888-4943-8dee-7e29ea04d20a
-md"""
-### Marginal Distribution of Ratios of Transit Observables for Pairs of Planets in Same System
-
-$(TwoColumn(LocalResource("../_assets/week5/Non_Clustered_Model_periodratios_compare.png"),LocalResource("../_assets/week5/Non_Clustered_Model_depthratios_compare.png")))
-"""
-# LocalResource("../_assets/week5/Non_Clustered_Model_logxi_compare.png")
-
-# ╔═╡ 4480d4e1-324c-4414-b278-6a798bab77f0
-md"""
-## Forward model for generating simulated planetary systems
-### Drawing Periods & Radii
-$(LocalResource("../_assets/week5/Models_cartoon.png"))
-### Drawing Eccentricities & Inclinations
-$(LocalResource("../_assets/week5/AMD_model_cartoon.png"))
-"""
-
-# ╔═╡ cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
-md"""
-## Best-fit Model for Planetary Systems
-### Marginal Distribution of Transit Observables
-$(ThreeColumn(
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_periods_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_radii_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_durations_compare.png")))
-
-### Marginal Distribution of Ratios of Transit Observables for Pairs of Planets in Same System
-
-$(ThreeColumn(
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_periodratios_compare.png"),
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_depthratios_compare.png"), 
-	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_all_compare.png")))
-"""
-
-# ╔═╡ 745e7b26-8db6-48b1-b20d-9d1093981fa1
-LocalResource("../_assets/week5/Compare_models/Models_Compare_underlying_multiplicities.png", :width=>"75%")
-
-# ╔═╡ 6bbd37e2-98dc-4c44-95ef-e236f143b942
-LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_pratio_min_vs_amd_ecc_incl.png")
-
-# ╔═╡ 9566be82-268b-44e6-b5c7-839d0ff49cbf
-LocalResource("../_assets/week5/Best_model/Clustered_P_R_Model_underlying_mult_vs_amd_ecc_incl_dists_long.png")
-
 # ╔═╡ 44db6c55-4235-4ff5-b391-847ac9d369e5
 #LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_per_mult.png")
 
@@ -403,6 +357,26 @@ md"""
 
 # ╔═╡ fbf647a7-b2ba-445d-8622-35c6cb2e27d0
 ChooseDisplayMode()
+
+# ╔═╡ 1d254576-2985-4f2a-8ca3-3c9c0e3960db
+question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
+
+# ╔═╡ e29ba494-3a9a-40a3-9e3e-c6c62eb35ced
+question(md"When we see transit, is there any way to figure out if the planet is orbiting in the expected direction?")
+
+# ╔═╡ b32729ce-4c64-468a-8d72-5800aa04e965
+question(md"Are there other limitations to the RM effect besides a sensitivity to the angle between the sky projections of the spin and orbital angular momentum vectors?")
+
+# ╔═╡ badba3a2-2222-4747-a352-e5f810b20233
+question(md"""
+Figure 5 shows two different graphs (a and b). Are all graphs like graph a) until changed based on the prevalent mechanisms? 
+""")
+
+# ╔═╡ 99ebc374-b9db-4a10-991a-12cee556d829
+question(md"Does the rotational oblateness of a star have a substantial effect on RM data?")
+
+# ╔═╡ 37cc7923-e762-4964-83bb-ba85143f1122
+question(md"Is there a specific distribution of inclinations that determines how the Rossiter-McLaughlin Effect is observed?")
 
 # ╔═╡ 9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
 function draw_randn_asym_01(μ::Real,σₗ::Real,σₕ::Real)
@@ -469,22 +443,6 @@ function draw_randn_asym_pos(μ::Real,σₗ::Real,σₕ::Real)
 	z
 end
 
-# ╔═╡ 59c0f88d-cc4f-4bff-b093-3259e190497b
-md"""
-Goofing around with table
-"""
-
-# ╔═╡ 8c722f99-87e3-47d2-b284-9abd1637a844
-names(df_all)
-
-# ╔═╡ 41f914ba-bc61-4b91-88eb-ebe9387c392a
-df_small = select(df_all, [:pl_name, :pl_letter,:hostname, :discoverymethod, :pl_controv_flag, :pl_orbper, :pl_cmasse, :pl_orbeccen, :pl_trueobliq])
-
-# ╔═╡ 75cc2572-23cd-4ce4-9cec-9f8e1d527c01
-df_small2 = df_small |> 
-	@filter(_.discoverymethod == "Radial Velocity") |> 
-	@filter( _.pl_controv_flag == 0 ) |> DataFrame
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -518,7 +476,7 @@ StatsPlots = "~0.15.3"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractFFTs]]
@@ -751,10 +709,10 @@ uuid = "c87230d0-a227-11e9-1b43-d7ebe4e7570a"
 version = "0.4.1"
 
 [[deps.FFMPEG_jll]]
-deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "Pkg", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
-git-tree-sha1 = "ccd479984c7838684b3ac204b716c89955c76623"
+deps = ["Artifacts", "Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "JLLWrappers", "LAME_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "PCRE2_jll", "Pkg", "Zlib_jll", "libaom_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
+git-tree-sha1 = "74faea50c1d007c85837327f6775bea60b5492dd"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
-version = "4.4.2+0"
+version = "4.4.2+2"
 
 [[deps.FFTW]]
 deps = ["AbstractFFTs", "FFTW_jll", "LinearAlgebra", "MKL_jll", "Preferences", "Reexport"]
@@ -1214,6 +1172,10 @@ version = "1.3.2+0"
 git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.4.1"
+
+[[deps.PCRE2_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
 
 [[deps.PCRE_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1815,6 +1777,16 @@ version = "1.4.1+0"
 # ╔═╡ Cell order:
 # ╟─4dade109-dd8b-450c-8a79-b0e5f8b9304d
 # ╟─c8f40951-6a14-4b0a-90f5-48206b77f123
+# ╟─5fd9efd1-a34c-4795-a6d4-087e5dd1d7c5
+# ╟─e29ba494-3a9a-40a3-9e3e-c6c62eb35ced
+# ╟─b32729ce-4c64-468a-8d72-5800aa04e965
+# ╟─1d271df1-8a1d-4626-bdd2-41a4f41b9151
+# ╟─badba3a2-2222-4747-a352-e5f810b20233
+# ╟─fb3eacf0-3546-4805-8c91-bbc32a957c63
+# ╟─99ebc374-b9db-4a10-991a-12cee556d829
+# ╟─f9062eb0-35ac-4f12-ab4b-e4cd4681dbbf
+# ╟─37cc7923-e762-4964-83bb-ba85143f1122
+# ╟─fa8e0a4f-76ef-40a6-bad5-ab016d3050c6
 # ╟─18bc32d3-8138-4ef5-b702-90f4fd7865a3
 # ╟─5a65c558-7125-4d83-af1e-7de3c417c9c0
 # ╟─a8805407-307a-45aa-886f-c6a56b24374f
@@ -1856,28 +1828,14 @@ version = "1.4.1+0"
 # ╟─51578155-c392-4bf5-bfd4-56402a1f8058
 # ╟─6c2e1a4a-ecfb-4347-9c0d-3fb38598af4c
 # ╟─09bce3b2-6f0b-4c0a-a273-8a478b4c1f2a
-# ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
-# ╟─32e6170f-0ab3-4681-9517-f9ef940e2b30
-# ╟─2849d543-08df-4abd-9da6-a5fe02bc9228
-# ╟─08ee8e02-9648-416f-b0b2-755e3d355714
-# ╟─ab9008f3-de65-4fef-a393-2a5dda409318
-# ╟─0d1199fc-0888-4943-8dee-7e29ea04d20a
-# ╟─4480d4e1-324c-4414-b278-6a798bab77f0
-# ╟─cf7ef986-66a6-4ba9-b1bd-2291862fb3f0
-# ╟─745e7b26-8db6-48b1-b20d-9d1093981fa1
-# ╟─6bbd37e2-98dc-4c44-95ef-e236f143b942
-# ╟─9566be82-268b-44e6-b5c7-839d0ff49cbf
 # ╟─44db6c55-4235-4ff5-b391-847ac9d369e5
 # ╟─51f670ae-da32-475d-b59e-272edf5c8596
 # ╟─c879333a-5aa4-4528-9110-00f491a9ed4a
 # ╠═fbf647a7-b2ba-445d-8622-35c6cb2e27d0
 # ╠═cda49574-3843-11ed-255d-f301e028a76e
+# ╟─1d254576-2985-4f2a-8ca3-3c9c0e3960db
 # ╠═7e0f6076-16d5-4eef-9f3e-ad19f8ae4a95
 # ╠═9ebc2384-bd73-4d5b-bf7b-0dfc0f89119e
 # ╠═89cb4354-d719-4dc1-bf85-a9c296d3c24e
-# ╟─59c0f88d-cc4f-4bff-b093-3259e190497b
-# ╠═8c722f99-87e3-47d2-b284-9abd1637a844
-# ╠═41f914ba-bc61-4b91-88eb-ebe9387c392a
-# ╠═75cc2572-23cd-4ce4-9cec-9f8e1d527c01
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

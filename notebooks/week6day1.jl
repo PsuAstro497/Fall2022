@@ -358,7 +358,7 @@ begin
 end;
 
 # ╔═╡ af076195-9083-4147-af74-081cd43eaa76
-plt_star
+TwoColumn(plt_star,title!(plt_rm,"Rossiter-McLaughlin Effect\nOn Measured RV"))
 
 # ╔═╡ b1cd4ae5-657e-4c05-9fe7-e63f5992fc56
 title!(plt_spectrum,"Absorption Line Profile")
@@ -468,7 +468,7 @@ Transits = "2e59a628-7bac-4d38-8059-3a73ba0928ab"
 
 [compat]
 ColorSchemes = "~3.19.0"
-Distributions = "~0.25.73"
+Distributions = "~0.25.71"
 Plots = "~1.33.0"
 PlutoTeachingTools = "~0.2.3"
 PlutoUI = "~0.7.40"
@@ -479,7 +479,7 @@ Transits = "~0.3.9"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -642,9 +642,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Distributions]]
 deps = ["ChainRulesCore", "DensityInterface", "FillArrays", "LinearAlgebra", "PDMats", "Printf", "QuadGK", "Random", "SparseArrays", "SpecialFunctions", "Statistics", "StatsBase", "StatsFuns", "Test"]
-git-tree-sha1 = "34a557ce10eb2d9142f4ef60726b4f17c1c30941"
+git-tree-sha1 = "ee407ce31ab2f1bacadc3bd987e96de17e00aed3"
 uuid = "31c24e10-a181-5473-b8eb-7969acd0382f"
-version = "0.25.73"
+version = "0.25.71"
 
 [[deps.DocStringExtensions]]
 deps = ["LibGit2"]
