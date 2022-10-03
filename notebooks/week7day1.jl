@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.11
+# v0.19.12
 
 using Markdown
 using InteractiveUtils
@@ -111,6 +111,14 @@ md"""
 # Questions (general)
 """
 
+# ╔═╡ 158e3b44-1c58-459e-ab48-d35c3ef90f05
+md"""
+# Questions (exam specific)
+"""
+
+# ╔═╡ 2f1b6b56-a016-44ae-aadb-2de0eee551bb
+
+
 # ╔═╡ c879333a-5aa4-4528-9110-00f491a9ed4a
 md"""
 # Helper Code
@@ -128,6 +136,17 @@ question(md"What are some ways we can make sure a planet is transiting if the pl
 # ╔═╡ 976efdd7-992c-4559-90a3-82a3b4f7ef3e
 question(md"How often do we see multiple exoplanet eclipses at once? Say, two planets passing in front of the host star at the same time? I'd think this to be very rare, but what could such a phenomena reveal about the host star's planetary system?")
 
+# ╔═╡ 1888dcd2-62e6-4556-a2ae-654e7000ad46
+question(md"""
+What are the main differences between the maximum a posteriori and the maximum likelihood estimator?
+""")
+
+# ╔═╡ 2489ac66-fad3-4928-8f30-984ed984dfc3
+question(md"""How extensive are the numerical calculations going to be?""")
+
+# ╔═╡ 6213c69e-d73d-43aa-bf27-3b89969b915c
+question(md"""Are there certain equations we should pay more attention to when studying?""")
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -144,8 +163,9 @@ PlutoUI = "~0.7.40"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.8.2"
 manifest_format = "2.0"
+project_hash = "06d50ac5a623a4175d1f10ff59cc0cdec47248c1"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -155,6 +175,7 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
+version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -177,6 +198,7 @@ version = "0.11.4"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
+version = "0.5.2+0"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -187,8 +209,9 @@ deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+version = "1.6.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -253,10 +276,12 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
+version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
+version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -265,6 +290,7 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
+version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -295,19 +321,23 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
+version = "2.28.0+0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
+version = "2022.2.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
+version = "1.2.0"
 
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
+version = "0.3.20+0"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
@@ -323,6 +353,7 @@ version = "2.4.0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+version = "1.8.0"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -379,6 +410,7 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+version = "0.7.0"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -397,10 +429,12 @@ uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+version = "1.0.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
+version = "1.10.1"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
@@ -421,23 +455,35 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
+version = "1.2.12+3"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+version = "5.1.1+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
+version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
+version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
 # ╟─4dade109-dd8b-450c-8a79-b0e5f8b9304d
 # ╟─c8f40951-6a14-4b0a-90f5-48206b77f123
+# ╟─b264c46c-43de-49c2-8788-08e192f25ff3
+# ╟─30bb5f69-d7ca-472e-9868-2ef5f8325c22
+# ╟─976efdd7-992c-4559-90a3-82a3b4f7ef3e
+# ╟─1888dcd2-62e6-4556-a2ae-654e7000ad46
+# ╟─158e3b44-1c58-459e-ab48-d35c3ef90f05
+# ╟─2489ac66-fad3-4928-8f30-984ed984dfc3
+# ╟─6213c69e-d73d-43aa-bf27-3b89969b915c
+# ╠═2f1b6b56-a016-44ae-aadb-2de0eee551bb
 # ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
 # ╟─32e6170f-0ab3-4681-9517-f9ef940e2b30
 # ╟─2849d543-08df-4abd-9da6-a5fe02bc9228
@@ -451,9 +497,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─9566be82-268b-44e6-b5c7-839d0ff49cbf
 # ╟─44db6c55-4235-4ff5-b391-847ac9d369e5
 # ╟─51f670ae-da32-475d-b59e-272edf5c8596
-# ╟─b264c46c-43de-49c2-8788-08e192f25ff3
-# ╟─30bb5f69-d7ca-472e-9868-2ef5f8325c22
-# ╟─976efdd7-992c-4559-90a3-82a3b4f7ef3e
 # ╟─c879333a-5aa4-4528-9110-00f491a9ed4a
 # ╠═fbf647a7-b2ba-445d-8622-35c6cb2e27d0
 # ╠═cda49574-3843-11ed-255d-f301e028a76e
