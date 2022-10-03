@@ -22,6 +22,19 @@ md"""
 # ╔═╡ c8f40951-6a14-4b0a-90f5-48206b77f123
 TableOfContents()
 
+# ╔═╡ b264c46c-43de-49c2-8788-08e192f25ff3
+md"""
+# Questions (general)
+"""
+
+# ╔═╡ ec125edc-5716-423d-8b15-42df6fa0921c
+
+
+# ╔═╡ 158e3b44-1c58-459e-ab48-d35c3ef90f05
+md"""
+# Questions (exam specific)
+"""
+
 # ╔═╡ 1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
 md"""
 # Kepler's Multiple Planet Systems
@@ -106,19 +119,6 @@ TwoColumn(
 	LocalResource("../_assets/week5/Best_model/Observed/Clustered_P_R_Model_logxi_nonmmr_compare.png") )
 =#
 
-# ╔═╡ b264c46c-43de-49c2-8788-08e192f25ff3
-md"""
-# Questions (general)
-"""
-
-# ╔═╡ 158e3b44-1c58-459e-ab48-d35c3ef90f05
-md"""
-# Questions (exam specific)
-"""
-
-# ╔═╡ 2f1b6b56-a016-44ae-aadb-2de0eee551bb
-
-
 # ╔═╡ c879333a-5aa4-4528-9110-00f491a9ed4a
 md"""
 # Helper Code
@@ -141,11 +141,17 @@ question(md"""
 What are the main differences between the maximum a posteriori and the maximum likelihood estimator?
 """)
 
+# ╔═╡ 5e41242d-cf26-4573-b991-3ccb0f8de985
+question(md"Are there external factors, such as dust clouds, gravitational lensing, or overlapping solar systems, that can significantly affect collected data?")
+
 # ╔═╡ 2489ac66-fad3-4928-8f30-984ed984dfc3
 question(md"""How extensive are the numerical calculations going to be?""")
 
 # ╔═╡ 6213c69e-d73d-43aa-bf27-3b89969b915c
 question(md"""Are there certain equations we should pay more attention to when studying?""")
+
+# ╔═╡ 2f1b6b56-a016-44ae-aadb-2de0eee551bb
+question(md"To what level of detail do we need to understand non-Keplerian motion? Qualitatively or Quantitatively?")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -480,10 +486,12 @@ version = "17.4.0+0"
 # ╟─30bb5f69-d7ca-472e-9868-2ef5f8325c22
 # ╟─976efdd7-992c-4559-90a3-82a3b4f7ef3e
 # ╟─1888dcd2-62e6-4556-a2ae-654e7000ad46
+# ╟─5e41242d-cf26-4573-b991-3ccb0f8de985
+# ╠═ec125edc-5716-423d-8b15-42df6fa0921c
 # ╟─158e3b44-1c58-459e-ab48-d35c3ef90f05
 # ╟─2489ac66-fad3-4928-8f30-984ed984dfc3
 # ╟─6213c69e-d73d-43aa-bf27-3b89969b915c
-# ╠═2f1b6b56-a016-44ae-aadb-2de0eee551bb
+# ╟─2f1b6b56-a016-44ae-aadb-2de0eee551bb
 # ╟─1ea3b5f3-5eed-4452-ae90-df5cdb4b3b99
 # ╟─32e6170f-0ab3-4681-9517-f9ef940e2b30
 # ╟─2849d543-08df-4abd-9da6-a5fe02bc9228
