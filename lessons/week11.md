@@ -14,5 +14,4 @@ Week {{week_num}}
 
 
 ## {{exo_topic}}
-- Before Friday's class, read TBD
 - Before Friday's class, read *Exoplanets*: Protoplanetary & Debris Disks:  Sec. 1-3.4
