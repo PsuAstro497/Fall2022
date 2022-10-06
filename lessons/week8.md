@@ -13,6 +13,15 @@ Week {{week_num}}
 ## {{ds_topic}}
 - Read [Julia Data Science, Ch 4.6-4.9](https://juliadatascience.io/join).
 - Optionally, read earlier sections of [Ch 4](https://juliadatascience.io/dataframes) if those are helpful to you now.
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week8day1/)
+
+## [Lab 7](../../labs/lab7/): {{fill title labs/lab7.md}}
+
+## {{exo_topic}}
+- Before Friday's class, read *Exoplanets*: Statistical Distribution of Exoplanets:   Sec. 1-2.7
+
+
+## Resources
 - More information about building queries:
    - [SQL Tutorial](https://www.khanacademy.org/computing/computer-programming/sql)
    - [Gaia Data Queries with ADQL](http://docs.g-vo.org/adql-gaia/html/twoup.pdf)
@@ -24,7 +33,4 @@ Week {{week_num}}
   - [Table Access Protocol (TAP)](https://www.ivoa.net/documents/TAP/)
   - [Tool for OPerations on Catalogues And Tables (TOPCAT)](http://www.star.bris.ac.uk/~mbt/topcat/)
 
-## [Lab 7](../../labs/lab7/): {{fill title labs/lab7.md}}
 
-## {{exo_topic}}
-- Before Friday's class, read *Exoplanets*: Statistical Distribution of Exoplanets:   Sec. 1-2.7

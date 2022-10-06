@@ -19,3 +19,4 @@ Week {{week_num}}
 
 ## {{ds_topic}}
 - Before Friday's class, read [section of syllabus about the class project](../../project/).
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week7day3/)

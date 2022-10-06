@@ -23,6 +23,7 @@ The plan should address each of the following:
   - What will serve as the robust baseline model?
   - What will serve as the more sophisticated model?
   - What will the models predict?
+  - How will the models be assessed?
 - Describe the plots that will be displayed on your dashboard.  For each plot,
   - What data will be shown?  
   - Will it be plotted with a curve, points, contours, histogram, etc.?

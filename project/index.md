@@ -97,10 +97,9 @@ While the choices for the above figures will be relatively straight forward, des
 
 In some cases, one visualization may serve multiple purposes.  For example, if the purpose of your dashboard is to inform the scheduling of future observations, then the figure showing the predictions of a model (using multiple sets of parameter values consistent with the current data) for a few months into the future, so users can see which observations times would be useful for collecting additional observations.  In some cases, that might just be one wide figure.  In other cases, it might be useful to split it into two figures, one focusing on existing data and one focusing on prediction during some window of time in the future.
 
+#### Warning messages
 In some cases, the most important result to convey may be that something went wrong and the user should do additional analysis or at least be extra cautious in interpreting the results on the dashboard.  
 In those cases, the dashboard should include a prominent warning (and telling the user what triggered the warning message).
-
-
 
 
 ### Timeline
