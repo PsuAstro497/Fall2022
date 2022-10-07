@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.12
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -158,19 +158,61 @@ warning_box(md"""
 If you try something other than Pluto, be prepared to spend significant ammount of time: figuring it out yourself, rewriting code to do tasks that I've already provided examples for, making the dashboard work reliably, and automating the setup process.
 """)
 
-# ╔═╡ 83a9749e-da15-42d0-8750-3ee021ca94b8
+# ╔═╡ e88c441f-d825-4fac-8e03-64d0eff762d8
 warning_box(md"""
-If using another language make absolutely sure:
-- Your dashboard must work reliably for other users and on other systems.  
-   - Exactly reproduces all package versions
-   - Any dependencies need to be automatically installed (likely in user space)
-   - Automatically deals with data transfer, file paths, system libraries, etc.
-- These things are annoying, but Justin, Pluto developers and I have already solved them for you (if you use Julia/Pluto).
-- It is to be a dashboard, not a notebook or a project report
-    - It should work on "new" data that you won't have been able to test it on
-    - Can not require users to rerun cells in a specific order after selecting dataset (e.g., target or date range) or changing a parameter.
-    - It should be *extremely easy* for users to use.
+It is to be a dashboard, not a notebook or a project report:
+- It should work on "new" data that you won't have been able to test it on
+- Can not require users to rerun cells in a specific order after selecting dataset (e.g., target or date range) or changing a parameter.
+- It should be *extremely easy* for users to use.
 """)
+
+# ╔═╡ 5ec81100-4ad7-4214-909a-694a58e6f40f
+warning_box(md"""
+If using another language make absolutely sure that your dashboard works reliably for other users and on other systems.  
+- Exactly reproduces all package versions
+- Any dependencies need to be automatically installed (likely in user space)
+- Works on Linux (ideally also MacOS, Windows, etc., but I won't test that) 
+- Automatically deals with file paths, system libraries, etc.
+- These details are often annoying, but: (1) the Julia & Pluto developers have taken care of the first two, and (2) Justin and I have already setup Roar to solve the remaining details, including using PyCall with astropy, pyquery and lightkurve.
+""")
+
+# ╔═╡ 3e2c13c0-2206-4f92-9608-cb158d7b46e0
+warning_box(md"""
+- I recommend that students who want to engage in original research become fluent in at least one high-level language (e.g., julia, python, R, IDL, matlab, Mathematica,...) and one compiled and strongly-typed language (e.g., julia, C/C++, Fortran,...).  
+- If you are only fluent in high-level language(s), then there will come a time when you are severely limited in what you can do.  This is particularly a concern for people likely to work with large datasets, large models and/or computationally expensive models.  
+
+→ If you are only fluent in high-level language(s), then I suggest using this opportunity to expand your skillset.  
+""")
+
+# ╔═╡ 73fba019-c1dc-4248-9993-8d4b6e7b0d9c
+md"""
+Your choice.  
+(If you have a datasource in mind and would like suggestions for how to access it, let me know.)
+
+Potential Data Sources
+- Transit light curves:
+  - Kepler/K2
+  - TESS
+- Transit Timing Variations:
+  - Table of transit times from Holczer et al. (2016)
+- Radial Velocities:
+  - California Legacy Survey RVs
+  - NEID standard star observations
+  - NEID solar observations
+- Host star properties
+  - California Legacy Survey spectra
+  - NEID standard star spectra
+  - Gaia
+"""
+
+# ╔═╡ 10af4937-9276-4322-a873-cc6ee79b3f45
+md"""
+It depends on the method.  For most problems, details are sufficiently technical that you need to go to original journal articles.  Usually, the state-of-the-art requires reading a set of papers each of which describes one or two steps in detail, but cite other papers for the details of the other steps.  (I can help find those for a particular method.)
+"""
+
+# ╔═╡ ab4a2203-0a98-4b23-9ae4-225a955d10f3
+md"""Yes.  It's possible.  That said, the easiest-to-find planets are the least likely to have been overlooked.  I'd encourage you to set goals that don't depend on what others have done in the past (e.g., build the capability to detect a planet, but call it a success even if all your detections have been discovered previously).
+"""
 
 # ╔═╡ d890335f-435f-494c-8884-580313ffd85e
 md"""
@@ -207,6 +249,15 @@ Is it necessary to do the final project in Julia?
 Can we do it in a language like R or Python instead?
 """)
 
+# ╔═╡ f6abdc43-b031-4d05-b5cc-460ee3e483c8
+question(md"""Will we have access to any public databases or specific ones chosen for us?""")
+
+# ╔═╡ 6a39d5e4-6cf7-431f-85ad-35573bd71251
+question(md"What are some good external resources that provide in-depth explanations on methods for exoplanet data analysis?")
+
+# ╔═╡ c44854a5-ee4e-411c-80eb-62929071b99b
+question(md"Would it be possible to use available data sets to discover planets that have not been found yet by anyone else?")
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -222,9 +273,8 @@ PlutoUI = "~0.7.43"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.8.2"
+julia_version = "1.7.1"
 manifest_format = "2.0"
-project_hash = "71f8ac5999635d848b5821f188b468ce01104556"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -234,7 +284,6 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -257,7 +306,6 @@ version = "0.11.4"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "0.5.2+0"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -268,9 +316,8 @@ deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -335,12 +382,10 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -349,7 +394,6 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -369,9 +413,9 @@ version = "2.2.2"
 
 [[deps.MacroTools]]
 deps = ["Markdown", "Random"]
-git-tree-sha1 = "42324d08725e200c23d4dfb549e0d5d89dede2d2"
+git-tree-sha1 = "3d3e902b31198a27340d0bf00d6ac452866021cf"
 uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
-version = "0.5.10"
+version = "0.5.9"
 
 [[deps.Markdown]]
 deps = ["Base64"]
@@ -380,23 +424,19 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.0+0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.2.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-version = "1.2.0"
 
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.20+0"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
@@ -412,7 +452,6 @@ version = "2.4.0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.8.0"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -469,7 +508,6 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-version = "0.7.0"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -488,12 +526,10 @@ uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-version = "1.0.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
-version = "1.10.1"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
@@ -514,22 +550,18 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.12+3"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.1.1+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
@@ -547,7 +579,15 @@ version = "17.4.0+0"
 # ╟─96a79b3c-d529-4dfd-a730-90d1a74128f3
 # ╟─cf806174-ee8d-4f17-87de-c83c6051c902
 # ╟─25a44765-87ea-4147-98ab-8bcfcfadec49
-# ╟─83a9749e-da15-42d0-8750-3ee021ca94b8
+# ╟─e88c441f-d825-4fac-8e03-64d0eff762d8
+# ╟─5ec81100-4ad7-4214-909a-694a58e6f40f
+# ╟─3e2c13c0-2206-4f92-9608-cb158d7b46e0
+# ╟─f6abdc43-b031-4d05-b5cc-460ee3e483c8
+# ╟─73fba019-c1dc-4248-9993-8d4b6e7b0d9c
+# ╟─6a39d5e4-6cf7-431f-85ad-35573bd71251
+# ╟─10af4937-9276-4322-a873-cc6ee79b3f45
+# ╟─c44854a5-ee4e-411c-80eb-62929071b99b
+# ╟─ab4a2203-0a98-4b23-9ae4-225a955d10f3
 # ╟─d890335f-435f-494c-8884-580313ffd85e
 # ╟─fa226e05-2eea-4635-8bc8-24551f73e706
 # ╟─5f2201e5-0a1e-45c7-a7d6-516d86d5f780
