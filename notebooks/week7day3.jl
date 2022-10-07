@@ -117,6 +117,61 @@ Describe the plots that will be displayed on your dashboard. For each plot:
    - If you or your team have any hard scheduling constraints that would prevent them from presenting during class on Dec 2, 5, 7 or 9. You may also indicate any additional scheduling preferences.
 """
 
+# ╔═╡ c5c712c1-e8b6-4220-a011-e22675fa9caa
+md"""
+## Teamwork
+"""
+
+# ╔═╡ d469d52c-7330-4004-a8a4-2e09f7eb0c01
+md"""
+# Questions
+"""
+
+# ╔═╡ cf806174-ee8d-4f17-87de-c83c6051c902
+md"""
+### By far the easiest way to meet class requirements: 
+- Pluto notebook & Julia
+- For nice UI can use [PlutoUI.jl](https://github.com/fonsp/Pluto.jl)
+
+### A little extra hassle, but very possibly worth it
+- Pluto notebook with Julia, plus calls to Python or R
+   - [PyCall.jl](https://github.com/JuliaPy/PyCall.jl):  Justin & I have tested on Roar for you.
+   - [PythonCall.jl](https://github.com/cjdoris/PythonCall.jl):  Probably nicer in long term, but I'm not sure it's ready yet.
+   - [RCall.jl](https://juliainterop.github.io/RCall.jl/stable/):  For R users
+- Examples of when this would make sense:  
+  - Reading data in obscure file formats using [astropy.io](https://docs.astropy.org/en/stable/io/unified.html)
+  - Downloading data using [astroquery](https://astroquery.readthedocs.io/en/latest/) or archive specific package (e.g., lightkurve or pyneid)
+
+### In theory, there are environments that could work
+#### But it will probably take significantly more time.
+
+- [Dash](https://dash.gallery/Portal/) (Python-specific)
+- [Reactor](https://github.com/herbps10/Reactor/) (R-specific)
+- [Shiny](https://shiny.rstudio.com/) (R-specific)
+- Potentially more, but I'm worried that they may be less mature, reliable, polished, well documented, etc.:
+   - [Dataflow notebooks](https://dataflownb.github.io/)? (Python-specific, on top of Jupyter)
+   - [Observable](https://observablehq.com/)? (Javascript+Something else) 
+"""
+
+# ╔═╡ 25a44765-87ea-4147-98ab-8bcfcfadec49
+warning_box(md"""
+If you try something other than Pluto, be prepared to spend significant ammount of time: figuring it out yourself, rewriting code to do tasks that I've already provided examples for, making the dashboard work reliably, and automating the setup process.
+""")
+
+# ╔═╡ 83a9749e-da15-42d0-8750-3ee021ca94b8
+warning_box(md"""
+If using another language make absolutely sure:
+- Your dashboard must work reliably for other users and on other systems.  
+   - Exactly reproduces all package versions
+   - Any dependencies need to be automatically installed (likely in user space)
+   - Automatically deals with data transfer, file paths, system libraries, etc.
+- These things are annoying, but Justin, Pluto developers and I have already solved them for you (if you use Julia/Pluto).
+- It is to be a dashboard, not a notebook or a project report
+    - It should work on "new" data that you won't have been able to test it on
+    - Can not require users to rerun cells in a specific order after selecting dataset (e.g., target or date range) or changing a parameter.
+    - It should be *extremely easy* for users to use.
+""")
+
 # ╔═╡ d890335f-435f-494c-8884-580313ffd85e
 md"""
 ## Dashboard Checklist
@@ -135,18 +190,22 @@ md"""
 1. Does the dashboard effectively achieve its stated goals? (2 point)
 """
 
-# ╔═╡ c5c712c1-e8b6-4220-a011-e22675fa9caa
-md"""
-## Teamwork
-"""
-
 # ╔═╡ fa226e05-2eea-4635-8bc8-24551f73e706
 md"""
-## Setup
+# Setup
 """
 
 # ╔═╡ 5f2201e5-0a1e-45c7-a7d6-516d86d5f780
 ChooseDisplayMode()
+
+# ╔═╡ e1da6dba-7fb7-4eba-a6b0-a1b87b683b04
+question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
+
+# ╔═╡ 96a79b3c-d529-4dfd-a730-90d1a74128f3
+question(md"""
+Is it necessary to do the final project in Julia? 
+Can we do it in a language like R or Python instead?
+""")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -165,7 +224,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.2"
 manifest_format = "2.0"
-project_hash = "69f995e0dc6a1c35a46792be048dc8abd510ce38"
+project_hash = "71f8ac5999635d848b5821f188b468ce01104556"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -483,10 +542,16 @@ version = "17.4.0+0"
 # ╟─80dc0be6-fe15-48a5-ae18-3816ec300a82
 # ╟─d9d15e47-0324-4f74-9959-02defe1f6e00
 # ╟─b71be193-556e-4415-a036-e343034c80bf
-# ╟─d890335f-435f-494c-8884-580313ffd85e
 # ╟─c5c712c1-e8b6-4220-a011-e22675fa9caa
+# ╟─d469d52c-7330-4004-a8a4-2e09f7eb0c01
+# ╟─96a79b3c-d529-4dfd-a730-90d1a74128f3
+# ╟─cf806174-ee8d-4f17-87de-c83c6051c902
+# ╟─25a44765-87ea-4147-98ab-8bcfcfadec49
+# ╟─83a9749e-da15-42d0-8750-3ee021ca94b8
+# ╟─d890335f-435f-494c-8884-580313ffd85e
 # ╟─fa226e05-2eea-4635-8bc8-24551f73e706
 # ╟─5f2201e5-0a1e-45c7-a7d6-516d86d5f780
 # ╠═cf0ea83a-4579-11ed-1543-6b6c2082230a
+# ╠═e1da6dba-7fb7-4eba-a6b0-a1b87b683b04
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
