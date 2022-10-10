@@ -274,6 +274,19 @@ md"""
 ### Examples
 """
 
+# ╔═╡ 70fe782a-bcd8-4239-b922-f6949435d865
+tip(md"Originally, both tables contained columns named `ra` and `dec`.  The joined table contains columns `ra` and `ra_1` (and `dec` and `dec_1`) because we set `makeunique`.")
+
+# ╔═╡ 6d00e16e-0556-440f-bb7b-29a347e65272
+md"""
+#### What if we didn't know the Gaia designation?
+"""
+
+# ╔═╡ ccfcbbe1-a358-41e8-a562-f5db25e2a9fc
+md"""
+#### Wait, which row is the best match?
+"""
+
 # ╔═╡ 540c6982-2759-4b63-b5a4-e360bddfa4e1
 md"""
 ## Questions?
@@ -998,9 +1011,12 @@ version = "17.4.0+0"
 # ╟─49bf3268-bb0f-484c-972a-14f94d7c4151
 # ╠═8fb6efb1-6493-449a-b5cb-49763b7d361c
 # ╠═1775c8de-0dc3-44c9-b36d-40b5eb2922e1
+# ╟─70fe782a-bcd8-4239-b922-f6949435d865
+# ╟─6d00e16e-0556-440f-bb7b-29a347e65272
 # ╠═91aab994-2b5f-4de2-b78e-828868c3ead5
 # ╠═29ab2b94-1aba-4831-ba1f-044c7f2843d1
 # ╠═6cde0247-5471-45e5-b291-73b8b96179ab
+# ╟─ccfcbbe1-a358-41e8-a562-f5db25e2a9fc
 # ╠═e667dfb6-40b6-4739-ae63-a8be386e1f21
 # ╠═41dfc658-2e54-4408-8e52-4879e209b022
 # ╟─540c6982-2759-4b63-b5a4-e360bddfa4e1
