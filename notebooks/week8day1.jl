@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.12
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -86,6 +86,7 @@ md"""
   - Webpage
   - URL-based
   - Custom Graphical user interface (GUI)
+    - TopCat
 """
 
 # ╔═╡ ad409d2a-1d8f-4f9f-b649-6b5c76321f7e
@@ -120,82 +121,6 @@ md"""
 - Transactions
 """
 
-# ╔═╡ a30a9fb2-0ac8-488a-ac63-0f9085b32fa2
-md"""
-## Example SQL Queries
-
-#### Do not send
-```sql
-select * from SomeTable
-```
-
-Why?
-"""
-
-# ╔═╡ 650e5cbe-7bc2-4c13-881a-e4469cf0152a
-md"""
-#### Take a quick peak two columns data for first few entries
-```sql
-select top 10 X, Y from SomeTable 
-```
-
-"""
-
-# ╔═╡ b61ec045-9c2f-4496-bde4-f2bade567867
-md"""
-#### Find extreme values of X
-```sql
-select top 10 X, Y 
-from SomeTable 
-order by X
-```
-
-"""
-
-# ╔═╡ 5e7371b9-7923-4ec3-b9c0-505391f5aebd
-md"""
-#### Filter which rows are returned using expression 
-```sql
-select top 10 x,y
-from SomeTable 
-where x*x+y*y between 0 and 1
-order by x 
-```
-"""
-
-# ╔═╡ 1f5a730e-6831-4973-9e6d-b5adc3db9778
-md"""
-#### Check how many rows are in a table
-```sql
-select COUNT(designation) as N from gaiadr2.gaia_source
-```
-
-#### Check how many rows satisfy a filter
-```sql
-select COUNT(designation) as n, AVG(astrometric_n_good_obs_al) as astrometric_n_good_obs_al_ave
-from gaiadr2.gaia_source
-where phot_g_mean_mag < 14
-```
-"""
-
-# ╔═╡ 8d04311d-42dc-499b-af80-7a2e6bdc332e
-md"""
-#### Grouping data
-```sql
-select COUNT(designation) as N from gaiadr2.gaia_source,
-       AVG(astrometric_n_good_obs_al) as astrometric_n_good_obs_al_ave,
-       AVE(phot_g_mean_mag) as phot_g_mean_mag_ave
-where phot_g_mean_mag < 14
-group by round(phot_g_mean_mag,1)
-order by mean(phot_g_mean_mag)
-```
-"""
-
-# ╔═╡ 29a7a0ca-fbe8-42e9-aabf-4e30a0a4eae7
-md"""
-#### [Gaia Archive](https://gea.esac.esa.int/archive/)
-"""
-
 # ╔═╡ e1669276-2b84-4bd4-94bc-d58feda22caf
 md"""
 ## Virtual Observatory (VO)
@@ -223,9 +148,95 @@ md"""
 - REGION
 """
 
+# ╔═╡ a30a9fb2-0ac8-488a-ac63-0f9085b32fa2
+md"""
+## Example Bad SQL Query
+
+#### Do not send
+```sql
+select * from SomeTable
+```
+
+Why?
+"""
+
+# ╔═╡ 39a288ff-eb95-486b-9816-e0693334fe4f
+md"""
+## Example SQL Queries 
+"""
+
+# ╔═╡ 650e5cbe-7bc2-4c13-881a-e4469cf0152a
+md"""
+### Take a quick peak two columns data for first few entries
+```sql
+select top 10 X, Y from SomeTable 
+```
+
+"""
+
+# ╔═╡ b61ec045-9c2f-4496-bde4-f2bade567867
+md"""
+## Find extreme values of X
+```sql
+select top 10 X, Y 
+from SomeTable 
+order by X
+```
+
+"""
+
+# ╔═╡ 5e7371b9-7923-4ec3-b9c0-505391f5aebd
+md"""
+## Filter which rows are returned using expression 
+```sql
+select top 10 x,y
+from SomeTable 
+where x*x+y*y between 0 and 1
+order by x 
+```
+"""
+
+# ╔═╡ f68211ad-5ed2-40ca-8199-44b5e1a6b984
+md"""
+## Check how many rows are in a table
+```sql
+select COUNT(designation) as N from gaiadr2.gaia_source
+```
+"""
+
+# ╔═╡ 29a7a0ca-fbe8-42e9-aabf-4e30a0a4eae7
+md"""
+#### [Gaia Archive](https://gea.esac.esa.int/archive/)
+"""
+
+# ╔═╡ 430fc7a3-2824-43ad-a281-64c1d0487898
+md"""
+## Check how many rows satisfy a filter
+```sql
+select COUNT(designation) as n, AVG(astrometric_n_good_obs_al) as astrometric_n_good_obs_al_ave
+from gaiadr2.gaia_source
+where phot_g_mean_mag < 14
+```
+"""
+
+# ╔═╡ 8d04311d-42dc-499b-af80-7a2e6bdc332e
+md"""
+## Grouping data to make a histogram
+```sql
+select COUNT(designation) as N, 
+       AVG(astrometric_n_good_obs_al) as astrometric_n_good_obs_al_ave,  
+       AVG(phot_g_mean_mag) as phot_g_mean_mag_ave,
+       ROUND(phot_g_mean_mag,1) as bin
+from gaiadr2.gaia_source
+where phot_g_mean_mag < 14
+group by bin 
+order by bin
+```
+"""
+
 # ╔═╡ f561d36e-ec3c-42b8-b7f8-0202f4a4363b
 md"""
-### Table Access Protocol (TAP)
+# Table Access Protocol (TAP)
 """
 
 # ╔═╡ 5396181f-b169-4011-b590-7bcc546bbbdc
@@ -292,6 +303,12 @@ md"""
 ## Questions?
 """
 
+# ╔═╡ b0224927-730a-41b5-a0e1-fa7101b64a12
+md"""
+!!! admonition "Question"
+    Would it be possible to use available data sets to discover planets that have not been found yet by anyone else?
+"""
+
 # ╔═╡ 499a15c9-41bb-46ea-beff-4ae9584ed780
 md"""
 # Setup & Helper Code
@@ -305,7 +322,7 @@ begin
 	nexsci_query_base_url = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query="
 	gaia_query_base_url = 
 	"https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY="
-end
+end;
 
 # ╔═╡ 45813921-68c4-4a61-84f2-d7f06a1e9e1b
 begin
@@ -423,7 +440,7 @@ Query = "1a8c2f83-1ff3-5112-b086-8aa67b057ba1"
 
 [compat]
 CSV = "~0.10.4"
-DataFrames = "~1.4.1"
+DataFrames = "~1.3.6"
 HTTP = "~1.4.0"
 PlutoTeachingTools = "~0.2.3"
 PlutoUI = "~0.7.43"
@@ -434,9 +451,8 @@ Query = "~1.0.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.8.2"
+julia_version = "1.7.1"
 manifest_format = "2.0"
-project_hash = "925e60680a34a704783566f3069dfad9ce1a43cc"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -446,7 +462,6 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -485,14 +500,13 @@ version = "0.11.4"
 
 [[deps.Compat]]
 deps = ["Dates", "LinearAlgebra", "UUIDs"]
-git-tree-sha1 = "3ca828fe1b75fa84b021a7860bd039eaea84d2f2"
+git-tree-sha1 = "5856d3031cdb1f3b2b6340dfdc66b6d9a149a374"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "4.3.0"
+version = "4.2.0"
 
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "0.5.2+0"
 
 [[deps.Crayons]]
 git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
@@ -500,15 +514,15 @@ uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
 version = "4.1.1"
 
 [[deps.DataAPI]]
-git-tree-sha1 = "46d2680e618f8abd007bce0c3026cb0c4a8f2032"
+git-tree-sha1 = "1106fa7e1256b402a86a8e7b15c00c85036fef49"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
-version = "1.12.0"
+version = "1.11.0"
 
 [[deps.DataFrames]]
-deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SnoopPrecompile", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
-git-tree-sha1 = "558078b0b78278683a7445c626ee78c86b9bb000"
+deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrettyTables", "Printf", "REPL", "Reexport", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
+git-tree-sha1 = "db2a9cb664fcea7836da4b414c3278d71dd602d2"
 uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "1.4.1"
+version = "1.3.6"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
@@ -536,9 +550,8 @@ deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
 
 [[deps.FilePathsBase]]
 deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
@@ -596,9 +609,9 @@ version = "0.5.1"
 
 [[deps.InlineStrings]]
 deps = ["Parsers"]
-git-tree-sha1 = "d0ca109edbae6b4cc00e751a29dcb15a124053d6"
+git-tree-sha1 = "d19f9edd8c34760dca2de2b503f969d8700ed288"
 uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
-version = "1.2.0"
+version = "1.1.4"
 
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
@@ -652,12 +665,10 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -666,7 +677,6 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -692,9 +702,9 @@ version = "2.2.2"
 
 [[deps.MacroTools]]
 deps = ["Markdown", "Random"]
-git-tree-sha1 = "42324d08725e200c23d4dfb549e0d5d89dede2d2"
+git-tree-sha1 = "3d3e902b31198a27340d0bf00d6ac452866021cf"
 uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
-version = "0.5.10"
+version = "0.5.9"
 
 [[deps.Markdown]]
 deps = ["Base64"]
@@ -709,7 +719,6 @@ version = "1.1.6"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.0+0"
 
 [[deps.Missings]]
 deps = ["DataAPI"]
@@ -722,22 +731,19 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.2.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-version = "1.2.0"
 
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.20+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
-git-tree-sha1 = "ebe81469e9d7b471d7ddb611d9e147ea16de0add"
+git-tree-sha1 = "02be9f845cb58c2d6029a6d5f67f4e0af3237814"
 uuid = "4d8831e6-92b7-49fb-bdf8-b643e874388c"
-version = "1.2.1"
+version = "1.1.3"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -759,7 +765,6 @@ version = "2.4.0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.8.0"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -798,10 +803,10 @@ uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.3.0"
 
 [[deps.PrettyTables]]
-deps = ["Crayons", "Formatting", "Markdown", "Reexport", "StringManipulation", "Tables"]
-git-tree-sha1 = "460d9e154365e058c4d886f6f7d6df5ffa1ea80e"
+deps = ["Crayons", "Formatting", "Markdown", "Reexport", "Tables"]
+git-tree-sha1 = "dfb54c4e414caa595a1f2ed759b160f5a3ddcba5"
 uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
-version = "2.1.2"
+version = "1.3.1"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -846,7 +851,6 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-version = "0.7.0"
 
 [[deps.SentinelArrays]]
 deps = ["Dates", "Random"]
@@ -861,11 +865,6 @@ uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 git-tree-sha1 = "874e8867b33a00e784c8a7e4b60afe9e037b74e1"
 uuid = "777ac1f9-54b0-4bf8-805c-2214025038e7"
 version = "1.1.0"
-
-[[deps.SnoopPrecompile]]
-git-tree-sha1 = "f604441450a3c0569830946e5b33b78c928e1a85"
-uuid = "66db9d55-30c0-4569-8b51-7e840670fc0c"
-version = "1.0.1"
 
 [[deps.Sockets]]
 uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
@@ -884,15 +883,9 @@ uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
-[[deps.StringManipulation]]
-git-tree-sha1 = "46da2434b41f41ac3594ee9816ce5541c6096123"
-uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
-version = "0.3.0"
-
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-version = "1.0.0"
 
 [[deps.TableShowUtils]]
 deps = ["DataValues", "Dates", "JSON", "Markdown", "Test"]
@@ -921,7 +914,6 @@ version = "1.9.0"
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
-version = "1.10.1"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
@@ -959,22 +951,18 @@ version = "1.4.2"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.12+3"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.1.1+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
@@ -989,16 +977,18 @@ version = "17.4.0+0"
 # ╟─ad409d2a-1d8f-4f9f-b649-6b5c76321f7e
 # ╟─9ac78e9d-c97e-451c-af50-2a7251f0714b
 # ╟─804babe2-6398-401d-b443-eeff52721208
-# ╟─a30a9fb2-0ac8-488a-ac63-0f9085b32fa2
-# ╠═650e5cbe-7bc2-4c13-881a-e4469cf0152a
-# ╟─b61ec045-9c2f-4496-bde4-f2bade567867
-# ╟─5e7371b9-7923-4ec3-b9c0-505391f5aebd
-# ╟─1f5a730e-6831-4973-9e6d-b5adc3db9778
-# ╟─8d04311d-42dc-499b-af80-7a2e6bdc332e
-# ╟─29a7a0ca-fbe8-42e9-aabf-4e30a0a4eae7
 # ╟─e1669276-2b84-4bd4-94bc-d58feda22caf
 # ╟─d09c5da7-7b12-478b-ae23-bf130a645f93
-# ╠═f561d36e-ec3c-42b8-b7f8-0202f4a4363b
+# ╟─a30a9fb2-0ac8-488a-ac63-0f9085b32fa2
+# ╟─39a288ff-eb95-486b-9816-e0693334fe4f
+# ╟─650e5cbe-7bc2-4c13-881a-e4469cf0152a
+# ╟─b61ec045-9c2f-4496-bde4-f2bade567867
+# ╟─5e7371b9-7923-4ec3-b9c0-505391f5aebd
+# ╟─f68211ad-5ed2-40ca-8199-44b5e1a6b984
+# ╟─29a7a0ca-fbe8-42e9-aabf-4e30a0a4eae7
+# ╟─430fc7a3-2824-43ad-a281-64c1d0487898
+# ╟─8d04311d-42dc-499b-af80-7a2e6bdc332e
+# ╟─f561d36e-ec3c-42b8-b7f8-0202f4a4363b
 # ╟─5396181f-b169-4011-b590-7bcc546bbbdc
 # ╠═241a7b00-a53e-4c93-8b1e-a9b76e3223e3
 # ╠═59c3abea-3aee-452d-902a-9a22b6393bd6
@@ -1020,8 +1010,9 @@ version = "17.4.0+0"
 # ╠═e667dfb6-40b6-4739-ae63-a8be386e1f21
 # ╠═41dfc658-2e54-4408-8e52-4879e209b022
 # ╟─540c6982-2759-4b63-b5a4-e360bddfa4e1
+# ╟─b0224927-730a-41b5-a0e1-fa7101b64a12
 # ╟─499a15c9-41bb-46ea-beff-4ae9584ed780
-# ╠═a62e5bb9-9027-4da8-8ce4-65a5419f79e3
+# ╟─a62e5bb9-9027-4da8-8ce4-65a5419f79e3
 # ╠═bd1bf442-3fba-441d-b22e-8768d67d8652
 # ╠═0d1dafe5-d584-4952-981e-f418d5043cef
 # ╟─45813921-68c4-4a61-84f2-d7f06a1e9e1b
