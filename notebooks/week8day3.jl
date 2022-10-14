@@ -71,7 +71,7 @@ md"""
 #### Proposed Change:
 - Lab 7: Start Oct 12 –- Due Oct 19 
 - Lab 8: Start Oct 19  –- Due Oct 26  
-- Lab 9: Start Nov 2 –- Due Nov 16 
+- Lab 9: Start Nov 2 –- Due Nov 9
 """)
 
 # ╔═╡ 64865555-6812-446a-b808-9f41449f274a
