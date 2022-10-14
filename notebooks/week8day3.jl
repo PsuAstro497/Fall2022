@@ -175,7 +175,8 @@ md"""
 
 # ╔═╡ 793c67a2-69c6-4577-a435-53601d91485e
 md"""
-## Reading Questions
+# Reading Questions
+## Selection Effects
 """
 
 # ╔═╡ c235a0f3-ff38-436e-8b18-15efc19f200a
@@ -188,6 +189,21 @@ md"""
 - Transit Timing Variations
 - Imaging
 - Microlensing
+"""
+
+# ╔═╡ 45caad00-3102-49f1-9388-67a1703388fb
+md"""
+When using different telescopes from different locations, better coverage in time-domain is achieved.  However, correlated noise due to *atmospheric effects* or *stellar variability* will still affect transit survey sensitivity.
+"""
+
+# ╔═╡ 39cfffe5-90b0-4b6c-aefb-0beee32dc70f
+md"""
+## Periodograms
+"""
+
+# ╔═╡ 8bf4eb0d-2ab4-4cfc-ba14-357db52f77ae
+md"""
+## Labs
 """
 
 # ╔═╡ 55bc1d57-c9e4-4415-a2b4-3d72b9fd0bda
@@ -235,6 +251,20 @@ question(md"Do rogue planets impact exoplanet selection effects or number distri
 
 # ╔═╡ ec32bba8-e334-4c41-a4f8-36b262cf2b32
 question(md"What are the selection effects for other methods of exoplanet detection?")
+
+# ╔═╡ 3567639a-da74-4d1b-b93c-da2e099295c6
+question(md"""
+Will multi-observatory transit surveys detection ability limited by "red noise"? """)
+
+# ╔═╡ 94607e8e-e6e5-4483-899b-8214f6acefe5
+question(md"""
+Can you explain the LS periodogram?
+""")
+
+# ╔═╡ 69284468-3d75-430e-8bb0-c75e97f2e448
+question(md"""
+Is it possible to measure multiple periodogram power peaks that are all similar in magnitude and above the detection threshold, and what should be done in these cases?
+""")
 
 # ╔═╡ 60cf2065-206c-4354-9ca5-f0b1b0ac9219
 question(md"""
@@ -684,6 +714,12 @@ version = "17.4.0+0"
 # ╟─c235a0f3-ff38-436e-8b18-15efc19f200a
 # ╟─ec32bba8-e334-4c41-a4f8-36b262cf2b32
 # ╟─41885326-82e5-45eb-940e-de73eef9542f
+# ╟─3567639a-da74-4d1b-b93c-da2e099295c6
+# ╟─45caad00-3102-49f1-9388-67a1703388fb
+# ╟─39cfffe5-90b0-4b6c-aefb-0beee32dc70f
+# ╟─94607e8e-e6e5-4483-899b-8214f6acefe5
+# ╟─69284468-3d75-430e-8bb0-c75e97f2e448
+# ╟─8bf4eb0d-2ab4-4cfc-ba14-357db52f77ae
 # ╟─60cf2065-206c-4354-9ca5-f0b1b0ac9219
 # ╠═55bc1d57-c9e4-4415-a2b4-3d72b9fd0bda
 # ╠═b9c55b94-c2ae-4168-9ac1-f82e0a6c0f93
