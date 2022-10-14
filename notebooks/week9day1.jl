@@ -12,171 +12,16 @@ end
 
 # ╔═╡ 3d1bb85d-27c4-41ce-85b2-1e65566d4515
 md"""
-# Exoplanet Populations
-**Astro 497, Week 8, Day 3**
+# Data Science Lifecycle
+**Astro 497, Week 9, Day 1**
 """
 
 # ╔═╡ 5802bccb-e7de-40f2-87b7-5f68545dbb98
 TableOfContents()
 
-# ╔═╡ b6cbdfef-f881-4a36-8cfa-e3ef98e5c035
+# ╔═╡ d3d8d201-e3aa-4cd6-9df2-6d291c06172b
 md"""
-# Mid-semester Feedback
-
-#### Thanks for the encouragement about the labs!
-
-## How to use Wednesdays
-- All respondents expressed interest in using at least some of the remaining Wednesdays for working on projects.  
-- 2nd most popular was talking through how to approach solving quantitative problems 
-
-Let's make a plan.  
-"""
-
-# ╔═╡ 4f1e2adf-d23e-4d84-a331-88b1857579dd
-TwoColumn(
-md"""
-#### Potential project workdays:
-  - Oct 26 (before Checkpoint 1)
-  - Nov 9 (between Checkpoints 1 & 2)
-  - Nov 16 (between Checkpoint 2 & Dashboard due)
-  - Nov 30 (too late for dashboard itself, but could be used to work on presentations)
-""",
-	
-md"""
-#### Project deadlines
-- Project Plan (due Oct 19)
-- Project Step 1 (due Oct 31)
-- Project Step 2 (due Nov 14)
-- Project Dashboard (due Nov 28)
-- Project Presentations (due Dec 2 - 9)
-- Individual Report & Reflection (due Dec 9)
-""") 
-
-
-# ╔═╡ e6b8ed94-1762-4723-b077-f9463f8ad0ff
-md"""
-## Other suggestions
-- Provide a full week to complete labs.  
-"""
-
-# ╔═╡ bdfc73de-4cb9-4153-b506-97aa3c89076a
-TwoColumn(
-md"""
-#### Currently:
-- Lab 7: Start Oct 12 –- Due Oct 17
-- Lab 8: Start Oct 19 –- Due Oct 24
-- Lab 9: Start Nov 2  –- Due Nov 7
-""",
-md"""
-#### Proposed Change:
-- Lab 7: Start Oct 12 –- Due Oct 19 
-- Lab 8: Start Oct 19  –- Due Oct 26  
-- Lab 9: Start Nov 2 –- Due Nov 16 
-""")
-
-# ╔═╡ 64865555-6812-446a-b808-9f41449f274a
-
-
-# ╔═╡ baf36f8f-72fa-4492-a15b-200da8e8fe08
-md"""
-## Mid-term Exam Feedback
-- Most respondents cited time as a significant challenge.
-- Some students mentioned not knowing which equations to use or not being confident that they used the right equations.
-"""
-
-# ╔═╡ d03d8317-22c4-4ff8-8921-9155ba77a064
-md"""
-# How to organize knowledge about exoplanets (or any new field)?
-- Start with very limited knowledge.
-- As discover more exoplanets, iteratively improve knowledge.
-- As detection methods improve, we expect that the first detections are likely to be extreme in some way.
-- Even after detecting thousands of exoplanets, detection biases sculpt the known population. 
-
-## What we'd like to use
-- Physical characteristics (e.g., rocky, oceans, atmosphere)
-- How planets formed
-"""
-
-# ╔═╡ 35601a4f-1282-4511-b102-3874ed8add41
-md"""
-!!! hint "What's the problem with this system?"
-    We usually don't know their detailed physical characteristics.
-    We will never know their formation history for certain. 
-"""
-
-# ╔═╡ cfafc195-e8fb-4ae7-9d39-6e2e480c4c31
-md"""
-## Commonly used categories in practice
-### What do we measure first/best?
-- Orbital period (for transits or RVs)
-   - Relatively easy to transform in insolation
-- Size (for transits) or $m \sin i$ (for RVs)
-"""
-
-# ╔═╡ aacdada5-2912-4037-8de2-c14f6ead0de7
-md"""
-### Giant Planets
-- Hot-Jupiters (HJs)
-- Warm Giant Planets
-- Temperate/Cool Giant Planets (RV)
-- Wide-orbits Giant Planets (Direct Imaging)
-"""
-
-# ╔═╡ 6bf696f1-0d0f-40d1-b03e-e0c591e9ef79
-md"""
-### Neptune-size/mass Planets
-- Hot-Neptunes
-- Warm Neptunes
-"""
-
-# ╔═╡ 5f902134-f5a0-414d-af93-5334e6024c35
-md"""
-### Rocky Planets
-- Ultra short period planets (USPs) 
-- Warm rocky planets
-- Habitable-zone rocky planets
-"""
-
-# ╔═╡ ababa190-51d0-48bc-b097-72ff6a1cff80
-md"""
-## What else can we measure?
-Categories based on a notable property that is harder to measure, so is measured for only a subset of planets/systems: 
-- Chains of planets in mean-motion resonances (transits/TTVs)
-- Eccentric giant planets  (RVs, TTVs)
-- Misaligned hot-Jupiters  (RM)
-- Bulk densities (combining transits and RVs or TTVs)
-  - Rocky planets
-  - Planets with H/He atmospheres
-  - Waterworlds
-  - Super-puffy planets
-"""
-
-# ╔═╡ 742c93a4-247b-4abd-aee8-1515872e333c
-md"""
-## Categories for rare planets/systems
-- Ultra-short period planets 
-- Warm Jupiters
-- Brown dwarf desert
-- Pairs of planets straddling the radius valley
-"""
-
-# ╔═╡ 7c543f14-f0ac-4160-be87-92d502221bdc
-md"""
-# More nuanced types of information about a population
-- Non-detections ("truncation")
-- Upper (or lower) limits ("censoring")
-
-## How to deal with censored & truncated data?
-- For simple models can derive likelihoods
-- Hierarchical models
-
-## Challenges of combining data from multiple surveys/methods
-"""
-
-# ╔═╡ 793c67a2-69c6-4577-a435-53601d91485e
-md"""
-# Reading Questions
-## Selection Effects
+## Reading questions
 """
 
 # ╔═╡ 124ca383-cf56-4aef-8137-045f1d39dceb
@@ -204,6 +49,85 @@ hint(md"""
   
 """)
 
+# ╔═╡ 41885326-82e5-45eb-940e-de73eef9542f
+md"""
+- Transit Timing Variations
+  - Systems near mean-motion resonances
+  - Very closely spaced planets
+  - TTV period short enough to see TTVs during Kepler mission 
+  - Orbital periods long enough that TTV amplitude could be detected
+- Imaging
+  - Large orbital separations
+  - Prefer nearly face-on orbits
+  - Planets bright in IR → 
+    - Nearby
+    - Hot → Massive & Young
+
+- Microlensing
+  - Sweet spot in projected angular distance
+  - More massive planets have longer microlensing signatures
+
+"""
+
+# ╔═╡ c235a0f3-ff38-436e-8b18-15efc19f200a
+md"""
+- Microlensing
+"""
+
+# ╔═╡ 45caad00-3102-49f1-9388-67a1703388fb
+md"""
+When using different telescopes from different locations, better coverage in time-domain is achieved.  However, correlated noise due to *atmospheric effects* or *stellar variability* will still affect transit survey sensitivity.
+"""
+
+# ╔═╡ 39cfffe5-90b0-4b6c-aefb-0beee32dc70f
+md"""
+## Periodograms
+"""
+
+# ╔═╡ 09032194-ba8f-4d5c-83f9-d8396cf80c3a
+md"""
+See [periodograms](http://localhost:1234/edit?id=a98fe880-4bc3-11ed-21cb-9bea773fc5f2&isolated_cell_id=5a73b1fc-99bc-4530-ae4a-49ce25df99dc&isolated_cell_id=27119a64-236d-4b8f-b48a-0f4690f2a2f1")
+"""
+
+# ╔═╡ 8bf4eb0d-2ab4-4cfc-ba14-357db52f77ae
+md"""
+## Labs
+"""
+
+# ╔═╡ 55bc1d57-c9e4-4415-a2b4-3d72b9fd0bda
+df1 = DataFrame(:x=>1:3, :a=>["a","b","c"] )
+
+# ╔═╡ b9c55b94-c2ae-4168-9ac1-f82e0a6c0f93
+df2 = DataFrame(:y=>10:10:30, :b=>rand(3) )
+
+# ╔═╡ 736fae87-4cb6-4f4a-8fa7-2eeae32b5db9
+crossjoin(df1,df2)
+
+# ╔═╡ e51391a6-4d60-4b85-b606-04f567476d54
+md"""
+# Data Science Lifecycle
+"""
+
+# ╔═╡ ca78d256-8d41-4904-b48b-eae0c77cbf40
+md"""
+# ICDS Fall 2022 Symposium
+#### Data Science, AI, and a Sustainable, Resilient, and Equitable Future
+
+## Keynote speaker: danah boyd
+#### Partner Researcher at Microsoft Research, the founder of Data & Society and a Distinguished Visiting Professor at Georgetown University
+
+Quotes that stood out to me.
+- "I found that the people who ascribe the most power to statistics and data are not people who do statistics and data science.  They are executives who give the vision talks about the power of data..." - Jeff Hammerbacher (2016), former lead of Data Science at Facebook
+
+- "Performing math is different than doing math."  (in context of redistrictors making it look like yore being objective)
+
+- "You're not making true claims.  You're making invitations for inquiry." (in context of redistricting)
+
+- "It's easier for me to agree with the model" (in context of career risk)
+
+
+"""
+
 # ╔═╡ 73619a67-d86c-4d03-93c8-f3c56fc79f2c
 md"""
 # Setup
@@ -218,6 +142,31 @@ question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite
 # ╔═╡ 5c891d4b-8ed6-4153-b027-5ee36e12579c
 question(md"""
 Is there one type of star that is more frequently found having exoplanets orbiting it, and if so, could that be due to selection effects as well?
+""")
+
+# ╔═╡ ec32bba8-e334-4c41-a4f8-36b262cf2b32
+question(md"What are the selection effects for other methods of exoplanet detection?")
+
+# ╔═╡ ea42b3f7-bda0-4919-b76f-9808c0b994fe
+question(md"Do rogue planets impact exoplanet selection effects or number distributions at all? ")
+
+# ╔═╡ 3567639a-da74-4d1b-b93c-da2e099295c6
+question(md"""
+Will multi-observatory transit surveys detection ability limited by "red noise"? """)
+
+# ╔═╡ 94607e8e-e6e5-4483-899b-8214f6acefe5
+question(md"""
+Can you explain the LS periodogram?
+""")
+
+# ╔═╡ 69284468-3d75-430e-8bb0-c75e97f2e448
+question(md"""
+Is it possible to measure multiple periodogram power peaks that are all similar in magnitude and above the detection threshold, and what should be done in these cases?
+""")
+
+# ╔═╡ 60cf2065-206c-4354-9ca5-f0b1b0ac9219
+question(md"""
+Crossjoin:  What does the cartesian product of rows exactly mean?
 """)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -626,25 +575,27 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╔═╡ Cell order:
 # ╟─3d1bb85d-27c4-41ce-85b2-1e65566d4515
 # ╟─5802bccb-e7de-40f2-87b7-5f68545dbb98
-# ╟─b6cbdfef-f881-4a36-8cfa-e3ef98e5c035
-# ╟─4f1e2adf-d23e-4d84-a331-88b1857579dd
-# ╟─e6b8ed94-1762-4723-b077-f9463f8ad0ff
-# ╟─bdfc73de-4cb9-4153-b506-97aa3c89076a
-# ╟─64865555-6812-446a-b808-9f41449f274a
-# ╟─baf36f8f-72fa-4492-a15b-200da8e8fe08
-# ╟─d03d8317-22c4-4ff8-8921-9155ba77a064
-# ╟─35601a4f-1282-4511-b102-3874ed8add41
-# ╟─cfafc195-e8fb-4ae7-9d39-6e2e480c4c31
-# ╟─aacdada5-2912-4037-8de2-c14f6ead0de7
-# ╟─6bf696f1-0d0f-40d1-b03e-e0c591e9ef79
-# ╟─5f902134-f5a0-414d-af93-5334e6024c35
-# ╟─ababa190-51d0-48bc-b097-72ff6a1cff80
-# ╟─742c93a4-247b-4abd-aee8-1515872e333c
-# ╟─7c543f14-f0ac-4160-be87-92d502221bdc
-# ╟─793c67a2-69c6-4577-a435-53601d91485e
+# ╟─d3d8d201-e3aa-4cd6-9df2-6d291c06172b
 # ╟─5c891d4b-8ed6-4153-b027-5ee36e12579c
 # ╟─124ca383-cf56-4aef-8137-045f1d39dceb
 # ╟─aab300af-0a91-49e2-892a-3501c79b2c07
+# ╟─ec32bba8-e334-4c41-a4f8-36b262cf2b32
+# ╟─41885326-82e5-45eb-940e-de73eef9542f
+# ╟─ea42b3f7-bda0-4919-b76f-9808c0b994fe
+# ╟─c235a0f3-ff38-436e-8b18-15efc19f200a
+# ╟─3567639a-da74-4d1b-b93c-da2e099295c6
+# ╟─45caad00-3102-49f1-9388-67a1703388fb
+# ╟─39cfffe5-90b0-4b6c-aefb-0beee32dc70f
+# ╟─94607e8e-e6e5-4483-899b-8214f6acefe5
+# ╟─09032194-ba8f-4d5c-83f9-d8396cf80c3a
+# ╟─69284468-3d75-430e-8bb0-c75e97f2e448
+# ╟─8bf4eb0d-2ab4-4cfc-ba14-357db52f77ae
+# ╟─60cf2065-206c-4354-9ca5-f0b1b0ac9219
+# ╠═55bc1d57-c9e4-4415-a2b4-3d72b9fd0bda
+# ╠═b9c55b94-c2ae-4168-9ac1-f82e0a6c0f93
+# ╠═736fae87-4cb6-4f4a-8fa7-2eeae32b5db9
+# ╟─e51391a6-4d60-4b85-b606-04f567476d54
+# ╟─ca78d256-8d41-4904-b48b-eae0c77cbf40
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e
 # ╟─2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
