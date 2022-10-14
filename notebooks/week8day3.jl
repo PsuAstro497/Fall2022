@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.11
+# v0.19.12
 
 using Markdown
 using InteractiveUtils
@@ -9,17 +9,78 @@ using PlutoUI, PlutoTeachingTools
 
 # ╔═╡ 3d1bb85d-27c4-41ce-85b2-1e65566d4515
 md"""
-## Exoplanet Populations
+# Exoplanet Populations
 **Astro 497, Week 8, Day 3**
 """
 
+# ╔═╡ 5802bccb-e7de-40f2-87b7-5f68545dbb98
+TableOfContents()
+
+# ╔═╡ b6cbdfef-f881-4a36-8cfa-e3ef98e5c035
+md"""
+# Mid-semester Feedback
+
+#### Thanks for the encouragement about the labs!
+
+## How to use Wednesdays
+- All respondents expressed interest in using at least some of the remaining Wednesdays for working on projects.  
+- 2nd most popular was talking through how to approach solving quantitative problems 
+
+Let's make a plan.  
+"""
+
+# ╔═╡ 4f1e2adf-d23e-4d84-a331-88b1857579dd
+TwoColumn(
+md"""
+#### Potential project workdays:
+  - Oct 19 OR Oct 26 (before Checkpoint 1)
+  - Nov 2 OR Nov 9 (between Checkpoints 1 & 2)
+  - Nov 16 (between Checkpoint 2 & Dashboard due)
+  - Nov 30 (too late for dashboard itself, but could be used to work on presentations)
+""",
+	
+md"""
+#### Project deadlines
+- Project Plan (due Oct 19)
+- Project Step 1 (due Oct 31)
+- Project Step 2 (due Nov 14)
+- Project Dashboard (due Nov 28)
+- Project Presentations (due Dec 2 - 9)
+- Individual Report & Reflection (due Dec 9)
+""") 
+
+
+# ╔═╡ e6b8ed94-1762-4723-b077-f9463f8ad0ff
+md"""
+## Other suggestions
+- Provide a full week to complete labs.  
+"""
+
+# ╔═╡ bdfc73de-4cb9-4153-b506-97aa3c89076a
+TwoColumn(
+md"""
+#### Currently:
+- Lab 7: Start Oct 12 –- Due Oct 17
+- Lab 8: Start Oct 19 –- Due Oct 24
+- Lab 9: Start Nov 2  –- Due Nov 7
+""",
+md"""
+#### Proposed Change:
+- Lab 7: Start Oct 12 –- Due Oct 19 (or 26)
+- Lab 8: Start Oct 19 (or 26) –- Due Oct 26 (or Nov 2) 
+- Lab 9: Start Nov 2  (or 9) –- Due Nov 16 
+""")
+
+# ╔═╡ 64865555-6812-446a-b808-9f41449f274a
+warning_box(md"Update proposed dates based on choice of project workdays.")
+
 # ╔═╡ d03d8317-22c4-4ff8-8921-9155ba77a064
 md"""
-## How do we organize planets?
+# How to organize knowledge
 
 ## What we'd like to use
 - Physical characteristics (e.g., rocky, oceans, atmosphere)
-- How they formed
+- How planets formed
 """
 
 # ╔═╡ 35601a4f-1282-4511-b102-3874ed8add41
@@ -66,18 +127,49 @@ md"""
 ## Categories based on a particularly notable property
 - Eccentric giant planets
 - Misaligned hot-Jupiters
-- 
+- Waterworlds
+- Super-puffy planets
+- Chains of planets in mean-motion resonances
 """
 
 # ╔═╡ 742c93a4-247b-4abd-aee8-1515872e333c
 md"""
-## Categories for rare planets/regions of parameter space
+## Categories for rare planets/systems
+- Ultra-short period planets 
 - Warm Jupiters
 - Brown dwarf desert
+- Pairs of planets straddling the radius valley
 """
 
-# ╔═╡ ec32bba8-e334-4c41-a4f8-36b262cf2b32
+# ╔═╡ 7c543f14-f0ac-4160-be87-92d502221bdc
+md"""
+# More nuanced types of information about a population
+- Non-detections ("truncation")
+- Upper (or lower) limits ("censoring")
 
+## How to deal with censored & truncated data?
+- For simple models can derive likelihoods
+- Hierarchical models
+
+## Challenges of combining data from multiple surveys/methods
+"""
+
+# ╔═╡ 793c67a2-69c6-4577-a435-53601d91485e
+md"""
+## Reading Questions
+"""
+
+# ╔═╡ c235a0f3-ff38-436e-8b18-15efc19f200a
+md"""
+- Microlensing
+"""
+
+# ╔═╡ 41885326-82e5-45eb-940e-de73eef9542f
+md"""
+- Transit Timing Variations
+- Imaging
+- Microlensing
+"""
 
 # ╔═╡ ca78d256-8d41-4904-b48b-eae0c77cbf40
 md"""
@@ -94,7 +186,7 @@ Quotes that stood out to me.
 
 - "You're not making true claims.  You're making invitations for inquiry." (in context of redistricting)
 
-- "It's easier for me to agree with the model"
+- "It's easier for me to agree with the model" (in context of career risk)
 
 
 """
@@ -107,23 +199,29 @@ md"""
 # ╔═╡ 6a003863-69dc-40aa-95f3-bfe7159bdf6e
 ChooseDisplayMode()
 
+# ╔═╡ d0d367dd-30cd-4306-baf5-7cd5f24aca0f
+question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
+
+# ╔═╡ ea42b3f7-bda0-4919-b76f-9808c0b994fe
+question(md"Do rogue planets impact exoplanet selection effects or number distributions at all? ")
+
+# ╔═╡ ec32bba8-e334-4c41-a4f8-36b262cf2b32
+question(md"What are the selection effects for other methods of exoplanet detection?")
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-
-[compat]
-PlutoTeachingTools = "~0.2.3"
-PlutoUI = "~0.7.44"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.8.2"
 manifest_format = "2.0"
+project_hash = "69f995e0dc6a1c35a46792be048dc8abd510ce38"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -133,6 +231,7 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
+version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -155,6 +254,7 @@ version = "0.11.4"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
+version = "0.5.2+0"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -165,8 +265,9 @@ deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+version = "1.6.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -231,10 +332,12 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
+version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
+version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -243,6 +346,7 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
+version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -273,19 +377,23 @@ uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
+version = "2.28.0+0"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
+version = "2022.2.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
+version = "1.2.0"
 
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
+version = "0.3.20+0"
 
 [[deps.OrderedCollections]]
 git-tree-sha1 = "85f8e6578bf1f9ee0d11e7bb1b1456435479d47c"
@@ -294,13 +402,14 @@ version = "1.4.1"
 
 [[deps.Parsers]]
 deps = ["Dates"]
-git-tree-sha1 = "6c01a9b494f6d2a9fc180a08b182fcb06f0958a0"
+git-tree-sha1 = "3d5bf43e3e8b412656404ed9466f1dcbf7c50269"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.4.2"
+version = "2.4.0"
 
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
+version = "1.8.0"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -322,9 +431,9 @@ version = "0.2.3"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
-git-tree-sha1 = "6e33d318cf8843dade925e35162992145b4eb12f"
+git-tree-sha1 = "2777a5c2c91b3145f5aa75b61bb4c2eb38797136"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.44"
+version = "0.7.43"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -357,6 +466,7 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+version = "0.7.0"
 
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -375,10 +485,12 @@ uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+version = "1.0.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
+version = "1.10.1"
 
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
@@ -399,34 +511,50 @@ uuid = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
+version = "1.2.12+3"
 
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+version = "5.1.1+0"
 
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
+version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
+version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
 # ╟─3d1bb85d-27c4-41ce-85b2-1e65566d4515
+# ╟─5802bccb-e7de-40f2-87b7-5f68545dbb98
+# ╟─b6cbdfef-f881-4a36-8cfa-e3ef98e5c035
+# ╟─4f1e2adf-d23e-4d84-a331-88b1857579dd
+# ╟─e6b8ed94-1762-4723-b077-f9463f8ad0ff
+# ╟─bdfc73de-4cb9-4153-b506-97aa3c89076a
+# ╟─64865555-6812-446a-b808-9f41449f274a
 # ╟─d03d8317-22c4-4ff8-8921-9155ba77a064
 # ╟─35601a4f-1282-4511-b102-3874ed8add41
 # ╟─cfafc195-e8fb-4ae7-9d39-6e2e480c4c31
 # ╟─aacdada5-2912-4037-8de2-c14f6ead0de7
 # ╟─6bf696f1-0d0f-40d1-b03e-e0c591e9ef79
 # ╟─5f902134-f5a0-414d-af93-5334e6024c35
-# ╠═ababa190-51d0-48bc-b097-72ff6a1cff80
-# ╠═742c93a4-247b-4abd-aee8-1515872e333c
-# ╠═ec32bba8-e334-4c41-a4f8-36b262cf2b32
+# ╟─ababa190-51d0-48bc-b097-72ff6a1cff80
+# ╟─742c93a4-247b-4abd-aee8-1515872e333c
+# ╟─7c543f14-f0ac-4160-be87-92d502221bdc
+# ╟─793c67a2-69c6-4577-a435-53601d91485e
+# ╟─ea42b3f7-bda0-4919-b76f-9808c0b994fe
+# ╟─c235a0f3-ff38-436e-8b18-15efc19f200a
+# ╟─ec32bba8-e334-4c41-a4f8-36b262cf2b32
+# ╟─41885326-82e5-45eb-940e-de73eef9542f
 # ╟─ca78d256-8d41-4904-b48b-eae0c77cbf40
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e
-# ╠═2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
+# ╟─2ef8e8d0-4af9-11ed-2a34-1fe4f1ff7dc8
+# ╟─d0d367dd-30cd-4306-baf5-7cd5f24aca0f
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
