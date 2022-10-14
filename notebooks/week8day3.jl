@@ -74,9 +74,20 @@ md"""
 # ╔═╡ 64865555-6812-446a-b808-9f41449f274a
 warning_box(md"Update proposed dates based on choice of project workdays.")
 
+# ╔═╡ baf36f8f-72fa-4492-a15b-200da8e8fe08
+md"""
+## Mid-term Exam Feedback
+- Most respondents cited time as a significant challenge.
+- Some students mentioned not knowing which equations to use or not being confident that they used the right equations.
+"""
+
 # ╔═╡ d03d8317-22c4-4ff8-8921-9155ba77a064
 md"""
-# How to organize knowledge
+# How to organize knowledge about exoplanets (or any new field)?
+- Start with very limited knowledge.
+- As discover more exoplanets, iteratively improve knowledge.
+- As detection methods improve, we expect that the first detections are likely to be extreme in some way.
+- Even after detecting thousands of exoplanets, detection biases sculpt the known population. 
 
 ## What we'd like to use
 - Physical characteristics (e.g., rocky, oceans, atmosphere)
@@ -93,9 +104,10 @@ md"""
 # ╔═╡ cfafc195-e8fb-4ae7-9d39-6e2e480c4c31
 md"""
 ## Commonly used categories in practice
-### What do we measure first?
-- Orbital period or insolation
-- Size or mass
+### What do we measure first/best?
+- Orbital period (for transits or RVs)
+   - Relatively easy to transform in insolation
+- Size (for transits) or $m \sin i$ (for RVs)
 """
 
 # ╔═╡ aacdada5-2912-4037-8de2-c14f6ead0de7
@@ -124,12 +136,16 @@ md"""
 
 # ╔═╡ ababa190-51d0-48bc-b097-72ff6a1cff80
 md"""
-## Categories based on a particularly notable property
-- Eccentric giant planets
-- Misaligned hot-Jupiters
-- Waterworlds
-- Super-puffy planets
-- Chains of planets in mean-motion resonances
+## What else can we measure?
+Categories based on a notable property that is harder to measure, so is measured for only a subset of planets/systems: 
+- Chains of planets in mean-motion resonances (transits/TTVs)
+- Eccentric giant planets  (RVs, TTVs)
+- Misaligned hot-Jupiters  (RM)
+- Bulk densities (combining transits and RVs or TTVs)
+  - Rocky planets
+  - Planets with H/He atmospheres
+  - Waterworlds
+  - Super-puffy planets
 """
 
 # ╔═╡ 742c93a4-247b-4abd-aee8-1515872e333c
@@ -537,6 +553,7 @@ version = "17.4.0+0"
 # ╟─e6b8ed94-1762-4723-b077-f9463f8ad0ff
 # ╟─bdfc73de-4cb9-4153-b506-97aa3c89076a
 # ╟─64865555-6812-446a-b808-9f41449f274a
+# ╟─baf36f8f-72fa-4492-a15b-200da8e8fe08
 # ╟─d03d8317-22c4-4ff8-8921-9155ba77a064
 # ╟─35601a4f-1282-4511-b102-3874ed8add41
 # ╟─cfafc195-e8fb-4ae7-9d39-6e2e480c4c31
