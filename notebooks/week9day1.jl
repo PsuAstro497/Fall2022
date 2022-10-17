@@ -204,6 +204,32 @@ md"""
 
 Emphasizes loops and deployment
 
+#### Team Data Science Process (TDSP) 
+Combines a workflow with project templates and recommendations for infrastructure and tools.  Favors MS products.
+"""
+
+# ╔═╡ 43dc6de8-fbab-42d3-9daa-3ac29b100764
+md"""
+#### Domino’s data science life cycle is founded on three guiding principles:
+1. Ideation
+2. Data Acquisition and Exploration
+3. Research & Development
+4. Validation
+5. Delivery
+6. Monitoring
+
+Emphasizes frequest iteration, collaboration and reproducibility.
+"""
+
+# ╔═╡ e66bd4b0-0e43-4903-a10b-6fa85cad0b26
+md"""
+## Adapting Data Science Workflows from Industry to Scientific Setting
+- Reinterpret terms like "business case" and "customer"
+- Often don't know to quantify success when we start a project
+- Generally, place more value on interpretability 
+- Can accommodate projects requiring longer timescales
+- Increasingly, plan to make data & codes with public
+- Often communication is primarily with other scientists
 """
 
 # ╔═╡ ca78d256-8d41-4904-b48b-eae0c77cbf40
@@ -717,6 +743,8 @@ version = "17.4.0+0"
 # ╟─5f77f4db-cb91-4696-b517-28b17f51ed48
 # ╟─cf3d848d-b566-4475-80fd-a3743201eb0c
 # ╟─b096359d-158d-42c5-80a1-9543eb30ef9e
+# ╟─43dc6de8-fbab-42d3-9daa-3ac29b100764
+# ╟─e66bd4b0-0e43-4903-a10b-6fa85cad0b26
 # ╟─ca78d256-8d41-4904-b48b-eae0c77cbf40
 # ╟─73619a67-d86c-4d03-93c8-f3c56fc79f2c
 # ╟─6a003863-69dc-40aa-95f3-bfe7159bdf6e
