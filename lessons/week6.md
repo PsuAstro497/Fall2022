@@ -2,7 +2,7 @@
 title = "Week 6"
 week_num = 6
 tags = ["lessons"]
-topic = "Explanatory Data Analysis"
+topic = "Explanatory Data Analysis and Mass & Orbits"
 ds_topic = "Explanatory Data Analysis & Uncertainty Quantification"
 exo_topic =  "Exoplanet Characterization: Masses & Orbits"
 +++

@@ -2,7 +2,7 @@
 title = "Week 5"
 week_num = 5
 tags = ["lessons"]
-topic = "Bayesian Inference & Exoplanet Masses & Orbits I"
+topic = "Bayesian Inference & Rossiter-McLaughlin Effect"
 ds_topic = "Model Building III: Bayesian Inference & Non-linear Models"
 exo_topic =  "Exoplanet Characterization: Rossiter McLaughlin Effect"
 +++
