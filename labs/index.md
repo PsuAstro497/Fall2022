@@ -21,9 +21,10 @@ lab_list = [("labs/lab1.md","lab1"),
 - [Lab 4](lab4/): {{fill title labs/lab4.md}} ([github](https://github.com/PsuAstro497/lab4-start))
 - [Lab 5](lab5/): {{fill title labs/lab5.md}} ([github](https://github.com/PsuAstro497/lab5-start))
 - [Lab 6](lab6/): {{fill title labs/lab6.md}} ([github](https://github.com/PsuAstro497/lab6-start))
-- [Lab 7](lab7/): {{fill title labs/lab7.md}} ([github](https://github.com/PsuAstro497/lab6-start))
-- [Lab 8](lab8/): {{fill title labs/lab8.md}}
-- [Lab 9](lab9/): {{fill title labs/lab9.md}}
+- [Lab 7](lab7/): {{fill title labs/lab7.md}} ([github](https://github.com/PsuAstro497/lab7-start))
+- [Lab 8](lab8/): {{fill title labs/lab8.md}} ([github](https://github.com/PsuAstro497/lab8-start))
+- [Lab 9](lab9/): {{fill title labs/lab9.md}} ([github](https://github.com/PsuAstro497/lab9-start))
+
 
 <!--
 {{for (page,lab) in lab_list }}

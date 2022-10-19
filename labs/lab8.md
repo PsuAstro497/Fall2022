@@ -17,13 +17,13 @@ In this lab, students will learn to:
 - Read and write files in CSV, FITS and HDF5/JLD2 formats
 - Benchmark code
 - Choose a file format appropriate for their problem
-S
+
 
 Students will strengthen their understanding of:
 - Strengths and weaknesses of common file formats
 
 ### Logistics
-Follow [this link](https://classroom.github.com/a/dtBirzi5 to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
+Follow [this link](https://classroom.github.com/a/dtBirzi5) to create your own private copy of this lab's repository on GitHub.com. See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.
 
 ### Resources
 - [FileIO.jl](https://github.com/JuliaIO/FileIO.jl)
