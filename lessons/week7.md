@@ -4,7 +4,7 @@ week_num = 7
 tags = ["lessons"]
 topic = "Exam & Intro to Class Projects"
 ds_topic = "Introduction to Class Projects"
-exo_topic =  "NA"
+exo_topic =  "Multiple Planet Systems"
 +++
 
 Week {{week_num}}
