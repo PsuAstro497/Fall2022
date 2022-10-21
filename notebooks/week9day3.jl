@@ -18,9 +18,12 @@ TableOfContents()
 
 # ╔═╡ adb15016-e599-40eb-8a57-ebe7854ebe97
 md"""
-$(LocalResource("../_assets/week9/fig1_transit_geom.png"))
+$(LocalResource("../_assets/week9/fig1_transit_geom.png", :width=>"80%"))
 --- [Kreidberg, chapter from Handbook of Exoplanets](https://arxiv.org/abs/1709.05941)
 """
+
+# ╔═╡ 0e1bc001-996a-4e8b-acd4-8d1434689527
+LocalResource("../_assets/week2/circular_diagram.png", :width=>"80%")
 
 # ╔═╡ 92b3b41d-01fc-4fb5-909f-9a933ca211e6
 md"""
@@ -30,6 +33,15 @@ $(LocalResource("../_assets/week9/fig3_w43.png",:width=>"80%"))
 - Main figure is transmission spectrum from Hubble WFC3
 - Inset figure is emission spectrum is Spitzer/IRAC 3.6 & 4.5μm
 --- [Kreidberg et al. 2015 & chapter from Handbook of Exoplanets](https://arxiv.org/abs/1709.05941)
+"""
+
+# ╔═╡ ef536496-c022-4088-bf3c-1c38b94ff572
+md"""
+## Ground-based transmision spectroscopy 
+#### XO-2b
+$(LocalResource("../_assets/week9/XO2FOV.png", :width=>"60%"))
+$(LocalResource("../_assets/week9/GTC_XO2_HD_4pi.png", :width=>"60%"))
+--- [Sing et al. 2011](https://arxiv.org/abs/1008.4795)
 """
 
 # ╔═╡ 2c723044-9c7c-45f3-9600-29275938f9af
@@ -72,7 +84,7 @@ $$\Delta\delta(\lambda) = \frac{\pi (R_p + N_H(\lambda)  H)^2}{\pi R_\star^2} - 
 # ╔═╡ 432c2cc2-d105-4936-a955-15ca4ed1bcc6
 md"""
 ### Representative values
-| Planet | $\delta$ | $T$ | $g$  | $\mu_m$ | $\delta$ |
+| Planet | $\delta$ | $T$ | $g$  | $\mu_m$ | $\Delta\delta$ |
 |:-------|---------:|--------:|----------:|:-------------:|---------:|
 | |  | (K) | (m/s) | (amu) |  |
 | Hot-Jupiter | $\simeq 10^{-2}$ | $\simeq 1300$ | $\simeq 25$| $\simeq 2$ | $\simeq 10^{-4}$ |
@@ -138,6 +150,35 @@ md"""
 
 # ╔═╡ 5a2ac6e2-6bac-40a7-8d0f-b8300e45f4ae
 ChooseDisplayMode()
+
+# ╔═╡ f64a71be-a0f6-4726-974e-5e569040bba7
+question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
+
+# ╔═╡ 118c2c33-ae39-49ef-a430-b51139b969cb
+question(md"""Is transmission spectroscopy limited by the thickness of a planet's atmosphere? 
+
+Since it gets more dense closer to the center of the planet, are we only able to resolve what makes up the outer edges of said planet's atmosphere?""")
+
+# ╔═╡ 8505a3ac-d44a-4e80-a37f-4860f35d9382
+question(md"""While analyzing atmosphere composition, how to distinguish between the spectrum footprint produced by the planet and that produced by the observed background star?""")
+
+# ╔═╡ 1ff54f17-505e-4f11-8a98-62d35d23391a
+question(md"""Are the different filters used in a large variety of ways? Or or they just used based on certain properties of the planets that are being detected?""")
+
+# ╔═╡ 3d61adf1-b48c-4a25-99eb-97c9593a0bb6
+question(md"""Is a planet's transmission spectrum dependent on its temperature and mean molecular mass?  
+
+Is this a confounding factor when determining its atmospheric composition?""")
+
+
+# ╔═╡ 3ee02e32-b6ed-4f1e-aafd-7e3a6c1f5619
+question(md"""What information can we get about planets using transmission spectroscopy?""")
+
+# ╔═╡ 848ab804-cf30-47e7-b164-c7af7afe1501
+question(md"If we are able to gather the light that has run into a planet's atmosphere, is there enough data to detect what the atmosphere of exoplanets consist of?")
+
+# ╔═╡ 0baf8ecb-a1c6-4a46-a644-5e2ce39cdc96
+question(md"""Are there any drawbacks to transmission spectroscopy?""")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -448,19 +489,29 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╔═╡ Cell order:
 # ╟─e56ca8be-4f08-11ed-0ea5-e554a448992b
 # ╟─da5a69e7-235a-4f4e-b404-c8934f1a3743
-# ╟─adb15016-e599-40eb-8a57-ebe7854ebe97
+# ╟─118c2c33-ae39-49ef-a430-b51139b969cb
+# ╠═adb15016-e599-40eb-8a57-ebe7854ebe97
+# ╟─8505a3ac-d44a-4e80-a37f-4860f35d9382
+# ╟─0e1bc001-996a-4e8b-acd4-8d1434689527
 # ╟─92b3b41d-01fc-4fb5-909f-9a933ca211e6
+# ╟─1ff54f17-505e-4f11-8a98-62d35d23391a
+# ╟─ef536496-c022-4088-bf3c-1c38b94ff572
 # ╟─2c723044-9c7c-45f3-9600-29275938f9af
 # ╟─1c92299c-fd1d-421b-a0c2-c840e8e06062
 # ╟─fb614745-bf3d-45f7-b6a3-9d81dfdb5045
 # ╟─432c2cc2-d105-4936-a955-15ca4ed1bcc6
+# ╟─3d61adf1-b48c-4a25-99eb-97c9593a0bb6
 # ╟─4f07a97e-b844-4f5c-b15f-1432ded4735a
+# ╟─3ee02e32-b6ed-4f1e-aafd-7e3a6c1f5619
 # ╟─0d3a2df4-946a-4c31-b7d4-53b94a980157
+# ╟─848ab804-cf30-47e7-b164-c7af7afe1501
 # ╟─ae0e2eb9-434c-4e9d-a5a2-83d2c867c5fd
 # ╟─80a92749-ef71-4a6e-a1e8-ef14218846d8
+# ╟─0baf8ecb-a1c6-4a46-a644-5e2ce39cdc96
 # ╟─390589c9-1769-4a86-95c9-c6ce78438759
 # ╟─e2f9cf86-88cd-4500-a1ea-03015de70296
 # ╟─5a2ac6e2-6bac-40a7-8d0f-b8300e45f4ae
 # ╠═ae9e8a91-f154-4888-b029-b0bdfd4f11de
+# ╠═f64a71be-a0f6-4726-974e-5e569040bba7
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
