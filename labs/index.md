@@ -25,7 +25,6 @@ lab_list = [("labs/lab1.md","lab1"),
 - [Lab 8](lab8/): {{fill title labs/lab8.md}} ([github](https://github.com/PsuAstro497/lab8-start))
 - [Lab 9](lab9/): {{fill title labs/lab9.md}} ([github](https://github.com/PsuAstro497/lab9-start))
 
-
 <!--
 {{for (page,lab) in lab_list }}
 - Lab {{fill lab_num page}}: {{lab}} [page]({{fill title page}})
