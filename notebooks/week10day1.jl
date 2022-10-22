@@ -16,18 +16,73 @@ md"""
 # ╔═╡ 3dfec25d-4600-4425-90a6-c652dd2b5ebc
 TableOfContents()
 
-# ╔═╡ 8aef55bf-3bd3-49a6-8c0c-3e9384eebd4b
+# ╔═╡ afd8e60d-b96b-4c06-8246-d1592dff222d
 md"""
-## Memory latency heirarchy
-- Registers
-- Cache L1
-- Cache L2
-- Cache L3
+# Memory latency hierarchy
+- Registers:
+- Caches:
 - RAM
 - Local disk storage
-- Disk storage on local network
-- Disk storage on internew
-- Tape storage
+- Non-local disks
+- Tape storage (e.g., Roar Near-line storage)
+"""
+
+# ╔═╡ 97976480-c802-490e-856f-17dc21dee021
+md"""
+## Registers:
+  - All calculations are based on data in registers
+  - Only a few dozen registers per CPU core
+  - Many of those are special purpose (e.g., performing multiple arithmetic operations at once)
+"""
+
+# ╔═╡ 4a452891-744e-403c-ace5-d9d3c72616f2
+md"""
+## Caches:
+  - L1 Cache:  
+    - Very low latency
+    - Typically 16 -- 64KB data cache per core
+    - Separate instruction cache
+  - L2 Cache:
+    - Typically a few times slower than L1 cache
+    - Typically 256KB - few MB L2 cache per core (or pair of cores)
+  - L3 Cache:
+    - Typically ~10 times slower than L2 cache
+    - Typically ~few to tens or even hundreds of MB 
+    - Often shared among all CPU cores
+    - N-way associative cache → How many different places a variable could be in the cache
+"""
+
+# ╔═╡ 850f5dea-987b-4ae3-97a2-0602abb68917
+md"""
+## RAM
+  - GB to TB 
+  - Symmetric Multiprocessing (SMP): all cores have equal access to all RAM
+  - Non-Uniform Memory Access (NUMA): 
+    - RAM divided
+    - Some is assigned to be "local" to each core (or pair of cores)
+    - Rest of RAM is accessible via an interconnect 
+"""
+
+# ╔═╡ 003b71bd-38d6-4024-a7a7-bac6bf9bc691
+md"""
+## Disk storage
+- Local disk storage
+  - NVME
+  - SSD 
+  - Dard drives
+- Disk storage within local network
+- Disk storage over internet
+  - Internet2
+  - Commodity internet
+"""
+
+# ╔═╡ 1ef4627d-a5d6-46cb-afde-20bf20c0f929
+md"""
+## Tape storage
+  - Very high latency
+  - Can still have high throughput
+  - Efficient in terms cost, energy & reliability
+  - On Roar, known as "near-line archival storage"
 """
 
 # ╔═╡ 5dc6dc68-9e3e-45f1-abba-48381adf6a3a
@@ -37,61 +92,79 @@ md"
 
 # ╔═╡ dc964423-dd50-48c4-9899-36c596b83658
 md"""
-### Where do your variables go?
-- Stack (scalars, small structures or collections with known size)
-- Heap (large collections, structures/collections with unknown size)
+# Where do your variables go?
+- Programmer explicitly chooses when to write to disk or access network. 
+  -  (Some cloud programming frameworks abstract these away)
+- The vast majority of scientific software development uses high-level languages.  
+- High-level languages let compilers and CPUs manage caches
+- Programmer choices can make it easy/hard/impossible for them to use caches effectively.
+- Programmer choices also dictate whether variables are stored in:
+  - Stack (scalars, small structures or collections with known size)
+  - Heap (large collections, structures/collections with unknown size)
 """
 
 # ╔═╡ ff821bb7-e4c1-42fc-b8a1-3170b1a3204f
 md"""
-#### Stack 
+## Stack 
 ![Program call stack](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/ProgramCallStack2_en.png/862px-ProgramCallStack2_en.png) (from [Wikimedia](https://commons.wikimedia.org/wiki/File:ProgramCallStack2_en.png))
 
 - Stack memory is released on a last-in-first-out basis.
-- Therefore, stack (de)allocation is faster than allocation/deallocation from heap.
-- Stack has limited size (often can change defaults, but then code becomes OS specific)
+- Stack (de)allocation is much faster than allocation/deallocation from heap.
+- Stack has fixed size (e.g., 8MB is default on linux, can change with `ulimit -s`)
+- Active frame of stack is likely to stay in cache
 - Stack is good for variables:
    - Whose size is known at compile time, 
    - Aren't too large 
-   - Won't be needed after function finishes
+   - Won't be needed after a function finishes
 - Use heap for 
    - Large collections (e.g., arrays, matrices) that are stored contiguously in memory.
    - Collections whose size is unknown at compile time
-   - Collections that allow for variable size (even if their size is known at compile time)
+   - Collections vary in size (in hard to predict way)
 """
 
-# ╔═╡ 63e7b99c-c203-4acf-a775-5d0bc8b69ffd
+# ╔═╡ 3dfc1aa3-6670-4369-8094-00ac52a06317
 md"""
-### Stages of Compilation
-- Preprocessing/parsing of human-written code
-- *Lowered*/Intermediate form (for weakly or dynamically typed languages)
-- *Typed code* (for strongly or dynamically typed typed languages)
-- LLVM Compiler's Intermediate Representation (*LLVM IR*) (similar to "byte code")
-   - Text form (for a small fraction of humans to read)
-   - Binary forms (for compiler, library)
-- Native code (for CPU)
-- CPU rewrites code on the fly!
+# Key factors for achieving good performance
+
+From highest to lowest priority:
+1. Choose an appropriate algorithm for your problem
+2. Use compiled language, rather than an interpreted language
+3. Use variables with fixed and known types
+4. Minimize[^1] disk/network/tape access
+5. Minimize[^1] unnecessary memory allocations on heap
+6. Choose data types that promote linear access, e.g.,
+   - Vectors & Arrays (rather than Dictionaries)
+   - Arrays of values (rather than arrays of pointers)7. Group reads/writes of nearby data 
+   - For matrices, inner loop over minor dimension
+     - Fortran, Matlab, R & Julia[^2] matrices are column-major
+     - C/C++ & Python[^2] matrices are row-major
+   - For large matrices, there are clever strategies of working on smaller blocks at a time.  Use cache-optimized libraries, e.g., 
+     - BLAS, LAPACK, IntelMKL
+   - For datasets with many columns, structures of arrays (rather than arrays of structures)
+7. Use programming patterns that make it easy to parallelize the "embarrassingly parallel" portions of your code.
+   - E.g., `map`, `mapreduce`, `split-apply-combine`
+   - Once fully tested in serial, then can turn on parallelism for those sections easily.
+8. Only after ensuring that you've done all of the above, should you even consider using "advanced" programming techniques that obfuscate the code, make it hard to maintain, or are likely to soon become out-of-date. 
+
+[^1]: Use it when you need it, but don't add lots of extra small read/writes to disk or memory allocations.  
+
+[^2]: By default.  With Julia & Numby, one can explicitly specify a variable to be stored in the opposite format.  
 """
 
-
-# ╔═╡ ac7bb983-4ac5-4196-ab7c-bc180f35f0d4
+# ╔═╡ c1509525-20e4-40dd-96fb-629fe993beda
 md"""
-**Q:**  Why have memory speed increases been unable to keep up with CPU speed increases?
+## What is *not* on the list for achieving high performance?
+"Vectorization"
+The word *vectorization* is used in two fundamentally different ways:
+- Computing hardware, e.g.
+  - SSE, SSE2, AVX, AVX512
+  - GPU Streamming Multiprocessors
+- Programming patterns, e.g., 
+  - z = x + y
 
-**A:**  Registers do keep up with CPU speed.  
-- People want more and more memory.  Not all can be fast.
-- CPUs have stopped getting faster.  They are increasing their throughput.
-[Memory latency comparison](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
+In many places, vectorization, as in the programming pattern, can make code easier to read.  However, often it results in unnecessary memory allocations and cache misses[^3].  Therefore, be careful about using vectorized notation in performance-sensitive sections of code.
 
-**Q:**  What is physically limiting memory speeds from being equal to modern CPU speeds?
-
-**A:**  Real estate on a chip is valuable.  
-- Physical proximity affects latency.  
-- Low latency memory requires more power than memory with lower latency.
-CPU/memory speed is limited by ability to dissipate heat.
-
-![Variations on Moore's Law:
-](https://www.karlrupp.net/wp-content/uploads/2018/02/42-years-processor-trend.png) - source: [K. Rupp blog](https://www.karlrupp.net/2018/02/42-years-of-microprocessor-trend-data/#more-760) 
+[^3]: In many cases, Julia and JAX can broadcast and fuse vectorized expressions to achieve nearly identical performance as hand-written loops.
 """
 
 # ╔═╡ 5315a4ec-d56e-4339-8b48-2e4e651dca5f
@@ -106,58 +179,43 @@ For Julia (or C/C++, Fortran, Java,...) for loops are not detrimental. Why is th
 - Compiled languages:  
    + Loops are fast.
    + Usually choose whether to write loop explicilty based on what's more convenient for programmer.
-   + Using "vectorized" notation can add unnecessary memory allocations...
+   + Using "vectorized" notation can add unnecessary memory allocations and cache misses...
        - if you don't use broadcasting and fusing   
 """
 
-# ╔═╡ c1509525-20e4-40dd-96fb-629fe993beda
+# ╔═╡ 806a8cff-af86-4708-8a5a-71bbb4f7f04d
 md"""
-## Vectorization
-The word *vectorization* is used in two fundamentally different ways:
-- Computing hardware
-- Programming pattern
-"""
+# Trends in Computing Hardware
+## Moore's Law
+![Moore's Law: Transistors](https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Moore%27s_Law_Transistor_Count_1970-2020.png/1280px-Moore%27s_Law_Transistor_Count_1970-2020.png)
+[Wikimedia](https://commons.wikimedia.org/w/index.php?curid=98219918)
+By Max Roser, Hannah Ritchie -
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0)
 
-# ╔═╡ dafec889-067a-40a5-82b4-e862806b6d40
-md"""
-## Hardware Vectorization
-
-CPUs
-- SIMD
-- SSE, SSE2, AVX, AVX512
-
-GPUs
-- Streamming Multiprocessor (SM)
+-----
+### Why are computers becoming more parallel?
+![Variations on Moore's Law:
+](https://www.karlrupp.net/wp-content/uploads/2018/02/42-years-processor-trend.png) - source: [K. Rupp blog](https://www.karlrupp.net/2018/02/42-years-of-microprocessor-trend-data/#more-760) 
 """
 
 # ╔═╡ 01a883d0-aa94-46cd-a3cc-7a7ea5a968ec
-md"## Data structures"
+md"# Data structures"
 
-# ╔═╡ a936e673-0017-459c-81c0-973f4fb450b2
+# ╔═╡ 155c323b-8ff6-41b3-9d57-252c18f9b73c
 md"""
-
-**Q:**  What is a linked list? Is it similar to an array?
-![Linked List](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Singly-linked-list.svg/640px-Singly-linked-list.svg.png)
-
-Use **array** when:
-- Know size at time of creation (or won't need to change size often)
-- Value fast access to elements (not just the beginning/end)
-- Value not allocating more memory than memory
-- Very common for scientific performance sensitive code
-
-Use **linked list** when:
-- Likely to insert elements and/or change size often
-- Don't mind taking longer to access elements (other than beginning/end)
-- Value not allocating (much) more memory than necessary
-- Useful for frequent sorting 
-
-Other common data structures to consider...
+## Array 
+Good when:
+- Value fast access to individual elements, even if not in linear order
+  - But even faster if elements will often be accessed in linear order
+- Know how many elements you'll need (or at least can make a decent guess)
+- Don't want to allocate more memory that you actually need
+- There's not a reason to use a more complicated data structure
 """
-
 
 # ╔═╡ 7e328504-0035-4472-a12a-890fac80d718
 md"""
-### **Hash table** (aka dictionary/`Dict`) when:
+## Hash table (aka dictionary/`Dict`)
+Good when:
 - Elements unlikely to be accessed in any particular order
 - Value pretty fast access to individual elements
 - Don't mind allocating significantly more memory than necessary
@@ -186,54 +244,31 @@ md"""
 """
 
 
-# ╔═╡ 806a8cff-af86-4708-8a5a-71bbb4f7f04d
+# ╔═╡ a936e673-0017-459c-81c0-973f4fb450b2
 md"""
-# Parallel Programming:
-## Why go parallel?
-### Moore's Law
-![Moore's Law: Transistors](https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Moore%27s_Law_Transistor_Count_1970-2020.png/1280px-Moore%27s_Law_Transistor_Count_1970-2020.png)
-[Wikimedia](https://commons.wikimedia.org/w/index.php?curid=98219918)
-By Max Roser, Hannah Ritchie -
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0)
 
------
+### Linked List
+![Linked List](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Singly-linked-list.svg/640px-Singly-linked-list.svg.png)
 
-![Variations on Moore's Law:
-](https://www.karlrupp.net/wp-content/uploads/2018/02/42-years-processor-trend.png) - source: [K. Rupp blog](https://www.karlrupp.net/2018/02/42-years-of-microprocessor-trend-data/#more-760) 
+Use **array** when:
+- Know size at time of creation (or won't need to change size often)
+- Value fast access to elements (not just the beginning/end)
+- Value not allocating more memory than memory
+- Very common for scientific performance sensitive code
+
+Use **linked list** when:
+- Likely to insert elements and/or change size often
+- Don't mind taking longer to access elements (other than beginning/end)
+- Value not allocating (much) more memory than necessary
+- Useful for frequent sorting 
+
+Other common data structures to consider...
 """
 
-# ╔═╡ 42b4b674-6df3-443f-9bc0-68e4a101e727
-md"""
-## Advantages of Shared-Memory Systems
-- Ease of programming
-- Good for tightly coupled problems
-___
-## Disadvantages of Shared-Memory Systems
-- Sharing memory creates costs
-- Locking
-"""
-
-# ╔═╡ 29c92f4d-a0e7-4b27-9de1-535e5ecab5d2
-md"""
-### Memory architectures:
-- Shared memory
-- Distributed memory
-- Accelerator-specific memory
-
-### Examples of Shared-Memory Systems
-- Laptop (~2-6 cores)
-- Workstation/Compute Node (~4-24 cores)
-- Server (~8-128 cores)
-- Old school supercomputers (e.g., Cray Y-MP)
-___
-### Examples of Distributed-Memory Systems
-- Computer Cluster (e.g., Roar)
-- Cloud computing
-"""
 
 # ╔═╡ 44a59fba-7530-44d3-911a-c73683a45ade
 md"""
-### Garbage Collection
+# Garbage Collection
 Julia's garbage collector is "a non-compacting, generational, mark-and-sweep, tracing collector, which at a high level means the following…
 
 **Mark-Sweep / Tracing**:
@@ -289,7 +324,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.2"
 manifest_format = "2.0"
-project_hash = "69f995e0dc6a1c35a46792be048dc8abd510ce38"
+project_hash = "71f8ac5999635d848b5821f188b468ce01104556"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -600,22 +635,24 @@ version = "17.4.0+0"
 # ╔═╡ Cell order:
 # ╟─fd64866f-1c3b-43ef-93ff-eace062dae2d
 # ╟─3dfec25d-4600-4425-90a6-c652dd2b5ebc
-# ╟─8aef55bf-3bd3-49a6-8c0c-3e9384eebd4b
+# ╟─afd8e60d-b96b-4c06-8246-d1592dff222d
+# ╟─97976480-c802-490e-856f-17dc21dee021
+# ╟─4a452891-744e-403c-ace5-d9d3c72616f2
+# ╟─850f5dea-987b-4ae3-97a2-0602abb68917
+# ╟─003b71bd-38d6-4024-a7a7-bac6bf9bc691
+# ╟─1ef4627d-a5d6-46cb-afde-20bf20c0f929
 # ╟─5dc6dc68-9e3e-45f1-abba-48381adf6a3a
-# ╟─ac7bb983-4ac5-4196-ab7c-bc180f35f0d4
-# ╟─806a8cff-af86-4708-8a5a-71bbb4f7f04d
 # ╟─dc964423-dd50-48c4-9899-36c596b83658
 # ╟─ff821bb7-e4c1-42fc-b8a1-3170b1a3204f
-# ╟─63e7b99c-c203-4acf-a775-5d0bc8b69ffd
-# ╟─5315a4ec-d56e-4339-8b48-2e4e651dca5f
+# ╟─3dfc1aa3-6670-4369-8094-00ac52a06317
 # ╟─c1509525-20e4-40dd-96fb-629fe993beda
-# ╟─dafec889-067a-40a5-82b4-e862806b6d40
+# ╟─5315a4ec-d56e-4339-8b48-2e4e651dca5f
+# ╟─806a8cff-af86-4708-8a5a-71bbb4f7f04d
 # ╟─01a883d0-aa94-46cd-a3cc-7a7ea5a968ec
-# ╟─a936e673-0017-459c-81c0-973f4fb450b2
+# ╟─155c323b-8ff6-41b3-9d57-252c18f9b73c
 # ╟─7e328504-0035-4472-a12a-890fac80d718
 # ╟─6747fbad-7448-45c5-a21a-fd89a58a1300
-# ╟─42b4b674-6df3-443f-9bc0-68e4a101e727
-# ╟─29c92f4d-a0e7-4b27-9de1-535e5ecab5d2
+# ╟─a936e673-0017-459c-81c0-973f4fb450b2
 # ╟─44a59fba-7530-44d3-911a-c73683a45ade
 # ╟─f4b3eceb-b365-4abb-925d-4e14a88c7b28
 # ╟─2e6842b2-f8ac-44a2-a355-1904553cb754
