@@ -2,8 +2,8 @@
 title = "Week 13"
 week_num = 13
 tags = ["lessons"]
-topic = "Data Visualization & Future of Exoplanet Detection"
-ds_topic = "Data Visualization"
+topic = "Reproducible Research & Future of Exoplanet Detection"
+ds_topic = "Reproducible Research"
 exo_topic =  "Future of Exoplanet Detection"
 +++
 

@@ -16,6 +16,14 @@ md"""
 # ╔═╡ da5a69e7-235a-4f4e-b404-c8934f1a3743
 TableOfContents()
 
+# ╔═╡ fb7dbb03-ce25-4072-a346-73765abb05e5
+md"""
+## Project Outline Feedback
+- Analyze/plot data for one object at a time
+- Allow user to select which object to analyze
+- Most transiting planets won't have mass measurements
+"""
+
 # ╔═╡ adb15016-e599-40eb-8a57-ebe7854ebe97
 md"""
 $(LocalResource("../_assets/week9/fig1_transit_geom.png", :width=>"80%"))
@@ -489,8 +497,9 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╔═╡ Cell order:
 # ╟─e56ca8be-4f08-11ed-0ea5-e554a448992b
 # ╟─da5a69e7-235a-4f4e-b404-c8934f1a3743
+# ╟─fb7dbb03-ce25-4072-a346-73765abb05e5
 # ╟─118c2c33-ae39-49ef-a430-b51139b969cb
-# ╠═adb15016-e599-40eb-8a57-ebe7854ebe97
+# ╟─adb15016-e599-40eb-8a57-ebe7854ebe97
 # ╟─8505a3ac-d44a-4e80-a37f-4860f35d9382
 # ╟─0e1bc001-996a-4e8b-acd4-8d1434689527
 # ╟─92b3b41d-01fc-4fb5-909f-9a933ca211e6
@@ -511,7 +520,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─390589c9-1769-4a86-95c9-c6ce78438759
 # ╟─e2f9cf86-88cd-4500-a1ea-03015de70296
 # ╟─5a2ac6e2-6bac-40a7-8d0f-b8300e45f4ae
-# ╠═ae9e8a91-f154-4888-b029-b0bdfd4f11de
-# ╠═f64a71be-a0f6-4726-974e-5e569040bba7
+# ╟─ae9e8a91-f154-4888-b029-b0bdfd4f11de
+# ╟─f64a71be-a0f6-4726-974e-5e569040bba7
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

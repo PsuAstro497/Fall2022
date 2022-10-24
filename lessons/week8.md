@@ -19,7 +19,7 @@ Week {{week_num}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Statistical Distribution of Exoplanets:   Sec. 1-2.7
-
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week8day3/)
 
 ## Resources
 - More information about building queries:
@@ -32,5 +32,3 @@ Week {{week_num}}
   - [Astronomical Data Query Language (ADQL)](https://www.ivoa.net/documents/ADQL/)
   - [Table Access Protocol (TAP)](https://www.ivoa.net/documents/TAP/)
   - [Tool for OPerations on Catalogues And Tables (TOPCAT)](http://www.star.bris.ac.uk/~mbt/topcat/)
-
-

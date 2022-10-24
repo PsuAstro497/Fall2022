@@ -11,9 +11,12 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
+- No reading
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week10day1/)
 
-
-## [Lab 8](../../labs/lab8/): {{fill title labs/lab8.md}}
+## Wednesday
+- If haven't already, before class, submit [Lab 8](../../labs/lab8/): {{fill title labs/lab8.md}}
+- During class, work on class project & ask questions of instructor & TA
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Exoplanet Transits & Occultations:   Sec. 3.4

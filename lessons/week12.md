@@ -17,7 +17,9 @@ Optional Resources:
    - Genie.jl: [docs](https://genieframework.com/docs/genie/v5/tutorials/1--Overview.html) [video overview](https://www.youtube.com/watch?v=YEQLTCWxDuM)
    - Dash.jl: [docs](https://dash.plotly.com/julia/introduction)
 
-## [Lab 9](../../labs/lab9/): {{fill title labs/lab9.md}}
+## Wednesday
+- If haven't already, before class, submit [Lab 9](../../labs/lab9/): {{fill title labs/lab9.md}}
+- During class, work on class project & ask questions of instructor & TA
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Microlensing by Exoplanets:   Sec. 1-3.1, 4-4.5
