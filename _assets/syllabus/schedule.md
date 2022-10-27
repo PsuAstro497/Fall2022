@@ -16,17 +16,17 @@ There will be a short reading to be completed prior to class on most Mondays and
 | 2 | Exploratory Data Analysis | Transits |
 | 3 | (Labor Day)  Model Building | Transit Timing |
 | 4 | Model Assessment | Radial Velocities |
-| 5 | Non-linear Models | Masses & Orbits I |
-| 6 | Explanatory Data Analysis | Masses & Orbits II |
+| 5 | Bayesian Inference | Rossiter-MchLaughlin Effect |
+| 6 | Explanatory Data Analysis | Masses & Orbits |
 | 7 | Exam week | Intro to Class Projects |
 | 8 | Databases & Data Wrangling | Exoplanet Populations |
-| 9 | Bayesian Workflow | Transmission Spectroscopy |
-| 10 | Data Storage | Emission/Reflection Spectroscopy |
-| 11 | Reproducible Research | Microlensing |
+| 9 | Data Science Workflow | Transmission Spectroscopy |
+| 10 | Data Storage | Emission Spectroscopy |
+| 11 | Data Visualization | Microlensing |
 | 12 | Reports & Dashboards | Disks  |
-| 13 | Data Visualization | Future of Exoplanet Detection |
+| 13 | Reproducible Research | Future of Exoplanet Detection |
 | 14 | (Thanksgiving Holiday) | - |
-| 15 | TBD | - |
+| 15 | Retrospective | Future of Exoplanet Characterization |
 | 16 | Student Presentations | Student Presentations |
 <!-- | 17 | (Exam Week) | - | -->
 
