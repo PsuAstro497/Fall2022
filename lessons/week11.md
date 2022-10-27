@@ -11,8 +11,10 @@ Week {{week_num}}
 # {{topic}}
 
 ## {{ds_topic}}
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week11day1/)
 
 ## [Lab 9](../../labs/lab8/): {{fill title labs/lab8.md}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Protoplanetary & Debris Disks:  Sec. 1-3.4
+

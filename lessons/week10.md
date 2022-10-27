@@ -20,3 +20,4 @@ Week {{week_num}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Exoplanet Transits & Occultations:   Sec. 3.4
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week10day3/)
