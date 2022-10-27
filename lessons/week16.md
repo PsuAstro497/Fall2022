@@ -10,5 +10,6 @@ exo_topic =  "NA"
 Week {{week_num}}
 # {{topic}}
 
+- [Presentations Schedule](https://github.com/PsuAstro497/PresentationScheduleFall2022)
 - Present your class project to the class.
 - No readings.  Enjoy seeing what your fellow students did and learning from their experiences, too.
