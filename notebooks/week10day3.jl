@@ -118,16 +118,13 @@ $(LocalResource("../_assets/week10/VivienNewestSpectrum.png",:width=>"80%"))
 --- [Mansfield et al.](https://arxiv.org/abs/1805.00424) [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 """
 
-# ╔═╡ 0d3a2df4-946a-4c31-b7d4-53b94a980157
-#md"""#### Things to look for"""
-
 # ╔═╡ ae0e2eb9-434c-4e9d-a5a2-83d2c867c5fd
 md"""
 #  How to prioritize planets for detailed atmospheric characterization?
 ## Emission spectroscopy metric
 ```math
 \begin{eqnarray}
-\mathrm{TSM} & = & 4.29 \times 10^6 \times \left(\frac{R_p}{R_\oplus}\right)^ \left(\frac{B_{7.5}(T_{day})}{B_{7.5}(T_\star)}\right) \times 10^{-m_K/5} \\
+\mathrm{ESM} & = & 4.29 \times 10^6 \times \left(\frac{R_p}{R_\oplus}\right)^2 \left(\frac{B_{7.5}(T_{day})}{B_{7.5}(T_\star)}\right) \times 10^{-m_K/5} \\
 \end{eqnarray}
 ```
 
@@ -176,8 +173,29 @@ ChooseDisplayMode()
 # ╔═╡ f64a71be-a0f6-4726-974e-5e569040bba7
 question(str; invite="Question") = Markdown.MD(Markdown.Admonition("tip", invite, [str]))
 
+# ╔═╡ 16864b92-cd9a-462b-b093-880a618116b1
+question(md"How significant is the error when approximating blackbody temperature with brightness temperature?")
+
+# ╔═╡ 128bb657-447e-43cd-8555-0858786e6dfb
+question(md"In a lot of the emission spectra, the wavelength range is 1-10 microns. 
+Are there any important elements that can be detected that do not lie in this range?")
+
+# ╔═╡ 0d3a2df4-946a-4c31-b7d4-53b94a980157
+#md"""#### Things to look for"""
+question(md"Is occultation spectroscopy a good way to find out the type of planet we are looking at?")
+
+# ╔═╡ d4f5366c-7c85-4835-b4f9-ec76a1349285
+question(md"""
+Are there specific types of stars for which occultation spectroscopy is better suited/more successful? 
+""")
+
 # ╔═╡ 0baf8ecb-a1c6-4a46-a644-5e2ce39cdc96
 question(md"""Are there any drawbacks to emission spectroscopy?""")
+
+# ╔═╡ 7b660cf9-6359-4419-bb31-770204a574dd
+question(md""" "Occultation spectroscopy and transit spectroscopy thereby provide different and complementary information about the planetary atmosphere."
+
+What exact different information can these two spectroscopy  provide?""")
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -518,12 +536,16 @@ version = "17.4.0+0"
 # ╟─1202615c-3f96-4e1c-9ca4-8a33a4ed2dae
 # ╟─432c2cc2-d105-4936-a955-15ca4ed1bcc6
 # ╟─498fe414-2dc0-4b85-8c91-4dd066354bca
+# ╟─16864b92-cd9a-462b-b093-880a618116b1
+# ╟─128bb657-447e-43cd-8555-0858786e6dfb
 # ╟─b23dca9e-afc7-4b8d-9d87-793089c68b51
-# ╠═0d3a2df4-946a-4c31-b7d4-53b94a980157
+# ╟─0d3a2df4-946a-4c31-b7d4-53b94a980157
 # ╟─ae0e2eb9-434c-4e9d-a5a2-83d2c867c5fd
+# ╟─d4f5366c-7c85-4835-b4f9-ec76a1349285
 # ╟─9d06b2fb-d53b-4190-b229-a22fbb1741e4
 # ╟─75c096fb-cb60-4aca-a9a2-6924cad61880
 # ╟─0baf8ecb-a1c6-4a46-a644-5e2ce39cdc96
+# ╟─7b660cf9-6359-4419-bb31-770204a574dd
 # ╟─390589c9-1769-4a86-95c9-c6ce78438759
 # ╟─e2f9cf86-88cd-4500-a1ea-03015de70296
 # ╟─5a2ac6e2-6bac-40a7-8d0f-b8300e45f4ae
