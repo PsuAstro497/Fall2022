@@ -22,4 +22,4 @@ Optional Resources:
 - During class, work on class project & ask questions of instructor & TA
 
 ## {{exo_topic}}
-- Before Friday's class, read *Exoplanets*: Microlensing by Exoplanets:   Sec. 1-3.1, 4-4.5
+- Before Friday's class, read *Exoplanets*: Protoplanetary & Debris Disks:  Sec. 1, 2-2.1, 2.4, 3-3.2

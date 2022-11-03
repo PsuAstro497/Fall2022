@@ -30,6 +30,5 @@ lab_list = [("labs/lab1.md","lab1"),
 - Lab {{fill lab_num page}}: {{lab}} [page]({{fill title page}})
 {{end}}
 -->
-\\
 
 See also [GitHub organization](https://github.com/PsuAstro497) and [lessons page](/lessons/).
