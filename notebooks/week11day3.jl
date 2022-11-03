@@ -53,6 +53,31 @@ $x\equiv D_l/D_s$
 
 """
 
+# ╔═╡ 998b4730-5863-4d3e-9b52-65acba06564c
+md"""
+## Magnification ($A$)
+-  Can be 10%, 100% or even 1000%!
+-  $A>1.34$ if $u\le 1$
+-  Even if $r_E$ is very small
+"""
+
+# ╔═╡ 457804a5-a203-465b-834d-5eec925d9c3c
+md"""
+## Timescale for Microlensing Events 
+
+$$t_E = \theta_E / \mu_{\mathrm{rel}}$$
+-  $\mu_{\mathrm{rel}}$: proper motion of source relative to the lens 
+-  Often $\sim$months for low-mass star lens events towards galactic bulge
+"""
+
+# ╔═╡ b35d8e6e-a357-48f2-adec-09015f6d46db
+md"""
+## Frequency of microlensing events
+-  $\mathcal{O}(10^{-6})$ events per star per year
+-  Towards buldge $\sim~10^7$ stars per deg² to I$\sim~20$
+-  $\sim~10$ events per square degree monitored
+"""
+
 # ╔═╡ d9caa407-d2ea-44b1-b45d-9177a71763c3
 md"""
 Lens Star Properties:  
@@ -90,6 +115,66 @@ Add Planet: $(@bind incl_planet CheckBox(default=false))  $nbsp  $nbsp
 M\_l,pl: $(@bind M_l_pl_earth NumberField(0:1:1000, default=10) )  M\_⊕ $nbsp  $nbsp
 x\_pl: $(@bind x_pl NumberField(0:0.1:5, default=1.0)) AU $nbsp  $nbsp
 y\_pl: $(@bind y_pl NumberField(0:0.02:5, default=1.0)) AU  $nbsp $nbsp
+"""
+
+# ╔═╡ 53a7b484-c6a2-4171-8788-159ccf26445c
+md"""
+## Planet Hunting Regimes
+## Weak magnification regime
+-  $A\le~10$ or $u_0\ge0.1$
+-  $\theta_{E,p} = \sqrt{\frac{m_pl}{M_l}}$
+-  Probability of significant additional magnification by planet: $\sim A(t_{0,p}) \theta_{E,p} / \theta_E$ 
+-  Sensitivity to planets:
+   - Peaks when projected planet-star separation is comparable to $r_E$
+   - Falls rapidly for planets inside $r_E$, more slowly for planets beyond $r_E$
+-  Detection is challenging primarily because planetary events have short durations and could fall in gaps between observations.
+-  Relatively easy to model
+-  $t_E$ provides information about lens mass, distance and relative proper motion 
+-  $A_{pl}$ and time of planetary event constrain projected separation (in units of $r_E$)
+"""
+
+# ╔═╡ 4a74e6d0-7c4a-4ff1-8e4c-0ef5ca4acfce
+md"""
+### Strong magnification regime
+-  $u\le 0.01$  or $A_\max \ge 100$
+-  Events with maximum magnification $A_\max$ are small fraction of events ($\sim1/A_\max$)
+-  Sensitive to planets with projected separation $\simeq r_E$ regardless of azimuthal angle
+-  $\sim~1$ day of high sensitivity
+-  Time of peak sensitivity can be predicted with hours to days of lead time
+-  Modeling is complex and computationally expensive (And not included in figure above.)
+-  Can help resolve some degeneracies in planet mass and separation
+-  Often still two qualitatively different solutions (corresponding to very close/very wide solutions)
+"""
+
+# ╔═╡ 28db28e7-79fd-4bf5-b798-93979b426bbb
+md"""
+## Higher-order effects
+- Blending with background stars
+- Finite source size
+- Parallax effects
+- Orbital motion of lens system
+- Binary sources
+"""
+
+# ╔═╡ 58aad46d-2b7a-4bc0-8d03-c2307d163618
+md"""
+## Microlensing Pros
+- Sensitive to relatively low-mass planets at intermediate distances
+- Even low-mass planets cause substantial increases in observed flux (for a brief time) 
+- Opportunity for small telescopes to make valuable contributions
+- Has potential to detect free-floating planets.
+- Several degeneracies in basic scenario can be resolve by having multiple observatories spread across the solar system.
+"""
+
+# ╔═╡ 06ecfa6f-8605-438a-bc6d-59bbd24ace79
+md"""
+## Microlensing Cons
+- Don't get to pick to apply microlensing to a system
+- Planetary systems detected are faint & far away
+- Unlikely to get a second chance to study a given system
+- Need frequent monitoring to detect brief magnification events
+- 
+- Difficult to distinguish planets on wide orbits from free-floating planets.
 """
 
 # ╔═╡ c218c1c6-bb6b-46c7-86bd-b82141567605
@@ -157,6 +242,7 @@ begin
 	u₀_star = b₀_star  / r_e  
 	v_lens_au_per_day = v_lens_km_per_sec / AU_to_km * sec_to_day
 	tₑ_star = r_e/v_lens_au_per_day	
+	min_u_star = (Rsol_at_kpc * R_s / D_s) * (D_l*1000*parsec_to_AU) / r_e # very approximate
 end;
 
 # ╔═╡ 69d67c12-351c-4b55-9361-bd85bb1a83a3
@@ -174,6 +260,7 @@ end;
 # ╔═╡ 5887728a-7f14-4505-b5fd-0b4bc26b62f3
 md"""
 r\_E: $(round(r_e,sigdigits=3)) AU $nbsp $nbsp
+r\_E,pl: $(round(r_e_pl,sigdigits=3)) AU $nbsp $nbsp
 t\_E,⋆: $(round(tₑ_star,sigdigits=3)) d $nbsp $nbsp
 t\_E,pl: $(round(tₑ_pl,sigdigits=3)) d $nbsp $nbsp
 r\_pl: $(round(r_pl,sigdigits=3))  AU $nbsp $nbsp
@@ -190,7 +277,7 @@ begin
 		local t_around_pl = range(t₀_pl-tₑ_pl,stop=t₀_pl+tₑ_pl, length=100)
 		t = sort(vcat(t, t_around_pl))
 	end
-	local flux = A.(u.(t,u₀=u₀_star,tₑ=tₑ_star)) 
+	local flux = A.(max.(min_u_star,u.(t,u₀=u₀_star,tₑ=tₑ_star))) 
 	if incl_planet 
 		flux +=  A.(max.(min_u_pl,u.(t,u₀=u₀_pl,t₀=t₀_pl,tₑ=tₑ_pl))).-1		
 	end
@@ -207,7 +294,7 @@ begin
 		local t_around_pl = range(t₀_pl/tₑ_star-sqrt(M_l_pl/M_l_star),stop=t₀_pl/tₑ_star+sqrt(M_l_pl/M_l_star), length=100)
 		t = sort(vcat(t, t_around_pl))
 	end
-	local flux = A.(u.(t,u₀=u₀_star)) 
+	local flux = A.(max.(min_u_star,u.(t,u₀=u₀_star))) 
 	if incl_planet 
 		flux +=  A.(max.(min_u_pl,u.(t,u₀=u₀_pl,t₀=t₀_pl/tₑ_star,tₑ=sqrt(M_l_pl/M_l_star)))).-1		
 	end
@@ -1278,24 +1365,32 @@ version = "1.4.1+0"
 # ╟─ede39321-60ca-4033-be8b-db745781a5bc
 # ╟─3eaf7c1a-7840-4291-88a1-1b0c5a9e253e
 # ╟─bbc0e60e-068d-4be5-b568-5b1446843884
+# ╟─998b4730-5863-4d3e-9b52-65acba06564c
+# ╟─457804a5-a203-465b-834d-5eec925d9c3c
+# ╟─b35d8e6e-a357-48f2-adec-09015f6d46db
 # ╟─33b5b842-ac74-4c5a-89c4-20944f70b758
-# ╠═e229fd4c-88a3-4602-88e4-fb2e032e7ca6
+# ╟─e229fd4c-88a3-4602-88e4-fb2e032e7ca6
 # ╟─d9caa407-d2ea-44b1-b45d-9177a71763c3
 # ╟─571ff1c2-0d65-443d-abdc-842a2c957b5d
 # ╟─ae4c42c6-f352-4e00-93bf-12f31847e07c
 # ╟─8d0dd2cf-207d-4c12-9b39-8d1dfe29003e
 # ╟─5887728a-7f14-4505-b5fd-0b4bc26b62f3
+# ╟─53a7b484-c6a2-4171-8788-159ccf26445c
+# ╟─4a74e6d0-7c4a-4ff1-8e4c-0ef5ca4acfce
+# ╟─28db28e7-79fd-4bf5-b798-93979b426bbb
+# ╟─58aad46d-2b7a-4bc0-8d03-c2307d163618
+# ╟─06ecfa6f-8605-438a-bc6d-59bbd24ace79
 # ╟─c218c1c6-bb6b-46c7-86bd-b82141567605
 # ╟─a1dc4d22-11a1-4658-a810-32acce0ac409
 # ╠═b9de11cf-4b68-41a1-ae92-4152bc2b2ca4
-# ╠═71edc6ba-2a70-4a64-ad8d-309077789f02
+# ╟─71edc6ba-2a70-4a64-ad8d-309077789f02
 # ╠═76471117-d378-404b-864c-bf24fc856c78
 # ╠═69d67c12-351c-4b55-9361-bd85bb1a83a3
 # ╠═37710d26-eada-4e59-8cff-89f712d3da66
 # ╠═8809eceb-4e81-40f2-a637-7b4bd4fa483d
 # ╠═cf3d9913-93ee-41ad-a85c-7f016633de7c
 # ╠═02b316cd-3473-4be1-ae88-8af1bc74eea7
-# ╠═69c05a08-e334-4160-bd8e-82f90ea31b00
+# ╟─69c05a08-e334-4160-bd8e-82f90ea31b00
 # ╟─b7f9e62f-2d40-4d13-a723-523024f49ce2
 # ╟─5dc53e8d-45cd-494e-9930-e9abf04b7769
 # ╟─3cbf37dd-b2ba-420e-95c5-1a2de1e4ae2d
