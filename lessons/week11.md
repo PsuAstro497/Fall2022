@@ -16,5 +16,4 @@ Week {{week_num}}
 ## [Lab 9](../../labs/lab8/): {{fill title labs/lab8.md}}
 
 ## {{exo_topic}}
-- Before Friday's class, read *Exoplanets*: Protoplanetary & Debris Disks:  Sec. 1-3.4
-
+- Before Friday's class, read *Exoplanets*: Microlensing by Exoplanets:  Sec. 1-2.2.1, 4-5

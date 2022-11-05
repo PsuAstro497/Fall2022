@@ -61,6 +61,13 @@ md"""
 -  Even if $r_E$ is very small
 """
 
+# ╔═╡ c3adf2e6-c22c-4431-9143-d7bfd6ef4f6c
+md"""
+### Single Lens
+$(Resource("https://www.astronomy.ohio-state.edu/gaudi.1/Movies/point.gif", :width=>"80%", :alt=>"Animation of Microlensing Magnification and Image for Single Lens")) 
+--- Credit: [S. Gaudi](https://www.astronomy.ohio-state.edu/gaudi.1/movies.html)
+"""
+
 # ╔═╡ 457804a5-a203-465b-834d-5eec925d9c3c
 md"""
 ## Timescale for Microlensing Events 
@@ -70,6 +77,13 @@ $$t_E = \theta_E / \mu_{\mathrm{rel}}$$
 -  Often $\sim$months for low-mass star lens events towards galactic bulge
 """
 
+# ╔═╡ 5f0f3c37-ddc8-4ba5-a188-e204145c7c67
+md"""
+### Lens with Planet
+$(Resource("https://www.astronomy.ohio-state.edu/gaudi.1/Movies/pmicromin_wi.gif", :width=>"80%", :alt=>"Animation of Microlensing Magnification and Image for Lens with Planet")) 
+--- Credit: [S. Gaudi](https://www.astronomy.ohio-state.edu/gaudi.1/movies.html)
+"""
+
 # ╔═╡ b35d8e6e-a357-48f2-adec-09015f6d46db
 md"""
 ## Frequency of microlensing events
@@ -77,6 +91,9 @@ md"""
 -  Towards buldge $\sim~10^7$ stars per deg² to I$\sim~20$
 -  $\sim~10$ events per square degree monitored
 """
+
+# ╔═╡ a1ca11d6-d195-4cfe-86ab-29a289c714bb
+question_box(md"Have any known microlensing events for an exoplanet been caused by a black hole rather than a background star?")
 
 # ╔═╡ d9caa407-d2ea-44b1-b45d-9177a71763c3
 md"""
@@ -161,20 +178,25 @@ md"""
 ## Microlensing Pros
 - Sensitive to relatively low-mass planets at intermediate distances
 - Even low-mass planets cause substantial increases in observed flux (for a brief time) 
+- Potential to link occurence rates measured by transit/Doppler surveys to occurence direct imaging surveys
 - Opportunity for small telescopes to make valuable contributions
-- Has potential to detect free-floating planets.
-- Several degeneracies in basic scenario can be resolve by having multiple observatories spread across the solar system.
+- Potential to detect sub-Earth-mass planets
+- Potential to detect free-floating planets
+- Several degeneracies in basic scenario can be resolved by combining multiple observatories spread across the solar system.
 """
 
 # ╔═╡ 06ecfa6f-8605-438a-bc6d-59bbd24ace79
 md"""
 ## Microlensing Cons
 - Don't get to pick to apply microlensing to a system
+- Majority of microlensing events provide limited information about planets 
 - Planetary systems detected are faint & far away
 - Unlikely to get a second chance to study a given system
-- Need frequent monitoring to detect brief magnification events
-- 
-- Difficult to distinguish planets on wide orbits from free-floating planets.
+- Need intense monitoring to detect brief magnification events from low-mass planets
+- Low sensitivity to planets significantly closer than Eienstein radius
+- Often significant degeneracies in measured parameters
+- Difficult to distinguish planets on wide orbits from free-floating planets
+- Limited observatories beyond Earth orbit to help resolve degeneracies
 """
 
 # ╔═╡ c218c1c6-bb6b-46c7-86bd-b82141567605
@@ -365,8 +387,8 @@ PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 [compat]
 ColorSchemes = "~3.19.0"
 LaTeXStrings = "~1.3.0"
-Plots = "~1.35.5"
-PlutoTeachingTools = "~0.2.3"
+Plots = "~1.35.8"
+PlutoTeachingTools = "~0.2.5"
 PlutoUI = "~0.7.48"
 """
 
@@ -599,9 +621,9 @@ version = "1.0.2"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "Dates", "IniFile", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "a97d47758e933cd5fe5ea181d178936a9fc60427"
+git-tree-sha1 = "8556f4b387fcd1d9b3013d798eecbcfa0d985e66"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.5.1"
+version = "1.5.2"
 
 [[deps.HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg"]
@@ -865,15 +887,15 @@ uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
-git-tree-sha1 = "3c3c4a401d267b04942545b1e964a20279587fd7"
+git-tree-sha1 = "5628f092c6186a80484bfefdf89ff64efdaec552"
 uuid = "4d8831e6-92b7-49fb-bdf8-b643e874388c"
-version = "1.3.0"
+version = "1.3.1"
 
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
-git-tree-sha1 = "e60321e3f2616584ff98f0a4f18d98ae6f89bbb3"
+git-tree-sha1 = "f6e9dba33f9f2c44e08a020b0caf6903be540004"
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "1.1.17+0"
+version = "1.1.19+0"
 
 [[deps.OpenSpecFun_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Pkg"]
@@ -897,10 +919,10 @@ deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
 
 [[deps.Parsers]]
-deps = ["Dates"]
-git-tree-sha1 = "6c01a9b494f6d2a9fc180a08b182fcb06f0958a0"
+deps = ["Dates", "SnoopPrecompile"]
+git-tree-sha1 = "cceb0257b662528ecdf0b4b4302eb00e767b38e7"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.4.2"
+version = "2.5.0"
 
 [[deps.Pipe]]
 git-tree-sha1 = "6842804e7867b115ca9de748a0cf6b364523c16d"
@@ -931,9 +953,9 @@ version = "1.3.1"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SnoopPrecompile", "SparseArrays", "Statistics", "StatsBase", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "0a56829d264eb1bc910cf7c39ac008b5bcb5a0d9"
+git-tree-sha1 = "b434dce10c0290ab22cb941a9d72c470f304c71d"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.35.5"
+version = "1.35.8"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -949,9 +971,9 @@ version = "0.1.5"
 
 [[deps.PlutoTeachingTools]]
 deps = ["Downloads", "HypertextLiteral", "LaTeXStrings", "Latexify", "Markdown", "PlutoLinks", "PlutoUI", "Random"]
-git-tree-sha1 = "d8be3432505c2febcea02f44e5f4396fae017503"
+git-tree-sha1 = "ea3e4ac2e49e3438815f8946fa7673b658e35bdb"
 uuid = "661c6b06-c737-4d37-b85c-46df65de6f69"
-version = "0.2.3"
+version = "0.2.5"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
@@ -991,9 +1013,9 @@ version = "1.3.1"
 
 [[deps.RecipesPipeline]]
 deps = ["Dates", "NaNMath", "PlotUtils", "RecipesBase", "SnoopPrecompile"]
-git-tree-sha1 = "9b1c0c8e9188950e66fc28f40bfe0f8aac311fe0"
+git-tree-sha1 = "249df6fb3520492092ccebe921829920215ab205"
 uuid = "01d81517-befc-4cb6-b9ec-a95719d0359c"
-version = "0.6.7"
+version = "0.6.9"
 
 [[deps.Reexport]]
 git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
@@ -1366,8 +1388,11 @@ version = "1.4.1+0"
 # ╟─3eaf7c1a-7840-4291-88a1-1b0c5a9e253e
 # ╟─bbc0e60e-068d-4be5-b568-5b1446843884
 # ╟─998b4730-5863-4d3e-9b52-65acba06564c
+# ╟─c3adf2e6-c22c-4431-9143-d7bfd6ef4f6c
 # ╟─457804a5-a203-465b-834d-5eec925d9c3c
+# ╟─5f0f3c37-ddc8-4ba5-a188-e204145c7c67
 # ╟─b35d8e6e-a357-48f2-adec-09015f6d46db
+# ╟─a1ca11d6-d195-4cfe-86ab-29a289c714bb
 # ╟─33b5b842-ac74-4c5a-89c4-20944f70b758
 # ╟─e229fd4c-88a3-4602-88e4-fb2e032e7ca6
 # ╟─d9caa407-d2ea-44b1-b45d-9177a71763c3
@@ -1382,14 +1407,14 @@ version = "1.4.1+0"
 # ╟─06ecfa6f-8605-438a-bc6d-59bbd24ace79
 # ╟─c218c1c6-bb6b-46c7-86bd-b82141567605
 # ╟─a1dc4d22-11a1-4658-a810-32acce0ac409
-# ╠═b9de11cf-4b68-41a1-ae92-4152bc2b2ca4
+# ╟─b9de11cf-4b68-41a1-ae92-4152bc2b2ca4
 # ╟─71edc6ba-2a70-4a64-ad8d-309077789f02
-# ╠═76471117-d378-404b-864c-bf24fc856c78
-# ╠═69d67c12-351c-4b55-9361-bd85bb1a83a3
-# ╠═37710d26-eada-4e59-8cff-89f712d3da66
-# ╠═8809eceb-4e81-40f2-a637-7b4bd4fa483d
-# ╠═cf3d9913-93ee-41ad-a85c-7f016633de7c
-# ╠═02b316cd-3473-4be1-ae88-8af1bc74eea7
+# ╟─76471117-d378-404b-864c-bf24fc856c78
+# ╟─69d67c12-351c-4b55-9361-bd85bb1a83a3
+# ╟─37710d26-eada-4e59-8cff-89f712d3da66
+# ╟─8809eceb-4e81-40f2-a637-7b4bd4fa483d
+# ╟─cf3d9913-93ee-41ad-a85c-7f016633de7c
+# ╟─02b316cd-3473-4be1-ae88-8af1bc74eea7
 # ╟─69c05a08-e334-4160-bd8e-82f90ea31b00
 # ╟─b7f9e62f-2d40-4d13-a723-523024f49ce2
 # ╟─5dc53e8d-45cd-494e-9930-e9abf04b7769
