@@ -14,391 +14,357 @@ macro bind(def, element)
     end
 end
 
-# ╔═╡ b9de11cf-4b68-41a1-ae92-4152bc2b2ca4
+# ╔═╡ 464bc715-0c64-4cb3-990e-211dca7d47b9
 begin
 	using PlutoUI, PlutoTeachingTools
-	using Plots, Plots.Measures, ColorSchemes, LaTeXStrings
+	using CSV, DataFrames, Plots
 end
 
-# ╔═╡ 0cf45db2-593a-11ed-26c3-472f38ebc129
+# ╔═╡ e0fca990-5c74-11ed-066b-f9317fd86eb9
 md"""
-# Microlensing
-**Astro 497, Week 11, Friday**
+# Communicating (Data) Science
+## Reports & Dashboards
+## Collaborating
+**Astro 497, Week 12, Monday**
 """
 
-# ╔═╡ c78e975d-7d5c-4762-b9ca-a8af2cdfde20
-md"""
-### Logistics
-- Please read Feedback on Project Checkpoint 1
-- Let me know if you have questions
-"""
-
-# ╔═╡ ede39321-60ca-4033-be8b-db745781a5bc
+# ╔═╡ c6027088-fd9b-4f10-8b3e-0677bf39fc54
 TableOfContents()
 
-# ╔═╡ 3eaf7c1a-7840-4291-88a1-1b0c5a9e253e
+# ╔═╡ 85c7a5f1-bd17-4c0a-9c7f-14b31a608dbf
 md"""
-## Einstein radius
-$$\theta_E = \sqrt{\frac{2R_{Sch}}{D_{rel}}} = \frac{2\sqrt{GM_l}}{c}$$
+# Reports
+- You (or your team) performed a detailed analysis.  
+- A report shares your conclusions and recommendations with others.
 
--  $G$: Gravitational constant
--  $M_l$: Mass of lens
--  $c$: speed of light
--  $D_l$: Distance to lens
--  $D_s$: Distance to source
--  $D_{rel}$: Relative distance. $1/D_{rel} = 1/D_l - 1/D_s$
+### Who are you reporting to?
+- Your team members (e.g., regular group meeting)
+- A wider collaboration (e.g., internal white paper, annual collaboration meeting)
+- Experts beyond your collaboration (e.g., journal article, scientific meeting)
+- Funding agency (e.g., progress/final grant report)
+- General public (e.g., press release, funding agency)
+- Planning committee (e.g., white paper for decadal survey)
+
+### What are you aiming to accomplish from the report?
+- Stimulate suggestions for how to solve current roadblock
+- Provide documentation for team members to build on your results
+- Help identify future opportunities for connections to other researchers/projects
+- Get critical feedback to identify weak points of analysis
+- Provide documentation to justify continued/increased support for project
+
+### Prepare report to advance specific goals
+- Use the knowledge gained from performing a detailed analysis positions
+- Narrative & choice of figures (in report body) directly support report's goals
+"""
+
+# ╔═╡ 0cb28bbd-4b85-49eb-a95a-c166a92c88d0
+md"""
+### Typical Scientific Report Structure
+1. Summary of Conclusions/Recommendations
+   - Abstract
+   - Executive Summary
+   - Opening paragraphs "above the fold"
+2. Context:  
+   - Why did you do this work?
+     - Problem or unmet need
+     - Previous studies left unanswered question
+   - What other information is needed to understand your approach and results?
+   - Why did you choose this approach, as opposed to alternatives?
+3. Describe Input Data 
+   - Where did data come from?
+   - How was data collected?
+   - What is known (or unknown) about quality of data?
+   - What concerns about data should be kept in mind?
+4. Describe Data Analysis & Outputs 
+   - How were data analyzed?
+   - What are the outputs of the analysis?
+   - Sometimes includes limited straight-forward results
+5. Interpret Data
+   - Explain rationale for each conclusion/recommendation
+6. Conclusions/Recommendations
+   - Concise summary
+7. What comes next?
+   - Motivate what you want to do next
+   - Inspire others to contribute
+8. Appendices
+   - Supporting Data, Tables, Figures, Codes
+   - More details about Analysis Methods & Implementation Details
+   - Describe checks that were performed and passed
+"""
+
+# ╔═╡ 85c09fe5-640a-4aff-8fec-5f7df07977ea
+md"""
+### Pros of Typical Written Scientific Report
+- Provides details needed to understand, evaluate and/or build on results
+- Great for referring back to long after report was prepared
+- Sense of accomplishment from finishing a project
+
+### Cons of Typical Written Scientific Report
+- Can take significant time to prepare
+- Can take significant time to understand
+- Easy to overlook important elements "buried" in a long report
+- Readers may skim/skip over parts
+- Often "dry"
+"""
+
+# ╔═╡ ebf7a98e-2fc3-4b1e-87a0-1633d074120c
+md"""
+## Oral Report/Presentations
+- Summarizes key elements of written report
+- Refers to written report for details (e.g., data, methodology, analysis, complete list of assumptions/caveats)
+  - Should still highlight most important assumptions/caveats
+- Best presentations tell a story
+  - Easier to maintain audience's attention
+  - More likely to be remembered
+"""
+
+# ╔═╡ 49ca4f5f-82e8-449e-806d-2fddfcfdbf07
+md"""
+# Dashboard
+**Goal:** Efficiently communicate what can be learned from data
+
+- Support people in making future decisions
+- Won't represent the best-possible analysis
+- Automates performing common tasks & analysis
+- Needs to be robust & capable of handling corner cases gracefully
+"""
+
+# ╔═╡ 7adfadea-9e17-4194-bb7a-6fa4132ca900
+md"""
+## Pros of Dashboard
+- Enables people to gain insights efficiently
+- Accelerate science
+- Reduce errors by automating routine steps
+- Allows team members to focus on other steps 
+- Can integrates expertise from multiple team members 
+
+## Cons of Dashboard
+- Takes significant time to make pipeline robust
+- Takes significant time to design effective visualizations
+- May not be able to refer back to dashboard's state at previous time
+- Takes time/knowledge to keep running smoothly
+- Often want to update dashboard (repeatedly) as needs change
+- Risks oversimplifying complex cases
+- Can contribute to leaders becoming overconfident
+"""
+
+# ╔═╡ 78f8aa5c-7291-4466-b91f-c250409ecb0d
+md"""
+## Key Differences between a Report & a Dashboard
+
+| Reports            | Dashboards   |
+|:-------------------|:-------------|
+| Static             | Dynamic      |
+| Reviewed & Proofed | Rely on previous tests |
+| Explanatory        | Exploratory  |
+| Tailored to support message | Effective for any incoming data |   
+| Help reader reach your conclusion | Help viewer form hypothesis |
+"""
+
+# ╔═╡ 9217f2eb-9146-4212-8d18-f83d05e854f3
+md"""
+## Examples of Dashboards at Penn State
+- [Penn State COVID-19 Dashboard](https://virusinfo.psu.edu/covid-19-dashboard/)
+- [Penn State Undergraduate Admissions Dashboard](https://datadigest.psu.edu/peer-comparisons/student/")
+- [Penn State Graduation & Retension](https://datadigest.psu.edu/peer-comparisons/graduation/)
+- [Penn State Community Survey](https://opair.psu.edu/community-survey/dashboards/total/)
+- [Penn State Data Center Utilization](https://app.powerbi.com/groups/me/apps/5c12407d-ae59-4056-a1a6-52c33b794b48/reports/25e2976c-2b5c-4707-a300-ae871593f141/ReportSectiond2b1ec753d74efe369a4?ctid=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
+- [Census Data](https://pasdc.hbg.psu.edu/Census-2020-Dashboards/Census-2020-County-Data)
+"""
+
+# ╔═╡ 1afd9eb5-2943-47cd-a938-fe519a058ab5
+md"""
+## Dashboards aim to
+- Reduce cognitive load of viewer...
+  - but provide all information necessary
+- Anticipate questions that viewers will have...
+  - but questions change with time/new data
+- Be flexible enough to deal with whatever data comes in...
+  - but incoming data changes with time
+"""
+
+# ╔═╡ 800070be-23f6-4ab2-ac42-0aec543e4472
+md"""
+## Data Disagregation & Drilldown
+"""
+
+# ╔═╡ b963e86f-3adc-4022-83bf-23293aeb66bb
+md"""
+# Collaborating
+## Asynchronous
+- Write separate files/functions/modules
+- Maintain independent repositories
+- Merge changes via git
+- Create branches for new features, so main branch is always usable 
+
+## Synchronous
+- Like asynchronous, but ask questions as you go
+- Pair Coding: Driver & Navigator
+- Debugging: Explainer & Audience
+- Beware of using shared filesystem 
+"""
+
+# ╔═╡ 97af90ac-2800-4ccd-9037-40063f81ad1b
+md"""
+## Tools 
+- Merging updates: Git
+- Sharing screen: Zoom, Teams, Virtual Desktop 
+- Collaborative coding:  [VS Code](https://www.julia-vscode.org/docs/stable/userguide/remote/)/[VS Codium](https://vscodium.com/), [Repl.it](https://replit.com/), [Google Colab](https://colab.research.google.com/)
 
 """
 
-# ╔═╡ bbc0e60e-068d-4be5-b568-5b1446843884
-md"""
-## Physical separation of Einstein ring at distance of lens
-
-$$r_E = \theta_E D_l \simeq 2.2 \mathrm{AU} \left(\frac{M_l}{0.3 M_\odot}\right)^{1/2} \left(\frac{D_s}{8 \mathrm{kpc}}\right)^{1/2} \left(\frac{x(1-x)}{0.25}\right)^{1/2}$$
-
-$x\equiv D_l/D_s$
-
-"""
-
-# ╔═╡ 998b4730-5863-4d3e-9b52-65acba06564c
-md"""
-## Magnification ($A$)
--  Can be 10%, 100% or even 1000%!
--  $A>1.34$ if $u\le 1$
--  Even if $r_E$ is very small
-"""
-
-# ╔═╡ c3adf2e6-c22c-4431-9143-d7bfd6ef4f6c
-md"""
-### Single Lens
-$(Resource("https://www.astronomy.ohio-state.edu/gaudi.1/Movies/point.gif", :width=>"80%", :alt=>"Animation of Microlensing Magnification and Image for Single Lens")) 
---- Credit: [S. Gaudi](https://www.astronomy.ohio-state.edu/gaudi.1/movies.html)
-"""
-
-# ╔═╡ 457804a5-a203-465b-834d-5eec925d9c3c
-md"""
-## Timescale for Microlensing Events 
-
-$$t_E = \theta_E / \mu_{\mathrm{rel}}$$
--  $\mu_{\mathrm{rel}}$: proper motion of source relative to the lens 
--  Often $\sim$months for low-mass star lens events towards galactic bulge
-"""
-
-# ╔═╡ 5f0f3c37-ddc8-4ba5-a188-e204145c7c67
-md"""
-### Lens with Planet
-$(Resource("https://www.astronomy.ohio-state.edu/gaudi.1/Movies/pmicromin_wi.gif", :width=>"80%", :alt=>"Animation of Microlensing Magnification and Image for Lens with Planet")) 
---- Credit: [S. Gaudi](https://www.astronomy.ohio-state.edu/gaudi.1/movies.html)
-"""
-
-# ╔═╡ b35d8e6e-a357-48f2-adec-09015f6d46db
-md"""
-## Frequency of microlensing events
--  $\mathcal{O}(10^{-6})$ events per star per year
--  Towards buldge $\sim~10^7$ stars per deg² to I$\sim~20$
--  $\sim~10$ events per square degree monitored
-"""
-
-# ╔═╡ a1ca11d6-d195-4cfe-86ab-29a289c714bb
-question_box(md"Have any known microlensing events for an exoplanet been caused by a black hole rather than a background star?")
-
-# ╔═╡ d9caa407-d2ea-44b1-b45d-9177a71763c3
-md"""
-Lens Star Properties:  
-D\_l: $(@bind D_l NumberField(0:0.2:10, default=4) )  kpc $nbsp $nbsp
-M\_l: $(@bind M_l_star NumberField(0.01:0.01:1, default=0.3) ) M\_⊙ $nbsp  $nbsp
-"""
-
-# ╔═╡ 571ff1c2-0d65-443d-abdc-842a2c957b5d
-md"""
-Source Star Properties: 
-D\_s: $(@bind D_s NumberField(D_l:0.2:10, default=8) )  kpc $nbsp  $nbsp
-R\_s: $(@bind R_s NumberField(1:0.5:20, default=10) )  R\_⊙ $nbsp  $nbsp
-"""
-
-# ╔═╡ 33b5b842-ac74-4c5a-89c4-20944f70b758
-if D_l>=D_s
-  warning_box(md"Distance to lens must be less than distance to source.")
-end
-
-# ╔═╡ ae4c42c6-f352-4e00-93bf-12f31847e07c
-md"""
-Relative Position/Velocity: 
-b₀ (star): $(@bind b₀_star NumberField(0:0.1:5.0, default=0.75)) AU  $nbsp $nbsp
-v\_rel,sky: $(@bind v_lens_km_per_sec NumberField(0.5:0.5:300, default=30)) km/s  $nbsp $nbsp
-
-Observer Plot Limits:  
-Distance: $(@bind sky_plt_lim NumberField(0.5:0.5:100, default=4)) AU $nbsp $nbsp
-Time: $(@bind lc_plt_lim NumberField(10:10:10_000, default=400)) d $nbsp $nbsp
-Magnification: $(@bind lc_mag_lim NumberField(1:0.25:20, default=4)) $nbsp $nbsp
-"""
-
-# ╔═╡ 8d0dd2cf-207d-4c12-9b39-8d1dfe29003e
-md"""
-Add Planet: $(@bind incl_planet CheckBox(default=false))  $nbsp  $nbsp
-M\_l,pl: $(@bind M_l_pl_earth NumberField(0:1:1000, default=10) )  M\_⊕ $nbsp  $nbsp
-x\_pl: $(@bind x_pl NumberField(0:0.1:5, default=1.0)) AU $nbsp  $nbsp
-y\_pl: $(@bind y_pl NumberField(0:0.02:5, default=1.0)) AU  $nbsp $nbsp
-"""
-
-# ╔═╡ 53a7b484-c6a2-4171-8788-159ccf26445c
-md"""
-## Planet Hunting Regimes
-## Weak magnification regime
--  $A\le~10$ or $u_0\ge0.1$
--  $\theta_{E,p} = \sqrt{\frac{m_pl}{M_l}}$
--  Probability of significant additional magnification by planet: $\sim A(t_{0,p}) \theta_{E,p} / \theta_E$ 
--  Sensitivity to planets:
-   - Peaks when projected planet-star separation is comparable to $r_E$
-   - Falls rapidly for planets inside $r_E$, more slowly for planets beyond $r_E$
--  Detection is challenging primarily because planetary events have short durations and could fall in gaps between observations.
--  Relatively easy to model
--  $t_E$ provides information about lens mass, distance and relative proper motion 
--  $A_{pl}$ and time of planetary event constrain projected separation (in units of $r_E$)
-"""
-
-# ╔═╡ 4a74e6d0-7c4a-4ff1-8e4c-0ef5ca4acfce
-md"""
-### Strong magnification regime
--  $u\le 0.01$  or $A_\max \ge 100$
--  Events with maximum magnification $A_\max$ are small fraction of events ($\sim1/A_\max$)
--  Sensitive to planets with projected separation $\simeq r_E$ regardless of azimuthal angle
--  $\sim~1$ day of high sensitivity
--  Time of peak sensitivity can be predicted with hours to days of lead time
--  Modeling is complex and computationally expensive (And not included in figure above.)
--  Can help resolve some degeneracies in planet mass and separation
--  Often still two qualitatively different solutions (corresponding to very close/very wide solutions)
-"""
-
-# ╔═╡ 28db28e7-79fd-4bf5-b798-93979b426bbb
-md"""
-## Higher-order effects
-- Blending with background stars
-- Finite source size
-- Parallax effects
-- Orbital motion of lens system
-- Binary sources
-"""
-
-# ╔═╡ 58aad46d-2b7a-4bc0-8d03-c2307d163618
-md"""
-## Microlensing Pros
-- Sensitive to relatively low-mass planets at intermediate distances
-- Even low-mass planets cause substantial increases in observed flux (for a brief time) 
-- Potential to link occurence rates measured by transit/Doppler surveys to occurence direct imaging surveys
-- Opportunity for small telescopes to make valuable contributions
-- Potential to detect sub-Earth-mass planets
-- Potential to detect free-floating planets
-- Several degeneracies in basic scenario can be resolved by combining multiple observatories spread across the solar system.
-"""
-
-# ╔═╡ 06ecfa6f-8605-438a-bc6d-59bbd24ace79
-md"""
-## Microlensing Cons
-- Don't get to pick to apply microlensing to a system
-- Majority of microlensing events provide limited information about planets 
-- Planetary systems detected are faint & far away
-- Unlikely to get a second chance to study a given system
-- Need intense monitoring to detect brief magnification events from low-mass planets
-- Low sensitivity to planets significantly closer than Eienstein radius
-- Often significant degeneracies in measured parameters
-- Difficult to distinguish planets on wide orbits from free-floating planets
-- Limited observatories beyond Earth orbit to help resolve degeneracies
-"""
-
-# ╔═╡ aa61161d-9521-4b1d-9b39-d4db41ef5fef
-md"""
-# Programming Collaborations
-"""
-
-# ╔═╡ c218c1c6-bb6b-46c7-86bd-b82141567605
+# ╔═╡ c38de739-470f-4bdf-8e66-e27476edce0d
 md"""
 # Setup/Helper Code
 """
 
-# ╔═╡ a1dc4d22-11a1-4658-a810-32acce0ac409
+# ╔═╡ 86a5e98a-5d8d-4516-b9c2-9c86d4a58868
 ChooseDisplayMode()
 
-# ╔═╡ 71edc6ba-2a70-4a64-ad8d-309077789f02
-md"""
-## Microlensing Plots
-"""
-
-# ╔═╡ 69c05a08-e334-4160-bd8e-82f90ea31b00
-"""
-   `A(u)`
-
-Calculate total magnification from a single lensing event with dimensionless separation of`u`.
-"""
-A(u) = (2+u^2)/(u*sqrt(4+u^2))
-
-# ╔═╡ b7f9e62f-2d40-4d13-a723-523024f49ce2
-A₊(u) = ((u^2+2)/(u*sqrt(u^2+4))+1)/2
-
-# ╔═╡ 5dc53e8d-45cd-494e-9930-e9abf04b7769
-A₋(u) = ((u^2+2)/(u*sqrt(u^2+4))-1)/2
-
-# ╔═╡ 3cbf37dd-b2ba-420e-95c5-1a2de1e4ae2d
-""" 
-   `u(t; u₀, [t₀, tₑ] )`
-
-Calculate impact parameter measured in Einstein radii as a function of time.
-Inputs:
-- t: time (units of tE)
-- u₀: Minimum dimensionless impact parameter at time t₀
-- t₀: Time of minimium impact parameter [default: 0]
-- tₑ: Interval for lens to move by one Einstein ring radius [default: 1]
-"""
-u(t; u₀::Real, t₀::Real=zero(t), tₑ::Real=one(t) ) = sqrt(u₀^2+(t-t₀)^2/tₑ^2)
-
-# ╔═╡ 305d390e-7952-4342-8de6-c7fc574d2e76
-md"""
-### Units
-"""
-
-# ╔═╡ 5bda79ce-476c-4edc-88c7-b575f688573a
+# ╔═╡ 8eaf0c7c-275e-4d5a-af85-cdf7f190023c
 begin
-	arcsec_to_rad = π/(180*3600) 
-	parsec_to_AU = 206265
-	Rsol_to_AU = 215.032
-	AU_to_km = 149597870.7 
-	parsec_to_km = parsec_to_AU*AU_to_km
-	day_to_year = 365.2425
-	sec_to_day = 24*60^2
-	Rsol_at_kpc = 2.25461e-11
+	datadir = joinpath(pwd(),"data")
+	mkpath(datadir)
+	filename = "nexsci_ps.tsv"
+	datapath = joinpath(datadir,filename)
 end;
 
-# ╔═╡ 76471117-d378-404b-864c-bf24fc856c78
-begin  
-	# Computer intermediate results for stellar lens
-	local x = D_l/D_s
-	r_e = 2.2*sqrt( (M_l_star/0.3) * D_s/8 * x*(1-x)/0.25 ) # AU
-	u₀_star = b₀_star  / r_e  
-	v_lens_au_per_day = v_lens_km_per_sec / AU_to_km * sec_to_day
-	tₑ_star = r_e/v_lens_au_per_day	
-	min_u_star = (Rsol_at_kpc * R_s / D_s) * (D_l*1000*parsec_to_AU) / r_e # very approximate
-end;
-
-# ╔═╡ 69d67c12-351c-4b55-9361-bd85bb1a83a3
-begin
-	# Computer intermediate results for planet lens
-	M_l_pl = M_l_pl_earth * 3e-6
-	r_e_pl = r_e * sqrt( M_l_pl/M_l_star ) # AU
-	tₑ_pl = tₑ_star * sqrt(M_l_pl/M_l_star)
-	r_pl = sqrt(x_pl^2+y_pl^2)
-	u₀_pl = (y_pl - b₀_star)/r_e_pl
-	t₀_pl = x_pl/v_lens_au_per_day # / v_rel
-	min_u_pl = (Rsol_at_kpc * R_s / D_s) * (D_l*1000*parsec_to_AU) / r_e_pl # very approximate
-end;
-
-# ╔═╡ 5887728a-7f14-4505-b5fd-0b4bc26b62f3
-md"""
-r\_E: $(round(r_e,sigdigits=3)) AU $nbsp $nbsp
-r\_E,pl: $(round(r_e_pl,sigdigits=3)) AU $nbsp $nbsp
-t\_E,⋆: $(round(tₑ_star,sigdigits=3)) d $nbsp $nbsp
-t\_E,pl: $(round(tₑ_pl,sigdigits=3)) d $nbsp $nbsp
-r\_pl: $(round(r_pl,sigdigits=3))  AU $nbsp $nbsp
-"""
-
-# ╔═╡ cf3d9913-93ee-41ad-a85c-7f016633de7c
-begin
-	local plt_lim = lc_plt_lim
-	plt_lc_star_obs = plot(xlabel = "Time (d)", ylabel="Magnification", 
-		legend=:none)
-	ylims!(0.9,lc_mag_lim)
-	local t = range(-plt_lim,stop=plt_lim, step=0.02*tₑ_star)
-	if incl_planet 
-		local t_around_pl = range(t₀_pl-tₑ_pl,stop=t₀_pl+tₑ_pl, length=100)
-		t = sort(vcat(t, t_around_pl))
-	end
-	local flux = A.(max.(min_u_star,u.(t,u₀=u₀_star,tₑ=tₑ_star))) 
-	if incl_planet 
-		flux +=  A.(max.(min_u_pl,u.(t,u₀=u₀_pl,t₀=t₀_pl,tₑ=tₑ_pl))).-1		
-	end
-	plot!(plt_lc_star_obs, t, flux, markersize=2, markerstrokewidth=0 )
-end;
-
-# ╔═╡ 02b316cd-3473-4be1-ae88-8af1bc74eea7
-begin
-	local plt_lim = 2.5
-	plt_lc_star_theory = plot(xlabel = "Time (d/t_E)", ylabel="Magnification", 
-		legend=:none)
-	local t = range(-plt_lim,stop=plt_lim, step=0.02) 
-	if incl_planet 
-		local t_around_pl = range(t₀_pl/tₑ_star-sqrt(M_l_pl/M_l_star),stop=t₀_pl/tₑ_star+sqrt(M_l_pl/M_l_star), length=100)
-		t = sort(vcat(t, t_around_pl))
-	end
-	local flux = A.(max.(min_u_star,u.(t,u₀=u₀_star))) 
-	if incl_planet 
-		flux +=  A.(max.(min_u_pl,u.(t,u₀=u₀_pl,t₀=t₀_pl/tₑ_star,tₑ=sqrt(M_l_pl/M_l_star)))).-1		
-	end
-	plot!(plt_lc_star_theory, t, flux, markersize=2, markerstrokewidth=0 )
-end;
-
-# ╔═╡ c6a197b3-f911-4ce0-a406-c333389fa360
-md"""
-### Plotting 
-"""
-
-# ╔═╡ 0605f30e-68ca-4a01-bb56-d86e61eed308
-function plot_circle!(plt, r; x=0, y=0, n=50, linewidth=4, linestyle=:dash, linecolor=:black)
-	xx, yy = zeros(n+1), zeros(n+1)
-	xx[1:end-1] .= x.+r.*cos.(range(0,stop=2π, step=2π/n))
-	yy[1:end-1] = y.+r.*sin.(range(0,stop=2π, step=2π/n))
-	xx[end] = xx[1]
-	yy[end] = yy[1]
-	plot!(plt,xx,yy, linewidth=linewidth, linestyle=linestyle,linecolor=linecolor)
+# ╔═╡ 5c657d85-608a-4263-ba0c-8d24543f20d9
+"Returns a vector of strings with names of columns in DataFrame containing a variable of type."
+function get_cols_containing_type(df::DataFrame, type::Type)
+		filter(c->eltype(df[!,c])<:Union{Missing,type}, names(df) )
 end
 
-# ╔═╡ 37710d26-eada-4e59-8cff-89f712d3da66
-begin
-	local plt_lim = sky_plt_lim
-	plt_sky_obs = plot(xlabel=L"x \; (\mathrm{AU})", ylabel=L"y \; (\mathrm{AU})", 
-		size=(600,600), frame=:box, legend=:none, 
-		left_margin=2.5*Plots.mm, bottom_margin=2*Plots.mm)
-	xlims!(plt_sky_obs,-plt_lim,plt_lim)
-	ylims!(plt_sky_obs,-plt_lim,plt_lim)
-	plot_circle!(plt_sky_obs,r_e)
-	plot!(plt_sky_obs, [-plt_lim,plt_lim],[b₀_star, b₀_star], linewidth=4, linestyle=:dot )
-	if incl_planet 
-		plot_circle!(plt_sky_obs,r_e*sqrt(M_l_pl/M_l_star), x=x_pl, y=y_pl, linecolor=3, linestyle=:dot)
-		scatter!(plt_sky_obs, [x_pl], [y_pl], markersize=4, markerstrokewidth=0, markercolor=3)
+# ╔═╡ b4ff7f34-e3f0-43e4-826e-d0134383e641
+"Returns a vector of strings with names of columns in DataFrame containing some form of string."
+get_cols_containing_string(df) = get_cols_containing_type(df,AbstractString)
+
+# ╔═╡ b7160dc7-5d38-4a65-af6f-fbafee284359
+"Returns a vector of strings with names of columns in DataFrame containing some form of real number."
+get_cols_containing_real(df) = get_cols_containing_type(df,Real)
+
+# ╔═╡ 20fbb80e-a078-4d3e-af5f-fa3fc0995d91
+"""
+`make_tap_query_url(base_url, query_table; ...)`
+Returns url for a Table Access Protocol (TAP) query.
+Inputs:
+- base url 
+- table name
+Optional arguments:
+- max_rows (all)
+- select_cols (all)
+- where (no requirement)
+- order_by_cols (not sorted)
+- format (tsv)
+See [NExScI](https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html#sync) or [Virtual Observatory](https://www.ivoa.net/documents/TAP/) for more info.
+"""
+function make_tap_query_url(query_base_url::String, query_table::String; max_rows::Integer = 0, select_cols::String = "", where::String = "", order_by_cols::String = "", format::String="tsv" )
+	
+	query_select = "select"
+	if max_rows > 0 
+		query_select *= "+top+" * string(max_rows)
 	end
-	plt_sky_obs
+	if length(select_cols) >0
+		query_select *= "+" * select_cols 
+	else
+		query_select *= "+*"
+	end
+	query_from = "+from+" * query_table
+	query_where = length(where)>0 ? "+where+" * where : ""
+	query_order_by = length(order_by_cols) > 0 ? "+order+by+" * order_by_cols : ""
+	query_format = "&format=" * format
+	url = query_base_url * query_select * query_from * query_where * query_order_by * query_format
+end
+
+# ╔═╡ a744c046-93ab-4af3-9834-94a9ca83016a
+begin
+	query_base_url = "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query="
+	query_table = "ps"
+	query_where = "default_flag=1"
+	query_max_rows = 10_000
+	url_to_use = make_tap_query_url(query_base_url, query_table, where=query_where, max_rows=query_max_rows)
 end;
 
-# ╔═╡ 8809eceb-4e81-40f2-a637-7b4bd4fa483d
+# ╔═╡ aa7660af-e8dc-4539-96f6-edd0cbe36cb2
 begin
-	local plt_lim = 2
-	plt_sky_theory = plot(xlabel=L"x \; (r_E)", ylabel=L"y \; (r_E)", 
-		size=(600,600), frame=:box, legend=:none, 
-		left_margin=2.5*Plots.mm, bottom_margin=2*Plots.mm)
-	xlims!(plt_sky_theory,-plt_lim,plt_lim)
-	ylims!(plt_sky_theory,-plt_lim,plt_lim)
-	plot_circle!(plt_sky_theory,1)
-	plot!(plt_sky_theory, [-plt_lim,plt_lim],[u₀_star, u₀_star], linewidth=4, linestyle=:dot )
-	if incl_planet 
-		plot_circle!(plt_sky_theory,sqrt(M_l_pl/M_l_star), x=x_pl/r_e, y=y_pl/r_e, linecolor=3, linestyle=:dot)
-		scatter!(plt_sky_theory, [x_pl/r_e], [y_pl/r_e], markersize=4, markerstrokewidth=0, markercolor=3)
+	if !isfile(datapath) || filesize(datapath)==0
+		Downloads.download(url_to_use, datapath)
+		fresh_data = true
+	else
+		fresh_data = false
 	end
-	plt_sky_theory
+	#@test filesize(datapath) >0
+end
+
+# ╔═╡ 5c11f73e-cba2-4922-a45e-5721a6768ed9
+begin
+	fresh_data
+	df_raw = CSV.read(datapath,DataFrame)
 end;
 
-# ╔═╡ e229fd4c-88a3-4602-88e4-fb2e032e7ca6
-plot(plt_sky_obs,plt_lc_star_obs, plt_sky_theory, plt_lc_star_theory, layout=grid(2,2), size=(800,800) )
+# ╔═╡ 0db9e1b0-ea62-44ff-8801-ba0bcb994da5
+begin
+	# Create new Dataframe that eliminates columns that have names ending in "str"
+	colnames_ending_in_str = filter(x->contains(x,r"str$"), names(df_raw) )
+	df = select(df_raw,Not(Symbol.(colnames_ending_in_str)))
+
+	# Convert columns containing HTML into HTML
+	df.sy_refname = HTML.(df.sy_refname)
+	df.disc_refname = HTML.(df.disc_refname)
+	df.pl_refname = HTML.(df.pl_refname)
+	df
+end;
+
+# ╔═╡ 8bf28255-721c-49e9-b37f-685cc5d46903
+unique(df.discoverymethod)
+
+# ╔═╡ 6745536b-d96b-4181-b83a-cd50852f58d0
+df_by_method = groupby(df,:discoverymethod)
+
+# ╔═╡ bb0ff6b0-18b9-4056-8bdc-ecd344232f4e
+md"""
+Discovery Method: $(@bind disc_method_idx Select(0:length(keys(df_by_method)) .=> vcat("All",map(k->k.discoverymethod,keys(df_by_method)))))
+"""
+
+# ╔═╡ 3d0e5244-2231-4a43-9cc5-07bf2ae18310
+let
+	plt = plot() # histogram(df.disc_year, legend=:none)
+	if disc_method_idx >= 1	
+		local df_plt = df_by_method[disc_method_idx] 
+		histogram!(plt, df_plt.disc_year, bin=range(2000,stop=2022), legend=:none )
+	end
+end
+
+# ╔═╡ 749d7b93-6955-46e3-be81-5b19dd53f497
+let
+	plt = plot() #xscale=:log10, yscale=:log10, legend=:none)
+	histogram!(plt, df.disc_year, markersize=1, markerstrokewidth=0)
+	xlabel!("Period (d)")
+	ylabel!("Radius (Rⱼ)")
+	if disc_method_idx >= 1	
+		local df_plt = df_by_method[disc_method_idx] 
+		scatter!(df_plt.pl_orbper,df_plt.pl_radj, markersize=1, markerstrokewidth=0, markercolor=3)
+	end
+end
+
+# ╔═╡ d050107f-33df-4853-8ef3-70cfdbef79dd
+if disc_method_idx >= 1	
+	df_plt = df_by_method[disc_method_idx] 
+	scatter(df_plt.pl_orbper,df_plt.pl_radj)
+end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
-ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
-LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-ColorSchemes = "~3.19.0"
-LaTeXStrings = "~1.3.0"
+CSV = "~0.10.7"
+DataFrames = "~1.4.2"
 Plots = "~1.35.8"
 PlutoTeachingTools = "~0.2.5"
 PlutoUI = "~0.7.48"
@@ -436,6 +402,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
 version = "1.0.8+0"
+
+[[deps.CSV]]
+deps = ["CodecZlib", "Dates", "FilePathsBase", "InlineStrings", "Mmap", "Parsers", "PooledArrays", "SentinelArrays", "Tables", "Unicode", "WeakRefStrings"]
+git-tree-sha1 = "c5fd7cd27ac4aed0acf4b73948f0110ff2a854b2"
+uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+version = "0.10.7"
 
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
@@ -506,16 +478,32 @@ git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
 uuid = "d38c429a-6771-53c6-b99e-75d170b6e991"
 version = "0.6.2"
 
+[[deps.Crayons]]
+git-tree-sha1 = "249fe38abf76d48563e2f4556bebd215aa317e15"
+uuid = "a8cc5b0e-0ffa-5ad4-8c14-923d3ee1735f"
+version = "4.1.1"
+
 [[deps.DataAPI]]
 git-tree-sha1 = "46d2680e618f8abd007bce0c3026cb0c4a8f2032"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.12.0"
+
+[[deps.DataFrames]]
+deps = ["Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "LinearAlgebra", "Markdown", "Missings", "PooledArrays", "PrettyTables", "Printf", "REPL", "Random", "Reexport", "SnoopPrecompile", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
+git-tree-sha1 = "5b93f1b47eec9b7194814e40542752418546679f"
+uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+version = "1.4.2"
 
 [[deps.DataStructures]]
 deps = ["Compat", "InteractiveUtils", "OrderedCollections"]
 git-tree-sha1 = "d1fff3a548102f48987a52a2e0d114fa97d730f0"
 uuid = "864edb3b-99cc-5e75-8d2d-829cb0a9cfe8"
 version = "0.18.13"
+
+[[deps.DataValueInterfaces]]
+git-tree-sha1 = "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6"
+uuid = "e2d170a0-9d28-54be-80f0-106bbe20a464"
+version = "1.0.0"
 
 [[deps.Dates]]
 deps = ["Printf"]
@@ -557,6 +545,12 @@ git-tree-sha1 = "74faea50c1d007c85837327f6775bea60b5492dd"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
 version = "4.4.2+2"
 
+[[deps.FilePathsBase]]
+deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
+git-tree-sha1 = "e27c4ebe80e8699540f2d6c805cc12203b614f12"
+uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
+version = "0.9.20"
+
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
@@ -589,6 +583,10 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "aa31987c2ba8704e23c6c8ba8a4f769d5d7e4f91"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
 version = "1.0.10+0"
+
+[[deps.Future]]
+deps = ["Random"]
+uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
@@ -666,6 +664,12 @@ git-tree-sha1 = "f550e6e32074c939295eb5ea6de31849ac2c9625"
 uuid = "83e8ac13-25f8-5344-8a64-a9f2b223428f"
 version = "0.5.1"
 
+[[deps.InlineStrings]]
+deps = ["Parsers"]
+git-tree-sha1 = "a62189e59d33e1615feb7a48c0bea7c11e4dc61d"
+uuid = "842dd82b-1e85-43dc-bf29-5d0ee9dffc48"
+version = "1.3.0"
+
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
@@ -676,10 +680,20 @@ git-tree-sha1 = "49510dfcb407e572524ba94aeae2fced1f3feb0f"
 uuid = "3587e190-3f89-42d0-90ee-14403ec27112"
 version = "0.1.8"
 
+[[deps.InvertedIndices]]
+git-tree-sha1 = "bee5f1ef5bf65df56bdd2e40447590b272a5471f"
+uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
+version = "1.1.0"
+
 [[deps.IrrationalConstants]]
 git-tree-sha1 = "7fd44fd4ff43fc60815f8e764c0f352b83c49151"
 uuid = "92d709cd-6900-40b7-9082-c6be49f344b6"
 version = "0.1.1"
+
+[[deps.IteratorInterfaceExtensions]]
+git-tree-sha1 = "a3f24677c21f5bbe9d2a714f95dcd58337fb2856"
+uuid = "82899510-4779-5014-852e-03e436cf321d"
+version = "1.0.0"
 
 [[deps.JLFzf]]
 deps = ["Pipe", "REPL", "Random", "fzf_jll"]
@@ -993,11 +1007,23 @@ git-tree-sha1 = "efc140104e6d0ae3e7e30d56c98c4a927154d684"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.48"
 
+[[deps.PooledArrays]]
+deps = ["DataAPI", "Future"]
+git-tree-sha1 = "a6062fe4063cdafe78f4a0a81cfffb89721b30e7"
+uuid = "2dfb63ee-cc39-5dd5-95bd-886bf059d720"
+version = "1.4.2"
+
 [[deps.Preferences]]
 deps = ["TOML"]
 git-tree-sha1 = "47e5f437cc0e7ef2ce8406ce1e7e24d44915f88d"
 uuid = "21216c6a-2e73-6563-6e65-726566657250"
 version = "1.3.0"
+
+[[deps.PrettyTables]]
+deps = ["Crayons", "Formatting", "Markdown", "Reexport", "StringManipulation", "Tables"]
+git-tree-sha1 = "460d9e154365e058c4d886f6f7d6df5ffa1ea80e"
+uuid = "08abe8d2-0d0c-5749-adfa-8a2ac140af0d"
+version = "2.1.2"
 
 [[deps.Printf]]
 deps = ["Unicode"]
@@ -1061,6 +1087,12 @@ git-tree-sha1 = "f94f779c94e58bf9ea243e77a37e16d9de9126bd"
 uuid = "6c6a2e73-6563-6170-7368-637461726353"
 version = "1.1.1"
 
+[[deps.SentinelArrays]]
+deps = ["Dates", "Random"]
+git-tree-sha1 = "efd23b378ea5f2db53a55ae53d3133de4e080aa9"
+uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
+version = "1.3.16"
+
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
@@ -1115,9 +1147,26 @@ git-tree-sha1 = "d1bf48bfcc554a3761a133fe3a9bb01488e06916"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
 version = "0.33.21"
 
+[[deps.StringManipulation]]
+git-tree-sha1 = "46da2434b41f41ac3594ee9816ce5541c6096123"
+uuid = "892a3eda-7b42-436c-8928-eab12a02cf0e"
+version = "0.3.0"
+
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+
+[[deps.TableTraits]]
+deps = ["IteratorInterfaceExtensions"]
+git-tree-sha1 = "c06b2f539df1c6efa794486abfb6ed2022561a39"
+uuid = "3783bdb8-4a98-5b6b-af9a-565f29a5fe9c"
+version = "1.0.1"
+
+[[deps.Tables]]
+deps = ["DataAPI", "DataValueInterfaces", "IteratorInterfaceExtensions", "LinearAlgebra", "OrderedCollections", "TableTraits", "Test"]
+git-tree-sha1 = "c79322d36826aa2f4fd8ecfa96ddb47b174ac78d"
+uuid = "bd369af6-aec1-5ad0-b16a-f7cc5008161c"
+version = "1.10.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
@@ -1178,6 +1227,12 @@ deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "4528479aa01ee1b3b4cd0e6faef0e04cf16466da"
 uuid = "2381bf8a-dfd0-557d-9999-79630e7b1b91"
 version = "1.25.0+0"
+
+[[deps.WeakRefStrings]]
+deps = ["DataAPI", "InlineStrings", "Parsers"]
+git-tree-sha1 = "b1be2855ed9ed8eac54e5caff2afcdb442d52c23"
+uuid = "ea10d353-3f73-51f8-a26c-33c1cb351aa5"
+version = "1.4.2"
 
 [[deps.XML2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "Zlib_jll"]
@@ -1395,47 +1450,37 @@ version = "1.4.1+0"
 """
 
 # ╔═╡ Cell order:
-# ╟─0cf45db2-593a-11ed-26c3-472f38ebc129
-# ╟─c78e975d-7d5c-4762-b9ca-a8af2cdfde20
-# ╟─ede39321-60ca-4033-be8b-db745781a5bc
-# ╟─3eaf7c1a-7840-4291-88a1-1b0c5a9e253e
-# ╟─bbc0e60e-068d-4be5-b568-5b1446843884
-# ╟─998b4730-5863-4d3e-9b52-65acba06564c
-# ╟─c3adf2e6-c22c-4431-9143-d7bfd6ef4f6c
-# ╟─457804a5-a203-465b-834d-5eec925d9c3c
-# ╟─5f0f3c37-ddc8-4ba5-a188-e204145c7c67
-# ╟─b35d8e6e-a357-48f2-adec-09015f6d46db
-# ╟─a1ca11d6-d195-4cfe-86ab-29a289c714bb
-# ╟─33b5b842-ac74-4c5a-89c4-20944f70b758
-# ╟─e229fd4c-88a3-4602-88e4-fb2e032e7ca6
-# ╟─d9caa407-d2ea-44b1-b45d-9177a71763c3
-# ╟─571ff1c2-0d65-443d-abdc-842a2c957b5d
-# ╟─ae4c42c6-f352-4e00-93bf-12f31847e07c
-# ╟─8d0dd2cf-207d-4c12-9b39-8d1dfe29003e
-# ╟─5887728a-7f14-4505-b5fd-0b4bc26b62f3
-# ╟─53a7b484-c6a2-4171-8788-159ccf26445c
-# ╟─4a74e6d0-7c4a-4ff1-8e4c-0ef5ca4acfce
-# ╟─28db28e7-79fd-4bf5-b798-93979b426bbb
-# ╟─58aad46d-2b7a-4bc0-8d03-c2307d163618
-# ╟─06ecfa6f-8605-438a-bc6d-59bbd24ace79
-# ╟─aa61161d-9521-4b1d-9b39-d4db41ef5fef
-# ╟─c218c1c6-bb6b-46c7-86bd-b82141567605
-# ╟─a1dc4d22-11a1-4658-a810-32acce0ac409
-# ╟─b9de11cf-4b68-41a1-ae92-4152bc2b2ca4
-# ╟─71edc6ba-2a70-4a64-ad8d-309077789f02
-# ╟─76471117-d378-404b-864c-bf24fc856c78
-# ╟─69d67c12-351c-4b55-9361-bd85bb1a83a3
-# ╟─37710d26-eada-4e59-8cff-89f712d3da66
-# ╟─8809eceb-4e81-40f2-a637-7b4bd4fa483d
-# ╟─cf3d9913-93ee-41ad-a85c-7f016633de7c
-# ╟─02b316cd-3473-4be1-ae88-8af1bc74eea7
-# ╟─69c05a08-e334-4160-bd8e-82f90ea31b00
-# ╟─b7f9e62f-2d40-4d13-a723-523024f49ce2
-# ╟─5dc53e8d-45cd-494e-9930-e9abf04b7769
-# ╟─3cbf37dd-b2ba-420e-95c5-1a2de1e4ae2d
-# ╟─305d390e-7952-4342-8de6-c7fc574d2e76
-# ╠═5bda79ce-476c-4edc-88c7-b575f688573a
-# ╟─c6a197b3-f911-4ce0-a406-c333389fa360
-# ╟─0605f30e-68ca-4a01-bb56-d86e61eed308
+# ╟─e0fca990-5c74-11ed-066b-f9317fd86eb9
+# ╟─c6027088-fd9b-4f10-8b3e-0677bf39fc54
+# ╟─85c7a5f1-bd17-4c0a-9c7f-14b31a608dbf
+# ╟─0cb28bbd-4b85-49eb-a95a-c166a92c88d0
+# ╟─85c09fe5-640a-4aff-8fec-5f7df07977ea
+# ╟─ebf7a98e-2fc3-4b1e-87a0-1633d074120c
+# ╟─49ca4f5f-82e8-449e-806d-2fddfcfdbf07
+# ╟─7adfadea-9e17-4194-bb7a-6fa4132ca900
+# ╟─78f8aa5c-7291-4466-b91f-c250409ecb0d
+# ╟─9217f2eb-9146-4212-8d18-f83d05e854f3
+# ╟─1afd9eb5-2943-47cd-a938-fe519a058ab5
+# ╟─800070be-23f6-4ab2-ac42-0aec543e4472
+# ╠═bb0ff6b0-18b9-4056-8bdc-ecd344232f4e
+# ╠═3d0e5244-2231-4a43-9cc5-07bf2ae18310
+# ╠═749d7b93-6955-46e3-be81-5b19dd53f497
+# ╠═d050107f-33df-4853-8ef3-70cfdbef79dd
+# ╠═b963e86f-3adc-4022-83bf-23293aeb66bb
+# ╠═97af90ac-2800-4ccd-9037-40063f81ad1b
+# ╟─c38de739-470f-4bdf-8e66-e27476edce0d
+# ╟─86a5e98a-5d8d-4516-b9c2-9c86d4a58868
+# ╠═464bc715-0c64-4cb3-990e-211dca7d47b9
+# ╠═a744c046-93ab-4af3-9834-94a9ca83016a
+# ╠═8eaf0c7c-275e-4d5a-af85-cdf7f190023c
+# ╠═aa7660af-e8dc-4539-96f6-edd0cbe36cb2
+# ╠═5c11f73e-cba2-4922-a45e-5721a6768ed9
+# ╠═0db9e1b0-ea62-44ff-8801-ba0bcb994da5
+# ╠═8bf28255-721c-49e9-b37f-685cc5d46903
+# ╠═6745536b-d96b-4181-b83a-cd50852f58d0
+# ╟─5c657d85-608a-4263-ba0c-8d24543f20d9
+# ╟─b4ff7f34-e3f0-43e4-826e-d0134383e641
+# ╟─b7160dc7-5d38-4a65-af6f-fbafee284359
+# ╟─20fbb80e-a078-4d3e-af5f-fa3fc0995d91
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
