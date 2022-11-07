@@ -71,7 +71,8 @@ end
 function copy_markdown_files()
     from_dir = TUTORIALS_DIR
     md_files = filter(endswith(".md"), readdir(from_dir))
-    to_dir = joinpath(PKGDIR, "__site", "tutorials")
+    #to_dir = joinpath(PKGDIR, "__site", "tutorials")
+    to_dir = joinpath(PKGDIR, "__site", "notebooks")
     mkpath(to_dir)
     for md_file in md_files
         from = joinpath(from_dir, md_file)
