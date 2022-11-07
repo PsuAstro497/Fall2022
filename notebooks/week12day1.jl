@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.14
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -18,6 +18,7 @@ end
 begin
 	using PlutoUI, PlutoTeachingTools
 	using CSV, DataFrames, Plots
+	plotly()
 end
 
 # ╔═╡ e0fca990-5c74-11ed-066b-f9317fd86eb9
@@ -34,7 +35,7 @@ TableOfContents()
 # ╔═╡ 85c7a5f1-bd17-4c0a-9c7f-14b31a608dbf
 md"""
 # Reports
-- You (or your team) performed a detailed analysis.  
+- You (or your team) performed a detailed analysis.
 - A report shares your conclusions and recommendations with others.
 
 ### Who are you reporting to?
@@ -64,18 +65,18 @@ md"""
    - Abstract
    - Executive Summary
    - Opening paragraphs "above the fold"
-2. Context:  
+2. Context:
    - Why did you do this work?
      - Problem or unmet need
      - Previous studies left unanswered question
    - What other information is needed to understand your approach and results?
    - Why did you choose this approach, as opposed to alternatives?
-3. Describe Input Data 
+3. Describe Input Data
    - Where did data come from?
    - How was data collected?
    - What is known (or unknown) about quality of data?
    - What concerns about data should be kept in mind?
-4. Describe Data Analysis & Outputs 
+4. Describe Data Analysis & Outputs
    - How were data analyzed?
    - What are the outputs of the analysis?
    - Sometimes includes limited straight-forward results
@@ -118,6 +119,39 @@ md"""
   - More likely to be remembered
 """
 
+# ╔═╡ d7e89d0e-f84c-45bd-8eec-5fc89f32bfc7
+md"""
+## Common Presentation Structures
+- Solve a Problem/Need
+  - Problem... How Found the Solution... Solution
+  - Problem... Solution... Reasoning
+- The Big Idea
+  - One one hand...  On the other hand...  Call to Action...
+  - What is... What could be...   Call to Action...
+- [Hero's Journey](https://mindfulpresenter.com/9-powerful-steps-storytelling/) (hopefully abridged from Campbell version)
+"""
+
+# ╔═╡ b4761b06-8921-464d-9ec6-e36c6b921d43
+Foldable("Example of Hero's Journey adapted for presentation", md"""
+  - Set the scene/provide context
+  - Introduce the characters (data?)
+  - Begin the journey
+  - Encounter the obstacle
+  - Overcome the obstacle
+  - Resolve the story
+  - Make the point explicit
+  - Call To Action
+""")
+
+# ╔═╡ 970f39cf-b919-4126-a68c-8e7cffeb74c8
+md"""
+### Common Presentation Elements
+- Polished opening to capture's audience's attention/imagination
+- Asking audience a question
+- Dramatic pause / use of empty space
+- Call to Action
+"""
+
 # ╔═╡ 49ca4f5f-82e8-449e-806d-2fddfcfdbf07
 md"""
 # Dashboard
@@ -129,14 +163,40 @@ md"""
 - Needs to be robust & capable of handling corner cases gracefully
 """
 
+# ╔═╡ f618140d-f2d7-4cfe-8d10-73f52c85a278
+md"""
+## Example Dashboard Structure
+- Select which data to display
+- Minimally processed data
+- Summary/simplified version of data
+- Temporal evolution of data and/or summary
+- Comparison dataset or model
+  - Select which comparison to make
+  - Visualization of comparison data/model
+  - Summary of comparison data/model
+  - Temporal evolution of comparison data/model (on top of data?)
+- Opportunity to dig deeper to better understand numbers
+"""
+
+# ╔═╡ 9217f2eb-9146-4212-8d18-f83d05e854f3
+md"""
+## Examples of Dashboards at Penn State
+- [Penn State COVID-19 Dashboard](https://virusinfo.psu.edu/covid-19-dashboard/)
+- [Penn State Undergraduate Admissions Dashboard](https://datadigest.psu.edu/peer-comparisons/student/")
+- [Penn State Graduation & Retension](https://datadigest.psu.edu/peer-comparisons/graduation/)
+- [Penn State Community Survey](https://opair.psu.edu/community-survey/dashboards/total/)
+- [Penn State Data Center Utilization](https://app.powerbi.com/groups/me/apps/5c12407d-ae59-4056-a1a6-52c33b794b48/reports/25e2976c-2b5c-4707-a300-ae871593f141/ReportSectiond2b1ec753d74efe369a4?ctid=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
+- [Census Data](https://pasdc.hbg.psu.edu/Census-2020-Dashboards/Census-2020-County-Data)
+"""
+
 # ╔═╡ 7adfadea-9e17-4194-bb7a-6fa4132ca900
 md"""
 ## Pros of Dashboard
 - Enables people to gain insights efficiently
 - Accelerate science
 - Reduce errors by automating routine steps
-- Allows team members to focus on other steps 
-- Can integrates expertise from multiple team members 
+- Allows team members to focus on other steps
+- Can integrates expertise from multiple team members
 
 ## Cons of Dashboard
 - Takes significant time to make pipeline robust
@@ -157,19 +217,8 @@ md"""
 | Static             | Dynamic      |
 | Reviewed & Proofed | Rely on previous tests |
 | Explanatory        | Exploratory  |
-| Tailored to support message | Effective for any incoming data |   
+| Tailored to support message | Effective for any incoming data |
 | Help reader reach your conclusion | Help viewer form hypothesis |
-"""
-
-# ╔═╡ 9217f2eb-9146-4212-8d18-f83d05e854f3
-md"""
-## Examples of Dashboards at Penn State
-- [Penn State COVID-19 Dashboard](https://virusinfo.psu.edu/covid-19-dashboard/)
-- [Penn State Undergraduate Admissions Dashboard](https://datadigest.psu.edu/peer-comparisons/student/")
-- [Penn State Graduation & Retension](https://datadigest.psu.edu/peer-comparisons/graduation/)
-- [Penn State Community Survey](https://opair.psu.edu/community-survey/dashboards/total/)
-- [Penn State Data Center Utilization](https://app.powerbi.com/groups/me/apps/5c12407d-ae59-4056-a1a6-52c33b794b48/reports/25e2976c-2b5c-4707-a300-ae871593f141/ReportSectiond2b1ec753d74efe369a4?ctid=7cf48d45-3ddb-4389-a9c1-c115526eb52e)
-- [Census Data](https://pasdc.hbg.psu.edu/Census-2020-Dashboards/Census-2020-County-Data)
 """
 
 # ╔═╡ 1afd9eb5-2943-47cd-a938-fe519a058ab5
@@ -193,27 +242,41 @@ md"""
 Show Drilldown Plots $(@bind drilldown_plots CheckBox(default= false))
 """
 
-# ╔═╡ b963e86f-3adc-4022-83bf-23293aeb66bb
+# ╔═╡ 00632439-6134-4320-abc5-b705b6d55488
+
+
+# ╔═╡ 35205515-540c-45b1-8bdc-92da97229532
 md"""
 # Collaborating
+"""
+
+# ╔═╡ f4babbd2-5d08-4c2f-a113-8f0f3cf6605b
+question_box(
+md"""How do you currently collaborate on projects requiring coding?""")
+
+# ╔═╡ b22080e6-23f0-4a21-ab0b-15e2e575fa27
+md"""
 ## Asynchronous
 - Write separate files/functions/modules
 - Maintain independent repositories
 - Merge changes via git
-- Create branches for new features, so main branch is always usable 
+- Create branches for new features, so main branch is always usable
 
 ## Synchronous
 - Like asynchronous, but ask questions as you go
 - Pair Coding: Driver & Navigator
 - Debugging: Explainer & Audience
-- Beware of using shared filesystem 
+- Beware of using shared filesystem
 """
+
+# ╔═╡ 3ad08a19-1436-4f21-9c35-a2c3c7faf6e9
+question_box(md"""What tools do you use for collaborating on coding projects?""")
 
 # ╔═╡ 97af90ac-2800-4ccd-9037-40063f81ad1b
 md"""
-## Tools 
+## Tools
 - Merging updates: Git
-- Sharing screen: Zoom, Teams, Virtual Desktop 
+- Sharing screen: Zoom, Teams, Virtual Desktop
 - Collaborative coding:  [VS Code](https://www.julia-vscode.org/docs/stable/userguide/remote/)/[VS Codium](https://vscodium.com/), [Repl.it](https://replit.com/), [Google Colab](https://colab.research.google.com/)
 
 """
@@ -253,7 +316,7 @@ get_cols_containing_real(df) = get_cols_containing_type(df,Real)
 `make_tap_query_url(base_url, query_table; ...)`
 Returns url for a Table Access Protocol (TAP) query.
 Inputs:
-- base url 
+- base url
 - table name
 Optional arguments:
 - max_rows (all)
@@ -264,13 +327,13 @@ Optional arguments:
 See [NExScI](https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html#sync) or [Virtual Observatory](https://www.ivoa.net/documents/TAP/) for more info.
 """
 function make_tap_query_url(query_base_url::String, query_table::String; max_rows::Integer = 0, select_cols::String = "", where::String = "", order_by_cols::String = "", format::String="tsv" )
-	
+
 	query_select = "select"
-	if max_rows > 0 
+	if max_rows > 0
 		query_select *= "+top+" * string(max_rows)
 	end
 	if length(select_cols) >0
-		query_select *= "+" * select_cols 
+		query_select *= "+" * select_cols
 	else
 		query_select *= "+*"
 	end
@@ -299,7 +362,7 @@ begin
 		fresh_data = false
 	end
 	#@test filesize(datapath) >0
-end
+end;
 
 # ╔═╡ 5c11f73e-cba2-4922-a45e-5721a6768ed9
 begin
@@ -320,48 +383,45 @@ begin
 	df
 end;
 
-# ╔═╡ 8bf28255-721c-49e9-b37f-685cc5d46903
-unique(df.discoverymethod)
-
 # ╔═╡ 6745536b-d96b-4181-b83a-cd50852f58d0
-df_by_method = groupby(df,:discoverymethod)
+df_by_method = groupby(df,:discoverymethod);
 
 # ╔═╡ bb0ff6b0-18b9-4056-8bdc-ecd344232f4e
-if drilldown_plots 
+begin
+	menu_keys = 0:length(keys(df_by_method))
+	menu_values = vcat("All",map(k->k.discoverymethod,keys(df_by_method)))
 	md"""
-Discovery Method: $(@bind disc_method_idx Select(0:length(keys(df_by_method)) .=> vcat("All",map(k->k.discoverymethod,keys(df_by_method)))))
-"""
+	Discovery Method: $(@bind disc_method_idx Select(menu_keys .=> menu_values))
+	"""
 end
 
 # ╔═╡ 3d0e5244-2231-4a43-9cc5-07bf2ae18310
-if drilldown_plots
-	let
-	plt = plot() # histogram(df.disc_year, legend=:none)
-	if disc_method_idx >= 1	
-		local df_plt = df_by_method[disc_method_idx] 
-		histogram!(plt, df_plt.disc_year, bin=range(2000,stop=2022), legend=:none )
+begin
+	scalefontsizes()
+	scalefontsizes(1.5)
+	local plt = plot()
+	years_plt = range(2000,stop=2022)
+	if disc_method_idx >= 1
+		 df_plt = df_by_method[disc_method_idx]
+		histogram!(plt, df_plt.disc_year, df_plt.disc_year, bin=years_plt, title=menu_values[disc_method_idx+1], legend=:none )
+	else
+		histogram!(plt,df.disc_year, df.disc_year, bin=range(2000,stop=2022), title="All Exoplanets", legend=:none )
 	end
-	end
+	xlabel!(plt, "Year")
+	ylabel!(plt,"Number of Planets")
 end
 
-# ╔═╡ 749d7b93-6955-46e3-be81-5b19dd53f497
-if drilldown_plots
+# ╔═╡ 23331c5b-0fba-44be-afdc-d5b5cd6e826f
+if drilldown_plots && (disc_method_idx >= 1)
 	let
-	plt = plot() #xscale=:log10, yscale=:log10, legend=:none)
-	histogram!(plt, df.disc_year, markersize=1, markerstrokewidth=0)
-	xlabel!("Period (d)")
-	ylabel!("Radius (Rⱼ)")
-	if disc_method_idx >= 1	
-		local df_plt = df_by_method[disc_method_idx] 
-		scatter!(df_plt.pl_orbper,df_plt.pl_radj, markersize=1, markerstrokewidth=0, markercolor=3)
+	scalefontsizes()
+	scalefontsizes(1.5)
+	plt = plot(legend=:none)
+	scatter!(plt, df_plt.disc_year, df_plt.sy_dist,
+	title=menu_values[disc_method_idx+1])
+	xlabel!(plt,"Discovery Year")
+	ylabel!(plt,"Distance (pc)")
 	end
-	end
-end
-
-# ╔═╡ d050107f-33df-4853-8ef3-70cfdbef79dd
-if drilldown_plots && disc_method_idx >= 1	
-	df_plt = df_by_method[disc_method_idx] 
-	scatter(df_plt.pl_orbper,df_plt.pl_radj)
 end
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -385,9 +445,8 @@ PlutoUI = "~0.7.48"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.8.2"
+julia_version = "1.7.1"
 manifest_format = "2.0"
-project_hash = "b2e24d2e9056859962c3f99056b0cd41d7d1676f"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -397,7 +456,6 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -485,7 +543,6 @@ version = "4.3.0"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "0.5.2+0"
 
 [[deps.Contour]]
 git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
@@ -538,9 +595,8 @@ uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.9.2"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -772,12 +828,10 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -786,7 +840,6 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -888,7 +941,6 @@ version = "1.1.7"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.0+0"
 
 [[deps.Measures]]
 git-tree-sha1 = "e498ddeee6f9fdb4551ce855a46f54dbd900245f"
@@ -906,7 +958,6 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.2.1"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -916,7 +967,6 @@ version = "1.0.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-version = "1.2.0"
 
 [[deps.Ogg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -927,12 +977,10 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.20+0"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -966,7 +1014,6 @@ version = "1.4.1"
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-version = "10.40.0+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "SnoopPrecompile"]
@@ -988,7 +1035,6 @@ version = "0.40.1+0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.8.0"
 
 [[deps.PlotThemes]]
 deps = ["PlotUtils", "Statistics"]
@@ -1105,7 +1151,6 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-version = "0.7.0"
 
 [[deps.Scratch]]
 deps = ["Dates"]
@@ -1181,7 +1226,6 @@ version = "0.3.0"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-version = "1.0.0"
 
 [[deps.TableTraits]]
 deps = ["IteratorInterfaceExtensions"]
@@ -1198,7 +1242,6 @@ version = "1.10.0"
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
-version = "1.10.1"
 
 [[deps.TensorCore]]
 deps = ["LinearAlgebra"]
@@ -1403,7 +1446,6 @@ version = "1.4.0+3"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.12+3"
 
 [[deps.Zstd_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1432,7 +1474,6 @@ version = "0.15.1+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.1.1+0"
 
 [[deps.libfdk_aac_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1455,12 +1496,10 @@ version = "1.3.7+1"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1488,29 +1527,35 @@ version = "1.4.1+0"
 # ╟─0cb28bbd-4b85-49eb-a95a-c166a92c88d0
 # ╟─85c09fe5-640a-4aff-8fec-5f7df07977ea
 # ╟─ebf7a98e-2fc3-4b1e-87a0-1633d074120c
+# ╟─d7e89d0e-f84c-45bd-8eec-5fc89f32bfc7
+# ╟─b4761b06-8921-464d-9ec6-e36c6b921d43
+# ╟─970f39cf-b919-4126-a68c-8e7cffeb74c8
 # ╟─49ca4f5f-82e8-449e-806d-2fddfcfdbf07
+# ╟─f618140d-f2d7-4cfe-8d10-73f52c85a278
+# ╟─9217f2eb-9146-4212-8d18-f83d05e854f3
 # ╟─7adfadea-9e17-4194-bb7a-6fa4132ca900
 # ╟─78f8aa5c-7291-4466-b91f-c250409ecb0d
-# ╟─9217f2eb-9146-4212-8d18-f83d05e854f3
 # ╟─1afd9eb5-2943-47cd-a938-fe519a058ab5
 # ╟─800070be-23f6-4ab2-ac42-0aec543e4472
-# ╟─33ed27a3-be07-4655-8c9e-aee043a7f94e
-# ╟─bb0ff6b0-18b9-4056-8bdc-ecd344232f4e
+# ╠═6745536b-d96b-4181-b83a-cd50852f58d0
+# ╠═bb0ff6b0-18b9-4056-8bdc-ecd344232f4e
 # ╟─3d0e5244-2231-4a43-9cc5-07bf2ae18310
-# ╟─749d7b93-6955-46e3-be81-5b19dd53f497
-# ╟─d050107f-33df-4853-8ef3-70cfdbef79dd
-# ╠═b963e86f-3adc-4022-83bf-23293aeb66bb
-# ╠═97af90ac-2800-4ccd-9037-40063f81ad1b
+# ╟─33ed27a3-be07-4655-8c9e-aee043a7f94e
+# ╠═23331c5b-0fba-44be-afdc-d5b5cd6e826f
+# ╠═00632439-6134-4320-abc5-b705b6d55488
+# ╟─35205515-540c-45b1-8bdc-92da97229532
+# ╟─f4babbd2-5d08-4c2f-a113-8f0f3cf6605b
+# ╟─b22080e6-23f0-4a21-ab0b-15e2e575fa27
+# ╟─3ad08a19-1436-4f21-9c35-a2c3c7faf6e9
+# ╟─97af90ac-2800-4ccd-9037-40063f81ad1b
 # ╟─c38de739-470f-4bdf-8e66-e27476edce0d
 # ╟─86a5e98a-5d8d-4516-b9c2-9c86d4a58868
-# ╠═464bc715-0c64-4cb3-990e-211dca7d47b9
-# ╠═a744c046-93ab-4af3-9834-94a9ca83016a
-# ╠═8eaf0c7c-275e-4d5a-af85-cdf7f190023c
-# ╠═aa7660af-e8dc-4539-96f6-edd0cbe36cb2
-# ╠═5c11f73e-cba2-4922-a45e-5721a6768ed9
-# ╠═0db9e1b0-ea62-44ff-8801-ba0bcb994da5
-# ╠═8bf28255-721c-49e9-b37f-685cc5d46903
-# ╠═6745536b-d96b-4181-b83a-cd50852f58d0
+# ╟─464bc715-0c64-4cb3-990e-211dca7d47b9
+# ╟─a744c046-93ab-4af3-9834-94a9ca83016a
+# ╟─8eaf0c7c-275e-4d5a-af85-cdf7f190023c
+# ╟─aa7660af-e8dc-4539-96f6-edd0cbe36cb2
+# ╟─5c11f73e-cba2-4922-a45e-5721a6768ed9
+# ╟─0db9e1b0-ea62-44ff-8801-ba0bcb994da5
 # ╟─5c657d85-608a-4263-ba0c-8d24543f20d9
 # ╟─b4ff7f34-e3f0-43e4-826e-d0134383e641
 # ╟─b7160dc7-5d38-4a65-af6f-fbafee284359
