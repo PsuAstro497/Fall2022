@@ -42,7 +42,7 @@ function build()
     bopts = BuildOptions(dir; output_format, previous_dir)
     hopts = OutputOptions(; append_build_context=true)
     #build_notebooks(bopts, hopts)
-    build_notebooks_wo_html(bopts, hopts)
+    build_notebooks_wo_prebuilt(bopts, hopts)
     return nothing
 end
 
@@ -82,18 +82,34 @@ function copy_markdown_files()
     return nothing
 end
 
+"Copy the html files"
+function copy_html_files()
+    from_dir = TUTORIALS_DIR
+    md_files = filter(endswith(".html"), readdir(from_dir))
+    #to_dir = joinpath(PKGDIR, "__site", "tutorials")
+    to_dir = joinpath(PKGDIR, "__site", "notebooks")
+    mkpath(to_dir)
+    for md_file in md_files
+        from = joinpath(from_dir, md_file)
+        to = joinpath(to_dir, md_file)
+        cp(from, to; force=true)
+    end
+    return nothing
+end
+
 "Build the tutorials."
 function build_tutorials()
     build()
     # Copy the Markdown first or the appended notebook links will add up.
     copy_markdown_files()
     append_notebook_links()
+    #copy_html_files()
 end
 precompile(build_tutorials, ())
 
 
 
-function build_notebooks_wo_html(
+function build_notebooks_wo_prebuilt(
         bopts::BuildOptions,
         oopts::PlutoStaticHTML.OutputOptions=PlutoStaticHTML.OutputOptions()
     )::Dict{String,Vector{String}}
@@ -102,7 +118,10 @@ function build_notebooks_wo_html(
         path = joinpath(dir, file)
         endswith(file, ".jl") &&
         PlutoStaticHTML._is_pluto_file(path) && !startswith(file, PlutoStaticHTML.TMP_COPY_PREFIX) &&
-        !(filesize(file * ".html")>0)
+        !( (filesize(path * ".html")>0) ||
+           (filesize(path[1:end-3] * ".html")>0) ||
+           (filesize(path * ".md")>0) || 
+           (filesize(path[1:end-3] * ".md")>0) )
     end
     return build_notebooks(bopts, files, oopts)
 end
