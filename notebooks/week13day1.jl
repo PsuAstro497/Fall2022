@@ -21,15 +21,11 @@ md"""
 ## What should we expect of science?
 - Reproducible
 - Replicable
-- Reliable
 - Valid
 
 Historically, different fields of science have used these terms in different ways.  
-As importance became more widely recognized, the National Academies produced a [report](https://www.nationalacademies.org/our-work/reproducibility-and-replicability-in-science) that attempts to standardize language.  
+As their importance became more widely recognized, the National Academies produced a [report](https://www.nationalacademies.org/our-work/reproducibility-and-replicability-in-science) that attempts to standardize language.  
 """
-
-# ╔═╡ 7f1a661b-f830-494e-a991-58993ce9bd08
-
 
 # ╔═╡ bb1b2266-01e7-4991-ad6e-924309f8d1b5
 md"""
@@ -182,8 +178,7 @@ md"""
 > --- [Reproducibility & Replicabilitiy in Science (2019)](https://www.nationalacademies.org/our-work/reproducibility-and-replicability-in-science)
 
 ### Generalizability
-> "Generalizability, another term frequently used in science, refers to the
-extent that results of a study apply in other contexts or populations that differ from the original one."
+> "Generalizability, another term frequently used in science, refers to the extent that results of a study apply in other contexts or populations that differ from the original one."
 >
 > --- [Reproducibility & Replicabilitiy in Science (2019)](https://www.nationalacademies.org/our-work/reproducibility-and-replicability-in-science)
 
@@ -523,7 +518,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─65a5d160-6041-11ed-0ff9-2379cc6d582a
 # ╟─f63b98e1-097d-4a77-a5e8-a66107b9d745
 # ╟─f6a868cc-90d5-4b8b-b61d-07ec539daa1f
-# ╠═7f1a661b-f830-494e-a991-58993ce9bd08
 # ╟─bb1b2266-01e7-4991-ad6e-924309f8d1b5
 # ╟─85202f76-d0df-43e8-88e4-0018f1b4ef35
 # ╟─5abc1e1f-3d26-4d7c-881b-d1a17cef69a2
