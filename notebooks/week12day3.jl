@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.12
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -16,6 +16,15 @@ md"""
 **Astro 497, Week 12, Friday**
 
 Acknowledgement to Prof. Ian Czekala's [Astro 542](https://iancze.github.io/courses/astro542/lectures/) and [Astro 589](https://iancze.github.io/courses/astro589/lectures/01-introduction/).
+"""
+
+# ╔═╡ 941e5c20-bfa9-493a-8cc5-27b717093f46
+TableOfContents()
+
+# ╔═╡ b99ebd92-0632-483c-a6e3-ee129a165924
+md"""
+#### More questions on Microlensing
+See updaed notebook from Monday
 """
 
 # ╔═╡ 9a83fa22-4a20-435a-aa50-c060a9b86e61
@@ -81,6 +90,50 @@ Credit: [Merel van’t Hoff, Ph.D. thesis](https://ui.adsabs.harvard.edu/abs/201
 - Planets can be recognized by their sculpting of Stage III protoplanetary disks.
 """
 
+# ╔═╡ 22ee95e4-e2db-4996-b26d-e3320778e73e
+md"""
+$(question_box(md"What does angular momentum is transferred outward mean?"))
+
+- Angular momentum is exchanged between particles
+- Maximum angular momentum of an order proportional to semi-major axis (a)
+- As mass shifts inwards, angular momentum shifts outwards
+
+
+$(question_box(md"What are possible consequences of transportation of angular momentum?"))
+- Planets (and protoplanetary cores) migrate inwards with the disk.
+- One mechanism to explain massive planets orbiting in inner solar system
+- Raises new questions:  Why don't planets continue to migrate into star.
+"""
+
+# ╔═╡ a2d848d3-2423-461f-8c79-e9ca48b5b523
+md"""
+### Particle on a Keplerian Orbit
+#### Specific Angular Momentum:
+$$\frac{L}{m} = \sqrt{G M a (1-e^2)}$$
+
+
+#### Specific Energy:
+$$\frac{E}{m} = -\frac{GM}{2a}$$
+
+"""
+
+# ╔═╡ 9009e600-0b58-445a-b9ce-8efeaf225ebe
+let
+	x = range(0.1,stop=10,step=0.1)
+	scalefontsizes()
+	scalefontsizes(1.5)
+	plt = plot(xlabel="a (AU)", ylabel="Specific Angular Momentum", yguidefontcolor=:red)
+	
+	plot!(plt, x, sqrt.(x), linecolor=:red, lineweight=4, label="Angular Momentum", legend=:none)
+	plt_r = twinx()
+	plot!(plt_r, x,-0.5 ./x, linecolor=:blue, lineweight=4, ylabel="Specific Energy", yguidefontcolor=:blue, legend=:none )
+	yflip!(plt_r,true)
+	plt
+end
+
+# ╔═╡ e2c65e99-0eec-453e-a6c0-7cb83708b49f
+question_box(md"""What stage disk our solar system formed from?""")
+
 # ╔═╡ fa78e15e-b6d7-4ff9-bf6b-3ff3f0a5e9fa
 md"""
 $(question_box(md"How does the type of star affect the characteristics of the protoplanetary disk?"))
@@ -109,7 +162,7 @@ question_box(md"Is there a limit to how long a protoplanetary disc can last, and
 
 # ╔═╡ 52e4b42b-ac48-4c4a-b23f-0a52e6522b69
 md"""
-$(Resource("https://upload.wikimedia.org/wikipedia/commons/1/17/Mamajek09_diskfraction.jpg",:width=>"80%"))
+$(Resource("https://upload.wikimedia.org/wikipedia/commons/1/17/Mamajek09_diskfraction.jpg",:height=>"60%"))
 --- Credit: [Mamajek 2009](https://aip.scitation.org/doi/abs/10.1063/1.3215910) Lincense: [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en)
 
 """
@@ -163,18 +216,23 @@ The Atacama Large (Sub)millimeter Array, an interferometric array of 66 antennas
 
 """
 
-# ╔═╡ 2ee1e839-cb68-4e6b-8fcb-8d8da55cb32a
-md"""
-$(Resource("https://iancze.github.io/courses/astro589/lectures/01-introduction/HLTau_ALMA.jpg",:width=>"80%"))
-The protoplanetary disk around HL Tau, imaged using the Atacama Large Millimeter Array. Credit: [ALMA(ESO/NAOJ/NRAO); C. Brogan, B. Saxton (NRAO/AUI/NSF)](https://public.nrao.edu/gallery/hl-tau-birth-of-planets-revealed-in-astonishing-detail-2/)
-"""
-
 # ╔═╡ 409629b7-cf84-4f34-b40d-8c58eebdd471
 md"""
 $(Resource("https://public.nrao.edu/wp-content/uploads/2017/05/nrao17cb20b.jpg", :height=>"80%"))
 --- Credit: [ALMA (ESO/NAOJ/NRAO); M. MacGregor](https://public.nrao.edu/news/2017-alma-ring-fomalhaut/)
 
 """
+
+# ╔═╡ 2ee1e839-cb68-4e6b-8fcb-8d8da55cb32a
+md"""
+$(Resource("https://iancze.github.io/courses/astro589/lectures/01-introduction/HLTau_ALMA.jpg",:width=>"80%"))
+The protoplanetary disk around HL Tau, imaged using the Atacama Large Millimeter Array. Credit: [ALMA(ESO/NAOJ/NRAO); C. Brogan, B. Saxton (NRAO/AUI/NSF)](https://public.nrao.edu/gallery/hl-tau-birth-of-planets-revealed-in-astonishing-detail-2/)
+"""
+
+# ╔═╡ 0fcd4e2b-5a51-40d7-b930-11c732d4d276
+question_box(md"""
+- Would creating a model that utilizes hydrodynamics, radiative transfer and chemical structure of the gas be worth the extra accuracy in calculated protoplanetary disks? 
+- Is the time and money worth it and how much more accurate would it be than the current approximations?""")
 
 # ╔═╡ d3636262-b958-4f5f-b91e-f146c633a5ef
 md"""
@@ -197,6 +255,9 @@ md"""
 # ╔═╡ be44d4a5-d188-4993-aa25-9ec4c848ab94
 question_box(md"How is the mass outflow of a protoplanetary disk measured?")
 
+# ╔═╡ c18e7216-dd61-4b52-865d-a6268391f4b3
+question_box(md"What are different characteristics from the gas in debris, primordial and transitional disks.")
+
 # ╔═╡ c978b7bf-470a-4be6-ac7b-681a3df3b2f5
 md"""
 ## Measuring Mass from Optically Thin Disk
@@ -210,13 +271,24 @@ md"""
 
 """
 
-# ╔═╡ 01132cca-7dc4-4f3b-b4b2-e690a2b45a54
+# ╔═╡ 6efda016-c825-43f2-bd1e-f21ade54b9f7
+md"""
+$(question_box(md"Can you explain hydrodynamic models?"))
+- Conservation of mass
+- Conservation of momentum
+- Conservation of energy
+- Equations of state: Pressure for given density, temperature... (e.g., ideal gas law)
 
+For [Newtonian fluid](https://en.wikipedia.org/wiki/Newtonian_fluid):  Conservation laws → [Navier–Stokes equations](https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations)
+"""
 
 # ╔═╡ 023a920e-806b-429a-89cc-03b132946b72
 md"""
 # Setup
 """
+
+# ╔═╡ 7212ba2a-19e6-48ac-ad8d-9bc202ad6aec
+ChooseDisplayMode()
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -235,9 +307,8 @@ PlutoUI = "~0.7.48"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.8.2"
+julia_version = "1.7.1"
 manifest_format = "2.0"
-project_hash = "5df49e9a6298c7833fce6de53fae2712b237ab67"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -247,7 +318,6 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -329,7 +399,6 @@ version = "4.3.0"
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "0.5.2+0"
 
 [[deps.Contour]]
 git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
@@ -366,9 +435,8 @@ uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.9.2"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -574,12 +642,10 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -588,7 +654,6 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -690,7 +755,6 @@ version = "1.1.7"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.0+0"
 
 [[deps.Measures]]
 git-tree-sha1 = "e498ddeee6f9fdb4551ce855a46f54dbd900245f"
@@ -708,7 +772,6 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.2.1"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -718,7 +781,6 @@ version = "1.0.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-version = "1.2.0"
 
 [[deps.Ogg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -729,12 +791,10 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.20+0"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -768,13 +828,12 @@ version = "1.4.1"
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-version = "10.40.0+0"
 
 [[deps.Parsers]]
-deps = ["Dates"]
-git-tree-sha1 = "6c01a9b494f6d2a9fc180a08b182fcb06f0958a0"
+deps = ["Dates", "SnoopPrecompile"]
+git-tree-sha1 = "cceb0257b662528ecdf0b4b4302eb00e767b38e7"
 uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
-version = "2.4.2"
+version = "2.5.0"
 
 [[deps.Pipe]]
 git-tree-sha1 = "6842804e7867b115ca9de748a0cf6b364523c16d"
@@ -790,7 +849,6 @@ version = "0.40.1+0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.8.0"
 
 [[deps.PlotThemes]]
 deps = ["PlotUtils", "Statistics"]
@@ -846,9 +904,9 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [[deps.Qt5Base_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Fontconfig_jll", "Glib_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "OpenSSL_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libxcb_jll", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_keysyms_jll", "Xorg_xcb_util_renderutil_jll", "Xorg_xcb_util_wm_jll", "Zlib_jll", "xkbcommon_jll"]
-git-tree-sha1 = "c6c0f690d0cc7caddb74cef7aa847b824a16b256"
+git-tree-sha1 = "0c03844e2231e12fda4d0086fd7cbe4098ee8dc5"
 uuid = "ea2cea3b-5b76-57ae-a6ef-0a8af62496e1"
-version = "5.15.3+1"
+version = "5.15.3+2"
 
 [[deps.REPL]]
 deps = ["InteractiveUtils", "Markdown", "Sockets", "Unicode"]
@@ -866,9 +924,9 @@ version = "1.3.1"
 
 [[deps.RecipesPipeline]]
 deps = ["Dates", "NaNMath", "PlotUtils", "RecipesBase", "SnoopPrecompile"]
-git-tree-sha1 = "a030182cccc5c461386c6f055c36ab8449ef1340"
+git-tree-sha1 = "249df6fb3520492092ccebe921829920215ab205"
 uuid = "01d81517-befc-4cb6-b9ec-a95719d0359c"
-version = "0.6.10"
+version = "0.6.9"
 
 [[deps.Reexport]]
 git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
@@ -895,7 +953,6 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-version = "0.7.0"
 
 [[deps.Scratch]]
 deps = ["Dates"]
@@ -960,12 +1017,10 @@ version = "0.33.21"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-version = "1.0.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
-version = "1.10.1"
 
 [[deps.TensorCore]]
 deps = ["LinearAlgebra"]
@@ -1164,7 +1219,6 @@ version = "1.4.0+3"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.12+3"
 
 [[deps.Zstd_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1193,7 +1247,6 @@ version = "0.15.1+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.1.1+0"
 
 [[deps.libfdk_aac_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1216,12 +1269,10 @@ version = "1.3.7+1"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1244,10 +1295,16 @@ version = "1.4.1+0"
 
 # ╔═╡ Cell order:
 # ╟─c0bf0bcc-5d29-11ed-2315-77976ccb39c5
+# ╟─941e5c20-bfa9-493a-8cc5-27b717093f46
+# ╟─b99ebd92-0632-483c-a6e3-ee129a165924
 # ╟─9a83fa22-4a20-435a-aa50-c060a9b86e61
 # ╟─5e616463-5db5-44bb-bb90-fc50762f91b4
 # ╟─5a6f123a-0703-4397-96a3-9c6fb0e16e83
 # ╟─8a8035b9-b59d-4065-b41b-863b6fd08bd7
+# ╟─22ee95e4-e2db-4996-b26d-e3320778e73e
+# ╟─a2d848d3-2423-461f-8c79-e9ca48b5b523
+# ╟─9009e600-0b58-445a-b9ce-8efeaf225ebe
+# ╟─e2c65e99-0eec-453e-a6c0-7cb83708b49f
 # ╟─fa78e15e-b6d7-4ff9-bf6b-3ff3f0a5e9fa
 # ╟─8edea32a-8460-43d4-bf91-5d906e9c8ddd
 # ╟─f9be9b6f-bde1-490c-9376-f90be78d3758
@@ -1256,14 +1313,17 @@ version = "1.4.1+0"
 # ╟─2dc4066a-419d-462d-bf97-96321cea42e9
 # ╟─009eed9d-94f4-4ea8-bef7-2badd3193a71
 # ╟─e0e5f51d-9a57-46ff-b04c-c43ad202cc5e
-# ╟─2ee1e839-cb68-4e6b-8fcb-8d8da55cb32a
 # ╟─409629b7-cf84-4f34-b40d-8c58eebdd471
+# ╟─2ee1e839-cb68-4e6b-8fcb-8d8da55cb32a
+# ╟─0fcd4e2b-5a51-40d7-b930-11c732d4d276
 # ╟─d3636262-b958-4f5f-b91e-f146c633a5ef
 # ╟─ec06759a-14d8-4fe4-ba54-e0fc84a0ed97
 # ╟─be44d4a5-d188-4993-aa25-9ec4c848ab94
+# ╟─c18e7216-dd61-4b52-865d-a6268391f4b3
 # ╟─c978b7bf-470a-4be6-ac7b-681a3df3b2f5
-# ╠═01132cca-7dc4-4f3b-b4b2-e690a2b45a54
+# ╟─6efda016-c825-43f2-bd1e-f21ade54b9f7
 # ╟─023a920e-806b-429a-89cc-03b132946b72
-# ╠═781b73a5-e837-4acc-afb5-0eaacaf4a2f6
+# ╟─7212ba2a-19e6-48ac-ad8d-9bc202ad6aec
+# ╟─781b73a5-e837-4acc-afb5-0eaacaf4a2f6
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
