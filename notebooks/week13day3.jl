@@ -5,7 +5,7 @@ using Markdown
 using InteractiveUtils
 
 # ╔═╡ 26079d65-8d59-4e26-8791-99bca0cb6182
-using PlutoUI, PlutoTeachingTools
+using PlutoUI, PlutoTeachingTools, ShortCodes
 
 # ╔═╡ 655579f2-60ae-11ed-256a-5588282a3cfe
 md"""
@@ -16,26 +16,129 @@ md"""
 # ╔═╡ e403178e-846f-4455-86b3-cf78a5bd3489
 TableOfContents()
 
-# ╔═╡ 10942995-de9b-4329-8830-71b45c110a92
+# ╔═╡ 65d556e2-a9b0-4077-9b05-cc41eeb35f39
 md"""
-# Transits
-- TESS
-- Plato
+## Transits
+
+### [TESS](https://tess.gsfc.nasa.gov/) (extended missions ongoing)
+  - Luanched 2018
+  - 4x 105mm cameras
+  - Field of view: 24°x24° (each camera)
+  - Eccentric earth orbit
+
+### [Plato](https://platomission.com/)
+  - Launch scheduled 2026
+  - 26x120mm cameras
+  - Field of view: 2232 square degrees (combined) 
+  - L2 (Earth-Sun Lagrange point behind Earth)
+$(Resource("https://platomission.files.wordpress.com/2018/05/csm_plato-satellit_artist_s-impression__c__ohb-system-ag_cd2eb45818-e1551701363683.jpg?w=596"))
+"""
+
+# ╔═╡ d9873cdf-0b1c-4719-bfde-736b1841e18e
+md"""
+## Microlensing
+- [Nancy Grace Roman Space Telescope](https://roman.gsfc.nasa.gov/)
+- Launch scheduled by 2027
+- 2.4m Mirror
+- Wide-Field Instrument (WFI): 0.28 square degrees (that's big), 300.8 megapixels
+- (also includes a Coronagraphic Instrument (CGI): Goal $10^{-8}$ contrast and inner working angle of 0.15 arcsec, but demoted to technology demonstration)
+
+$(Resource("https://roman.gsfc.nasa.gov/images/satellites2020/100Percent/RST_2020_Still.jpg")) 
+--- Image Credit:  NASA ([interactive view](https://roman.gsfc.nasa.gov/interactive/))
+"""
+
+# ╔═╡ ed23756a-d437-47c8-88f5-5d2d16fbff23
+md"""
+## Astrometry 
+#### [Gaia](https://sci.esa.int/web/gaia)
+- Launched 2013
+- Single measurement astrometric precision ≈60 microarcseconds for the brightest stars
+- " With some plausible assumptions on planet occurrences, we find that some 21,000 (±6000) high-mass ($\sim~1-15M_J$) long-period planets should be discovered out to distances of ~500 pc for the nominal 5 yr mission (including at least 1000-1500 around M dwarfs out to 100 pc), rising to some 70,000 (±20, 000) for a 10 yr mission."  -- [Perryman et al. 2014](https://iopscience.iop.org/article/10.1088/0004-637X/797/1/14)
+
+$(YouTube("4u_dVKKRoPw"))
+
 """
 
 # ╔═╡ f9cb1859-ed08-400b-aa35-ff9c1271cdc1
 md"""
 ## Radial Velocities
 New generation:
-- Optical: ESPRESSO, EXPRES, NEID, KPF
-- IR: CARMENES, HPF, MAROON-X
+- Optical: 
+  - ESPRESSO: VLT (8.2m), ~2016--present
+  - EXPRES: DCT (4.3m): ~2020--present
+  - NEID: WIYN (3.5m): ~2021--present 
+  - KPF: Keck (10m): 2022 (last week)--present (concept started in 2014)
+- IR: 
+  - CARMENES (3.5m): 2016--present
+  - HPF (10m*): ~2018--present
+  - MAROON-X (8m.1): ~2019--present
 
+- Substantial improvements in instrumental stability and calibration relative to first generation of RV-hunting spectrographs.  
+- Intrinsic stellar variability currently limits the detectability of low-mass planets for most stars
+
+
+Another generation of spectrographs will be needed to reach an Earth-twin ($1 M_\oplus$, 1 AU, $1 M_\odot$ host → $K = 9$ cm/s $\times \sin i$).
 Next generation:
-- Extremely Precise Radial Velocity Working Group Report
+- [Extremely Precise Radial Velocity Working Group](https://exoplanets.nasa.gov/exep/NNExplore/EPRV/): [Report](https://exoplanets.nasa.gov/internal_resources/2000/) & [Presentation](https://exoplanets.nasa.gov/internal_resources/1556)
+
+$(LocalResource("../_assets/week13/EPRV_noise_sources_1.png"))
+--- Credit: Sam Halverson
+
+$(LocalResource("../_assets/week13/EPRV_stellar_variability_effects.png"))
+--- Credit: Morgan et al. 2021 submitted/Crass et al. 2021
+"""
+
+# ╔═╡ 779ab852-84e6-4a2c-933d-a132e0314f45
+md"""
+## Projected Yield of Proposed EPRV Survey
+
+$(LocalResource("../_assets/week13/Luhn_snr_architectures.jpg"))
+--- Credit: [Luhn et al. 2022](https://ui.adsabs.harvard.edu/abs/2022arXiv220412512L/abstract)
+
+$(LocalResource("../_assets/week13/Luhn_snr_stellar_types.jpg"))
+--- Credit: [Luhn et al. 2022](https://ui.adsabs.harvard.edu/abs/2022arXiv220412512L/abstract)
 """
 
 # ╔═╡ cc149ab1-e49a-40b6-8eca-8c5a798959ae
+md"""
+# Future of Exoplanet Characterization
+"""
 
+# ╔═╡ 69246b10-216b-4ff6-961f-a84c6917eb93
+md"""
+### Radial Velocities
+### Transits 
+- [Cheops](): Launched 2019
+"""
+
+# ╔═╡ 32377648-e737-4070-a204-cc5694f357e7
+md"""
+## Transit/Occultation Spectroscopy
+### [JWST]()
+$(Resource("https://webb.nasa.gov/images/l2.3.jpg"))
+$(Resource("https://webb.nasa.gov/images/l2.2.jpg"))
+$(Resource("https://webb.nasa.gov/images2/sunshieldhotcold.jpg"))
+"""
+
+# ╔═╡ fa5d96d2-e551-4e2a-940e-300b9ef527b1
+md"""
+### [Ariel](https://arielmission.space/)
+- Luanch scheduled 2029
+- 1.1 x 0.7 meter primary
+$(Resource("https://arielmission.space/wp-content/uploads/2019/04/ariel4.png"))
+"""
+
+# ╔═╡ ddb56bb9-fd15-4c34-87c8-2e68d4c23c39
+md"""
+### Direct Imaging
+- HabEx
+
+$(YouTube("i_Mt8MVb1sU"))
+
+$(LocalResource("../_assets/week13/EPRV_HabEx_yield.png"))
+--- Credit: Morgan et al. 2021 submitted/Crass et al. 2021
+
+"""
 
 # ╔═╡ 2083e6bd-e533-40ea-9ac8-ed3d0bdd4797
 md"""
@@ -50,10 +153,12 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+ShortCodes = "f62ebe17-55c5-4640-972f-b59c0dd11ccf"
 
 [compat]
 PlutoTeachingTools = "~0.2.5"
 PlutoUI = "~0.7.48"
+ShortCodes = "~0.3.3"
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000002
@@ -83,6 +188,12 @@ deps = ["InteractiveUtils", "UUIDs"]
 git-tree-sha1 = "cc4bd91eba9cdbbb4df4746124c22c0832a460d6"
 uuid = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
 version = "1.1.1"
+
+[[deps.CodecZlib]]
+deps = ["TranscodingStreams", "Zlib_jll"]
+git-tree-sha1 = "ded953804d019afa9a3f98981d99b33e3db7b6da"
+uuid = "944b1d66-785c-5afd-91f1-9de20f533193"
+version = "0.7.0"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
@@ -121,6 +232,12 @@ git-tree-sha1 = "8339d61043228fdd3eb658d86c926cb282ae72a8"
 uuid = "59287772-0a20-5a39-b81b-1366585eb4c0"
 version = "0.4.2"
 
+[[deps.HTTP]]
+deps = ["Base64", "Dates", "IniFile", "Logging", "MbedTLS", "NetworkOptions", "Sockets", "URIs"]
+git-tree-sha1 = "0fa77022fe4b511826b39c894c90daf5fce3334a"
+uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+version = "0.9.17"
+
 [[deps.Hyperscript]]
 deps = ["Test"]
 git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
@@ -139,6 +256,11 @@ git-tree-sha1 = "f7be53659ab06ddc986428d3a9dcc95f6fa6705a"
 uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
 version = "0.2.2"
 
+[[deps.IniFile]]
+git-tree-sha1 = "f550e6e32074c939295eb5ea6de31849ac2c9625"
+uuid = "83e8ac13-25f8-5344-8a64-a9f2b223428f"
+version = "0.5.1"
+
 [[deps.InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
@@ -148,6 +270,12 @@ deps = ["Dates", "Mmap", "Parsers", "Unicode"]
 git-tree-sha1 = "3c837543ddb02250ef42f4738347454f95079d4e"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.21.3"
+
+[[deps.JSON3]]
+deps = ["Dates", "Mmap", "Parsers", "SnoopPrecompile", "StructTypes", "UUIDs"]
+git-tree-sha1 = "84b10656a41ef564c39d2d477d7236966d2b5683"
+uuid = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
+version = "1.12.0"
 
 [[deps.JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
@@ -213,9 +341,21 @@ version = "0.5.10"
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
+[[deps.MbedTLS]]
+deps = ["Dates", "MbedTLS_jll", "MozillaCACerts_jll", "Random", "Sockets"]
+git-tree-sha1 = "03a9b9718f5682ecb107ac9f7308991db4ce395b"
+uuid = "739be429-bea8-5141-9913-cc70e7f3736d"
+version = "1.1.7"
+
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
+
+[[deps.Memoize]]
+deps = ["MacroTools"]
+git-tree-sha1 = "2b1dfcba103de714d31c033b5dacc2e4a12c7caa"
+uuid = "c03570c3-d221-55d1-a50c-7939bbd78826"
+version = "0.4.4"
 
 [[deps.Mmap]]
 uuid = "a63ad114-7e13-5084-954f-fe012c677804"
@@ -304,6 +444,12 @@ uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
 [[deps.Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 
+[[deps.ShortCodes]]
+deps = ["Base64", "CodecZlib", "HTTP", "JSON3", "Memoize", "UUIDs"]
+git-tree-sha1 = "0fcc38215160e0a964e9b0f0c25dcca3b2112ad1"
+uuid = "f62ebe17-55c5-4640-972f-b59c0dd11ccf"
+version = "0.3.3"
+
 [[deps.SnoopPrecompile]]
 git-tree-sha1 = "f604441450a3c0569830946e5b33b78c928e1a85"
 uuid = "66db9d55-30c0-4569-8b51-7e840670fc0c"
@@ -320,6 +466,12 @@ uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 deps = ["LinearAlgebra", "SparseArrays"]
 uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
+[[deps.StructTypes]]
+deps = ["Dates", "UUIDs"]
+git-tree-sha1 = "ca4bccb03acf9faaf4137a9abc1881ed1841aa70"
+uuid = "856f2bd8-1eba-4b0a-8007-ebc267875bd4"
+version = "1.10.0"
+
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
@@ -331,6 +483,12 @@ uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
 [[deps.Test]]
 deps = ["InteractiveUtils", "Logging", "Random", "Serialization"]
 uuid = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[[deps.TranscodingStreams]]
+deps = ["Random", "Test"]
+git-tree-sha1 = "8a75929dcd3c38611db2f8d08546decb514fcadf"
+uuid = "3bb67fe8-82b1-5028-8e26-92a6c54297fa"
+version = "0.9.9"
 
 [[deps.Tricks]]
 git-tree-sha1 = "6bac775f2d42a611cdfcd1fb217ee719630c4175"
@@ -369,11 +527,18 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╔═╡ Cell order:
 # ╟─655579f2-60ae-11ed-256a-5588282a3cfe
 # ╟─e403178e-846f-4455-86b3-cf78a5bd3489
-# ╠═10942995-de9b-4329-8830-71b45c110a92
+# ╟─65d556e2-a9b0-4077-9b05-cc41eeb35f39
+# ╟─d9873cdf-0b1c-4719-bfde-736b1841e18e
+# ╟─ed23756a-d437-47c8-88f5-5d2d16fbff23
 # ╟─f9cb1859-ed08-400b-aa35-ff9c1271cdc1
-# ╠═cc149ab1-e49a-40b6-8eca-8c5a798959ae
+# ╟─779ab852-84e6-4a2c-933d-a132e0314f45
+# ╟─cc149ab1-e49a-40b6-8eca-8c5a798959ae
+# ╟─69246b10-216b-4ff6-961f-a84c6917eb93
+# ╟─32377648-e737-4070-a204-cc5694f357e7
+# ╠═fa5d96d2-e551-4e2a-940e-300b9ef527b1
+# ╟─ddb56bb9-fd15-4c34-87c8-2e68d4c23c39
 # ╟─2083e6bd-e533-40ea-9ac8-ed3d0bdd4797
 # ╟─75608306-c58e-4942-990e-e762cff28cfb
-# ╠═26079d65-8d59-4e26-8791-99bca0cb6182
+# ╟─26079d65-8d59-4e26-8791-99bca0cb6182
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
