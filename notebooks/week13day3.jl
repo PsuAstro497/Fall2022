@@ -88,57 +88,38 @@ $(LocalResource("../_assets/week13/EPRV_stellar_variability_effects.png"))
 --- Credit: Morgan et al. 2021 submitted/Crass et al. 2021
 """
 
-# ╔═╡ 779ab852-84e6-4a2c-933d-a132e0314f45
+# ╔═╡ a5c18c5f-cac1-4381-80e6-88e1653b36e9
 md"""
-## Projected Yield of Proposed EPRV Survey
-
-$(LocalResource("../_assets/week13/Luhn_snr_architectures.jpg"))
---- Credit: [Luhn et al. 2022](https://ui.adsabs.harvard.edu/abs/2022arXiv220412512L/abstract)
-
-$(LocalResource("../_assets/week13/Luhn_snr_stellar_types.jpg"))
---- Credit: [Luhn et al. 2022](https://ui.adsabs.harvard.edu/abs/2022arXiv220412512L/abstract)
+## Direct Imaging
 """
 
-# ╔═╡ cc149ab1-e49a-40b6-8eca-8c5a798959ae
-md"""
-# Future of Exoplanet Characterization
-"""
+# ╔═╡ e8730313-eb60-4343-9051-b11a8967b850
+question_box(md"Have any hot Jupiters been imaged?")
 
-# ╔═╡ 69246b10-216b-4ff6-961f-a84c6917eb93
-md"""
-### Radial Velocities
-### Transits 
-- [Cheops](): Launched 2019
-"""
+# ╔═╡ 9ccd3bb8-a3da-4d2a-bb6c-1c1e4b3240e2
+question_box(md"What is the best waveband to spot exoplanets?")
 
-# ╔═╡ 32377648-e737-4070-a204-cc5694f357e7
+# ╔═╡ 8042135c-9af9-4e46-ba31-2b627a2db5f4
 md"""
-## Transit/Occultation Spectroscopy
-### [JWST]()
+### [JWST](https://webb.nasa.gov/)
 $(Resource("https://webb.nasa.gov/images/l2.3.jpg"))
 $(Resource("https://webb.nasa.gov/images/l2.2.jpg"))
 $(Resource("https://webb.nasa.gov/images2/sunshieldhotcold.jpg"))
 """
 
-# ╔═╡ fa5d96d2-e551-4e2a-940e-300b9ef527b1
-md"""
-### [Ariel](https://arielmission.space/)
-- Luanch scheduled 2029
-- 1.1 x 0.7 meter primary
-$(Resource("https://arielmission.space/wp-content/uploads/2019/04/ariel4.png"))
-"""
+# ╔═╡ 0324f1c6-7317-454a-8d7a-0d2be8431cad
+question_box(md"How often will James Webb be used to image exoplanets?")
 
-# ╔═╡ a5c18c5f-cac1-4381-80e6-88e1653b36e9
+# ╔═╡ f50e0bbd-4722-4834-be96-01d6528452c7
 md"""
-### Direct Imaging
+Check out [approved JWST observing programs](https://www.stsci.edu/jwst/science-execution/approved-programs).
+- All exoplanet & disks programs: 1403.6 hours out of 4,896.3 hours ≃  28.6%
+- Looks like ~6 GO Cycle 1 programs aim for direct imaging of planets.
 """
-
-# ╔═╡ 9ccd3bb8-a3da-4d2a-bb6c-1c1e4b3240e2
-question_box(md"What is the best waveband to spot exoplanets?")
 
 # ╔═╡ b3631d07-7d3f-49a6-860d-a166e09ab40f
 md"""
-### Misson Concepts:
+### Future Direct Imaging Misson Concepts:
 #### Decadal Survey Inputs:
 - HabEx (4m)
 - LUVOIR (8m and 15m options)
@@ -166,23 +147,19 @@ $(LocalResource("../_assets/week13/EPRV_HabEx_yield.png"))
 
 """
 
-# ╔═╡ 0324f1c6-7317-454a-8d7a-0d2be8431cad
-question_box(md"How often will James Webb be used to image exoplanets?")
-
-# ╔═╡ 8042135c-9af9-4e46-ba31-2b627a2db5f4
+# ╔═╡ 779ab852-84e6-4a2c-933d-a132e0314f45
 md"""
-### JWST
+### Projected Yield of Proposed EPRV Survey
+
+$(LocalResource("../_assets/week13/Luhn_snr_architectures.jpg"))
+--- Credit: [Luhn et al. 2022](https://ui.adsabs.harvard.edu/abs/2022arXiv220412512L/abstract)
+
+$(LocalResource("../_assets/week13/Luhn_snr_stellar_types.jpg"))
+--- Credit: [Luhn et al. 2022](https://ui.adsabs.harvard.edu/abs/2022arXiv220412512L/abstract)
 """
 
-# ╔═╡ f50e0bbd-4722-4834-be96-01d6528452c7
-md"""
-Check out [approved JWST observing programs](https://www.stsci.edu/jwst/science-execution/approved-programs).
-- All exoplanet & disks programs: 1403.6 hours out of 4,896.3 hours ≃  28.6%
-- Looks like ~6 GO Cycle 1 programs aim for direct imaging of planets.
-"""
-
-# ╔═╡ e8730313-eb60-4343-9051-b11a8967b850
-question_box(md"Have any hot Jupiters been imaged?")
+# ╔═╡ c4d5d663-84dc-4838-b4b4-a54fea8c9b84
+question_box(md"""What are some of the "more sophisticated" ways to image mature planets and and why are they necessary?""")
 
 # ╔═╡ 69fa28c7-2fb5-4e17-98e4-a4d80d1d5894
 question_box(md"Will the planet's spectrum suffer from the contamination of stellar light, stellar wind, or circumstellar materials? If so, how can astronomers  eliminate such contamination?") 
@@ -190,8 +167,34 @@ question_box(md"Will the planet's spectrum suffer from the contamination of stel
 # ╔═╡ 7a7a6454-2f83-4c79-b6c3-6542788b731b
 question_box(md"Are coronagraphs just able to observe objects with very small [angular] separations or do they offer any other large scale benefits?")
 
-# ╔═╡ c4d5d663-84dc-4838-b4b4-a54fea8c9b84
-question_box(md"""What are some of the "more sophisticated" ways to image mature planets and and why are they necessary?""")
+# ╔═╡ cc149ab1-e49a-40b6-8eca-8c5a798959ae
+md"""
+# Future of Exoplanet Characterization
+"""
+
+# ╔═╡ 69246b10-216b-4ff6-961f-a84c6917eb93
+md"""
+### Radial Velocities
+### Transits 
+- [Cheops](): Launched 2019
+"""
+
+# ╔═╡ 32377648-e737-4070-a204-cc5694f357e7
+md"""
+## Transit/Occultation Spectroscopy
+### [JWST](https://webb.nasa.gov/)
+$(Resource("https://webb.nasa.gov/images/l2.3.jpg"))
+$(Resource("https://webb.nasa.gov/images/l2.2.jpg"))
+$(Resource("https://webb.nasa.gov/images2/sunshieldhotcold.jpg"))
+"""
+
+# ╔═╡ fa5d96d2-e551-4e2a-940e-300b9ef527b1
+md"""
+## [Ariel](https://arielmission.space/)
+- Luanch scheduled 2029
+- 1.1 x 0.7 meter primary
+$(Resource("https://arielmission.space/wp-content/uploads/2019/04/ariel4.png"))
+"""
 
 # ╔═╡ 2083e6bd-e533-40ea-9ac8-ed3d0bdd4797
 md"""
@@ -584,24 +587,24 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─d9873cdf-0b1c-4719-bfde-736b1841e18e
 # ╟─ed23756a-d437-47c8-88f5-5d2d16fbff23
 # ╟─f9cb1859-ed08-400b-aa35-ff9c1271cdc1
-# ╟─779ab852-84e6-4a2c-933d-a132e0314f45
-# ╟─cc149ab1-e49a-40b6-8eca-8c5a798959ae
-# ╟─69246b10-216b-4ff6-961f-a84c6917eb93
-# ╟─32377648-e737-4070-a204-cc5694f357e7
-# ╟─fa5d96d2-e551-4e2a-940e-300b9ef527b1
 # ╟─a5c18c5f-cac1-4381-80e6-88e1653b36e9
+# ╟─e8730313-eb60-4343-9051-b11a8967b850
 # ╟─9ccd3bb8-a3da-4d2a-bb6c-1c1e4b3240e2
 # ╟─8042135c-9af9-4e46-ba31-2b627a2db5f4
+# ╟─0324f1c6-7317-454a-8d7a-0d2be8431cad
 # ╟─f50e0bbd-4722-4834-be96-01d6528452c7
 # ╟─b3631d07-7d3f-49a6-860d-a166e09ab40f
 # ╟─2d70000d-b7db-457a-b1c7-026fb4e7fa0e
 # ╟─aeb84263-f235-463f-83a0-944a4b63a117
 # ╟─bcd0b8b0-b052-43af-9ed0-b62d05a03fe4
-# ╟─0324f1c6-7317-454a-8d7a-0d2be8431cad
-# ╟─e8730313-eb60-4343-9051-b11a8967b850
-# ╟─69fa28c7-2fb5-4e17-98e4-a4d80d1d5894
+# ╟─779ab852-84e6-4a2c-933d-a132e0314f45
 # ╟─c4d5d663-84dc-4838-b4b4-a54fea8c9b84
+# ╟─69fa28c7-2fb5-4e17-98e4-a4d80d1d5894
 # ╟─7a7a6454-2f83-4c79-b6c3-6542788b731b
+# ╟─cc149ab1-e49a-40b6-8eca-8c5a798959ae
+# ╟─69246b10-216b-4ff6-961f-a84c6917eb93
+# ╟─32377648-e737-4070-a204-cc5694f357e7
+# ╟─fa5d96d2-e551-4e2a-940e-300b9ef527b1
 # ╟─2083e6bd-e533-40ea-9ac8-ed3d0bdd4797
 # ╟─75608306-c58e-4942-990e-e762cff28cfb
 # ╟─26079d65-8d59-4e26-8791-99bca0cb6182
