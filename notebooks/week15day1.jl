@@ -24,17 +24,67 @@ md"""
 - My feedback survey
 """
 
+# ╔═╡ ceca639b-40fb-426b-920c-ee0f45e43ffe
+md"""
+# Course Goals
+- Understand how astronomers detect and characterize extrasolar planetary systems,
+- Learn about the current state and future of exoplanet science,
+- Increase their data acumen, and
+- Appreciate how building data science skills can benefit astronomy & astrophysics research.
+"""
+
+# ╔═╡ d0e55a20-531f-4448-923e-b9ee226de515
+md"""
+# Course Objectives
+- Ingest and manipulate data from astronomical surveys.
+- Quantitatively describe the effects of exoplanets on astronomical observations.
+- Build, apply, assess and update astrophysically motivated models for astronomical observations.
+- Create visualizations for exploratory and explanatory data analyses of observations from exoplanet surveys.
+- Synthesize the above into a dashboard to support the efficient analysis of exoplanet observations while following principles of reproducible research.
+"""
+
 # ╔═╡ a9ea7c50-ccf3-4e83-b22a-d9f41bf7c975
 md"""
-## What have we learned?
+## What Data Science skills have we developed?
 """
 
 # ╔═╡ f8f07eeb-96bc-4ee4-864f-c01706890c43
+md"""
+Data Science:
+- Data Acumen[^data_acumen]
+- Model building
+- Data visualization
+- Reproducible research
+- Practice "soft skills"
+- Technical collaboration
+- Scientific communications
+- Provide taste of Data Science
 
+
+[^data_acumen]: "We define data acumen as the ability to make good judgements about the use of data to support problem solutions." (Keller et al. 2020)
+"""
 
 # ╔═╡ eaaa7e10-3dc0-4630-84ca-53b914d0d17e
 md"""
-## What have we skiped? 
+### What Data Science skills have we skipped? 
+- Linear Algebra (see MATH 220)
+- Probability Theory (STAT/MATH 414)
+- Statistics (e.g., ASTRO 415)
+- Machine Learning/AI (e.g., DS 310, DS/CMPSC 442)
+- Programming (e.g., CMPSC 121, 122)
+- Information Retrieval and Organization (e.g., IST 441, but several prereqs)
+- Deployment & Operations
+
+### Data Science classes to learn more:
+- Programming Models for Big Data (DS/CMPSC 410)
+- Data Science Through Statistical Reasoning and Computation (STAT 380)
+- Introduction to Probability and Stochastic Processes for Engineering (STAT/MATH 418)
+- Visual Analytics for Data Sciences (DS 330)
+
+### Astronomy classes to learn more
+- Astronomical Techniques (see ASTRO 451)
+- Numerical Methods (see ASTRO 410)
+- Research project (e.g., ASTRO 496, summer project or thesis)
 """
 
 # ╔═╡ e52545cf-1226-4454-a246-5ad99e538de1
@@ -52,6 +102,12 @@ md"""
 
 # ╔═╡ 1b37b200-83d7-4ab6-80ac-3a6ee1a94d17
 ChooseDisplayMode()
+
+# ╔═╡ 44775706-144e-4681-ab35-8f436ca51177
+InlineFootnotesStyleSuperscript()
+
+# ╔═╡ 696833a8-2a74-4f38-8b5d-16896f6a2b48
+InlineAndBottomFootnotesNumbered()
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -378,13 +434,17 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─9f8c0c00-69a1-11ed-351e-f7a8f3259436
 # ╟─14c93947-008a-41ad-8e4c-489e44d11e9f
 # ╟─c939481d-8c25-4b98-b0a9-d030131c90ee
-# ╠═a9ea7c50-ccf3-4e83-b22a-d9f41bf7c975
-# ╠═f8f07eeb-96bc-4ee4-864f-c01706890c43
-# ╠═eaaa7e10-3dc0-4630-84ca-53b914d0d17e
+# ╟─ceca639b-40fb-426b-920c-ee0f45e43ffe
+# ╟─d0e55a20-531f-4448-923e-b9ee226de515
+# ╟─a9ea7c50-ccf3-4e83-b22a-d9f41bf7c975
+# ╟─f8f07eeb-96bc-4ee4-864f-c01706890c43
+# ╟─eaaa7e10-3dc0-4630-84ca-53b914d0d17e
 # ╠═e52545cf-1226-4454-a246-5ad99e538de1
 # ╠═70caf978-383c-4fb6-b9a8-57cdbc8edc3c
 # ╟─1b220333-b15a-4796-8d18-8c3bdf6c4f1d
 # ╟─f2f088c5-3271-4acb-9f74-b7c19a197854
 # ╟─1b37b200-83d7-4ab6-80ac-3a6ee1a94d17
+# ╠═44775706-144e-4681-ab35-8f436ca51177
+# ╠═696833a8-2a74-4f38-8b5d-16896f6a2b48
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
