@@ -21,21 +21,29 @@ md"""
 ## Logistics
 - Presentations
 - SRTEs
-- My feedback survey
+- My course-specific survey
+"""
+
+# ╔═╡ 774d68f5-496c-430e-bbca-2f68a4c4a897
+md"""
+# Looking back
 """
 
 # ╔═╡ ceca639b-40fb-426b-920c-ee0f45e43ffe
 md"""
-# Course Goals
+## Course Goals
 - Understand how astronomers detect and characterize extrasolar planetary systems,
 - Learn about the current state and future of exoplanet science,
-- Increase their data acumen, and
+- Increase their data acumen[^data_acumen], and
 - Appreciate how building data science skills can benefit astronomy & astrophysics research.
+
+[^data_acumen]: "We define data acumen as the ability to make good judgements about the use of data to support problem solutions." (Keller et al. 2020)
+
 """
 
 # ╔═╡ d0e55a20-531f-4448-923e-b9ee226de515
 md"""
-# Course Objectives
+## Course Objectives
 - Ingest and manipulate data from astronomical surveys.
 - Quantitatively describe the effects of exoplanets on astronomical observations.
 - Build, apply, assess and update astrophysically motivated models for astronomical observations.
@@ -51,49 +59,89 @@ md"""
 # ╔═╡ f8f07eeb-96bc-4ee4-864f-c01706890c43
 md"""
 Data Science:
-- Data Acumen[^data_acumen]
-- Model building
+- Data Acumen
+- Databases, queries & storage 
+- Ingesting data & Data wrangling
+- Exploratory data analysis
+- Model building & assessment
+- Explanatory data analysis
 - Data visualization
 - Reproducible research
-- Practice "soft skills"
-- Technical collaboration
+- Scientific workflows
+- Technical collaboration (if teamed up for project)
 - Scientific communications
-- Provide taste of Data Science
-
-
-[^data_acumen]: "We define data acumen as the ability to make good judgements about the use of data to support problem solutions." (Keller et al. 2020)
 """
 
-# ╔═╡ eaaa7e10-3dc0-4630-84ca-53b914d0d17e
+# ╔═╡ 80ffcd87-533a-448c-bc2e-6c51476365fc
 md"""
-### What Data Science skills have we skipped? 
-- Linear Algebra (see MATH 220)
-- Probability Theory (STAT/MATH 414)
-- Statistics (e.g., ASTRO 415)
-- Machine Learning/AI (e.g., DS 310, DS/CMPSC 442)
-- Programming (e.g., CMPSC 121, 122)
-- Information Retrieval and Organization (e.g., IST 441, but several prereqs)
-- Deployment & Operations
+## What Data Science skills have we skipped $br (or only skimmed the surface of)? 
+- Probability & Statistics
+- Machine Learning/Artificial Intelligence (AI)
 
-### Data Science classes to learn more:
-- Programming Models for Big Data (DS/CMPSC 410)
-- Data Science Through Statistical Reasoning and Computation (STAT 380)
-- Introduction to Probability and Stochastic Processes for Engineering (STAT/MATH 418)
-- Visual Analytics for Data Sciences (DS 330)
+- Computing
+  - Data structures
+  - Algorithms
+  - Databases
+  - Parallel computing
+  
+- Applications
+  - Hardware
+  - Big Data frameworks
+  - ML/AI tools
+  - Software engineering
+  - Deployment & operations
+"""
 
-### Astronomy classes to learn more
-- Astronomical Techniques (see ASTRO 451)
-- Numerical Methods (see ASTRO 410)
-- Research project (e.g., ASTRO 496, summer project or thesis)
+# ╔═╡ 09977d74-2d59-41e5-aeff-a54631815b3f
+md"""
+# Looking forward
 """
 
 # ╔═╡ e52545cf-1226-4454-a246-5ad99e538de1
 md"""
-## How to learn more about Data Sciences?
+## Foundational Classes to learn more about Data Sciences
+#### Mathematics
+- **Probability** 
+  - Elementary Probability (STAT 318)
+  - Probability Theory (STAT/MATH 414)
+  - Introduction to Probability and Stochastic Processes for Engineering (STAT/MATH 418)
+  - Astrostatistics (ASTRO 415)
+- **Linear Algebra** (MATH 220)
+
+#### Programming
+- **Intro to Programming** (e.g., CMPSC 121, 122)
+- Data management/databases (DS 220, but one DS or CMPSC preqreq beyond CMPSC 122)
+- Programming Models for Big Data (DS/CMPSC 410, but several CMPSC prereqs)
+- Information Retrieval and Organization (e.g., IST 441, but several IST prereqs)
+
+#### Machine Learning/AI
+- **Machine Learning** (DS 310; prereqs: (CMPSC 121 or CMPSC 131) and (STAT/MATH 318 or STAT/MATH 414 or STAT/MATH 418))
+- AI (e.g., DS/CMPSC 442, but several CMPSC prereqs)
+  
 """
 
-# ╔═╡ 70caf978-383c-4fb6-b9a8-57cdbc8edc3c
+# ╔═╡ 2c3326b5-36bb-4ade-b3dc-6ec70077a3f8
+md"""
+## Applied classes that connect to Data Sciences
+- Astrostatistics (ASTRO 415, Spring 2023)
+- Computational Astrophysics (ASTRO/PHYS 410, Spring 2023)
+- Astronomical Techniques? (ASTRO 451, Fall 2022)
+- Data Science Through Statistical Reasoning and Computation (STAT 380; but prereq STAT 184)
+- Visual Analytics for Data Sciences (DS 330; but prereq DS 220)
+- Research projects (e.g., ASTRO 496, summer project or thesis)
+"""
 
+# ╔═╡ 0e66490c-d361-46c5-8790-28653f14af23
+md"""
+## Project-based leraning
+Pros:  
+- Help to motivate why need to learn things
+- Emphasize practical problems
+Cons: 
+- Forces you to work through implementation details
+- Risk learning specific tools, rather than underlying mathematics/algorithms
+- Specific tools used are very likely certainly become obsolete soon
+"""
 
 # ╔═╡ 1b220333-b15a-4796-8d18-8c3bdf6c4f1d
 md"""
@@ -434,17 +482,20 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─9f8c0c00-69a1-11ed-351e-f7a8f3259436
 # ╟─14c93947-008a-41ad-8e4c-489e44d11e9f
 # ╟─c939481d-8c25-4b98-b0a9-d030131c90ee
+# ╟─774d68f5-496c-430e-bbca-2f68a4c4a897
 # ╟─ceca639b-40fb-426b-920c-ee0f45e43ffe
 # ╟─d0e55a20-531f-4448-923e-b9ee226de515
 # ╟─a9ea7c50-ccf3-4e83-b22a-d9f41bf7c975
 # ╟─f8f07eeb-96bc-4ee4-864f-c01706890c43
-# ╟─eaaa7e10-3dc0-4630-84ca-53b914d0d17e
-# ╠═e52545cf-1226-4454-a246-5ad99e538de1
-# ╠═70caf978-383c-4fb6-b9a8-57cdbc8edc3c
+# ╟─80ffcd87-533a-448c-bc2e-6c51476365fc
+# ╟─09977d74-2d59-41e5-aeff-a54631815b3f
+# ╟─e52545cf-1226-4454-a246-5ad99e538de1
+# ╟─2c3326b5-36bb-4ade-b3dc-6ec70077a3f8
+# ╟─0e66490c-d361-46c5-8790-28653f14af23
 # ╟─1b220333-b15a-4796-8d18-8c3bdf6c4f1d
 # ╟─f2f088c5-3271-4acb-9f74-b7c19a197854
 # ╟─1b37b200-83d7-4ab6-80ac-3a6ee1a94d17
-# ╠═44775706-144e-4681-ab35-8f436ca51177
-# ╠═696833a8-2a74-4f38-8b5d-16896f6a2b48
+# ╟─44775706-144e-4681-ab35-8f436ca51177
+# ╟─696833a8-2a74-4f38-8b5d-16896f6a2b48
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
