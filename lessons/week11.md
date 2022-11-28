@@ -17,3 +17,4 @@ Week {{week_num}}
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Microlensing by Exoplanets:  Sec. 1-2.2.1, 4-5
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week11day3/)
