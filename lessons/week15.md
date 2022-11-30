@@ -16,6 +16,7 @@ Week {{week_num}}
 
 ## Wednesday
 - Instead of having a graded final exam, we'll work through some potential exam problems in class.  
+- [Notebook from class](https://psuastro497.github.io/Fall2022/notebooks/week15day2/)
 
 ## {{exo_topic}}
 - Before Friday's class, read *Exoplanets*: Terrestrial Planet Atmospheres & Biosigantures:  Sec 1-2.2, 3-3.2

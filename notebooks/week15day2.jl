@@ -116,28 +116,15 @@ $$T_{eq} \equiv T_{\star,eff} \sqrt{\frac{R_\star}{a}} \left(2^{-1/4}\right)$$
 
 # ╔═╡ 3ed3bfa1-1fdc-4f2f-8445-22657615a289
 begin 
-	Teff = 7000 # K
+	Teff = 5770 # K
 	R_sol_in_AU = 0.00465047 # AU
-	a_8days = (4/365.25)^(2/3) # AU
+	a_8days = (8/365.25)^(2/3) # AU
 	Teff_8d = Teff * sqrt(R_sol_in_AU/a_8days) / 2^(1/4) # K 
+
+	a_4days = (4/365.25)^(2/3) # AU
+	Teff_4d = Teff * sqrt(R_sol_in_AU/a_4days) / 2^(1/4) # K 
+	Teff_4d, Teff_8d
 end
-
-# ╔═╡ 3c479247-f208-4121-adbe-98e30a378ec8
-
-
-# ╔═╡ 0824995c-2216-414a-86c4-220281a270f7
-let
- 	h = 6.62607015e-34 # m^2 kg / s
-	c = 299_792_458 # m / s
-	k_B = 1.380649e−23 # m^2 kg s^-2 K^-1
-	λ_min = 12e-6 # m
-	λ_min/(h*c/(k_B*Teff_8d))
-end
-
-# ╔═╡ 2820d2e3-c8e6-4cd3-a657-54cfb5a09b96
-md"""
-
-"""
 
 # ╔═╡ 7cf45894-877a-4dbf-8950-b4103490f373
 function Bλ(T::Real; λ::AbstractArray{T1} = range(0.5, stop=10, length=1000) ) where { T1 <: Real }
@@ -152,10 +139,17 @@ let
 	
     λ = range(0.5, stop=12, length=1000)
     plt = plot(xlabel="λ (μm)", ylabel="Spectral Energy Density", widen=false)
-    plot!(plt,λ,Bλ(1000; λ=λ.*1e-6), label="T = 1000 K")
     plot!(plt,λ,Bλ(1200; λ=λ.*1e-6), label="T = 1200 K")
-    plot!(plt,λ,Bλ(1400; λ=λ.*1e-6), label="T = 1400 K")
-    plot!(plt,λ,Bλ(1600; λ=λ.*1e-6), label="T = 1600 K")
+    plot!(plt,λ,Bλ(1500; λ=λ.*1e-6), label="T = 1500 K")
+end
+
+# ╔═╡ 0824995c-2216-414a-86c4-220281a270f7
+let
+ 	h = 6.62607015e-34 # m^2 kg / s
+	c = 299_792_458 # m / s
+	k_B = 1.380649e−23 # m^2 kg s^-2 K^-1
+	λ_min = 12e-6 # m
+	λ_min/(h*c/(k_B*Teff_8d))
 end
 
 # ╔═╡ db5b818f-3daa-46d5-ba46-1139daf61936
@@ -171,9 +165,32 @@ $\delta_{occ}(\lambda) \rightarrow  \left(\frac{R_p}{R_\star}\right)^2 \frac{T_p
 """
 
 
+# ╔═╡ c64b31a9-b201-4baa-ab55-c31391d1ac15
+hint(md"""
+
+$$\Delta\delta(\lambda) \propto T_{eq} \propto a^{-1/2}$$
+
+Convert from semi-major axis to orbital period 
+
+$$P^2 \propto a^3$$
+$$\Delta\delta(\lambda) \propto P^{-1/3}$$
+
+$$\frac{\Delta\delta(\lambda)_{HJ @ P=4d}}{\Delta\delta(\lambda)_{HJ @ P=8d}}
+= \left(\frac{8\mathrm{d}}{4\mathrm{d}}\right)^{\frac{1}{3}} \simeq 1.26$$
+
+""")
+
+# ╔═╡ 6bc615e8-73e2-4335-a61d-e16d2c642df9
+md"""
+#### What if we didnn't use Rayleigh-Jean's limit?
+"""
+
+# ╔═╡ b9cd240e-2d7a-4f7d-8fdc-a5e0eb9667cb
+ Bλ(Teff_4d, λ=[12e-6]) ./ Bλ(Teff_8d, λ=[12e-6])
+
 # ╔═╡ 32a88271-14d2-4dcc-be58-5172366ba78a
 md"""
-**Q2b:** If one also were to account for the effects of tides on the two planets, would you expect the estimate above to over or underestaimte the true ratio of transmission spectroscopy signals (for 4d planet relative to 8d planet)? 
+**Q2b:** If one also were to account for the effects of tides on the two planets, would you expect the estimate above to over or underestaimte the true ratio of emission spectroscopy signals (for 4d planet relative to 8d planet)? 
 """
 
 # ╔═╡ faedafcc-8920-4d6e-941c-0e1fcb32da66
@@ -208,7 +225,8 @@ md"""
 
 # ╔═╡ bd3ef978-a69b-48d7-bd79-474bc8fbc55f
 hint(md"""
-Since $P_{bb} = A \sigma T^4$, temperature would  increase by a factor of $2^{1/4} \simeq 1.19$. 
+Since $P_{bb} = A \sigma T^4$, the most the temperature could increase is by a factor of $2^{1/4} \simeq 1.19$. 
+Therefore, we can place a bound on the transit depth ratio allowing for effects of tidal circularization of 20% higher than our previous calculation.
 """)
 
 # ╔═╡ 1d81e0a8-94b6-46cb-a2fc-7a32c2f0ba25
@@ -222,27 +240,112 @@ md"""
 """
 
 
-# ╔═╡ 447ec9db-de92-4ac6-bdbf-98c9445c6291
+# ╔═╡ 2e7de2d9-1b48-4cf7-bbaf-b016f814c8bb
 md"""
 ## Atmospheric Scale Height
-$$H = \frac{k_B T}{\mu_m g}$$
+Consider an Earth-mass, Earth-radius planet in the habitable zome of a sun-like star with unknown atmospheric composition.  Imagine you wnat to planning observations ot search for evidence of water in its atmosphere.  
 
+**Q3a:** Evaluate the ratio of the atmospheric scale height for a planet with an atmosphere of pure molecular hydrogen to the atmospheric scale height for a planet with an atmosphere of pure water vapor.   
+"""
+
+# ╔═╡ 1acc105c-8ad1-499e-a706-9f8ef705ef63
+hint(md"""
+$$H = \frac{k_B T}{\mu_m g}$$
+""")
+
+# ╔═╡ ac1135fe-de82-4b17-a25a-9ee7c5019876
+md"""
+- What variables affect the result?  
+- What values to use? 
+"""
+
+# ╔═╡ 7b54ba5f-eeaa-4825-b55f-2b3f88ad7f38
+hint(md"""
+$\mu_{H_2} \simeq 2$
+$\mu_{H_2O} \simeq 18$
+""")
+
+# ╔═╡ b8c77ea4-361e-4f07-b54a-afe9c4813542
+hint(md"""
+$$
+H_{H_2} / H_{H_2O} \simeq \frac{18}{2} \simeq 9$$
+""")
+
+# ╔═╡ 3bf97059-4ab2-46dc-8b49-6fd011cd3308
+md"""
+**Q3b:**  Evaluate the ratio of the atmospheric scale height for the same planet with an atmosphere of pure hydrogen to atmospheric scale height for the same planet with an atmosphere of 79% molecular hydrogen 20% helium and 1% water vapor.  
+"""
+
+# ╔═╡ e8ee413b-7d83-45e1-8af3-8b4f41da0dcd
+μmix = 0.79*2 + 0.2*4 + 0.01*18;
+
+# ╔═╡ 99f0b2c7-0f5a-4cfe-aa54-2a22a6bfa57f
+hint(md"Need to compute μ_mix = 0.79 * 2 + 0.2 * 4 + 0.01*18 ≃ $(μmix)")
+
+# ╔═╡ 602d4829-b1be-41e0-a98b-5925deb08376
+hint(md"""
+$$\frac{H_{H_2}}{H_{\mathrm{mix}}} \simeq \frac{μ_{\mathrm{mix}}}{\mu_{H_2}} \simeq 1.3$$
+""")
+
+# ╔═╡ c2781372-a23d-4da8-a0ea-d4ea58555b2e
+md"""
+## Disk lifetimes
+**Q4:**  Imagine you are reviewing a proposal to search for protoplanetary disks around sun-like stars in the Hyades star cluster, a cluster with ~300 stars with an age of ≃ 600Myr.  Identify the main challenge to the success of this proposal.  Would you recommend awarding this proposal telescope time?  Why or why not?
 """
 
 # ╔═╡ fedc704e-d4eb-42ac-88bc-299ebc24b021
-md"""
+hint(md"""
 $f_{\mathrm{disk}} = \exp(-t/\tau_{\mathrm{disk}})$
 
 $\tau_{\mathrm{disk}} = 2.5 \; \mathrm{Myr}$
-"""
+""")
+
+# ╔═╡ 8226a5d6-bce3-4ad4-9cf0-8647904b444c
+exp(-600/2.5)
+
+# ╔═╡ b15a6c3e-b0f4-4561-8145-f74412d36e10
+md"""
+## Future Transit Surveys
+**Q5:**  Evaluate the relative photometric precision of photometry of the host star in the Kepler-11 system for the PLATO mission relative to the Kepler mission.   
+Kepler-11 has an apparent magnitude of 14.  You may assume that Kepler-11 is not observered by PLATO's fast cameras."""
 
 # ╔═╡ 294c4702-b6c6-48e3-aecd-6fe29055088d
-Kepler: 0.95m aperture
-PLATO: 26x120mm cameras
+hint(md"Precission is/will be photon limited for 14th magnitude targets.")
 
+# ╔═╡ b652f52a-26db-4b0d-a416-28119def2fa4
+hint(md"""
+- Kepler: 0.95m aperture
+- PLATO: 26x 120mm cameras: 4 groups of 6 cameras + 2 fast cameras
+""")
+
+# ╔═╡ f16fb6a2-1e48-4f02-8c11-655525022413
+hint(md"""
+$$A_{Kepler} = π 0.95^2$$
+$$A_{Plato} = 6* π 0.12^2$$
+$$A_{ratio} = A_{Plato} / A_{Kepler}$$
+"""
+)
+
+# ╔═╡ c9c8a379-6b99-477c-84e5-de4ca42be7dc
+hint(md"""
+$$\frac{\sigma_{Plato}}{\sigma_{Kepler}} = \left(\frac{A_{Kepler}}{A_{Plato}}\right)^{1/2} \simeq 3.2$$
+""")
+
+# ╔═╡ 591aef9d-14ee-4e10-be69-b010be650a1e
+begin 
+	AKepler = π * 0.95^2
+	APlato = 6* π * 0.12^2
+	Aratio = APlato / AKepler
+	σ_ratio = 1/sqrt(Aratio)
+end
 
 # ╔═╡ bb6909dd-8f38-4ecf-af07-164518af7539
+md"""
+# Setup
+"""
 
+# ╔═╡ 7a68041d-e5f7-4cdc-8144-ee5acfa18d2b
+ChooseDisplayMode()
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -252,7 +355,7 @@ PlutoTeachingTools = "661c6b06-c737-4d37-b85c-46df65de6f69"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
-Plots = "~1.36.4"
+Plots = "~1.36.1"
 PlutoTeachingTools = "~0.2.5"
 PlutoUI = "~0.7.48"
 """
@@ -261,9 +364,8 @@ PlutoUI = "~0.7.48"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.8.2"
+julia_version = "1.7.1"
 manifest_format = "2.0"
-project_hash = "3f79aef09ffcc710f1aa072228d8daa7987327b2"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -273,7 +375,6 @@ version = "1.1.4"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
-version = "1.1.1"
 
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
@@ -282,9 +383,9 @@ uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
 
 [[deps.BitFlags]]
-git-tree-sha1 = "43b1a4a8f797c1cddadf60499a8a077d4af2cd2d"
+git-tree-sha1 = "629c6e4a7be8f427d268cebef2a5e3de6c50d462"
 uuid = "d1d4a3ce-64b1-5f1a-9ba4-7e7e69966f35"
-version = "0.1.7"
+version = "0.1.6"
 
 [[deps.Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -348,14 +449,13 @@ version = "0.12.8"
 
 [[deps.Compat]]
 deps = ["Dates", "LinearAlgebra", "UUIDs"]
-git-tree-sha1 = "aaabba4ce1b7f8a9b34c015053d3b1edf60fa49c"
+git-tree-sha1 = "3ca828fe1b75fa84b021a7860bd039eaea84d2f2"
 uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "4.4.0"
+version = "4.3.0"
 
 [[deps.CompilerSupportLibraries_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
-version = "0.5.2+0"
 
 [[deps.Contour]]
 git-tree-sha1 = "d05d9e7b7aedff4e5b51a029dced05cfb6125781"
@@ -392,9 +492,8 @@ uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.9.2"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
 
 [[deps.Expat_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -454,16 +553,16 @@ uuid = "0656b61e-2033-5cc2-a64a-77c0f6c09b89"
 version = "3.3.8+0"
 
 [[deps.GR]]
-deps = ["Artifacts", "Base64", "DelimitedFiles", "Downloads", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Pkg", "Preferences", "Printf", "Random", "Serialization", "Sockets", "TOML", "Tar", "Test", "UUIDs", "p7zip_jll"]
-git-tree-sha1 = "7cf81e7388dc19629aba24666ec46e8d250f58cf"
+deps = ["Base64", "DelimitedFiles", "GR_jll", "HTTP", "JSON", "Libdl", "LinearAlgebra", "Pkg", "Preferences", "Printf", "Random", "Serialization", "Sockets", "Test", "UUIDs"]
+git-tree-sha1 = "00a9d4abadc05b9476e937a5557fcce476b9e547"
 uuid = "28b8d3ca-fb5f-59d9-8090-bfdbd6d07a71"
-version = "0.71.0"
+version = "0.69.5"
 
 [[deps.GR_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Cairo_jll", "FFMPEG_jll", "Fontconfig_jll", "GLFW_jll", "JLLWrappers", "JpegTurbo_jll", "Libdl", "Libtiff_jll", "Pixman_jll", "Pkg", "Qt5Base_jll", "Zlib_jll", "libpng_jll"]
-git-tree-sha1 = "d63e2e87b93e1ed04d339d6d0050fb8efae34cfe"
+git-tree-sha1 = "bc9f7725571ddb4ab2c4bc74fa397c1c5ad08943"
 uuid = "d2c73de3-f751-5644-a686-071e5b155ba9"
-version = "0.71.0+0"
+version = "0.69.1+0"
 
 [[deps.Gettext_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "Libiconv_jll", "Pkg", "XML2_jll"]
@@ -490,9 +589,9 @@ version = "1.0.2"
 
 [[deps.HTTP]]
 deps = ["Base64", "CodecZlib", "Dates", "IniFile", "Logging", "LoggingExtras", "MbedTLS", "NetworkOptions", "OpenSSL", "Random", "SimpleBufferStream", "Sockets", "URIs", "UUIDs"]
-git-tree-sha1 = "e1acc37ed078d99a714ed8376446f92a5535ca65"
+git-tree-sha1 = "0c0e8d05fdd5e9792b31b7c7841f11a2ff8ad633"
 uuid = "cd3eb016-35fb-5094-929b-558a96fad6f3"
-version = "1.5.5"
+version = "1.5.4"
 
 [[deps.HarfBuzz_jll]]
 deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "Graphite2_jll", "JLLWrappers", "Libdl", "Libffi_jll", "Pkg"]
@@ -564,9 +663,9 @@ version = "2.1.2+0"
 
 [[deps.JuliaInterpreter]]
 deps = ["CodeTracking", "InteractiveUtils", "Random", "UUIDs"]
-git-tree-sha1 = "a79c4cf60cc7ddcdcc70acbb7216a5f9b4f8d188"
+git-tree-sha1 = "0f960b1404abb0b244c1ece579a0ec78d056a5d1"
 uuid = "aa1ae85d-cabe-5617-a682-6adf51b2e16a"
-version = "0.9.16"
+version = "0.9.15"
 
 [[deps.LAME_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -600,12 +699,10 @@ version = "0.15.17"
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
 uuid = "b27032c2-a3e7-50c8-80cd-2d36dbcbfd21"
-version = "0.6.3"
 
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "MbedTLS_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "7.84.0+0"
 
 [[deps.LibGit2]]
 deps = ["Base64", "NetworkOptions", "Printf", "SHA"]
@@ -614,7 +711,6 @@ uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 [[deps.LibSSH2_jll]]
 deps = ["Artifacts", "Libdl", "MbedTLS_jll"]
 uuid = "29816b5a-b9ab-546f-933c-edad1886dfa8"
-version = "1.10.2+0"
 
 [[deps.Libdl]]
 uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
@@ -673,9 +769,9 @@ uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 
 [[deps.LogExpFunctions]]
 deps = ["ChainRulesCore", "ChangesOfVariables", "DocStringExtensions", "InverseFunctions", "IrrationalConstants", "LinearAlgebra"]
-git-tree-sha1 = "946607f84feb96220f480e0422d3484c49c00239"
+git-tree-sha1 = "94d9c52ca447e23eac0c0f074effbcd38830deb5"
 uuid = "2ab3a3ac-af41-5b50-aa03-7779005ae688"
-version = "0.3.19"
+version = "0.3.18"
 
 [[deps.Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
@@ -716,7 +812,6 @@ version = "1.1.7"
 [[deps.MbedTLS_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "c8ffd9c3-330d-5841-b78e-0817d7145fa1"
-version = "2.28.0+0"
 
 [[deps.Measures]]
 git-tree-sha1 = "c13304c81eec1ed3af7fc20e75fb6b26092a1102"
@@ -734,7 +829,6 @@ uuid = "a63ad114-7e13-5084-954f-fe012c677804"
 
 [[deps.MozillaCACerts_jll]]
 uuid = "14a3606d-f60d-562e-9121-12d972cd8159"
-version = "2022.2.1"
 
 [[deps.NaNMath]]
 deps = ["OpenLibm_jll"]
@@ -744,7 +838,6 @@ version = "1.0.1"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
-version = "1.2.0"
 
 [[deps.Ogg_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -755,12 +848,10 @@ version = "1.3.5+1"
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
-version = "0.3.20+0"
 
 [[deps.OpenLibm_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "05823500-19ac-5b8b-9628-191a04bc5112"
-version = "0.8.1+0"
 
 [[deps.OpenSSL]]
 deps = ["BitFlags", "Dates", "MozillaCACerts_jll", "OpenSSL_jll", "Sockets"]
@@ -794,7 +885,6 @@ version = "1.4.1"
 [[deps.PCRE2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "efcefdf7-47ab-520b-bdef-62a2eaa19f15"
-version = "10.40.0+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "SnoopPrecompile"]
@@ -816,7 +906,6 @@ version = "0.40.1+0"
 [[deps.Pkg]]
 deps = ["Artifacts", "Dates", "Downloads", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Serialization", "TOML", "Tar", "UUIDs", "p7zip_jll"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
-version = "1.8.0"
 
 [[deps.PlotThemes]]
 deps = ["PlotUtils", "Statistics"]
@@ -832,9 +921,9 @@ version = "1.3.1"
 
 [[deps.Plots]]
 deps = ["Base64", "Contour", "Dates", "Downloads", "FFMPEG", "FixedPointNumbers", "GR", "JLFzf", "JSON", "LaTeXStrings", "Latexify", "LinearAlgebra", "Measures", "NaNMath", "Pkg", "PlotThemes", "PlotUtils", "Printf", "REPL", "Random", "RecipesBase", "RecipesPipeline", "Reexport", "RelocatableFolders", "Requires", "Scratch", "Showoff", "SnoopPrecompile", "SparseArrays", "Statistics", "StatsBase", "UUIDs", "UnicodeFun", "Unzip"]
-git-tree-sha1 = "c411cd689fbcdd2c01b79db2817114e4321c6fa2"
+git-tree-sha1 = "47e70b391ff314cc36e7c2400f7d2c5455dc9496"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
-version = "1.36.4"
+version = "1.36.1"
 
 [[deps.PlutoHooks]]
 deps = ["InteractiveUtils", "Markdown", "UUIDs"]
@@ -892,9 +981,9 @@ version = "1.3.1"
 
 [[deps.RecipesPipeline]]
 deps = ["Dates", "NaNMath", "PlotUtils", "RecipesBase", "SnoopPrecompile"]
-git-tree-sha1 = "e974477be88cb5e3040009f3767611bc6357846f"
+git-tree-sha1 = "a030182cccc5c461386c6f055c36ab8449ef1340"
 uuid = "01d81517-befc-4cb6-b9ec-a95719d0359c"
-version = "0.6.11"
+version = "0.6.10"
 
 [[deps.Reexport]]
 git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
@@ -921,7 +1010,6 @@ version = "3.4.0"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-version = "0.7.0"
 
 [[deps.Scratch]]
 deps = ["Dates"]
@@ -986,12 +1074,10 @@ version = "0.33.21"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
-version = "1.0.0"
 
 [[deps.Tar]]
 deps = ["ArgTools", "SHA"]
 uuid = "a4e569a6-e804-4fa4-b0f3-eef7a1d5b13e"
-version = "1.10.1"
 
 [[deps.TensorCore]]
 deps = ["LinearAlgebra"]
@@ -1190,7 +1276,6 @@ version = "1.4.0+3"
 [[deps.Zlib_jll]]
 deps = ["Libdl"]
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.12+3"
 
 [[deps.Zstd_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1219,7 +1304,6 @@ version = "0.15.1+0"
 [[deps.libblastrampoline_jll]]
 deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
 uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
-version = "5.1.1+0"
 
 [[deps.libfdk_aac_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1242,12 +1326,10 @@ version = "1.3.7+1"
 [[deps.nghttp2_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
-version = "1.48.0+0"
 
 [[deps.p7zip_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.4.0+0"
 
 [[deps.x264_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
@@ -1285,12 +1367,13 @@ version = "1.4.1+0"
 # ╟─5236d3a3-0c53-4350-808e-71746ec40908
 # ╟─7f1121b0-3bcb-4366-97ae-a28ce8671f22
 # ╠═3ed3bfa1-1fdc-4f2f-8445-22657615a289
-# ╠═3c479247-f208-4121-adbe-98e30a378ec8
+# ╟─7cf45894-877a-4dbf-8950-b4103490f373
+# ╟─18a01480-fd37-4578-a8f4-128f621116c5
 # ╠═0824995c-2216-414a-86c4-220281a270f7
-# ╠═2820d2e3-c8e6-4cd3-a657-54cfb5a09b96
-# ╠═7cf45894-877a-4dbf-8950-b4103490f373
-# ╠═18a01480-fd37-4578-a8f4-128f621116c5
-# ╠═db5b818f-3daa-46d5-ba46-1139daf61936
+# ╟─db5b818f-3daa-46d5-ba46-1139daf61936
+# ╟─c64b31a9-b201-4baa-ab55-c31391d1ac15
+# ╟─6bc615e8-73e2-4335-a61d-e16d2c642df9
+# ╠═b9cd240e-2d7a-4f7d-8fdc-a5e0eb9667cb
 # ╟─32a88271-14d2-4dcc-be58-5172366ba78a
 # ╟─faedafcc-8920-4d6e-941c-0e1fcb32da66
 # ╟─6a93649d-295e-40b8-86ae-4bc084598993
@@ -1298,10 +1381,26 @@ version = "1.4.1+0"
 # ╟─e7149564-8870-42de-bd50-4b10e0fdc839
 # ╟─bd3ef978-a69b-48d7-bd79-474bc8fbc55f
 # ╟─1d81e0a8-94b6-46cb-a2fc-7a32c2f0ba25
-# ╠═447ec9db-de92-4ac6-bdbf-98c9445c6291
-# ╠═fedc704e-d4eb-42ac-88bc-299ebc24b021
-# ╠═294c4702-b6c6-48e3-aecd-6fe29055088d
-# ╠═85d71efb-26e6-4734-8798-284e7d90904d
-# ╠═bb6909dd-8f38-4ecf-af07-164518af7539
+# ╟─2e7de2d9-1b48-4cf7-bbaf-b016f814c8bb
+# ╟─1acc105c-8ad1-499e-a706-9f8ef705ef63
+# ╟─ac1135fe-de82-4b17-a25a-9ee7c5019876
+# ╟─7b54ba5f-eeaa-4825-b55f-2b3f88ad7f38
+# ╟─b8c77ea4-361e-4f07-b54a-afe9c4813542
+# ╟─3bf97059-4ab2-46dc-8b49-6fd011cd3308
+# ╟─99f0b2c7-0f5a-4cfe-aa54-2a22a6bfa57f
+# ╟─e8ee413b-7d83-45e1-8af3-8b4f41da0dcd
+# ╟─602d4829-b1be-41e0-a98b-5925deb08376
+# ╟─c2781372-a23d-4da8-a0ea-d4ea58555b2e
+# ╟─fedc704e-d4eb-42ac-88bc-299ebc24b021
+# ╠═8226a5d6-bce3-4ad4-9cf0-8647904b444c
+# ╟─b15a6c3e-b0f4-4561-8145-f74412d36e10
+# ╟─294c4702-b6c6-48e3-aecd-6fe29055088d
+# ╟─b652f52a-26db-4b0d-a416-28119def2fa4
+# ╟─f16fb6a2-1e48-4f02-8c11-655525022413
+# ╟─c9c8a379-6b99-477c-84e5-de4ca42be7dc
+# ╟─591aef9d-14ee-4e10-be69-b010be650a1e
+# ╟─bb6909dd-8f38-4ecf-af07-164518af7539
+# ╠═7a68041d-e5f7-4cdc-8144-ee5acfa18d2b
+# ╟─85d71efb-26e6-4734-8798-284e7d90904d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
