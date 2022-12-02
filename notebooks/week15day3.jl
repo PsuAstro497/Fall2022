@@ -22,20 +22,6 @@ md"""
 # ╔═╡ 922dc0fb-ac8b-4e40-9c91-263aaaa831ec
 TableOfContents()
 
-# ╔═╡ 55eeb586-f85d-4f35-b0d4-ccd6fe1a2b5f
-md"""
-## Questions fom Last week
-"""
-
-# ╔═╡ 701c1397-f876-413c-a088-7f32821f0b72
-question_box(md"""What are some of the "more sophisticated" ways to image mature planets and and why are they necessary?""")
-
-# ╔═╡ 8cae27e3-feaf-49df-8ac7-6dc3dd79d359
-question_box(md"Will the planet's spectrum suffer from the contamination of stellar light, stellar wind, or circumstellar materials? If so, how can astronomers  eliminate such contamination?")
-
-# ╔═╡ 313a5800-4395-40d1-acfb-b8d7831fec2f
-question_box(md"Are coronagraphs just able to observe objects with very small [angular] separations or do they offer any other large scale benefits?")
-
 # ╔═╡ 92f30fd8-3fc3-40c8-98be-e3b139936a3a
 md"""
 # Future of Exoplanet Characterization
@@ -48,6 +34,9 @@ md"""
 - Preparatory science for direct imaging missions
 """
 
+# ╔═╡ c4e4de5f-db7b-4602-971e-e860089f1856
+question_box(md"Is it possible that if a planet's atmosphere causes it to be much too hot or much too cold [for what?] that it would affect the Rossiter-Mclaughlin effect significantly?")
+
 # ╔═╡ 755424c3-9ff9-463e-8942-73c619e50f0c
 md"""
 ## Transits 
@@ -55,6 +44,16 @@ md"""
 - [TESS](https://tess.gsfc.nasa.gov/) extended missions
 - [Plato](https://platomission.com/) follow-up of Kepler field
 """
+
+# ╔═╡ e0134ee8-74ba-4ed6-8e03-7947b95f406e
+md"""
+## Other new ground-based programs 
+- Extremely Large Telescopes w/o new generations of adaptive optics (AO)
+- Radio astronomy:  ALMA, Square Kilometer Array
+"""
+
+# ╔═╡ 0f79a18e-6db1-44ea-9f8b-276cf15391f2
+question_box(md"How could we detect an exoplanet's magnetic field and its properties [relevant to protecting potential life from stellar winds]?")
 
 # ╔═╡ bf4f3112-367d-4d4b-8a76-722004db6bcb
 md"""
@@ -67,6 +66,12 @@ $(LocalResource("../_assets/week15/jwst_spectrum_wasp96b.jpg", :width=>"100%"))
 Credit: [Image: NASA, ESA, CSA, and L. Hustak (STScI)](https://www.nasa.gov/feature/goddard/2022/nasa-s-webb-detects-carbon-dioxide-in-exoplanet-atmosphere)
 """
 
+# ╔═╡ 94c8b481-9c6c-4d17-a239-efbb7ddcd74c
+question_box(md"Is it safe to assume a planet radiates as a blackbody?")
+
+# ╔═╡ aba032d8-0d88-4863-8af0-56c8aacc4c54
+question_box(md"What kind of limitations will the JWST have when searching for biosignatures? ")
+
 # ╔═╡ 9be30e1c-e8f5-42a2-a77b-166a61d82201
 md"""
 ## [Ariel](https://arielmission.space/) (Atmospheric Infrared Remote sensing Exoplnae Large Survey)
@@ -74,9 +79,18 @@ md"""
 - 4 year primary mission
 - 1.1 x 0.7 meter primary
 - Orbit about L2
-- Photoometry & Spectroscopy spanning 0.5--7.8 μm
+- Photometry & Spectroscopy spanning 0.5--7.8 μm
 
 $(Resource("https://arielmission.space/wp-content/uploads/2019/04/ariel4.png", :width=>"60%"))
+"""
+
+# ╔═╡ f6823e2d-a526-46d2-a305-c96c0ce60fc5
+question_box(md"How likely is it that we will be able to image rogue planets with any current or upcoming direct imaging mission?")
+
+# ╔═╡ db8cc5ae-64db-411e-a72a-fa8986f62475
+md"""
+[JWST GTO program aiming for 1 M_Jup planets in NGC 1333](https://www.nasa.gov/feature/goddard/2019/nasa-s-webb-telescope-to-search-for-young-brown-dwarfs-and-rogue-planets)
+$(Resource("https://cdn.mos.cms.futurecdn.net/sNakwxHixQhuiuQyE8KPYe-1200-80.jpg.webp"))
 """
 
 # ╔═╡ 25cef735-d449-4c5e-b09a-ee6860ce9bb0
@@ -134,12 +148,72 @@ $(LocalResource("../_assets/week15/LUVOIR_earth_spectrum.png",:width=>"100%"))
 Image Credit: J. Lustig-Yaeger via [LUVOIR Final Report](https://www.luvoirtelescope.org/copy-of-design)
 """
 
+# ╔═╡ 8554e92e-17b1-49f7-8141-56e0b8894a88
+question_box(md"Can the presence of clouds interfere with spectral analysis of the atmosphere of a planet? 
+
+For example if the Earth was observed, and a cloud of water vapor obstructed the light of the sun passing through the atmosphere, could an observer misidentify the Earth's atmosphere to be majority water vapor? If so, are there ways to account for such errors?")
+
+# ╔═╡ 54771cf3-bf98-4e17-8afb-a945f32ed008
+md"""
+$(LocalResource("../_assets/week15/cloud_spectrum.png"))
+--- [Schlundt et al. (2011)](https://amt.copernicus.org/articles/4/319/2011/) [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+"""
+
+# ╔═╡ a4afae22-8b5c-4ed0-8cc4-1bdb46713398
+question_box(md"What observations... would be sufficient to confidently determine the presence of a biosphere [on an exoplanet]? 
+
+How close is current technology to being able to achieve this, and what would be the impact of such a discovery?")
+
 # ╔═╡ 76e28b88-8d8b-4004-98af-b4462cc06f5e
 md"""
 ## Earth through time
 $(LocalResource("../_assets/week15/LUVOIR_earth_through_time.png",:width=>"100%"))
 Image Credit:  Arney, Domagal-Goldman & Griswold via [LUVOIR Final Report](https://www.luvoirtelescope.org/copy-of-design)
 """
+
+# ╔═╡ 30eebd11-6202-4058-bcf4-7e439b6bc720
+md"""
+## Light curve of Earth (diurnal)
+$(LocalResource("../_assets/week15/Earth_rotational_variability_fst2002.png",:width=>"100%"))
+Image Credit:  [Ford, Seager & Turner 2002](https://arxiv.org/abs/astro-ph/0210277)
+"""
+
+# ╔═╡ 712bd604-6d28-438b-8f3d-91ae187fa539
+md"""
+## Light curve of Earth (diurnal)
+$(LocalResource("../_assets/week15/Earth_seasonal_variations_fst2022.png",:height=>"80%"))
+Image Credit:  [Ford, Seager & Turner 2002](https://arxiv.org/abs/astro-ph/0210277)
+"""
+
+# ╔═╡ 61a64ee3-0b60-487a-82d6-9359c9ed5934
+md"""
+## Light curve of alternative Earths
+$(LocalResource("../_assets/week15/alt_earths_fst2002.png",:width=>"80%"))
+Image Credit:  [Ford, Seager & Turner 2002](https://arxiv.org/abs/astro-ph/0210277)
+"""
+
+
+# ╔═╡ 8ca54e3d-9234-447f-8dc2-9f62de0de29c
+md"""
+## Evolution of Earth's light curve 
+$(LocalResource("../_assets/week15/earth_albedo_variability_9.3d.png",:width=>"100%"))
+Caption:  
+Each curve is the average daily lightcurve over 9.3 days.
+$br
+Left:  Cloud-free.  Right:  Clouds 
+$br
+Image Credit:  [Palle et al. 2008](https://arxiv.org/abs/0802.1836)
+"""
+
+
+# ╔═╡ 3e1cf4b5-9746-4116-a364-b2075fc3f142
+md"""
+## Autocorrelation function of Earth's lightcurve (equatorial view)
+$(LocalResource("../_assets/week15/earth_rotation_acf.png",:width=>"80%"))
+Black:  Cloudless.  Blue:  Cloud-free. $br
+Image Credit:  [Palle et al. 2008](https://arxiv.org/abs/0802.1836)
+"""
+
 
 # ╔═╡ 90e42040-f3ae-41cb-9811-ea7ab8c9b3d5
 md"""
@@ -169,53 +243,6 @@ $(LocalResource("../_assets/week13/HabEx_targets_1.png"))
 $(LocalResource("../_assets/week13/HabEx_targets_2.png"))
 --- Credit: [HabEx Final Report](https://www.jpl.nasa.gov/habex/documents/)
 """
-
-# ╔═╡ 30eebd11-6202-4058-bcf4-7e439b6bc720
-md"""
-## Light curve of Earth (diurnal)
-$(LocalResource("../_assets/week15/Earth_rotational_variability_fst2002.png",:width=>"100%"))
-Image Credit:  [Ford, Seager & Turner 2002](https://arxiv.org/abs/astro-ph/0210277)
-"""
-
-# ╔═╡ 712bd604-6d28-438b-8f3d-91ae187fa539
-md"""
-## Light curve of Earth (diurnal)
-$(LocalResource("../_assets/week15/Earth_seasonal_variations_fst2022.png",:width=>"80%"))
-Image Credit:  [Ford, Seager & Turner 2002](https://arxiv.org/abs/astro-ph/0210277)
-"""
-
-# ╔═╡ 61a64ee3-0b60-487a-82d6-9359c9ed5934
-md"""
-## Light curve of alternative Earths
-$(LocalResource("../_assets/week15/alt_earths_fst2002.png",:width=>"80%"))
-Image Credit:  [Ford, Seager & Turner 2002](https://arxiv.org/abs/astro-ph/0210277)
-"""
-
-
-# ╔═╡ 3e1cf4b5-9746-4116-a364-b2075fc3f142
-md"""
-## Autocorrelation function of Earth's lightcurve (equatorial view)
-$(LocalResource("../_assets/week15/earth_rotation_acf.png",:width=>"80%"))
-Black:  Cloudless.  Blue:  Cloud-free. $br
-Image Credit:  [Palle et al. 2008](https://arxiv.org/abs/0802.1836)
-"""
-
-
-# ╔═╡ 8ca54e3d-9234-447f-8dc2-9f62de0de29c
-md"""
-## Evolution of Earth's light curve 
-$(LocalResource("../_assets/week15/earth_albedo_variability_9.3d.png",:width=>"100%"))
-Caption:  
-Each curve is the average daily lightcurve over 9.3 days.
-$br
-Left:  Cloud-free.  Right:  Clouds 
-$br
-Image Credit:  [Palle et al. 2008](https://arxiv.org/abs/0802.1836)
-"""
-
-
-# ╔═╡ 5f985f48-1b6c-4706-a32a-d6f8338e8bdf
-
 
 # ╔═╡ e7cd1f30-12da-408e-8f73-c14b7e6c9626
 md"""
@@ -605,31 +632,36 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─21e779f0-69a2-11ed-2375-6186eb8751c8
 # ╟─b4416de1-92ff-4f58-817d-7caac2dae00e
 # ╟─922dc0fb-ac8b-4e40-9c91-263aaaa831ec
-# ╟─55eeb586-f85d-4f35-b0d4-ccd6fe1a2b5f
-# ╟─701c1397-f876-413c-a088-7f32821f0b72
-# ╟─8cae27e3-feaf-49df-8ac7-6dc3dd79d359
-# ╟─313a5800-4395-40d1-acfb-b8d7831fec2f
 # ╟─92f30fd8-3fc3-40c8-98be-e3b139936a3a
 # ╟─0a47fda7-4d49-4455-8697-3ef1ef452cb8
+# ╟─c4e4de5f-db7b-4602-971e-e860089f1856
 # ╟─755424c3-9ff9-463e-8942-73c619e50f0c
-# ╠═bf4f3112-367d-4d4b-8a76-722004db6bcb
+# ╟─e0134ee8-74ba-4ed6-8e03-7947b95f406e
+# ╟─0f79a18e-6db1-44ea-9f8b-276cf15391f2
+# ╟─bf4f3112-367d-4d4b-8a76-722004db6bcb
+# ╟─94c8b481-9c6c-4d17-a239-efbb7ddcd74c
+# ╟─aba032d8-0d88-4863-8af0-56c8aacc4c54
 # ╟─9be30e1c-e8f5-42a2-a77b-166a61d82201
+# ╟─f6823e2d-a526-46d2-a305-c96c0ce60fc5
+# ╟─db8cc5ae-64db-411e-a72a-fa8986f62475
 # ╟─25cef735-d449-4c5e-b09a-ee6860ce9bb0
 # ╟─f6bd00b8-63b6-4f1b-87fe-f679df3f1652
 # ╟─e098ba7f-3262-4441-aeb0-b35db391ae7b
 # ╟─cafe66ec-cb81-4033-9bc3-9a35cd66441f
 # ╟─c6380774-4c57-484d-82ab-2364ba020f86
+# ╟─8554e92e-17b1-49f7-8141-56e0b8894a88
+# ╟─54771cf3-bf98-4e17-8afb-a945f32ed008
+# ╟─a4afae22-8b5c-4ed0-8cc4-1bdb46713398
 # ╟─76e28b88-8d8b-4004-98af-b4462cc06f5e
+# ╟─30eebd11-6202-4058-bcf4-7e439b6bc720
+# ╟─712bd604-6d28-438b-8f3d-91ae187fa539
+# ╟─61a64ee3-0b60-487a-82d6-9359c9ed5934
+# ╟─8ca54e3d-9234-447f-8dc2-9f62de0de29c
+# ╟─3e1cf4b5-9746-4116-a364-b2075fc3f142
 # ╟─90e42040-f3ae-41cb-9811-ea7ab8c9b3d5
 # ╟─401d052c-106c-4296-bff3-e997a26e8c9c
 # ╟─c251e18c-1415-45c0-b2d7-ee32eaa348bc
 # ╟─3e3f9001-4cc9-47ab-a7f5-27b34354aaaa
-# ╟─30eebd11-6202-4058-bcf4-7e439b6bc720
-# ╟─712bd604-6d28-438b-8f3d-91ae187fa539
-# ╟─61a64ee3-0b60-487a-82d6-9359c9ed5934
-# ╟─3e1cf4b5-9746-4116-a364-b2075fc3f142
-# ╟─8ca54e3d-9234-447f-8dc2-9f62de0de29c
-# ╠═5f985f48-1b6c-4706-a32a-d6f8338e8bdf
 # ╟─e7cd1f30-12da-408e-8f73-c14b7e6c9626
 # ╟─78b5ed93-0496-405d-839f-472dec2188c0
 # ╟─0a76c19b-a812-4a27-927c-8462d8b45263
