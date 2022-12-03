@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Starting Labs on Roar - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/tips/roar/'>Using Roar</a></li>
+    <li class='menu-item '><a href='/Fall2022/tips/roar/pluto/'>Starting Pluto</a></li>
+    <li class='menu-item '><a href='/Fall2022/tips/labs/'>Using Labs</a></li>
+    
+      <li class='menu-item active'><a href='/Fall2022/tips/labs/starting/'>Starting</a></li>
+      <li class='menu-item '><a href='/Fall2022/tips/labs/commit/'>Commiting</a></li>
+      <li class='menu-item '><a href='/Fall2022/tips/labs/submitting/'>Submitting</a></li>
+      <li class='menu-item '><a href='/Fall2022/tips/labs/feedback/'>Feedback</a></li>
+    
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h1 id="starting_labs_on_roar"><a href="#starting_labs_on_roar" class="header-anchor">Starting Labs on Roar</a></h1>
+<div class="franklin-toc"><ol><li><a href="#start_a_new_roar_session">Start a new Roar Session</a></li><li><a href="#clone_your_github_repository_to_begin_a_new_assignment">Clone your github repository to begin a new assignment</a></li><li><a href="#instantiate_the_labs_environemnt">Instantiate the lab&#39;s environemnt</a></li><li><a href="#open_pluto_notebook">Open Pluto notebook</a></li><li><a href="#commit_your_changes">Commit your changes</a></li></ol></div>
+<h2 id="start_a_new_roar_session"><a href="#start_a_new_roar_session" class="header-anchor">Start a new Roar Session</a></h2>
+<ul>
+<li><p>Request a &quot;<strong>BYOE Jupyter server</strong>&quot; session via the <a href="https://portal2.aci.ics.psu.edu/">Roar portal</a> &#40;see <a href="../../roar/pluto/">starting Pluto Server</a>&#41;</p>
+</li>
+<li><p>You can proceed to the next step, while you&#39;re waiting for it to star.</p>
+</li>
+</ul>
+<h2 id="clone_your_github_repository_to_begin_a_new_assignment"><a href="#clone_your_github_repository_to_begin_a_new_assignment" class="header-anchor">Clone your github repository to begin a new assignment</a></h2>
+<ul>
+<li><p>Lookup the url for the repo to be cloned &#40;from email, Canvas announcement, or Canvas lab page&#41;.</p>
+<ul>
+<li><p>If you haven&#39;t followed the link to create your repo for this week&#39;s assignment yet, then do that now.  Following that link should trigger GitHub to create a private git repository named labN-GITHUBID &#40;where N is the week number and GITHUBID is the GitHub username that you&#39;re logged in as at the time you follow the link&#41;.</p>
+</li>
+<li><p>Navigate to the github repository you&#39;ll be using in your browser.</p>
+</li>
+<li><p>Click <em>Clone or download</em>.</p>
+</li>
+<li><p>If it says &quot;Clone with https&quot;, click &quot;Use ssh&quot;.</p>
+</li>
+<li><p>Click the clipboard icon to copy the url onto your clipboard</p>
+</li>
+</ul>
+</li>
+<li><p>Return to your browser tab with &quot;My Interactive Sessions&quot;.</p>
+</li>
+<li><p>Hopefully, there&#39;s now a <em>Connect to Jupyter Server</em> button. Click it.</p>
+</li>
+<li><p>Go to the newly opened tab, you&#39;ll have a Jupyter Lab Server.</p>
+</li>
+<li><p>If you don&#39;t see tiles for Python, Julia and Pluto Notebooks, then click <em>File.NewLauncher</em>.</p>
+</li>
+<li><p>Find the <em>Terminal</em> tile or in the menu system, <em>File.New.Terminal</em>.</p>
+</li>
+<li><p>In the new terminal tab, clone your github repo by running</p>
+</li>
+</ul>
+<pre><code class="language-shell">git clone REPO_URL</code></pre>
+<p>where <code>REPO_URL</code> is what you&#39;ll paste from the clipboard</p>
+<h2 id="instantiate_the_labs_environemnt"><a href="#instantiate_the_labs_environemnt" class="header-anchor">Instantiate the lab&#39;s environemnt</a></h2>
+<ul>
+<li><p>Change into the directory that was created for the repository &#40;we&#39;ll call it REPO_DIR&#41; and setup all the package dependencies required &#40;as specified by the Project.toml or test/Project.toml file or embedded in Pluto notebooks&#41; by running</p>
+</li>
+</ul>
+<pre><code class="language-shell">cd REPO_DIR
+julia --project -e &#39;using Pkg; Pkg.instantiate&#40;&#41;; &#39;</code></pre>
+<hr />
+<h2 id="open_pluto_notebook"><a href="#open_pluto_notebook" class="header-anchor">Open Pluto notebook</a></h2>
+<ul>
+<li><p>Go back to the browser tab with your Jupyter Lab server running.</p>
+</li>
+<li><p>If you do not see the a tile for Pluto, then go to <em>File.NewLauncher</em>.</p>
+</li>
+<li><p>Most labs will contain one or more Pluto notebooks &#40;their file names will end in .jl&#41;.  To open one in Pluto,</p>
+<ul>
+<li><p>Click the Pluto tile.  A new tab will open in your browser for the Pluto session.</p>
+</li>
+<li><p>In the box labeled &quot;Open from file&quot; or &quot;Open a notebook&quot; &#40;depending on Pluto version&#41;, type the path to the directory containing the repo, a forward slash and the name of the first notebook &#40;e.g., &#39;lab1-yourgithubid/ex1.jl&#39;&#41;.  Tab completion is often helpful.</p>
+</li>
+</ul>
+</li>
+<li><p>Do your work in the notebook.</p>
+</li>
+<li><p>When you&#39;re done with a notebook, make sure it is saved &#40;Ctrl&#43;S&#41; and close the tab.</p>
+</li>
+</ul>
+<hr />
+<h2 id="commit_your_changes"><a href="#commit_your_changes" class="header-anchor">Commit your changes</a></h2>
+<p>Ideally, you&#39;d commit small changes as you go.  At a minimum, make sure that you <a href="../commit">commit your changes</a> each time you are wrapping up a coding session or about to take a break.</p>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

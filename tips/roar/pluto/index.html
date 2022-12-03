@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Pluto Notebooks on Roar - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/tips/roar/'>Using Roar</a></li>
+    <li class='menu-item active'><a href='/Fall2022/tips/roar/pluto/'>Starting Pluto</a></li>
+    <li class='menu-item '><a href='/Fall2022/tips/labs/'>Using Labs</a></li>
+    
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h1 id="start_roar_session_with_pluto_server"><a href="#start_roar_session_with_pluto_server" class="header-anchor">Start Roar Session with Pluto Server</a></h1>
+<p>If this is your first time to run Pluto on Roar, then first make sure you have an account on ACI and have completed the <a href="../tips/roar/">initial setup</a> steps. Then, each time you want to start a Jupyter notebook session on Roar, you&#39;ll follow the instructions below:</p>
+<ol>
+<li><p>Browse to <a href="https://portal2.aci.ics.psu.edu">portal2.aci.ics.psu.edu</a>.</p>
+</li>
+</ol>
+<p>Using &quot;guest&quot; or &quot;incognito&quot; mode is recommended. Login and authenticat &#40;as necessary&#41;.</p>
+<ol>
+<li><p>Under <em>Interactive Apps</em>, choose _BYOE Jupyter Server__</p>
+</li>
+<li><p>Select:</p>
+<ul>
+<li><p>Jupyter Interface: JupyterLab</p>
+</li>
+<li><p>Use custom environment: checked/selected</p>
+</li>
+<li><p>Environment Setup: <code>source /gpfs/group/RISE/sw7/anaconda/envs-2022.05/julia/setup</code></p>
+</li>
+<li><p>Ignore then box under Select a conda environment.</p>
+</li>
+<li><p>Allocation: <code>ebf11_i_g_lc_default</code></p>
+</li>
+<li><p>Number of hours: 2 hours  &#40;can choose longer if you plan to continue after class or outside of class&#41;</p>
+</li>
+<li><p>Number of cores: 4</p>
+</li>
+<li><p>Memory per core: 4 GB</p>
+</li>
+<li><p>Node type: <code>ACI-b Legacy Core</code></p>
+</li>
+</ul>
+</li>
+<li><p>Click <em>Launch</em> &#40;Wait while your job starts.&#41;</p>
+</li>
+<li><p>Once the <em>Connect to JupyterLab Server</em> button appears, click it.</p>
+<ul>
+<li><p>The top row of tiles &#40;labeled &quot;Notebook&quot;&#41; should include a tile labeled &quot;Pluto.jl&quot;.  Click it.  </p>
+</li>
+<li><p>A new browser tab should open with a Pluto session.</p>
+</li>
+<li><p>The first time you open Pluto it will take a few minutes and is likely to time out.  Just wait a few minutes and try again.  &#40;Behind the scenes, it&#39;s installing a lot of packages.&#41;</p>
+</li>
+<li><p>For a blank notebook, click &quot;new notebook&quot;, or enter the path to a notebook you&#39;d like to open in the text box under &quot;Open from file&quot; and click the &quot;Open&quot; button.</p>
+</li>
+<li><p>Do your work, remembering to save your notebook before you quit.</p>
+</li>
+</ul>
+</li>
+<li><p>See <a href="/Fall2022/tips/labs/">Starting &amp; Submitting Assignments</a> for more information on accessing and submitting assignments.</p>
+</li>
+<li><p>When you&#39;re done, close notebook tabs and click logout in upper right &#40;of the Jupyter server session&#41;.</p>
+</li>
+<li><p>Go back to the &quot;My Interactive Sessions&quot; tab in the ACI Portal, click &quot;Delete&quot; for this Sessions and confirm.</p>
+</li>
+</ol>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Class Project - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/project/plan/'>Plan</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/checkpoint/'>Checkpoints</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/dashboard/'>Final Dashboard</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/presentation/'>Group Presentation</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/report/'>Individual Report</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h2 id="class_project"><a href="#class_project" class="header-anchor">Class Project</a></h2>
+<h3 id="overview"><a href="#overview" class="header-anchor">Overview</a></h3>
+<p>Students will synthesize lessons learned in the class by building an exoplanet “dashboard” that ingests data related to detecting and/or characterizing exoplanets, performs basic data manipulations, fits a model to the data, assesses the quality of the model for the given observations, and effectively visualizes the results.  </p>
+<h3 id="purpose"><a href="#purpose" class="header-anchor">Purpose</a></h3>
+<p>The first step is figuring out what the purpose of your dashboard will be.   That will affect many aspects of your project &#40;e.g., the data it presents, the models it fits, the visualizations that it shows&#41;.  Below are some example ideas that you can choose from or use to help you think of something that&#39;s particularly interesting to you.</p>
+<ul>
+<li><p>Transits</p>
+<ul>
+<li><p>Analyze transit light curves to vet planet candidates from potential astrophysical false positives</p>
+</li>
+<li><p>Analyze transit light curves to inform planning of follow-up observations</p>
+</li>
+</ul>
+</li>
+<li><p>Transit Timing Variations</p>
+<ul>
+<li><p>Analyze TTV observations to assess whether TTVs are likely due to known transiting planets or additional unknown  planets</p>
+</li>
+<li><p>Analyze TTV observations to assess whether TTVs are more likely due to dynamical effects or stellar variability.</p>
+</li>
+<li><p>Analyze TTV observations to identify candidates for RV follow-up observations</p>
+</li>
+</ul>
+</li>
+<li><p>Radial Velocity Observations</p>
+<ul>
+<li><p>Analyze radial velocity observations to assess whether a planet candidate&#39;s orbit is well characterized and ready for publication</p>
+</li>
+<li><p>Analyze radial velocity observations of stars with planet candidates to inform planning of future RV measurements</p>
+</li>
+<li><p>Analyze NEID standard star observations to identify any measurements which are not robust &#40;e.g., comparing RVs derived from each order of the spectra&#41;</p>
+</li>
+<li><p>Analyze NEID solar observations to fit a differential extinction model specific to each day and to assess whether it is adequate to use for subsequent analysis</p>
+</li>
+</ul>
+</li>
+<li><p>Microlensing</p>
+<ul>
+<li><p>Analyze microlensing light curves to assess whether a microlensing event shows evidence for a planet or binary star</p>
+</li>
+<li><p>Analyze microlensing light curves to inform planning of follow-up observations</p>
+</li>
+</ul>
+</li>
+<li><p>Other ideas</p>
+<ul>
+<li><p>Synthesize observations of host stars being targeted by exoplanet surveys</p>
+</li>
+<li><p>Analyze pyrheliometer data and exposure meter data accompanying NEID solar observations to determine which days observations were likely contaminated by poor atmospheric conditions</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="elements"><a href="#elements" class="header-anchor">Elements</a></h3>
+<p>Once you have decided on the purpose of your dashboard, then you can begin planning each of the core elements.</p>
+<h4 id="ingest_data"><a href="#ingest_data" class="header-anchor">Ingest data</a></h4>
+<p>A key feature of a dashboard is that it should be robust and provide useful results for new data &#40;e.g., another day/month/year of data from the same instrument, observations of a different target using the same method&#41;.   This is in contrast to performing a &#40;likely more detailed&#41; analysis for one or a few specific datasets that are of particular interest.   Therefore, each dashboard should include the ability to select one of many potential datasets to analyze.   It will likely not be practical to explicitly look at the results of your dashboard for every one of those datasets. You should test that it works well on enough of those datasets that you are confident that it will also work well on the datasets that others select &#40;e.g., the instructor and TA when grading&#41;.  </p>
+<h4 id="data_wrangling"><a href="#data_wrangling" class="header-anchor">Data Wrangling</a></h4>
+<p>It&#39;s very likely that you&#39;ll need to do some manipulating of data to get it into a form you can use.   Some example of common issues that you may need to incorporate:</p>
+<ul>
+<li><p>Flagging datapoints that are problematic &#40;e.g., missing, NaN&#41; or suspect &#40;e.g., have data quality issue, unphysical values&#41;</p>
+</li>
+<li><p>Standardizing target identifiers &#40;e.g., if observing logs don&#39;t use the same name consistently, if you&#39;re joining data from multiple sources&#41;</p>
+</li>
+<li><p>Checking that the dataset has the minimum number of observations to support your analysis</p>
+</li>
+<li><p>Checking that the data needed for your analysis is present &#40;particularly if you&#39;re joining data from two sources&#41;</p>
+</li>
+<li><p>Converting units to enable comparisons</p>
+</li>
+<li><p>Performing variable transformations &#40;e.g., sqrt, log&#41; to support helpful useful visualizations</p>
+</li>
+</ul>
+<p>While it may not be practical to identify all the manipulations that you&#39;ll need to do, it&#39;s good to start identifying those issues that you will need to deal with &#40;or at least check if you need to deal with&#41;.  </p>
+<h4 id="model_fitting"><a href="#model_fitting" class="header-anchor">Model Fitting</a></h4>
+<p>Identify at least two models that your dashboard will fit to each dataset.   Typically, there will be one model that prioritizes being robust and efficient. Often this first model is highly simplified or approximate &#40;e.g., linear model for transit times, circular model for RV perturbations from a single planet&#41;.   Even if it&#39;s not complex enough for all datasets, it can serve as a useful reference point for comparison. Typically, a second model will model additional complications &#40;e.g., linear &#43; sinusoidal model for transit times, Keplerian model for RV perturbations&#41;. In some cases, it may make sense to have more than two models &#40;e.g., allow for the possibility of additional planets or a more detailed model for transit times, such as TTVFaster&#41;. Each dashboard should present the results of each model fit in a way that supports the purpose of that dashboard.</p>
+<p>If all the modeling calculations are very fast, then it may make sense for the dashboard to perform all the calculations for a given system as soon as the user selects a dataset.   If some of the modeling is more computationally demanding, then it would likely make sense for the user to have the option to perform the time consuming steps. For example, your dashboard might automatically compute the maximum a posterior estimate of the parameters, but have a checkbox that the user must check before it starts performing Markov chain Monte Carlo simulations to compute a posterior sample.</p>
+<h4 id="model_assessment"><a href="#model_assessment" class="header-anchor">Model Assessment</a></h4>
+<p>As demonstrated in the labs, blindly use the results of model fitting is dangerous.   In some cases, a well-intentioned, but poorly-designed dashboard can make it scarily easy for users to jump to false conclusions/decisions.    We want to avoid that&#33; Therefore, it&#39;s important that your dashboard include some mechanism to assess the quality of the results from each model it fits.   For each model that your dashboard fits, your dashboard should perform tests that the results are reasonable and prominently warn users if there is any reason for concern. Whenever an iterative algorithm is used, the dashboard should either report that the algorithm met the intended convergence criteria or highlight if there are convergence concerns. For stochastic algorithms or algorithms that depend on an initial guess, either perform analyses from automatically &#40;e.g., using different initial guesses and/or multiple sets of random numbers&#41; or include an easy way for user to trigger an additional calculation.</p>
+<p>In the context of a dashboard, users are expected to analyze new datasets, and it&#39;s often not practical that it perfectly fit its most detailed model to every dataset.     For example, some datasets may provide only loose constraints on model parameters leading to convergence issues.   For other datasets, obtaining a good model may require a more complex model than is implemented in the dashboard.   That&#39;s completely understandable.   Hopefully, your dashboard will have a first model that is robust enough to return useful results for any reasonable dataset.   Then your dashboard can compare the results from the different models to support its goal.   Again, it is very important that the dashboard make it easy for the user to recognize if there are any reasons for concern &#40;e.g., failure to converge, converging to unphysical or limiting values, poor quality fit to data, results are sensitive to modeling choices&#41;, so users don&#39;t misuse the outputs.  </p>
+<h4 id="visualization"><a href="#visualization" class="header-anchor">Visualization</a></h4>
+<p>Trying to make sense of a table of numbers or even a long computational notebook is often difficult and time consuming. Effective visualizations can make it easier to digest the information.   Your dashboard should include several plots:</p>
+<ol>
+<li><p><em>Visualize the data to be analyzed with relatively little processing or analysis:</em>  The purpose of this visualization is to give users an opportunity to recognize any data quality issues that may affect all subsequent analyses.  This might be an observed lightcurve, a raw spectrum, reported RV measurements, or the residuals of the transit times from a linear model&#41;.</p>
+</li>
+<li><p><em>Visualize the data after potentially significant data processing:</em>  The purpose here is to give users an opportunity to recognize if any of the &quot;automatic&quot; processing had unintended consequences.  This might be a lightcurve after removing long-term trends, a spectrum after performing continuum normalization, RV measurements plotted versus orbital phase for a putative orbital period, or transit times plotted versus phase of a putative TTV periodicity.  </p>
+</li>
+<li><p><em>Visualize the predictions of each of the models fit to the data and the deviations of the predictions from observations.</em>  One purpose of these visualizations is to allow the user to assess the quality of the model.  If the deviations from the model are small compared to the total extent of variations, then it may be useful to have a separate panel plotting the residuals.  If there&#39;s a modest number of data points, then you&#39;ll generally want to show the measurement uncertainty for each observation.  If there&#39;s hundreds of data points, then it may be more useful to leave out the residuals from plots of a model&#39;s predictions, but to add a histogram of the residuals to each model.   </p>
+</li>
+<li><p><em>Clearly communicate the results of the analysis.</em>   This will depend on the purpose of your dashboard.  For example, if the purpose is to assess whether a planet candidate&#39;s orbit is well characterized and ready for publication, then the dashboard could show contour plots of the posterior probability for pairs of model parameters.   If the purpose of the dashboard is to assess whether TTVs are more likely due to dynamical effects or stellar variability, then your dashboard might plot the expected distribution of the log likelihood and indicate the maximum values of the log likelihood under the two models for TTVs.  </p>
+</li>
+</ol>
+<p>While the choices for the above figures will be relatively straight forward, designing this figure is likely to require some experimentation with multiple possible visualizations to find what is effective.  </p>
+<p>In some cases, one visualization may serve multiple purposes.  For example, if the purpose of your dashboard is to inform the scheduling of future observations, then the figure showing the predictions of a model &#40;using multiple sets of parameter values consistent with the current data&#41; for a few months into the future, so users can see which observations times would be useful for collecting additional observations.  In some cases, that might just be one wide figure.  In other cases, it might be useful to split it into two figures, one focusing on existing data and one focusing on prediction during some window of time in the future.</p>
+<h4 id="warning_messages"><a href="#warning_messages" class="header-anchor">Warning messages</a></h4>
+<p>In some cases, the most important result to convey may be that something went wrong and the user should do additional analysis or at least be extra cautious in interpreting the results on the dashboard.   In those cases, the dashboard should include a prominent warning &#40;and telling the user what triggered the warning message&#41;.</p>
+<h3 id="timeline"><a href="#timeline" class="header-anchor">Timeline</a></h3>
+<p>This is a substantive project and students should spread their effort over several weeks of the semester.  To encourage making steady progress, students will earn credit for submitting a plan and demonstrating significant progress for two additional checkpoints.  </p>
+<ol>
+<li><p><a href="plan">Project Plan</a> &#40;due Oct 19&#41;</p>
+</li>
+<li><p><a href="checkpoint">Project Step 1</a> &#40;due Oct 31&#41;</p>
+</li>
+<li><p><a href="checkpoint">Project Step 2</a> &#40;due Nov 14&#41;</p>
+</li>
+<li><p><a href="dashboard">Project Dashboard</a> &#40;due Nov 28&#41;</p>
+</li>
+<li><p><a href="presentation">Project Presentations</a> &#40;due Dec 2 - 9&#41;</p>
+</li>
+<li><p><a href="report">Individual Report & Reflection</a> &#40;due Dec 9&#41;</p>
+</li>
+</ol>
+<h3 id="teamwork"><a href="#teamwork" class="header-anchor">Teamwork</a></h3>
+<p>Students are encouraged &#40;but not required&#41; to work in small teams of two to three, so that they can build a high-quality dashboard, while practicing technical communications and collaboration skills.   Groups will submit a single dashboard and present their dashboard to the full class during the final weeks of class as a group.   Each student will individually submit a final statement describing their contributions to the dashboard project, describing the contributions of their teammates, and reflecting on what they learned from the experience.   Remember that both you and other group members will have other assignments, exams, and projects.   Therefore, it is very important to develop a mutually agreeable schedule and to follow through on your contributions in a timely fashion.   </p>
+<h2 id="resources"><a href="#resources" class="header-anchor">Resources</a></h2>
+<ul>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/data.html">Exoplanet Archive</a></p>
+</li>
+<li><p><a href="https://github.com/leerosenthalj/CLSI">California Legacy Survey RVs</a> &#40;see csv files in legacy_tables directory&#41;</p>
+</li>
+<li><p><a href="https://california-planet-search.github.io/cks-website/">California-Kepler Survey &#40;spectra &amp; RVs&#41;</a></p>
+</li>
+<li><p><a href="https://archive.stsci.edu/kepler/publiclightcurves.html">Kepler light curves</a></p>
+</li>
+<li><p><a href="https://docs.lightkurve.org/tutorials/1-getting-started/searching-for-data-products.html">Lightkurve package for downloading Kepler, K2 &amp; TESS data</a></p>
+</li>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/KeplerSimulated.html">Kepler Simulated data products</a></p>
+</li>
+<li><p><a href="https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/225/9#/browse">Transit Timing Variations observed by Kepler &#40;Holczer et al. 2016&#41;</a></p>
+</li>
+<li><p><a href="http://research.iac.es/proyecto/exoatmospheres/table.php">IAC community database for exoplanet atmospheric observations</a></p>
+</li>
+</ul>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

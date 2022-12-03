@@ -1,0 +1,4 @@
+Sitemap: https://PsuAstro497.github.io/Fall2022/sitemap.xml
+
+User-agent: *
+Disallow:

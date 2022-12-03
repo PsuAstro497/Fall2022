@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Academic Integrity - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/syllabus/basics/'>Basic Info</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/goals/'>Goals</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/schedule/'>Schedule</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/preparation/'>Preparation</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/relation_to_other_courses/'>Relation to Other Courses</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/reading/'>Reading</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/assessment/'>Assessment</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/safety/'>Safety</a></li>
+    <li class='menu-item active'><a href='/Fall2022/syllabus/academic_integrity/'>Academic Integrity</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/additional_statements/'>Additional Statements</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content"><h2 id="academic_integrity"><a href="#academic_integrity" class="header-anchor">Academic Integrity</a></h2>
+<p>All Penn State and Eberly College of Science policies regarding <a href="http://senate.psu.edu/policies-and-rules-for-undergraduate-students/47-00-48-00-and-49-00-grades/#49-20">academic integrity</a>, ethics and honorable behavior apply to this course.  In light of the fact that group work is highly encouraged, and to fully facilitate best ethical practices and academic integrity, the following rules apply:</p>
+<br/>
+<p>All work submitted for an exam must be entirely the student&#39;s own work.   For other assignments &#40;i.e., homework/labs and class project&#41;, all ideas and work derived from resources beyond class notes must properly acknowledge or reference sources including: assigned readings &#40;including textbooks and online sources&#41;, websites, classmates, other students, and solution sets from other or prior courses, etc.   This means you should work together on labs/homework assignments, but each student should respond to questions individually and make liberal use of acknowledgments. For the class project, students will be encouraged to work in small teams of two or three students.  In the final report, students are required to describe their contributions to the project accurately and to give credit to their teammates for their contributions.  </p>
+<br/>
+<p>Academic integrity is the pursuit of scholarly activity in an open, honest and responsible manner. Academic integrity is a basic guiding principle for all academic activity at The Pennsylvania State University, and all members of the University community are expected to act in accordance with this principle. Consistent with this expectation, the University’s Code of Conduct states that all students should act with personal integrity, respect other students’ dignity, rights and property, and help create and maintain an environment in which all can succeed through the fruits of their efforts.</p>
+<br/>
+<p>Academic integrity includes a commitment by all members of the University community not to engage in or tolerate acts of falsification, misrepresentation or deception. Such acts of dishonesty violate the fundamental ethical principles of the University community and compromise the worth of work completed by others.</p>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

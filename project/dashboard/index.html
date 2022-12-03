@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Class Project Dashboard - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/project/plan/'>Plan</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/checkpoint/'>Checkpoints</a></li>
+    <li class='menu-item active'><a href='/Fall2022/project/dashboard/'>Final Dashboard</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/presentation/'>Group Presentation</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/report/'>Individual Report</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h3 id="class_project_dashboard"><a href="#class_project_dashboard" class="header-anchor">Class Project Dashboard</a></h3>
+<p>Each group will submit their final dashboard by Nov 28. The submission could be a single file &#40;if everything is self-contained&#41; or a GitHub repository that should be cloned.   Be sure to test that the dashboard will run successfully when run by another user and in a different directory than where you developed the dashboard.    If the dashboard needs access to a large dataset that is not practical to download automatically, then you may require that it be run from the ICDS Roar system.  Make sure that file permissions are set so that others have read access to the datafiles that it will access.</p>
+<p>The final dashboard will be graded based on:</p>
+<ul>
+<li><p>Dashboard successfully reads in data for user selected objects and/or time periods.  &#40;1 point&#41;</p>
+</li>
+<li><p>Dashboard performs whatever data wrangling is necessary to provide high-quality results in subsequent analysis. &#40;1 point&#41;   </p>
+</li>
+<li><p>Dashboard provides effective visualizations of input data &#40;with relatively little preprocessing and, if applicable, after any potentially significant preprocessing&#41;.  &#40;1 point&#41;</p>
+</li>
+<li><p>Dashboard successfully fits baseline model to user-selected data.  &#40;1 point&#41;</p>
+</li>
+<li><p>Dashboard effectively visualizes the predictions of the baseline model and the deviations of the predictions from observations. &#40;1 point&#41;  </p>
+</li>
+<li><p>Dashboard provides accurate and useful assessment of quality of results from baseline model.  &#40;1 point&#41;</p>
+</li>
+<li><p>Dashboard successfully fits at least one more sophisticated model to user-selected data. &#40;2 point&#41;</p>
+</li>
+<li><p>Dashboard effectively visualizes the predictions of at least one more sophisticated model and the deviations of the predictions from observations.  &#40;1 point&#41;  </p>
+</li>
+<li><p>Dashboard provides accurate and useful assessment of quality of results from at least one more sophisticated model. &#40;2  point&#41;  </p>
+</li>
+<li><p>Dashboard provides additional visualizations and prominent warning messages that communicate the results of the analysis effectively and clearly.  &#40;3 point&#41;</p>
+</li>
+<li><p>Dashboard successfully runs to completion &#40;and any error messages are in plain English&#41; on Roar without manual setup steps. &#40;2 points&#41;</p>
+</li>
+<li><p>Does the dashboard provide a simple and effective user interface for selecting data to be analyzed, setting any user-specified parameters and/or interacting with visualizations.  &#40;2 points&#41;  </p>
+</li>
+<li><p>Does the dashboard effectively achieve its stated goals?  &#40;2 point&#41;</p>
+</li>
+</ul>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+name = "Tutorials"
+uuid = "e088c1bc-e00f-47bb-8742-48f468c16799"
+authors = ["Eric Ford <ebf11@psu.edu>"]
+version = "1.0.0"
+
+[deps]
+Franklin = "713c75ef-9fc9-4b05-94a9-213340da978e"
+Pluto = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
+PlutoStaticHTML = "359b1769-a58e-495b-9770-312e911026ad"
+PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+
+[compat]
+Franklin = "0.10"

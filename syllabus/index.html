@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Syllabus - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/syllabus/basics/'>Basic Info</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/goals/'>Goals</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/schedule/'>Schedule</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/preparation/'>Preparation</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/relation_to_other_courses/'>Relation to Other Courses</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/reading/'>Reading</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/assessment/'>Assessment</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/safety/'>Safety</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/academic_integrity/'>Academic Integrity</a></li>
+    <li class='menu-item '><a href='/Fall2022/syllabus/additional_statements/'>Additional Statements</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<div class="h1">Data Science Applications for Exoplanets</div>
+<h1 id="syllabus"><a href="#syllabus" class="header-anchor">Syllabus</a></h1>
+<p>&#40;version v0.2&#41;</p>
+<h2 id="basic_information"><a href="#basic_information" class="header-anchor">Basic Information</a></h2>
+<ul>
+<li><p>Course: Astro 497: Data Science Applications for Exoplanets &#40;Fall 2022&#41;</p>
+</li>
+<li><p>Class Meetings: 10:10-11:00am MWF</p>
+</li>
+<li><p>Location: Davey Lab 538 (Mondays & Fridays) and Online (Wednesdays)</p>
+<p>&#40;Zoom link/meeting ID are available within Canvas&#41;</p>
+</li>
+<li><p>Instructor: Eric Ford</p>
+</li>
+<li><p>Email: ebf11 _at_ psu.edu</p>
+</li>
+<li><p>Phone: x3-5558</p>
+</li>
+<li><p>Graduate Teaching Assistant: Zhenyuan Wang</p>
+</li>
+<li><p>Email: zzw173 _at_ psu.edu</p>
+</li>
+<li><p>Office Hours: Thursdays 3-4 (Davey Lab 532C) & Fridays 3-4 (online)</p>
+</li>
+<li><p>Website: <a href="https://PsuAstro497.github.io/Fall2022/">https://PsuAstro497.github.io/Fall2022/</a></p>
+</li>
+</ul>
+
+<h2 id="course_goals_objectives"><a href="#course_goals_objectives" class="header-anchor">Course Goals &amp; Objectives</a></h2></p>
+<p>Successful students in the class will:</p>
+<ul>
+<li><p>Understand how astronomers detect and characterize extrasolar planetary systems,</p>
+</li>
+<li><p>Learn about the current state and future of exoplanet science,</p>
+</li>
+<li><p>Increase their data acumen, and</p>
+</li>
+<li><p>Appreciate how building data science skills can benefit astronomy &amp; astrophysics research.  </p>
+</li>
+</ul>
+<h2 id="learning_objectives"><a href="#learning_objectives" class="header-anchor">Learning Objectives</a></h2>
+<p>Successful students in the class will:</p>
+<ul>
+<li><p>Ingest and manipulate data from astronomical surveys.</p>
+</li>
+<li><p>Quantitatively describe the effects of exoplanets on astronomical observations.</p>
+</li>
+<li><p>Build, apply, assess and update astrophysically motivated models for astronomical observations.</p>
+</li>
+<li><p>Create visualizations for exploratory and explanatory data analyses of observations from exoplanet surveys.</p>
+</li>
+<li><p>Synthesize the above into a dashboard to support the efficient analysis of exoplanet observations while following principles of reproducible research.</p>
+</li>
+</ul>
+<h2 id="course_overview"><a href="#course_overview" class="header-anchor">Course Overview</a></h2>
+<p>Students will learn about techniques for detecting and characterizing extrasolar planetary systems, including the capabilities and challenges for the future of each method.  Students will analyze astronomical data to detect and characterize exoplanets and their host stars.  Along the way, students will build practical data science skills &#40;e.g., querying astronomical databases, data storage and manipulation, data visualization, exploratory and explanatory data analysis, Bayesian modeling workflows, and reproducible research practices&#41;.
+<h2 id="course_content_structure"><a href="#course_content_structure" class="header-anchor">Course Content &amp; Structure</a></h2></p>
+<p>In a typical week:  </p>
+<ul>
+<li><p>Friday lectures will focus on an Exoplanets topic.  </p>
+</li>
+<li><p>Monday lectures will focus on a Data Science topic.  </p>
+</li>
+<li><p>Wednesday computer labs will aim to combine the two.</p>
+</li>
+</ul>
+<p>There will be a short reading to be completed prior to class on most Mondays and Fridays.  Students will continue working on the computer lab begun on Wednesday as homework, typically due prior to class the following Monday.  Inevitably, there will be some deviations &#40;e.g., getting started week, weeks with a holiday or exam, week of student presentations, etc.&#41;.   </p>
+<br/>
+<h3 id="schedule_of_topics"><a href="#schedule_of_topics" class="header-anchor">Schedule of Topics</a></h3>
+<table><tr><th align="right">Week</th><th align="right">Data Science</th><th align="right">Exoplanets</th></tr><tr><td align="right">1</td><td align="right">What is Data Science?</td><td align="right">Overview of Known Exoplanets</td></tr><tr><td align="right">2</td><td align="right">Exploratory Data Analysis</td><td align="right">Transits</td></tr><tr><td align="right">3</td><td align="right">&#40;Labor Day&#41;  Model Building</td><td align="right">Transit Timing</td></tr><tr><td align="right">4</td><td align="right">Model Assessment</td><td align="right">Radial Velocities</td></tr><tr><td align="right">5</td><td align="right">Bayesian Inference</td><td align="right">Rossiter-MchLaughlin Effect</td></tr><tr><td align="right">6</td><td align="right">Explanatory Data Analysis</td><td align="right">Masses &amp; Orbits</td></tr><tr><td align="right">7</td><td align="right">Exam week</td><td align="right">Intro to Class Projects</td></tr><tr><td align="right">8</td><td align="right">Databases &amp; Data Wrangling</td><td align="right">Exoplanet Populations</td></tr><tr><td align="right">9</td><td align="right">Data Science Workflow</td><td align="right">Transmission Spectroscopy</td></tr><tr><td align="right">10</td><td align="right">Data Storage</td><td align="right">Emission Spectroscopy</td></tr><tr><td align="right">11</td><td align="right">Data Visualization</td><td align="right">Microlensing</td></tr><tr><td align="right">12</td><td align="right">Reports &amp; Dashboards</td><td align="right">Disks</td></tr><tr><td align="right">13</td><td align="right">Reproducible Research</td><td align="right">Future of Exoplanet Detection</td></tr><tr><td align="right">14</td><td align="right">&#40;Thanksgiving Holiday&#41;</td><td align="right">-</td></tr><tr><td align="right">15</td><td align="right">Retrospective</td><td align="right">Future of Exoplanet Characterization</td></tr><tr><td align="right">16</td><td align="right">Student Presentations</td><td align="right">Student Presentations</td></tr></table>
+<p><br/> The schedule is subject to change.  Any changes will be announced via Canvas.  </p>
+<p>What is Data Science? & Overview of Exoplanets
+<h2 id="expected_student_preparation"><a href="#expected_student_preparation" class="header-anchor">Expected Student Preparation</a></h2></p>
+<p>This class assumes that students have knowledge of calculus-based mechanics and astronomical methods and experience with basic programming concepts &#40;e.g., data types, arrays, functions, loops and conditional statements&#41;, but not with numerical methods or statistical theory.   Homework/lab assignments will make use of the <a href="https://julialang.org/">Julia programming language</a>, but no prior experience with Julia is expected.  During the first half of the semester, examples or starter code will be provided so that students can focus on concepts rather than implementation details.  During the second half of the semester, students will create a dashboard for analyzing and visualizing data from one exoplanet survey.  This will require synthesizing lessons on exoplanet detection techniques with <a href="https://nap.nationalacademies.org/catalog/25104/data-science-for-undergraduates-opportunities-and-options">Data Science skills</a> built throughout the semester.  </p>
+<br/>
+<p>Formally, the prerequisites for the class are:</p>
+<ul>
+<li><p>&#40; ASTRO 291 OR &#40;ASTRO 401 AND ASTRO 402W&#41; &#41; AND</p>
+</li>
+<li><p>&#40; CMPSC 121 OR CMPSC 131 OR CMPSC 201 &#41; AND</p>
+</li>
+<li><p>&#40; MATH 230 OR MATH 231&#41; AND</p>
+</li>
+<li><p>&#40; PHYS 211 &#41;</p>
+</li>
+</ul>
+<p>Any student who is interested in the class and has not completed the above, should consult with the instructor before starting the class.  
+<h2 id="relation_to_other_courses"><a href="#relation_to_other_courses" class="header-anchor">Relation to Other Courses</a></h2></p>
+<p><a href="https://nap.nationalacademies.org/catalog/25104/data-science-for-undergraduates-opportunities-and-options">Data Science</a> represents the synthesis of knowledge and skills from mathematics, statistics, computer science, and an application domain, as well several supporting skills &#40;e.g., workflows, visualization, data ethics, communications, teamwork&#41;. Even students <a href="https://datasciences.psu.edu/">majoring in Data Sciences at PSU</a> will not take classes covering all the important Data Science topics&#33; This class is designed to complement ASTRO 410, 415 and 451 &#40;and classes beyond the Astronomy department, e.g. MATH 220 and DS 310&#41;, so as to provide astronomy majors an introduction to data science skills that are particularly relevant to astronomical research and can be readily applied to other disciplines.</p>
+<br/>
+<p>Since this class does not presume ASTRO 410, 415 or 451 as a prerequisite, there will be some modest overlap &#40;i.e., essentials to fit a model to data&#41;.  While ASTRO 451 provides a broad overview of astronomical techniques, this class will go into more detail about methods for detecting and characterizing exoplanets.  While ASTRO 415 will provide a more rigorous treatment of statistical foundations, this class will emphasize applying such techniques and developing a broader set of data science skills.  While ASTRO 410 will teach students how to implement numerical methods common in astrophysics research, this class will apply numerical methods that have already been implemented for students.  The instructor will point out connections to other courses where students could learn more about a topic.  
+<h2 id="required_course_materials"><a href="#required_course_materials" class="header-anchor">Required Course Materials</a></h2></p>
+<h3 id="textbooks"><a href="#textbooks" class="header-anchor">Textbooks</a></h3>
+<p>The required textbooks for this course are:</p>
+<ul>
+<li><p><a href="https://www.amazon.com/Exoplanets-Space-Science-Sara-Seager/dp/0816529450">Exoplanets</a> &#40;Seager, ed; ISBN: 978-0816529452&#41;</p>
+</li>
+<li><p><a href="https://juliadatascience.io/">Julia Data Science</a> &#40;Storopoli et al.; online version available for free&#41;</p>
+</li>
+<li><p><a href="https://storopoli.github.io/Bayesian-Julia/">Bayesian Statistics using Julia &amp; Turing</a> &#40;Storopoli; online version available for free&#41;</p>
+</li>
+<li><p><a href="https://benlauwens.github.io/ThinkJulia.jl/latest/book.html">Think Julia</a> &#40;Lauwens &amp; Downey; online version available for free&#41;</p>
+</li>
+</ul>
+<h3 id="additional_resources"><a href="#additional_resources" class="header-anchor">Additional resources</a></h3>
+<p>Links to additional readings and other online resources will be provided via Canvas.  Students will also need a computer, modern web browser and high-speed internet access, so students can effectively participate in Zoom classes and complete computing assignments.
+<h2 id="assessment_and_grading_policy"><a href="#assessment_and_grading_policy" class="header-anchor">Assessment and Grading Policy</a></h2></p>
+<p>Assessment will be in four categories:</p>
+<ul>
+<li><p>Lab/Homework Assignments:  36&#37;</p>
+</li>
+<li><p>Exam: 15&#37;</p>
+</li>
+<li><p>Class Project: 39&#37;</p>
+<ul>
+<li><p>Project Plan: 3&#37;</p>
+</li>
+<li><p>Checkpoints: 6&#37;</p>
+</li>
+<li><p>Dashboard:  20&#37;</p>
+</li>
+<li><p>Presentation: 5&#37;</p>
+</li>
+<li><p>Final statement: 5&#37;</p>
+</li>
+</ul>
+</li>
+<li><p>Class Participation: 10&#37;</p>
+<ul>
+<li><p>Reading Questions: 5&#37; </p>
+</li>
+<li><p>Lab Participation: 5&#37;</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="labhomework_assignments"><a href="#labhomework_assignments" class="header-anchor">Lab/Homework Assignments</a></h3>
+<p>Most weeks, students will have a chance to begin work on a computer lab/homework assignment in small groups &#40;via Zoom breakout rooms&#41; during the Wednesday class session.  Homework exercises will typically be due before the start of class on Monday.  Any deviations from this schedule will be announced via Canvas.  If the University is closed on the due date of an assignment &#40;due to holiday or bad weather or any other reason&#41;, then the assignment will be due by 9am before the next class session &#40;that is not canceled&#41;.  There will be a 10&#37; penalty on assignments submitted after the deadline and up to one week after deadline, and a 20&#37; penalty on assignments submitted more than one week and up to two weeks after the deadline, and a 30&#37; penalty on assignments submitted more than 2 weeks after the deadline.    </p>
+<h3 id="examination_policy"><a href="#examination_policy" class="header-anchor">Examination Policy</a></h3>
+<p>A midterm exam will be taken during one of our regular class times.  The only two conditions under which you can request a makeup exam: &#40;1&#41; If you know in advance that you will have to miss a midterm exam for a religious observance or university sponsored trip &#40;e.g., athletics, research field work, class field trip&#41;, then you must request a makeup midterm in advance of the exam and as early in the semester as possible, to facilitate scheduling.   &#40;2&#41; If you are injured or ill or in isolation or quarantine during the midterm exam, you should request a makeup exam as soon as practical.  If any of the above cases, documentation may be requested.  Please email the instructor as soon as you are able to request scheduling a makeup exam. The timing and format of a makeup midterm exam will depend on the circumstances and be at the instructor&#39;s discretion.   For a religious holiday, the instructor would likely recommend taking the same exam early.  For an extended illness, the instructor would likely recommend taking an alternative exam at the end of the class to substitute for the mid-term exam.   Possible alternative exam formats include &#40;but are not limited to&#41; short answer, essay, or oral exam.</p>
+<p>The intent is that most students will <em>not</em> take a final exam.  However, the final exam week may be used in unusual circumstances &#40;e.g., in place of the mid-term exam due to an extended illness, need an alternative project format due to accessibility issues&#41;.</p>
+<h3 id="class_project"><a href="#class_project" class="header-anchor">Class Project</a></h3>
+<p>Students will synthesize lessons learned in the class by building an exoplanet “dashboard” that ingests data related to detecting and/or characterizing exoplanets, performs basic data manipulations, fits a model to the data, assesses the quality of the model for the given observations, and effectively visualizes the results.  More detailed instructions will be provided after the mid-term exam. This is a substantive project and students should spread their effort over several weeks of the semester.  To encourage making steady progress, students will earn credit for submitting a plan and demonstrating significant progress for two checkpoints.  Students are encouraged to work in small teams of two to three, so that they can build a high-quality dashboard.  Groups will submit a single dashboard and present their dashboard to the full class during the final weeks of class as a group.  Each student will individually submit a final statement describing their contributions to the dashboard project, describing the contributions of their teammates, and reflecting on what they learned from the experience.  Remember that both you and other group members will have other assignments, exams, and projects.  Therefore, it is very important to develop a mutually agreeable schedule and to follow through on your contributions in a timely fashion.   </p>
+<h3 id="readings_reading_questions"><a href="#readings_reading_questions" class="header-anchor">Readings &amp; Reading Questions</a></h3>
+<p>Students will be expected to read assignments before class on the days indicated in the course website &#40;page for that weeks&#39; lesson&#41;, so they will be prepared to participate in class discussions and to make progress on a lab assignment during class.  All students should submit at least one question per week &#40;typically about that week’s readings&#41; via <a href="https://app.tophat.com/e/641543">TopHat</a> by 9am Eastern Time on the day of class that the reading is to be completed by.  Reading assignments will appear in the lesson pages of the website.  There is a link to the course TopHat site inside the Canvas webpage. Submitting your questions well before class starts is important, so the instructor will have time to read the questions and update the day’s lesson to respond to student questions.  You’re also encouraged to take a look at questions submitted by other students and give a “thumbs up” to indicate those questions that you’d like to be addressed in class.  Since reading questions can not be made up, each student’s five lowest reading question scores will be dropped when computing final grades.  Students who are reluctant to ask questions in class are especially encouraged to ask extra questions prior to class.  </p>
+<h3 id="lab_participation"><a href="#lab_participation" class="header-anchor">Lab Participation</a></h3>
+<p>In-class computing lab sessions will provide an opportunity to work on lab/homework assignments.  Students should participate regularly, so as to help solidify their understanding of both exoplanet topics and build data science skills.   Gaining experience communicating technical information and working as a team is an important part of the course, so are encouraged to work in small groups.  Let the instructor know if you would like a Zoom breakout room created for your specific group.   Attendance will be taken during Wednesday lab sessions and count towards half of the course participation grade.  If the student is not online when attendance is taken, then they can earn a maximum of half a point for that week’s class participation &#40;even if they arrive later or were participating previously that day&#41;.  If you know you need to miss class &#40;e.g., university-approved travel, health issues, isolation or quarantine&#41;, then let the instructor know in advance whenever practical, so the absence can be removed from your average.  
+<h2 id="safety"><a href="#safety" class="header-anchor">Safety</a></h2></p>
+<p>While attendance and participation in class is important to the class and your learning, it is more important that we all stay safe and healthy.   Any student who does not feel well or who may be contagious must not attend class in Davey Lab.   If you are in isolation or quarantine, then you can still earn full credit for reading questions and class participation by: submitting reading questions prior to a Monday or Friday class and engaging in Wednesday classes via Zoom.   Students should make plans to get a classmate’s notes for any missed class sessions.   Some of the Monday and Friday class sessions may be moved online, based on community conditions or if the instructor needs to quarantine or isolate.  </p>
+<br/>
+<p>All students must follow all COVID protocols required or recommended by the university.   University policies and recommendations are likely to change during the semester.  The most up-to-date information can be accessed at <a href="https://virusinfo.psu.edu/university-status/ ">https://virusinfo.psu.edu/university-status/</a>.   Even when the university is not requiring masking, students will be asked and encouraged to wear a high-quality mask &#40;e.g., N95, KN95, KF94&#41; while in the classroom, so as to reduce the risk of any class participants getting sick or needing to quarantine and to allow everyone to focus on the class, rather than being distracted by safety concerns.  
+<h2 id="academic_integrity"><a href="#academic_integrity" class="header-anchor">Academic Integrity</a></h2></p>
+<p>All Penn State and Eberly College of Science policies regarding <a href="http://senate.psu.edu/policies-and-rules-for-undergraduate-students/47-00-48-00-and-49-00-grades/#49-20">academic integrity</a>, ethics and honorable behavior apply to this course.  In light of the fact that group work is highly encouraged, and to fully facilitate best ethical practices and academic integrity, the following rules apply:</p>
+<br/>
+<p>All work submitted for an exam must be entirely the student&#39;s own work.   For other assignments &#40;i.e., homework/labs and class project&#41;, all ideas and work derived from resources beyond class notes must properly acknowledge or reference sources including: assigned readings &#40;including textbooks and online sources&#41;, websites, classmates, other students, and solution sets from other or prior courses, etc.   This means you should work together on labs/homework assignments, but each student should respond to questions individually and make liberal use of acknowledgments. For the class project, students will be encouraged to work in small teams of two or three students.  In the final report, students are required to describe their contributions to the project accurately and to give credit to their teammates for their contributions.  </p>
+<br/>
+<p>Academic integrity is the pursuit of scholarly activity in an open, honest and responsible manner. Academic integrity is a basic guiding principle for all academic activity at The Pennsylvania State University, and all members of the University community are expected to act in accordance with this principle. Consistent with this expectation, the University’s Code of Conduct states that all students should act with personal integrity, respect other students’ dignity, rights and property, and help create and maintain an environment in which all can succeed through the fruits of their efforts.</p>
+<br/>
+<p>Academic integrity includes a commitment by all members of the University community not to engage in or tolerate acts of falsification, misrepresentation or deception. Such acts of dishonesty violate the fundamental ethical principles of the University community and compromise the worth of work completed by others.
+<h2 id="recordings_of_classes"><a href="#recordings_of_classes" class="header-anchor">Recordings of classes</a></h2></p>
+<p>Some classes may be recorded. Ay students who prefer to not ask questions while being recorded are encouraged to submit questions in advance of class.</p>
+<p>Video and audio recordings of classes are part of the class activities. Any video and audio recordings are used for educational use/purposes and only may be made available to all students presently enrolled in the class. For purposes where the recordings will be used in future class sessions/lectures beyond this class, any type of identifying information will be adequately removed.</p>
+<p>According to <a href="https://policy.psu.edu/policies/ad40">University Policy</a>, students must get express permission from their instructor to record class sessions. Screenshots showing instructors and students are considered recordings. Even if permission is granted, student-initiated recordings must be used only for educational purposes for the students enrolled in the initiating student’s class. Recordings may be used only during the period in which the student is enrolled in the class. Authorized student-initiated recordings may not be posted or shared in any fashion outside of the class, including online or through other media, without the express written consent of the course instructor or appropriate University administrator. Students who engage in the unauthorized distribution of class recordings may be held in violation of the University’s Code of Conduct, and/or liable under Federal and State laws.</p>
+<h2 id="instructions_for_a_campus_closure_or_other_adjustment"><a href="#instructions_for_a_campus_closure_or_other_adjustment" class="header-anchor">Instructions for a campus closure or other adjustment</a></h2>
+<p>In the event of any changes to the schedule &#40;e.g., due to a campus closure or delayed start, instructor illness, etc.&#41;, any changes in class meeting times, class format &#40;in-person or Zoom&#41;, assignment deadlines, submission procedures, exam procedures, or any other necessary instructions will be communicated via an announcement in Canvas.  Students should make a habit of checking their Canvas inbox at least daily.  </p>
+<h2 id="code_of_mutual_respect_and_cooperation"><a href="#code_of_mutual_respect_and_cooperation" class="header-anchor">Code of Mutual Respect and Cooperation</a></h2>
+<p>The Eberly College of Science <a href="https://science.psu.edu/climate-and-diversity/code-mutual-respect-and-cooperation">Code of Mutual Respect and Cooperation</a> embodies the values that we hope our faculty, staff, and students possess and will endorse to make The Eberly College of Science a place where every individual feels respected and valued, as well as challenged and rewarded. Please visit the link to review the 12 points that comprise this code.</p>
+<h2 id="academic_support"><a href="#academic_support" class="header-anchor">Academic Support</a></h2>
+<p>The Eberly College of Science is committed to the academic success of students enrolled in the College&#39;s courses and undergraduate programs. When in need of help, students can utilize various College and University wide resources for learning assistance. <a href="https://science.psu.edu/current-students/support-network">https://science.psu.edu/current-students/support-network</a>.</p>
+<h2 id="disability_accommodation_statement"><a href="#disability_accommodation_statement" class="header-anchor">Disability Accommodation Statement</a></h2>
+<p>Penn State welcomes students with disabilities into the University’s educational programs. Every Penn State campus has an office for students with disabilities. Student Disability Resources &#40;SDR&#41; website provides contact information for every Penn State campus &#40;<a href="http://equity.psu.edu/sdr/disability-coordinator">http://equity.psu.edu/sdr/disability-coordinator</a>&#41;. For further information, please visit Student Disability Resources website &#40;<a href="http://equity.psu.edu/sdr/">http://equity.psu.edu/sdr/</a>&#41;.</p>
+<p>In order to receive consideration for reasonable accommodations, you must contact the appropriate disability services office at the campus where you are officially enrolled, participate in an intake interview, and provide documentation: See documentation guidelines &#40;<a href="http://equity.psu.edu/sdr/guidelines">http://equity.psu.edu/sdr/guidelines</a>&#41;. If the documentation supports your request for reasonable accommodations, your campus disability services office will provide you with an accommodation letter. Please share this letter with your instructors and discuss the accommodations with them as early as possible. You must follow this process for every semester that you request accommodations.</p>
+<h2 id="counseling_psychological_services_statement"><a href="#counseling_psychological_services_statement" class="header-anchor">Counseling &amp; Psychological Services Statement</a></h2>
+<p>Many students at Penn State face personal challenges or have psychological needs that may interfere with their academic progress, social development, or emotional wellbeing. The university offers a variety of confidential services to help you through difficult times, including individual and group counseling, crisis intervention, consultations, online chats, and mental health screenings. These services are provided by staff who welcome all students and embrace a philosophy respectful of clients’ cultural and religious backgrounds, and sensitive to differences in race, ability, gender identity and sexual orientation.</p>
+<ul>
+<li><p>Counseling and Psychological Services at University Park &#40;CAPS&#41;: <a href="http://studentaffairs.psu.edu/counseling/">http://studentaffairs.psu.edu/counseling/</a>, 814-863-0395</p>
+</li>
+<li><p>Penn State Crisis Line &#40;24 hours/7 days/week&#41;: 877-229-6400</p>
+</li>
+<li><p>Crisis Text Line &#40;24 hours/7 days/week&#41;: Text LIONS to 741741</p>
+</li>
+</ul>
+<h2 id="reporting_educational_equity_concerns"><a href="#reporting_educational_equity_concerns" class="header-anchor">Reporting Educational Equity Concerns</a></h2>
+<p>Penn State takes great pride to foster a diverse and inclusive environment for students, faculty, and staff. Acts of intolerance, discrimination, or harassment due to age, ancestry, color, disability, gender, gender identity, national origin, race, religious belief, sexual orientation, or veteran status are not tolerated and can be reported through Educational Equity via the Report Bias webpage &#40;<a href="http://equity.psu.edu/reportbias/">http://equity.psu.edu/reportbias/</a>&#41;.
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

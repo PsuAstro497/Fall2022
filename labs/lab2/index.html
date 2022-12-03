@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Exploratory Data Analysis - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/labs/lab1/'>Lab 1</a></li>
+    <li class='menu-item active'><a href='/Fall2022/labs/lab2/'>Lab 2</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab3/'>Lab 3</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab4/'>Lab 4</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab5/'>Lab 5</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab6/'>Lab 6</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab7/'>Lab 7</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab8/'>Lab 8</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab9/'>Lab 9</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h2 id="lab_lab_num_title"><a href="#lab_lab_num_title" class="header-anchor">Lab 2: Exploratory Data Analysis</a></h2>
+<p>&#40;<a href="https://github.com/PsuAstro497/lab2-start">github</a>&#41;</p>
+<p>Start Aug 31 –- Due Sept 6  </p>
+<ul>
+<li><p><a href="https://psuastro497.github.io/lab2-start/ex1.html">Ex 1: Exploratory Data Analysis I: Introduction</a></p>
+</li>
+<li><p><a href="https://psuastro497.github.io/lab2-start/ex2.html">Ex 2: Exploratory Data Analysis II: Disaggregated Data</a></p>
+</li>
+</ul>
+<h3 id="goals"><a href="#goals" class="header-anchor">Goals:</a></h3>
+<p>In this lab, students will learn to:</p>
+<ul>
+<li><p>Download data from a url</p>
+</li>
+<li><p>Read data from a deliminted file into a DataFrame</p>
+</li>
+<li><p>Validate that the data was read in correctly</p>
+</li>
+<li><p>Describe the basic properties of a dataset</p>
+</li>
+<li><p>Make basic plots &#40;histogram, density estimate, scatter plot&#41;</p>
+</li>
+<li><p>Peform exploratory data analysis</p>
+</li>
+<li><p>Dissaggregate data by a categorical variable</p>
+</li>
+<li><p>Recognize the potential impact of missing data and selection effects</p>
+</li>
+</ul>
+<p>Students will strengthen their understanding of the:</p>
+<ul>
+<li><p>Rate of exoplanet discoveries</p>
+</li>
+<li><p>Observed distributions of exoplanet mass, orbital period and eccentricity</p>
+</li>
+<li><p>Relationships between these properties</p>
+</li>
+</ul>
+<h3 id="logistics"><a href="#logistics" class="header-anchor">Logistics</a></h3>
+<p>Follow <a href="https://classroom.github.com/a/LmfZ7cSn">this link</a> to create your own private copy of this lab&#39;s repository on GitHub.com.    See the <a href="https://psuastro497.github.io/fall2022/resources/labs/">help on the course website</a> for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.</p>
+<h3 id="resources"><a href="#resources" class="header-anchor">Resources</a></h3>
+<ul>
+<li><p><a href="https://dataframes.juliadata.org/stable/">DataFrames.jl</a></p>
+<ul>
+<li><p><a href="https://www.ahsmart.com/assets/pages/data-wrangling-with-data-frames-jl-cheat-sheet/DataFramesCheatSheet_v1.x_rev1.pdf">Data Wrangling with DataFrames.jl Cheat Sheet</a></p>
+</li>
+<li><p>Julia Data Science: <a href="https://juliadatascience.io/dataframes">Ch 4</a></p>
+</li>
+<li><p><a href="https://github.com/bkamins/Julia-DataFrames-Tutorial/#toc">DataFrames tutorials</a></p>
+</li>
+</ul>
+</li>
+<li><p><a href="https://csv.juliadata.org/stable/">CSV.jl</a></p>
+</li>
+<li><p><a href="https://docs.juliaplots.org/stable/">Plots.jl</a></p>
+</li>
+<li><p><a href="https://docs.juliaplots.org/stable/">StatsPlots.jl</a></p>
+</li>
+<li><p><a href="https://github.com/JuliaStats/KernelDensity.jl">KernelDensity.jl</a></p>
+</li>
+</ul>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

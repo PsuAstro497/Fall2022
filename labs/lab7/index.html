@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Queries & Data Wrangling - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/labs/lab1/'>Lab 1</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab2/'>Lab 2</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab3/'>Lab 3</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab4/'>Lab 4</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab5/'>Lab 5</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab6/'>Lab 6</a></li>
+    <li class='menu-item active'><a href='/Fall2022/labs/lab7/'>Lab 7</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab8/'>Lab 8</a></li>
+    <li class='menu-item '><a href='/Fall2022/labs/lab9/'>Lab 9</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h2 id="lab_lab_num_title"><a href="#lab_lab_num_title" class="header-anchor">Lab 7: Queries & Data Wrangling</a></h2>
+<p>&#40;<a href="https://github.com/PsuAstro497/lab7-start">github</a>&#41;</p>
+<p>Start Oct 12 –- Due Oct 19</p>
+<h2 id="goals"><a href="#goals" class="header-anchor">Goals</a></h2>
+<p>In this lab, students will learn to:</p>
+<ul>
+<li><p>Write queries using ADQL and TAP</p>
+</li>
+<li><p>Access tables with results of queries</p>
+</li>
+<li><p>Manipulate DataFrames including select, filter, join, groupby &amp; transform</p>
+</li>
+<li><p>Crossmatch objects between two catalogs</p>
+</li>
+<li><p>Download datafiles from a major astronomical archives using astroquery &#40;in ex2.jl&#41;</p>
+</li>
+<li><p>Access data from FITS files &#40;in ex2.jl&#41;</p>
+</li>
+<li><p>Apply Box Least Squares &#40;BLS&#41; periodogram to search for planets &#40;in optional ex3.jl&#41;</p>
+</li>
+</ul>
+<p>Students will strengthen their understanding of:</p>
+<ul>
+<li><p>Population of Rossiter-McLaughlin observations</p>
+</li>
+<li><p>Data products avaliable from space-based photometric missions &#40;in either ex2.jl or ex3.jl&#41;</p>
+</li>
+<li><p>Pre-processing of photometric light curves &#40;in ex3.jl&#41;</p>
+</li>
+<li><p>Combining multiple programmling languages &#40;in either ex2.jl or ex3.jl&#41;</p>
+</li>
+</ul>
+<p>All students should work through ex1.jl.   Students may choose to complete either exercise 2 or exercise 3,</p>
+<h3 id="logistics"><a href="#logistics" class="header-anchor">Logistics</a></h3>
+<p>Follow <a href="https://classroom.github.com/a/zjN5xMsq">this link</a> to create your own private copy of this lab&#39;s repository on GitHub.com. depending on what would be most useful for their class project. Before starting ex2.jl or ex3.jl, see instructions in Canvas announcement for updating your Julia depot, so the calls to astropy, astroquery and lightkurve will work.   </p>
+<p>See the help on the course website for instructions on getting setup to use ACI, cloning, committing, pushing and submitting your work.</p>
+<h3 id="resources"><a href="#resources" class="header-anchor">Resources</a></h3>
+<ul>
+<li><p><a href="https://juliadatascience.io/dataframes">Julia Data Science online textbook</a></p>
+</li>
+<li><p><a href="https://gea.esac.esa.int/archive/">ESA archive web interface</a></p>
+</li>
+<li><p><a href="https://www.cosmos.esa.int/web/gaia-users/archive/programmatic-access#CommandLine_Tap">ESA archive documentation</a> and <a href="https://www.cosmos.esa.int/web/gaia-users/archive/writing-queries">example queries</a></p>
+</li>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html#sync">NExScI intro to using TAP</a></p>
+</li>
+<li><p><a href="https://www.ivoa.net/documents/TAP/">Virtual Observatory specifications for TAP</a> for more info.</p>
+</li>
+<li><p>Exopalnet Archive Planetary Systems Table&#39;s <a href="https://exoplanetarchive.ipac.caltech.edu/docs/API_PS_columns.html">column descriptions</a>.  </p>
+</li>
+<li><p><a href="https://archive.stsci.edu/">Mikulski Archive for Space Telescopes &#40;MAST&#41;</a>  </p>
+</li>
+<li><p><a href="https://fits.gsfc.nasa.gov/fits_primer.html">FITS primer</a></p>
+</li>
+</ul>
+<p>Other Packages Used:</p>
+<ul>
+<li><p><a href="https://dataframes.juliadata.org/stable/man/working_with_dataframes/">DataFrames.jl</a></p>
+</li>
+<li><p><a href="https://github.com/queryverse/Query.jl">Query.jl</a>.</p>
+</li>
+<li><p><a href="https://github.com/JuliaAstro/FITSIO.jl">FITSIO.jl</a></p>
+</li>
+<li><p><a href="https://github.com/JuliaAstro/BoxLeastSquares.jl">BoxLeastSquares.jl</a></p>
+</li>
+<li><p><a href="https://github.com/JuliaPy/PyCall.jl">PyCall.jl</a></p>
+</li>
+<li><p><a href="https://docs.astropy.org/en/stable/">Astropy</a></p>
+</li>
+<li><p><a href="https://astroquery.readthedocs.io/en/latest/api/astroquery.mast.ObservationsClass.html#astroquery.mast.ObservationsClass.query_criteria">Astroquery</a></p>
+</li>
+<li><p><a href="https://docs.lightkurve.org/">Lightkurve</a></p>
+</li>
+</ul>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Week 8 - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <li class='menu-item '><a href='/Fall2022/lessons/week1/'>Week 1</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week2/'>Week 2</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week3/'>Week 3</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week4/'>Week 4</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week5/'>Week 5</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week6/'>Week 6</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week7/'>Week 7</a></li>
+
+    <li class='menu-item active'><a href='/Fall2022/lessons/week8/'>Week 8</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week9/'>Week 9</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week10/'>Week 10</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week11/'>Week 11</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week12/'>Week 12</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week13/'>Week 13</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week14/'>Week 14</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week15/'>Week 15</a></li>
+    <li class='menu-item '><a href='/Fall2022/lessons/week16/'>Week 16</a></li>
+
+    <!--
+      -->
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<p>Week 8</p>
+<h1 id="topic"><a href="#topic" class="header-anchor">Data Wrangling & Exoplanet Populations</a></h1>
+<h2 id="ds_topic"><a href="#ds_topic" class="header-anchor">Data Wrangling</a></h2>
+<ul>
+<li><p>Read <a href="https://juliadatascience.io/join">Julia Data Science, Ch 4.6-4.9</a>.</p>
+</li>
+<li><p>Optionally, read earlier sections of <a href="https://juliadatascience.io/dataframes">Ch 4</a> if those are helpful to you now.</p>
+</li>
+<li><p><a href="https://psuastro497.github.io/Fall2022/notebooks/week8day1/">Notebook from class</a></p>
+</li>
+</ul>
+<h2 id="a_hreflabslab7lab_7_fill_title_labslab7md"><a href="#a_hreflabslab7lab_7_fill_title_labslab7md" class="header-anchor"><a href="../../labs/lab7/">Lab 7</a>: Queries & Data Wrangling</a></h2>
+<h2 id="exo_topic"><a href="#exo_topic" class="header-anchor">Exoplanet Populations</a></h2>
+<ul>
+<li><p>Before Friday&#39;s class, read <em>Exoplanets</em>: Statistical Distribution of Exoplanets:   Sec. 1-2.7</p>
+</li>
+<li><p><a href="https://psuastro497.github.io/Fall2022/notebooks/week8day3/">Notebook from class</a></p>
+</li>
+</ul>
+<h2 id="resources"><a href="#resources" class="header-anchor">Resources</a></h2>
+<ul>
+<li><p>More information about building queries:</p>
+<ul>
+<li><p><a href="https://www.khanacademy.org/computing/computer-programming/sql">SQL Tutorial</a></p>
+</li>
+<li><p><a href="http://docs.g-vo.org/adql-gaia/html/twoup.pdf">Gaia Data Queries with ADQL</a></p>
+</li>
+<li><p><a href="https://www.gaia.ac.uk/data/gaia-data-release-1/adql-cookbook">ADQL Cookbook for Gaia &#40;DR1&#41;</a></p>
+</li>
+<li><p><a href="https://exoplanetarchive.ipac.caltech.edu/docs/TAP/usingTAP.html">Retrieving Exoplanet Archive Data With Table Access Protocol</a></p>
+</li>
+<li><p><a href="https://gaia.ari.uni-heidelberg.de/tap.html">Web Table Access Protocol client for Gaia</a></p>
+</li>
+</ul>
+</li>
+<li><p>Reference Resources:</p>
+<ul>
+<li><p><a href="https://www.ivoa.net/documents/ADQL/">Astronomical Data Query Language &#40;ADQL&#41;</a></p>
+</li>
+<li><p><a href="https://www.ivoa.net/documents/TAP/">Table Access Protocol &#40;TAP&#41;</a></p>
+</li>
+<li><p><a href="http://www.star.bris.ac.uk/~mbt/topcat/">Tool for OPerations on Catalogues And Tables &#40;TOPCAT&#41;</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

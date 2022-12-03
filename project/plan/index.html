@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="/Fall2022/assets/favicon.svg">
+  <script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ["\\(", "\\)"]],
+      processEscapes: true,
+    }
+  };
+</script>
+
+<!-- This weird alignment is required by Franklin's parser. -->
+<script
+    async
+    src="/Fall2022/assets/MathJax/MathJax-3.2.2/es5/tex-mml-chtml.js">
+</script>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff">
+}
+</style>
+
+<style>
+@font-face {
+  src: url("/Astro497//assets/MathJax/MathJax-3.2.2/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff">
+}
+</style>
+
+  <link rel="stylesheet"
+  href="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/styles/github.min.css">
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/highlight.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia.min.js">
+</script>
+
+<script
+  src="/Fall2022/assets/Highlight/cdn-release-11.5.0/build/languages/julia-repl.min.js">
+</script>
+
+<script>
+  hljs.configure({tabReplace: '    '});
+  hljs.highlightAll();
+</script>
+
+    <style>
+    @font-face {
+      font-family: JuliaMono-Regular;
+      src: url("/Astro497//assets/JuliaMono/juliamono-0.044/webfonts/JuliaMono-Regular.woff2");
+    }
+    </style>
+
+  <link rel="stylesheet" href="/Fall2022/css/spectre.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-exp.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-icons.min.css">
+  <link rel="stylesheet" href="/Fall2022/css/spectre-overrides.css">
+  <link rel="stylesheet" href="/Fall2022/css/docs.min.css">
+
+  <title>Class Project Plan - Astro 497</title>
+  <meta name="description" content="Penn State Astro 497: Data Science Applications for Exoplanets">
+
+
+    
+
+</head>
+<body>
+  <div class="docs-container off-canvas off-canvas-sidebar-show">
+  <div class="docs-navbar">
+    <a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i class="icon icon-menu"></i></a>
+    <div class="btns d-flex">
+      <a class="btn btn-primary ml-1" href="https://portal2.aci.ics.psu.edu">Roar Portal</a>
+      <a class="btn btn-primary ml-1" href="https://github.com/PsuAstro497/Fall2022">Improve this site</a>
+
+    </div>
+</div>
+
+<div id="sidebar" class="docs-sidebar off-canvas-sidebar">
+
+<div class="docs-brand">
+    <h5><a href="/Fall2022/">Astro 497</a></h5>
+</div>
+
+<div class="docs-nav">
+<div class="accordion-container">
+  <ul class="menu menu-nav">
+    <div class="menu-header"><a href="/Fall2022/syllabus/">Syllabus</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/lessons/">Lessons</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/labs/">Labs</a></div>
+    
+    <div class="menu-header"><a href="/Fall2022/project/">Class Project</a></div>
+    
+    <li class='menu-item active'><a href='/Fall2022/project/plan/'>Plan</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/checkpoint/'>Checkpoints</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/dashboard/'>Final Dashboard</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/presentation/'>Group Presentation</a></li>
+    <li class='menu-item '><a href='/Fall2022/project/report/'>Individual Report</a></li>
+    
+    <div class="menu-header"><a href="/Fall2022/tips/">Tips</a></div>
+    
+
+    <div class="menu-header"><a href="/Fall2022/resources/">Resources</a></div>
+
+  </ul>
+</div>
+</div>
+</div>
+<a class="off-canvas-overlay" href="#close"></a>
+
+
+
+<div class="off-canvas-content">
+<div id="content" class="docs-content">
+<div class="container">
+<!-- Content appended here -->
+<div class="franklin-content">
+<h3 id="class_project_plan"><a href="#class_project_plan" class="header-anchor">Class Project Plan</a></h3>
+<p>Each group will submit a short description of their plan their class project  by Oct 19.  </p>
+<p>The plan should address each of the following:</p>
+<ul>
+<li><p>What will be the purpose of the dashboard?  &#40;see <a href="../project/#Purpose">ideas</a>&#41;</p>
+</li>
+<li><p>What data set&#40;s&#41; will your dashboard use for its analysis?</p>
+<ul>
+<li><p>What observatories and instruments could provide the data to be analyzed?    </p>
+</li>
+<li><p>How many different objects &#40;or time periods&#41; are publicly available?</p>
+</li>
+<li><p>Where will you/your dashboard download the data from?   </p>
+</li>
+<li><p>Is the data small enough that we will download the entire dataset once?  Or is the dataset large enough that the dashboard will query a database to retrieve the data for each object &#40;or time period&#41; separate?  </p>
+</li>
+<li><p>What format will the data be in?  </p>
+</li>
+</ul>
+</li>
+<li><p>What data wrangling tasks do you anticipate needing to perform?</p>
+<ul>
+<li><p>Will the data for each object &#40;or time period&#41; arrive in a single table?  Or will you need to perform joins across multiple tables?</p>
+</li>
+</ul>
+</li>
+<li><p>What models will your dashboard fit to the data?</p>
+<ul>
+<li><p>What will serve as the robust baseline model?</p>
+</li>
+<li><p>What will serve as the more sophisticated model?</p>
+</li>
+<li><p>What will the models predict?</p>
+</li>
+<li><p>How will the models be assessed?</p>
+</li>
+</ul>
+</li>
+<li><p>Describe the plots that will be displayed on your dashboard.  For each plot,</p>
+<ul>
+<li><p>What data will be shown?  </p>
+</li>
+<li><p>Will it be plotted with a curve, points, contours, histogram, etc.?</p>
+</li>
+<li><p>What will be the axes?</p>
+</li>
+<li><p>Is there additional information that could be conveyed through other attributes like size or color of points?   </p>
+</li>
+<li><p>Would it be helpful to include multiple panels &#40;e.g., to show data on different x or y scales, or to show predictions of different models&#41;?</p>
+</li>
+<li><p>Will the figures that you have already described be sufficient for the dashboard to achieve its purpose?  Or do you anticipate needing additional experimentation to convey the results of the analysis effectively?  If you have some early ideas, then  provide enough information that you can get constructive feedback on them.</p>
+</li>
+</ul>
+</li>
+<li><p>Project schedule</p>
+<ul>
+<li><p>What tasks do you &#40;or each member of your team&#41; plan to accomplish each week?  Make sure to account for scheduling constraints such as exams or big assignments in other classes, holidays, and travel.   Be sure to allow some contingency in the schedule for tasks that take longer than expected or other unexpected delays.  </p>
+</li>
+<li><p>If you&#39;re working as part of a team, then make a plan for how your team will work.  Will you work together on each task simultaneously?  Will each person be responsible for writing code to do specific tasks separately?  It&#39;s particularly important to make a plan that doesn&#39;t create problematic dependencies &#40;e.g., one person needs to wait for working code from someone else and the team can only meet the deadline if everything goes perfectly&#41;.  </p>
+</li>
+<li><p>If you or your team have any hard scheduling constraints that would prevent them from presenting during class on Dec 2, 5, 7 or 9.  You may also indicate any additional scheduling preferences.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="potential_data_sources"><a href="#potential_data_sources" class="header-anchor">Potential Data Sources</a></h3>
+<ul>
+<li><p>Transit light curves:  </p>
+<ul>
+<li><p>Kepler/K2</p>
+</li>
+<li><p>TESS</p>
+</li>
+</ul>
+</li>
+<li><p>Transit Timing Variations:  </p>
+<ul>
+<li><p>Table of transit times from Holczer et al. &#40;2016&#41;</p>
+</li>
+</ul>
+</li>
+<li><p>Radial Velocities:</p>
+<ul>
+<li><p>California Legacy Survey RVs</p>
+</li>
+<li><p>NEID standard star observations</p>
+</li>
+<li><p>NEID solar observations</p>
+</li>
+</ul>
+</li>
+<li><p>Host star properties</p>
+<ul>
+<li><p>California Legacy Survey spectra</p>
+</li>
+<li><p>NEID standard star spectra</p>
+</li>
+</ul>
+</li>
+</ul>
+<script type="text/javascript" src="/Fall2022/libs/ansi_up.js" defer></script>
+
+<div id="copyright" class="docs-footer container grid-lg">
+<a href="https://www.psu.edu">Penn State</a> &mdash;
+<a href="https://science.psu.edu/astro">Astronomy & Astrophysics</a> &mdash;
+<a href="https://www.icds.psu.edu/">Institute for Computational & Data Sciences</a>
+</br>
+<a href="https://exoplanets.psu.edu/">Center for Exoplanets & Habitable Worlds</a> &mdash;
+<a href="https://astrostatistics.psu.edu/">Center for Astrostatistics</a>
+</br>
+</br>
+<a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> <a href="http://personal.psu.edu/ebf11/">Eric Ford</a>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+    </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>
